@@ -1,0 +1,83 @@
+:root {
+	--vh100: calc(var(--vh, 1vh) * 100);
+
+	/* btn & input */
+	--xsmall: 20px;
+	--small: 40px;
+	--medium: 48px;
+	--large: 56px;
+	--xlarge: 70px;
+
+	--xlarge-: -70px;
+
+	/* ico */
+	--ico-m : 20px;
+	--ico-l : 25px;
+
+	/* scroll */
+	--scroll: 4px;
+
+	/* scroll */
+	--header: 96px;
+	--header-: -96px;
+}
+
+@media all and (min-width: 1281px){
+	:root {
+		--gutter-100: 5.208vw;
+		--gutter-120: 6.250vw;
+		--gutter-180: 9.375vw;
+		--gutter-262: 13.646vw;
+
+		--gutter-160-120: 160px 6.250vw;
+		--gutter-160-210: 160px 10.938vw;
+		--gutter-200-120: 210px 6.250vw;
+	}
+}
+@media all and (min-width: 961px) and (max-width: 1280px) {
+	:root {
+		--gutter-100: 4.208vw;
+		--gutter-120: 5.250vw;
+		--gutter-180: 8.075vw;
+		--gutter-262: 12.146vw;
+
+		--gutter-160-120: 160px 4.250vw;
+		--gutter-160-210: 160px 8.938vw;
+		--gutter-200-120: 210px 4.250vw;
+	}
+}
+@media all and (max-width: 960px) {
+	:root {
+		/* scroll */
+		--header: 62px;
+		--header-: -62px;
+
+		--gutter-100: 30px;
+		--gutter-120: 30px;
+		--gutter-128: 30px;
+		--gutter-262: 30px;
+
+		--gutter-160-120: 100px 30px;
+		--gutter-160-210: 100px 30px;
+		--gutter-200-120: 100px 30px;
+	}
+}
+@media all and (max-width: 768px) {
+	:root {
+
+		--xlarge: 48px;
+
+		--xlarge-: -48px;
+
+		--gutter-100: 15px;
+		--gutter-120: 15px;
+		--gutter-180: 15px;
+		--gutter-262: 15px;
+
+		--gutter-160-120: 80px 15px;
+		--gutter-160-210: 80px 15px;
+		--gutter-200-120: 80px 15px;
+
+		--medium: 40px;
+	}
+}
