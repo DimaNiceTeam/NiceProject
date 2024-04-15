@@ -1,4 +1,8 @@
 /.metadata/
+.metadata/
+
+# 피클 파일 용량 큰거 
+**/dataframe.pickle 
 # Created by https://www.toptal.com/developers/gitignore/api/gradle,java,visualstudiocode,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=gradle,java,visualstudiocode,eclipse
 
