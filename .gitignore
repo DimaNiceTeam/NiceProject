@@ -2,7 +2,7 @@
 
 # 피클 파일 용량 큰거 
 **/dataframe.pickle
-#application.properties  -> 나중에 추가 해야할듯!
+application.properties  -> 나중에 추가 해야할듯!
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos
