@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1:1 문의</title>
+    <link rel="stylesheet" href="../../static/css/myPageInquiry.css" th:href="@{/css/myPageInquiry.css}">
+</head>
+<div class="header">
+    <div class="logo">
+        <a>NICE TO MATCH YOU</a> <!-- 회사로고 맨 왼쪽-->
+    </div>
+
+    <div class="gnb">
+        <ul class="menubar" style="float: left;"> <!-- 메뉴들 상단 중앙-->
+            <li>메뉴1</li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+            <li>메뉴4</li>
+            <li>메뉴5</li>
+        </ul>
+    </div>
+</div>
+<hr>
+<aside class="myPage" style="float: left"> <!--왼쪽 메뉴바-->
+    <div class="myPageBox">
+        <p class="BoxTitle"> 1:1 문의 </p>
+        <div class="lnb">
+            <!-- 리스트들 왼쪽으로 좀더 땡겨야함-->
+            <ul class="myPageList">
+                <li>
+                    <a class="myPagebtn">내 정보 수정</a>
+                </li>
+                <li>
+                    <a class="myPagebtn">회사 정보 수정</a>
+                </li>
+                <li>
+                    <a class="myPagebtn">메일함</a>
+                </li> <!--나눌지 논의 예정-->
+                <li>
+                    <a class="myPagebtn">내가 찜한 회사</a>
+                </li>
+                <li>
+                    <a class="myPagebtn">1:1 문의 </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+<section class="info"> <!-- 프로필 정보 보여주는 곳-->
+
+    </table>
+    <h4 class="info tit"> 나의 문의 내역 </h4>
+    <table border="1">
+        <tr class="content inquiryform">
+            <th class="inquiry no">분류</th>
+            <th class="inquiry title">제목 </th>
+            <th class="inquiry date">날짜 </th>
+        </tr>
+        <tr>
+            <td class="notice danger">공지</td>
+            <td>
+                <span>ㅁㄴㄴㅁㅁㄴㅇㅁㄴㄴㅁㅇ</span> <!-- 타임리프 태그 추가 필요-->
+            </td>
+            <td>
+                <span>2024/04/09</span> <!-- 타임리프 태그 추가 필요-->
+            </td>
+        </tr>
+    </table>
+    </div>
+
+    </table>
+    <div class="editinfo">
+        <a type="button" class="edit Btn btn-primary"> 1:1 문의하기</a>
+    </div>
+</section>
+
+<body>
+
+</body>
+
+</html>

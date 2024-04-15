@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+
+    <!-- 전체적으로 클래스명은 안적었음 하면서 적겠음-->
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a>로고 들어가는 곳</a> <!-- 회사로고 맨 왼쪽-->
+        </div>
+
+        <div>
+            <ul class="menubar">    <!-- 메뉴들 상단 오른쪽-->
+                <li>메뉴1</li>
+                <li>메뉴2</li>
+                <li>메뉴3</li>
+                <li>메뉴4</li>
+                <li>메뉴5</li>
+            </ul>
+        </div>
+    </div>
+    <aside> <!--왼쪽 메뉴바-->
+        <div>
+            <p> 내가 찜한 회사 </p>
+            <div>
+                <ul>
+                    <li>내 정보 수정</li>
+                    <li>회사 정보 수정</li>
+                    <li>메일함</li>
+                    <li>내가 찜한 회사</li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <section> <!-- 프로필 정보 보여주는 곳-->
+            <section>
+                <div>
+                    <span>회사이름 </span> <!--회사 이름 들어갈꺼-->
+                    <strong>
+                        <b> 담당자 이름</b> <!-- 담당자 이름-->
+                    </strong>
+                </div>
+            </section>
+            <h3> 내가 찜한 회사 정보</h3>
+        <div>
+            <input type="text"> 어떤회사인지 찾기 힘들때 카테고리 검색창?
+        </div>
+        <div class="content">
+            <table border="1">
+                <tr>
+                    <th>
+                        <h4>번호</h4>
+                    </th>
+                    <th> 
+                        <h4>회사명</h4>
+                    </th>
+                    <td>
+                        <h4>회사 URL</h4>
+                    </td>
+                    <td> 
+                        <h4>국가</h4>
+                    </td>
+                    <td> 
+                        <h4>이메일</h4>
+                    </td>
+                    <td> 
+                        <h4>이메일 발송</h4>
+                    </td>
+                    <td> 
+                        <h4> 찜 기능</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <th> 1 </th>
+                    <th> A회사 </th>
+                    <td> www.aaaa.com</td>
+                    <td> A국가</td>
+                    <td> qwertty12@gmail.com  </td>
+                    <td>
+                        <img src="../../static/images/empty-email_80599.png" width="18" height="18" style="margin-left: 34px;">
+                    </td>
+                    <td>
+                        <img src="../../static/images/star_1828970.png" width="18" height="18" style="margin-left: 17px;">
+                    </td>
+                </tr>
+                <tr>
+                    <th> 2 </th>
+                    <th> A회사 </th>
+                    <td> www.aaaa.com</td>
+                    <td> A국가</td>
+                    <td> qwertty12@gmail.com  </td>
+                    <td>
+                        <img src="../../static/images/empty-email_80599.png" width="18" height="18" style="margin-left: 34px;">
+                    </td>
+                    <td>
+                        <img src="../../static/images/star_1828970.png" width="18" height="18" style="margin-left: 17px;">
+                    </td>
+                </tr>
+                <tr>
+                    <th> 3 </th>
+                    <th> A회사 </th>
+                    <td> www.aaaa.com</td>
+                    <td> A국가</td>
+                    <td> qwertty12@gmail.com  </td>
+                    <td>
+                        <img src="../../static/images/empty-email_80599.png" width="18" height="18" style="margin-left: 34px;">
+                    </td>
+                    <td>
+                        <img src="../../static/images/star_1828970.png" width="18" height="18" style="margin-left: 17px;">
+                    </td>
+                </tr>
+            </table>
+        </div>
+</body>
+</html>
