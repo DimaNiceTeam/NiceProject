@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http//www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,60 @@
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <script src="../static/script/Static.js"></script>
+    <script th:src="@{/script/Static.js}"></script>
+    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function() {
+            //var path = "http://localhost:8080"
+            var baseFileName = "../static/file/STAT_";
+            var fileNames = []; // 파일 이름을 저장할 배열
+        
+            for (var i = 1; i < 3; i++) {
+                var parse;
+                if (i === 1) {
+                    parse = "ALL_INFO";
+                } else if (i === 2) {
+                    parse = "REG";
+                }
+                var fullFileName = baseFileName + parse + '.csv'; // 파일 경로 + 명칭 + 확장자
+                fileNames.push(fullFileName);
+            }
+
+
+            
+            fileNames.forEach((value, index) => function() {
+                $.ajax({
+                    url: value,
+                    dataType: 'text',
+                    success:
+                        processFileContent
+                        ,
+                    error: function() {
+                        console.log("Error loading the file: " + value);
+                    }
+                });
+            });
+        
+            function processFileContent(data) {
+                var rows = data.split(/\r?\n|\r/);
+                var outputText = "";
+        
+                rows.forEach(function(row) {
+                    var columns = row.split(",");
+                    outputText += columns.join("") + "<br>"; // Join all columns without separator and add line break
+                });
+        
+                $('#textArea').append(outputText);
+            }
+        });
+
+    </script>
 </head>
 <body>
-    
+    <div id="textarea"></div>
     <div id="insertChart"></div>
+
+    
     
 </body>
 </html>

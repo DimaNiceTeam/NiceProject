@@ -93,9 +93,45 @@
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script>
         $(function() {
-            var infoFIleName = "../static/file/STAT_ALL_INFO.csv";
-            var reglFileName = "../static/file/STAT_REG.csv";
-        });	
+            var baseFileName = "../static/file/STAT_";
+            var fileNames = []; // 파일 이름을 저장할 배열
+        
+            for (var i = 1; i < 3; i++) {
+                var parse;
+                if (i === 1) {
+                    parse = "ALL_INFO";
+                } else if (i === 2) {
+                    parse = "REG";
+                }
+                var fullFileName = baseFileName + parse + '.csv'; // 파일 경로 + 명칭 + 확장자
+                fileNames.push(fullFileName);
+            }
+        
+            fileNames.forEach(function(fileName) {
+                $.ajax({
+                    url: fileName,
+                    dataType: 'text',
+                    success: function(data) {
+                        processFileContent(data);
+                    },
+                    error: function() {
+                        console.log("Error loading the file: " + fileName);
+                    }
+                });
+            });
+        
+            function processFileContent(data) {
+                var rows = data.split(/\r?\n|\r/);
+                var outputText = "";
+        
+                rows.forEach(function(row) {
+                    var columns = row.split(",");
+                    outputText += columns.join("") + "<br>"; // Join all columns without separator and add line break
+                });
+        
+                $('#textArea').append(outputText);
+            }
+        });
 
     </script>
 </head>
@@ -125,6 +161,9 @@
         </div>
         <hr>
         <div id="countryDetails">
+            <p id="textarea">
+                
+            </p>
             국가 정보가 여기에 표시됩니다.
         </div>
         <br><br>

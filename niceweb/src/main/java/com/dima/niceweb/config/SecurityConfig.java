@@ -43,9 +43,11 @@ public class SecurityConfig {
 					,"/showOvsNews"
 					,"/showOvsNewsDetail"
 					,"/globeindex" // * get
+					,"/chartindex" // * get
 					,"/search" //**추천 알고리즘 검색 화면 요청 get
 					,"/cmpSelect" // ** 회사 상세보기 get
 					,"/predict" // ** fast api사용 post
+					,"/file/**"
 					,"/images/**"
 					,"/fonts/**"
 					,"/css/**"
@@ -53,8 +55,8 @@ public class SecurityConfig {
 					,"/script/**").permitAll()//permitAll()은 인증 절차 없이도 접근가능한 요청 
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.requestMatchers("/my/**").hasAnyRole("ADMIN","USER")
-				.anyRequest().authenticated() // 위에는 권한에 따라 분리를 하였고, 기타 다른 경로눈 인증된 사용자만 접근 가능, 가장 마지막에 둘것 
-				);
+				.anyRequest().permitAll() // 위에는 권한에 따라 분리를 하였고, 기타 다른 경로눈 인증된 사용자만 접근 가능, 가장 마지막에 둘것 
+				); // authenticated()로 바꾸기
 	// Custom Login 설정 : 내가 만든 로그인 화면 
 	http
 		.formLogin((auth)->auth
