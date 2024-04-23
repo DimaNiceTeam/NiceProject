@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천 알고리즘</title>
+    <!--모달창을 위한 페이지-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
+    <!--테이블 관련 임의로 넣어본 css-->
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 770px;
+            margin: 1rem auto;
+            background-color: white;
+            font-size: 13px;
+        }
+
+        thead {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 테이블 행 */
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            padding: 8px;
+            text-align: left;
+            text-align: center;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            color: #000;
+        }
+
+        /* 테이블 올렸을 때 */
+        tbody tr:hover {
+            background-color: #d3d3d3;
+            opacity: 0.9;
+            cursor: pointer;
+        }
+
+        /* 테이블 비율 */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 15%;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 55%;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 30%;
+        }
+
+        th,
+        td {
+            border-left: none;
+            border-right: none;
+        }
+    </style>
+
+    <script>
+        $(function () {
+
+            $("#continentSelect").on('change', updateCountryList);
+            $("#searchBtn").on('click', cosineSimilarity);
+
+            cosineSimilarity();
+
+
+        });
+        //나라선택 옵션 
+
+        function updateCountryList() {
+            // 나라 선택 변수 들
+            const continentCountries = {
+
+                "Asia": ["CN", "KR", "IN", "MY", "JP", "TH", "HK", "SG", "TW", "AE", "IL", "BH", "QA", "VN", "SA", "ID", "PH", "PK", "LK", "UZ"],
+                "Europe": ["DE", "GB", "FR", "SE", "AT", "DK", "IT", "BE", "NL", "SI", "HU", "CH", "CZ", "RO", "TR", "RS", "PL", "UA", "SK", "FI", "BG", "EE", "GR", "NO", "PT", "LV", "HR", "GE", "BY", "LT", "MT", "BA", "ES"],
+                "NorthAmerica": ["US", "CA", "MX", "GT", "CR", "SV", "JM", "NI", "DO", "VG", "PA"],
+                "SouthAmerica": ["BR", "CO", "AR", "CL", "VE", "EC", "TT"],
+                "Africa": ["ZA", "NG", "EG", "MA", "KE"],
+                "Oceania": ["NZ", "AU"]
+            };
+
+            const countryNames = {
+                "CN": "China", "KR": "South Korea", "IN": "India", "MY": "Malaysia", "JP": "Japan", "TH": "Thailand", "HK": "Hong Kong", "SG": "Singapore", "TW": "Taiwan",
+                "AE": "United Arab Emirates", "IL": "Israel", "BH": "Bahrain", "QA": "Qatar", "VN": "Vietnam", "SA": "Saudi Arabia", "ID": "Indonesia", "PH": "Philippines", "PK": "Pakistan",
+                "LK": "Sri Lanka", "UZ": "Uzbekistan", "DE": "Germany", "GB": "United Kingdom", "FR": "France", "SE": "Sweden", "AT": "Austria", "DK": "Denmark",
+                "IT": "Italy", "BE": "Belgium", "NL": "Netherlands", "SI": "Slovenia", "HU": "Hungary", "CH": "Switzerland", "CZ": "Czech Republic", "RO": "Romania",
+                "TR": "Turkey", "RS": "Serbia", "PL": "Poland", "UA": "Ukraine", "SK": "Slovakia", "FI": "Finland", "BG": "Bulgaria", "EE": "Estonia", "GR": "Greece",
+                "NO": "Norway", "PT": "Portugal", "LV": "Latvia", "HR": "Croatia", "GE": "Georgia", "BY": "Belarus", "LT": "Lithuania", "MT": "Malta",
+                "BA": "Bosnia and Herzegovina", "ES": "Spain", "US": "United States", "CA": "Canada", "MX": "Mexico", "GT": "Guatemala", "CR": "Costa Rica", "SV": "El Salvador",
+                "JM": "Jamaica", "NI": "Nicaragua", "DO": "Dominican Republic", "VG": "British Virgin Islands", "PA": "Panama", "BR": "Brazil", "CO": "Colombia", "AR": "Argentina",
+                "CL": "Chile", "VE": "Venezuela", "EC": "Ecuador", "TT": "Trinidad and Tobago", "ZA": "South Africa", "NG": "Nigeria", "EG": "Egypt", "MA": "Morocco", "KE": "Kenya",
+                "NZ": "New Zealand", "AU": "Australia"
+
+            };
+            function getCountryName(code) {
+                return countryNames[code] || code;  // 국가 코드에 해당하는 이름이 없다면 코드를 그대로 반환
+            }
+
+            var continent = $("#continentSelect").val(); // 선택된 대륙 가져오기
+            var countrySelect = $("#countrySelect"); // 국가를 표시할 select 박스
+            countrySelect.html('<option value="">Select Country</option>'); // 기본 옵션 추가
+            if (continent) { // 대륙이 선택된 경우
+                continentCountries[continent].forEach(function (code) { // 선택된 대륙에 속하는 각 국가에 대해 반복
+                    var option = $("<option></option>").val(code).text(getCountryName(code)); // 새 option 요소 생성
+                    countrySelect.append(option); // select 박스에 option 추가
+                });
+            }
+        }
+
+        function cosineSimilarity() {
+            let inputKeyword = $("#search").val();
+            let nation = ""; // 국가
+            if ($("#continentSelect").val() == "all") {
+                nation = "all";
+            }
+
+            else nation = $("#countrySelect").val();
+
+
+            $("#emailinputKeyword").val(inputKeyword);
+            $("#emailnation").val(nation);
+
+
+
+            let sendData = {
+                "inputKeyword": inputKeyword,
+                "nation": nation
+            }
+            $.ajax({
+                url: 'predict'
+                , method: 'post'
+                , async: false
+                , data: sendData
+                , success: function (resp) {
+                    if (resp.length == 0) {
+                        $("#cosine-list").html("");
+                        $("#noResult").html("검색된 결과가 없습니다.");
+                    }
+                    else {
+
+                        let receivedData = '';
+                        receivedData += `
+
+                <tr>
+        			<th>기업명</th>
+        			<th>국가</th>
+        			<th>이메일</th>
+                    <th>이메일 발송</th>
+                    <th>찜</th>
+                    <th>상세보기</th>
+        	    </tr>
+                    `;
+
+                        $.each(resp, function (index, item) {
+                            receivedData += `
+                        <tr>
+                            <td>${item.CMP_NM}</td>
+                            <td>${item.NAT_CD}</td>
+                            <td>${item.EML}</td>
+                            <td><a class="btn btn-primary email" data-bs-toggle="modal" data-bs-target="#myModal" cmpEmail="${item.EML}">
+        Email
+    </a></td>
+                            <td><button class="btn btn-warning plusMyCmp" style="color: white;" attr-dunsNo=${item.DUNS_NO}>찜</button></td>
+                            <td><button class="btn btn-success DetailBtn" data-bs-toggle="modal" data-bs-target="#Details" attr-dunsNo=${item.DUNS_NO}>상세</button></td>
+                        </tr>`;
+                        });//each 
+                        $("#noResult").html("");
+                        $("#cosine-list").html(receivedData);
+                        $(".email").on('click', mgl);
+                        $(".plusMyCmp").on('click', plusMyCmp);
+                        $(".DetailBtn").on('click', Details);
+
+                        // 마이페이지에 상세보기 추가 !!!!!!!!!!!!!!!!!!! 모달창으로 추가하는거 만들기 
+
+                    }
+                }
+            })
+
+        }
+
+        function mgl() { // 모달창에 이메일 꽂아 넣기 !
+            let email = $(this).attr("cmpEmail");
+            $("#cmpaddress").val(email);
+        }
+        // 관심 바이어 추가 
+        function plusMyCmp() {
+            let dunsNo = $(this).attr("attr-dunsno"); // 고유 던스넘버
+            let userNum = $("#userNum").val(); // 사용자의 고유 넘버 넣어주기 ~~
+
+
+            $.ajax({
+                url: "/user/favCmpInsert"
+                , method: 'GET'
+                , data: { "dunsNo": dunsNo, "userNum": userNum }
+                , success: function (resp) {
+                    // 이미 존재하는 경우 - 경고창
+                    if (resp == true) {
+                        alert("관심 바이어에 추가되었습니다.")
+
+                    } else {
+                        alert("관심 바이어에 이미 추가된 항목입니다.");
+                    }
+
+                }
+            })
+
+        }
+        // 상세보기 모달창 페이지에 정보 꽂아서 넣기
+        function Details() {
+            let dunsNo = $(this).attr("attr-dunsno"); // 던스넘버
+            $.ajax({
+                url: "/cmpSelect"
+                , method: 'GET'
+                , data: { "dunsNo": dunsNo }
+                , success: function (resp) {
+                    // 정보 가지고 오기
+                    $("#cmpName").html(resp.cmpName);
+                    $("#cmpDunsNo").html(resp.cmpDunsNo);
+                    $("#cmpSicCode").html(resp.cmpSicCode);
+                    $("#cmpNatCd").html(resp.cmpNatCd);
+                    $("#cmpNatEng").html(resp.cmpNatEng);
+                    $("#cmpAddress").html(resp.cmpAddress);
+                    $("#cmpEmp").html(resp.cmpEmp);
+                    $("#cmpMkt").html(resp.cmpMkt);
+                    $("#cmpSales").html(resp.cmpSales);
+                    $("#cmpUrl").html(resp.cmpUrl);
+                    $("#cmpUrl").attr("href", resp.cmpUrl);
+
+
+
+
+
+                }
+            })
+
+
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <h2>추천 알고리즘</h2>
+    <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
+    <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
+    <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+
+    <form th:action="@{/predict}" method="POST">
+        품목 검색<input type="text" placeholder="상품을 입력하세요" id="search" name="inputKeyword" th:value="${inputKeyword}">
+    </form>
+    <div class="dropdown-container">
+        <select id="continentSelect" onchange="updateCountryList()">
+            <option value="all">모든 국가</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="NorthAmerica">North America</option>
+            <option value="SouthAmerica">South America</option>
+            <option value="Africa">Africa</option>
+            <option value="Oceania">Oceania</option>
+        </select>
+
+        <select id="countrySelect">
+            <option th:value="${nation}">Select Country</option>
+        </select>
+        <input type="button" value="검색" id="searchBtn">
+    </div>
+    <span id="noResult"></span>
+    <table id="cosine-list"> <!--추천 알고리즘-->
+    </table>
+
+    <!-- 이메일 모달창  -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">이메일 발송</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <form th:action="@{/mail/mailsend}" method="POST">
+                    <!--데이터 가지고 가는 부분-->
+                    <input type="hidden" name="inputKeyword" value="" id="emailinputKeyword">
+                    <input type="hidden" name="nation" value="" id="emailnation">
+
+                    <div class="modal-body">
+                        <!--수정해야할 부분입니다~~~~~~~~-->
+                        <input type="hidden" name="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+                        <input id="cmpaddress" name="receiver" placeholder="이메일 주소" class="form-control" value=""> <br>
+                        <input name="emailSubject" placeholder="제목" class="form-control"> <br>
+                        <textarea name="emailContent" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"
+                            class="form-control"></textarea>
+                    </div>
+
+                    <!-- Modal footer -->
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn " style="background-color: blue; color: white;"
+                            data-bs-dismiss="modal">발송</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!--이메일 모달창 끝-->
+    <!--상세페이지 모달창-->
+    <div class="modal" id="Details">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="cmpName"></h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>D-U-N-S® Number</td>
+                            <td id="cmpDunsNo"></td>
+                        </tr>
+                        <tr>
+                            <td>Primary SIC Code</td>
+                            <td id="cmpSicCode"></td>
+                        </tr>
+                        <tr>
+                            <td>국가코드</td>
+                            <td id="cmpNatCd"></td>
+                        </tr>
+                        <tr>
+                            <td>국가</td>
+                            <td id="cmpNatEng"></td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td id="cmpAddress"></td>
+                        </tr>
+                        <tr>
+                            <td>Employees(All site)</td>
+                            <td id="cmpEmp"></td>
+                        </tr>
+                        <tr>
+                            <td>마케팅 등급</td>
+                            <td id="cmpMkt"></td>
+                        </tr>
+                        <tr>
+                            <td>Annual Sales</td>
+                            <td id="cmpSales"></td>
+                        </tr>
+                        <tr>
+                            <td>홈페이지</td>
+                            <td><a href="" id="cmpUrl"></a></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

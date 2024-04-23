@@ -1,0 +1,431 @@
+@charset "utf-8";
+
+/****************
+common form reset 
+*****************/
+/* 모든 입력 필드와 레이블, 필드셋에 대해 박스 모델을 border-box로 설정 */
+label,
+input,
+select,
+textarea,
+fieldset {box-sizing: border-box;} 
+
+/*  웹 폼 요소의 기본 브라우저 스타일을 제거 */
+input,
+select,
+textarea, /* 일반적인 웹 폼 요소 */
+input::-webkit-search-cancel-button, /* 웹 브라우저에서 검색 입력 필드에 표시되는 취소 버튼을 선택 */
+input::-webkit-calendar-picker-indicator{ /* 웹 브라우저에서 날짜 선택 입력 필드에 표시되는 달력 아이콘을 선택 */
+	appearance:none; 
+	-webkit-appearance:none;
+}
+
+/* 각 입력 필드와 셀렉트 박스, 텍스트 영역에 대한 기본 스타일을 정의 */
+input,
+select,
+textarea {font-size:16px; line-height: 21px; color:#000; background: #fff; outline: none; border:0; border-radius: 0;}
+
+/*  Microsoft Edge 및 Internet Explorer에서 <select> 요소의 드롭다운 화살표를 숨김 */
+select::-ms-expand {display: none;} /* -ms-expand는 드롭다운 화살표를 지칭 */
+
+/* caret-color: black;는 <input> 및 <textarea> 요소에서 텍스트 삽입 지점(커서)의 색상을 검은색으로 설정 */
+input,
+textarea {caret-color: black;}
+
+/* 입력 필드(예: <input>, <textarea>)의 플레이스홀더 텍스트의 색상을 CSS 변수 --gray로 지정한 회색으로 설정 */
+::placeholder {color: var(--gray);}
+
+/* <input>, <select>, <textarea> 요소가 포커스를 받았을 때 외곽선(outline)을 제거 */
+input:focus,
+select:focus,
+textarea:focus {outline-color: transparent; outline-style: none;}
+
+/* <legend> 요소에 대해 표 형식(table)의 디스플레이 속성을 적용하고, 내부 패딩을 0으로 설정 */
+legend {display: table; padding: 0;}
+
+/* <fieldset> 요소에 대한 스타일을 초기화*/
+fieldset {border: 0; padding: 0.01em 0 0 0; margin: 0; min-width: 0;}
+
+/* Firefox에서 <fieldset> 요소를 포함하는 페이지의 <body>에 대한 스타일
+Firefox에서는 이 코드가 특정 조건(:-moz-handler-blocked: 특정 핸들러가 차단되었을 때 발생하는 가상 클래스)을 충족할 때만 작동 
+이 때 <fieldset> 요소의 디스플레이 속성을 table-cell로 설정 */
+body:not(:-moz-handler-blocked) fieldset {display: table-cell;}
+
+/* <label> 요소를 브라우저에 인라인 블록 형태로 표시하고, 마우스 커서를 포인터로 변경하여 사용자에게 클릭 가능하다는 피드백을 제공 */
+label {display: inline-block; cursor: pointer;}
+
+/* 숫자 입력 필드의 스핀 버튼을 제거 */
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none; margin: 0;
+}
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+/****************
+common form style
+*****************/
+/* 일반적인 폼 스타일을 덮어씀 실제 스타일은 비어 있어서 다른 규칙이 추가될 수 있음 */
+input,
+select,
+textarea {}
+
+
+/*****************************
+input-text & select & textarea
+******************************/
+/* 텍스트 입력 필드와 셀렉트 박스의 기본 스타일을 정의 */
+.input-text,
+.select {border-bottom: 1px solid var(--light-gray-2); font-size: inherit; color: inherit; transition: border 0.2s ease-in-out;}
+
+.input-text.small,
+.select.small {height: 48px;}
+
+.input-text.medium,
+.select.medium {height: 64px;}
+
+.input-text.large,
+.select.large {}
+
+/*********
+input-text
+**********/
+/* 텍스트 입력 필드의 특정 유형에 대한 스타일을 정의 */
+.input-text {background-color: var(--white);}
+/* 검색 및 날짜 유형의 입력 필드에는 특정 버튼 이미지가 설정 */
+.input-text[type="search"]::-webkit-search-cancel-button,
+.input-text[type="date"]::-webkit-clear-button {position: relative; right: .25rem; width: 1.5rem; height: 1.5rem;
+	-webkit-appearance: none; -moz-appearance: none; appearance: none;
+	background: url('../images/@uio/btn_delete.svg') no-repeat 0 0;
+}
+
+/*****
+select
+******/
+/* 셀렉트 박스의 스타일을 정의합니다. 선택 화살표 이미지가 오른쪽에 배치 */
+.select {position: relative; /* 요소의 위치는 상대적으로 설정 */
+		 vertical-align: middle; /* 요소의 수직 정렬을 중앙으로 설정 */
+		 background: transparent url("../images/@uio/select-arr.svg") no-repeat 100% 50%; /* 배경으로 이미지를 사용하며, 이 이미지는 선택 화살표를 나타냄 */
+		 background-size: 20px 20px; /* 배경 이미지의 크기를 지정 */
+		 padding-right: 20px; /* 오른쪽 패딩을 추가하여 선택 화살표가 내용과 겹치지 않도록 함 */
+		 z-index: 1;} /* 요소의 쌓임 순서를 설정 */
+
+.select.is-empty {color: var(--gray);} /* .select 요소가 비어 있을 때의 색상을 회색으로 설정 */
+
+.select:focus-visible {background-image: url('../images/@uio/select-arr-active.svg');} /* 포커스가 되었을 때 활성화된 선택 화살표 이미지로 변경 */
+
+.select option {width: 100%; /* 옵션 요소의 너비를 100%로 설정 */
+			    font-weight: inherit; /* font-weight 설정 */
+				padding: 20px;} /* 옵션의 패딩을 설정 */
+
+.select-box {position: relative; /* 요소의 위치는 상대적으로 설정 */
+			border-bottom: 1px solid var(--light-gray-2); /* 아래쪽에 회색 경계선을 추가 */
+			transition: border-bottom 0.3s;} /* 경계선 변화에 대한 애니메이션 효과를 0.3초로 설정 */
+
+.select-box:focus-within {border-color: var(--navy);} /* 포커스가 되었을 때 경계선의 색상을 네이비로 변경 */
+
+.select-box .select {width: 100%; /* 요소의 너비를 100%로 설정 */
+					 border-bottom: 0; /* 아래쪽 경계선을 제거 */
+					 padding-right: 0; /* 오른쪽 패딩 제거 */
+					 z-index: 1;} /* 요소의 쌓임 순서를 설정 */
+
+/* select-box 내부의 .select 요소와 .selecc-box 내부의 .select:focus-visible의 배경 이미지를 제거 */
+.select-box .select,
+.selecc-box .select:focus-visible {background-image: none;} 
+
+.select-box::after {content: ''; /* 가상 요소에 내용을 추가 */
+					display: inline-block; /* 가상 요소를 인라인 블록 요소로 표시 */
+					position: absolute; /* 가상 요소의 위치를 상대적으로 설정 */
+					top: 50%; /* 가상 요소를 수직 방향으로 중앙에 배치 */
+					right: 0; /* 오른쪽 위치를 0으로 설정 */
+					width: 20px; /* 가상 요소의 위치를 상대적으로 설정 */
+					height: 20px; /* 가상 요소의 너비와 높이를 20px로 설정 */
+					background-image: none; /* 배경 이미지를 제거 */
+					background-repeat: no-repeat; /* 배경 이미지의 반복을 금지 */
+					background-position: center center; /* 배경 이미지를 가운데 정렬 */
+					background-size: cover; /* 배경 이미지를 요소에 맞게 크기 조절 */
+					transform: rotate(0deg) translateY(-50%); /* 가상 요소를 회전시키고 수직 방향으로 중앙으로 이동 */
+					transform-origin: top; /* 회전의 기준점을 상단으로 설정 */
+					filter: opacity(0.5); /* 투명도를 0.5로 설정 */
+					z-index: 1;} /* 가상 요소의 쌓임 순서를 설정 */
+
+.select-box.active::after {transform: rotate(180deg) translateY(-50%); /* 가상 요소를 180도 회전 */
+						   filter: opacity(1);} /* 투명도를 1로 설정하여 가상 요소가 완전히 표시되도록 함 */
+
+/*******
+textarea
+********/
+/* 텍스트 영역의 기본 스타일을 정의 */
+.textarea {border: 1px solid var(--light-gray-2); /* 텍스트 영역에 1px 두께의 테두리를 --light-gray-2 색상으로 설정 */
+		   padding: 20px; /* 텍스트 영역의 내부 패딩을 20px로 설정 */
+		   resize: none; /* 텍스트 영역의 크기 조절 기능을 비활성화 */
+		   transition: 0.3s;} /* 변경사항에 대한 전환 효과를 0.3초로 설정 */
+/* 클래스가 포커스를 받았을 때의 스타일 */
+.textarea:focus {border-color: var(--navy);} /* 테두리 색상을 --navy로 변경 */ 
+/* textarea 클래스가 비활성화 상태일 때의 스타일 */
+.textarea:disabled,
+.textarea[disabled] {background-color: var(--gray);} /* 배경 색상을 --gray로 설정 */
+
+/***************
+checkbox & radio
+****************/
+/* 체크박스와 라디오 버튼을 둘러싸는 래퍼의 스타일을 정의 */
+.check-wrap {gap: 0 10px; /* 자식 요소들 간의 간격을 수평 방향으로 10px, 수직 방향으로 0으로 설정 */
+			display: -webkit-inline-flex; display: inline-flex; /*  inline flexbox 레이아웃을 사용하여 내부 요소들을 배열 */
+			-webkit-align-items: center; align-items: center;} /* 내부 요소들을 수직 중앙 정렬 */
+/* .check-wrap 내부의 .underline 클래스에 적용되는 스타일 */
+.check-wrap .underline {font-weight: 700;} /* 글꼴의 굵기를 700으로 설정 */
+
+/*******
+checkbox
+********/
+/* 체크박스와 라디오 버튼의 기본 스타일을 정의 */
+.radio,
+.checkbox { -webkit-box-flex: 0; -ms-flex: none; flex: none; /* Flexbox 레이아웃에서 요소의 유연성(flex)을 비활성화 */
+	position: relative; vertical-align: middle; /* 요소의 위치를 상대적으로 설정하고, 수직 정렬을 중앙 */
+	display: inline-block; background-color: inherit; overflow: hidden; margin: 0; /* 인라인 블록 요소로 표시, 배경색은 상속받고, 오버플로우를 숨김 */
+}
+
+/* .checkbox와 .radio의 너비와 높이를 각각 20px로 설정 */
+.checkbox,
+.radio {width: 20px; height: 20px;} 
+
+/* 체크박스와 라디오 버튼에 대한 가상 요소(:before와 :after)에 공통으로 적용되는 스타일 */
+.checkbox:before,
+.radio:before,
+.checkbox:after,
+.radio:after {width: 100%; height: 100%; box-sizing: border-box;} /* 너비와 높이를 100%로 설정하고, 테두리 박스 크기 모델을 사용 */
+
+
+.checkbox:before,
+.checkbox:after,
+.radio:before,
+.radio:after {content: ''; display: block; /* 가상 요소에 내용을 추가하고, 블록 요소로 표시 */
+	-webkit-transition: all .2s ease-in-out; /* : 모든 스타일 변경에 대한 전환 효과를 0.2초로 설정 */
+			transition: all .2s ease-in-out;
+}
+
+.checkbox:after,
+.radio:after {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+
+/* .radio나 .checkbox 바로 다음에 오는 span 요소에 적용되는 스타일 */
+/* 너비는 20px을 뺀 만큼, 글꼴 크기는 16px, 커서는 포인터로 설정하고, 모든 스타일 변경에 대한 전환 효과를 0.3초로 설정 */
+.radio + span,
+.checkbox + span {width: calc(100% - 20px); font-size: 16px; cursor: pointer; transition: all .3s ease-in-out;} 
+
+/* 뷰포트 너비가 768px 이하일 때 적용되는 미디어 쿼리 */
+@media all and (max-width: 768px) {
+	.radio + span, 
+	.checkbox + span {font-size: 15px;} /* span 요소의 글꼴 크기를 15px로 줄임 */
+}
+
+/* .radio 클래스에 대한 추가 스타일이나 설정이 없음 */
+.radio {} 
+
+/* radio의 가상요소 after에 대한 스타일, 테두리를 1px 두께로 --navy 색상으로 설정 */
+.radio:after {border: 1px solid var(--navy);} 
+
+/* radio가 체크된 상태일 때 가상요소 after의 테두리 6px */
+.radio:checked:after {border-width: 6px;} 
+
+/* radio의 가상요소 before, after의 테두리 모서리 50%로 둥글게 설정 */
+.radio:before,
+.radio:after	{border-radius: 50%;} 
+
+/* checkbox의 가상요소 before 배경색 상속, 테두리 두께 1px 색상은 네이비, 테두리 모서리는 둥글게 2px */
+.checkbox:before {background-color: inherit; border: 1px solid var(--navy); border-radius: 2px;} 
+
+/* .checkbox의 가상 요소 after에 배경 이미지를 설정하고, 이미지의 반복을 제한하며, 위치와 크기를 조정 */
+.checkbox:after {background-image: url('../images/@uio/uio_check.svg'); background-repeat: no-repeat; background-position: 50% 50%; background-size: 16px 17px;}
+
+/* checkbox가 check됐을 때 가상요소 before의 배경색 navy */
+.checkbox:checked::before {background-color: var(--navy);}
+
+/* 비활성화된 .checkbox의 가상 요소 before에 대한 스타일 */
+/* 배경 색상을 --blue-gray-2로 설정, 테두리 색상을 --blue-gray-2로 설정 */
+.checkbox:disabled:before,
+.checkbox[disabled]:before {background-color: var(--blue-gray-2); border-color: var(--blue-gray-2);}
+
+/* 비활성화된 .checkbox의 가상 요소 after에 대한 스타일 */
+/* 이미지나 콘텐츠의 명암을 50%로 조절 */
+.checkbox:disabled:after,
+.checkbox[disabled]:after {filter: contrast(0.5);}
+
+/* 비활성화된 .radio의 가상 요소 :before와 :after에 대한 스타일 */
+/* 배경 색상을 --blue-gray-2로 설정, 테두리 색상을 --blue-gray-2로 설정 */
+.radio:disabled:before,
+.radio[disabled]:after,
+.radio:disabled:before,
+.radio[disabled]:after {background-color: var(--blue-gray-2); border-color: var(--blue-gray-2);}
+
+/*****
+toggle
+******/
+/* 토글 스위치의 기본 스타일을 정의*/
+/* .onoff 클래스에 기본적인 크기와 위치를 설정 */
+.onoff {position: relative; width: 4rem; height: 1.875rem;}
+
+/* .onoff 내부의 type="checkbox"에 적용되는 스타일 */
+.onoff [type="checkbox"] {display: block; /* 블록 레벨 요소로 표시 */ 
+						  width: 100%; 
+						  height: inherit; 
+						  margin: 0;
+	box-shadow: .3rem .3rem .6rem var(--gray-light), -.2rem -.2rem .5rem #fff; /* 그림자 효과를 추가 */
+	background: rgba(255, 255, 255, 0);
+}
+
+/* .onoff 내부의 type="checkbox"에 적용되는 스타일, 이후 span 태그와 가상요소 after에도 적용 */
+.onoff [type="checkbox"],
+.onoff [type="checkbox"] + span:after {border-radius: 2rem; /* 모서리 둥글게 만듦 */
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+/* type="checkbox" 바로 뒤에 오는 span에 대한 스타일 */
+.onoff [type="checkbox"] + span	{position: absolute; /* 절대 위치를 설정 */
+								top:0; left: 0; right:0; bottom:0;} /* span을 완전히 덮음 */
+
+/* type="checkbox" 바로 뒤에 오는 span의 가상 요소 :after에 대한 스타일 */
+.onoff [type="checkbox"] + span:after
+	{content: ""; /*  가상 요소에 내용을 추가하지 않음 */
+	position: absolute; /* 절대 위치를 설정 */
+	left: .25rem; bottom: .25rem; width: 2.25rem; height: calc(1.875rem - .5rem); 
+	line-height: calc(1.875rem - .5rem); /* 텍스트의 줄 높이를 설정 */
+	background-color: var(--gray-dark); /* 배경 색상을 --gray-dark로 설정 */
+	color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+	font-size: .688rem; /* 글꼴 크기를 설정 */
+	text-align: center; /* 텍스트를 중앙 정렬 */
+	-webkit-transform: translateX(0); transform: translateX(0); /* 변환을 적용하지 않음 */
+}
+
+/* type="checkbox"가 선택된 상태일 때의 스타일을 정의 */
+.onoff [type="checkbox"]:checked		{
+	background: linear-gradient(330deg, var(--color1-dark) 0%, var(--color1) 50%, var(--color1-light) 100%); /*: 그라디언트 배경을 적용 */
+}
+
+/* 선택된 type="checkbox" 바로 뒤에 오는 span의 가상 요소 :after에 대한 스타일 */
+.onoff [type="checkbox"]:checked + span:after	{background: #fff; color: #000; /* 배경 색상을 흰색으로, 텍스트 색상을 검은색으로 설정 */
+	-webkit-transform: translateX( calc(4rem - (2.25rem + .5rem)) );
+	transform: translateX(calc(4rem - (2.25rem + .5rem))); /*  텍스트의 위치를 계산하여 조절 */
+}
+
+/* 선택되지 않은 type="checkbox" 바로 뒤에 오는 span의 가상 요소 :after에 텍스트를 표시 */
+.onoff [type="checkbox"]:not(:checked) + span:after {content: attr(data-off-text);}
+
+/* 선택된 type="checkbox" 바로 뒤에 오는 span의 가상 요소 :after에 텍스트를 표시 */
+.onoff [type="checkbox"]:checked + span:after {content: attr(data-on-text);}
+
+/****** 
+.field
+*******/
+/* .field, .insert, .inputs, .input-cover, input-value에 대한 스타일을 정의 */
+.field,
+.insert,
+.inputs,
+.input-cover,
+input-value {
+	display: -ms-flexbox; display: -webkit-flex; display: flex; /* Flexbox를 사용하여 요소들을 배열 */
+	width: 100%; /* 너비 100% */
+}
+
+/* field 중 check 클래스를 가지고 있지 않은 것에 대한 스타일을 정의 */
+.field:not(.check) {-webkit-justify-content: flex-start; -ms-flex-pack: start; justify-content: flex-start; /* 주축을 시작점으로 정렬 */
+	-webkit-align-content: flex-start;-ms-flex-line-pack: start; align-content: flex-start; /* 교차축을 시작점으로 정렬 */
+	-webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; /* 컨테이너의 주축을 세로로 설정 */
+}
+
+
+.insert {-webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; /* : 자식 요소들을 여러 줄로 배열하되, 너비를 초과하면 줄바꿈 */
+	position: relative; height: 100%; /* 상대적 위치 지정과 높이 100% 설정 */
+}
+
+.inputs {-webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between;} /* 자식 요소들 사이에 공간을 균등하게 배분 */
+
+.input-cover {-webkit-align-items: center; -ms-flex-align: center; align-items: center;} /* 자식 요소들을 수직으로 중앙 정렬 */
+
+/* .input-cover 중 no-bdr 클래스를 가지고 있지 않은 것에 대한 스타일을 정의 */
+.input-cover:not(.no-bdr) {border-bottom: 1px solid var(--light-gray-2); /* 하단에 회색 경계선을 추가 */
+						   transition: border 0.2s ease-in-out;} /* 경계선 변화에 대한 전환 효과를 설정 */
+
+/* 	포커스가 해당 요소 내부에 있을 때의 스타일을 정의 */			   
+.input-cover:not(.no-bdr):focus-within {border-color: var(--navy);} /* 포커스가 있을 때의 경계선 색상을 navy로 설정 */
+
+.label {font-weight: 500; font-size: 20px;} /* 라벨의 글꼴 두께와 크기를 설정 */
+
+/* 라벨 내부의 em 요소에 대한 스타일을 정의 */
+label > em {display: inline-block; color: var(--blue); padding-left: 4px;}
+
+/* : 라벨 바로 뒤의 텍스트 영역에 상단 여백을 추가 */
+.label + .textarea {margin-top: 20px;}
+
+/* color: var(--bluegray);: .field 내부의 select 중 checked 클래스를 가지고 있지 않은 것의 색상을 회색으로 설정 */
+.field .select:not(.checked) {color: var(--bluegray);;}
+
+.field .textarea {height: 250px;} /* .field 내부의 textarea의 높이를 250px로 설정 */
+
+/* flex-wrap: wrap;: .field 요소 중 check 클래스를 가지고 있는 것에 대해 자식 요소를 여러 줄로 배열하되, 너비를 초과하면 줄바꿈 */
+.field.check{
+	-webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap;
+}
+
+/* margin-right: 60px;: .field.check 내부의 .check-wrap 요소의 오른쪽 여백을 60px로 설정 */
+.field.check .check-wrap{margin-right: 60px;}
+
+/* margin-right: 0;: .field.check 내부의 .check-wrap 중 마지막 자식 요소의 오른쪽 여백을 제거 */
+.field.check .check-wrap:last-child{margin-right: 0;}
+
+/* margin-top: 30px;: .field 바로 다음에 오는 .captcha 요소의 상단 여백을 30px로 설정 */
+.field + .captcha{margin-top: 30px;}
+
+/* .agree 클래스 내부의 a 태그에 대한 스타일을 정의, 글꼴 두께는 굵게, 텍스트에 밑줄을 추가 */
+.agree a{font-weight: bold;text-decoration: underline !important;}
+
+/* .agree 클래스 내부의 .check-wrap 요소를 수직으로 중앙 정렬 */
+.agree .check-wrap{vertical-align: middle;}
+
+/* 반응형 디자인을 위한 미디어 쿼리, 화면 너비가 768px 이하일 때 아래의 스타일이 적용 */
+@media all and (max-width: 768px) {
+	.field.check .check-wrap{margin-right: 30px;}	/* .field.check 내부의 .check-wrap 요소의 오른쪽 여백을 30px로 변경 */
+	.field + .captcha{margin-top: 20px;} /* .field 바로 다음에 오는 .captcha 요소의 상단 여백을 20px로 변경 */
+}
+
+
+/************
+form - search
+*************/
+/* 검색을 위한 필드에 적용 */
+.input-text[type="search"] {position: relative; /* 상대적 위치 설정 */
+							width: calc(100% - var(--ico-m)); /*  너비는 전체에서 var(--ico-m)을 뺀 값 */
+							height: var(--medium); /* 높이는 --medium 변수 값에 따라 설정 */
+							border: 1px solid var(--navy); /* 테두리 스타일 */
+							font-weight: 600; font-size: 14px; /* 글꼴 굵기와 크기 설정 */ 
+							padding: 0 15px 0 50px;} /* 내부 패딩 설정 */
+
+/* 검색 입력 필드 바로 뒤에 오는 .btn.search 또는 .ico에 스타일을 적용 */
+.input-text[type="search"] + .btn.search,
+.input-text[type="search"] + .ico {position: absolute; /*  절대적 위치 설정 */
+								   top: 50%; left: 20px; /* 상단에서 50% 위치, 왼쪽에서 20px 위치 */
+								   width: var(--ico-m); height: var(--ico-m); /* 너비와 높이는 --ico-m 변수 값에 따라 설정 */
+								   transform: translateY(-50%);} /* Y축으로 -50%만큼 이동 */
+
+/*  검색 필드가 비활성화되거나 읽기 전용일 때 .ico에 스타일을 적용 */
+.input-text[type="search"]:disabled + .ico,
+.input-text[type="search"][disabled] + .ico,
+.input-text[type="search"][readonly] + .ico {filter: brightness(0.9) contrast(0.4);} /* 밝기와 대비 조절 */
+
+/* 반응형 디자인을 위한 미디어 쿼리, 화면 크기가 768px 이하일 때 아래의 스타일을 적용 */
+@media all and (max-width: 768px) {
+	.input-text[type="search"] {height: 50px;} /* 검색 필드의 높이를 50px로 설정 */
+}
+
+/****
+form 
+*****/
+/* .write-form 클래스 내부의 .flex-wrap 요소에 스타일을 적용 */
+.write-form .flex-wrap {gap: 50px 20px; /* 요소 사이의 간격 설정 */
+	-webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; /* 주요 콘텐츠의 배치 설정 */
+}
+/* 반응형 디자인을 위한 미디어 쿼리, 화면 크기가 768px 이하일 때 아래의 스타일을 적용 */
+@media all and (max-width: 768px) {
+	.write-form .flex-wrap {gap: 30px 0;} /* 요소 사이의 간격을 30px로 설정, 수직 간격은 0으로 설정 */
+}

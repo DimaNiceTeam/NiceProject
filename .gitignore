@@ -2,7 +2,20 @@
 # Created by https://www.toptal.com/developers/gitignore/api/gradle,java,visualstudiocode,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=gradle,java,visualstudiocode,eclipse
 
+#기타 sts 파일 제외
+/mailapi/
+/spring7/
+**/__pycache__/
+
+## 비디오 파일 제거 
+*.mp4
+
+##피클 파일 수정 
+**/dense_matrix.pickle
 **/dataframe.pickle
+
+## sql문 수정
+**/.sql
 ### Eclipse ###
 .metadata
 bin/

@@ -9,6 +9,16 @@
             "projectName": "niceweb",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-NicewebApplication<niceweb>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.dima.niceweb.NicewebApplication",
+            "projectName": "niceweb",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
