@@ -39,6 +39,9 @@ public class SecurityConfig {
 					,"/rate" // 환율 getaaaaa!1
 					,"/fraud" // * 사기 get
 					,"/showFraud" //* 사기 get
+					,"/showFraudDetail"
+					,"/showOvsNews"
+					,"/showOvsNewsDetail"
 					,"/globeindex" // * get
 					,"/search" //**추천 알고리즘 검색 화면 요청 get
 					,"/cmpSelect" // ** 회사 상세보기 get
