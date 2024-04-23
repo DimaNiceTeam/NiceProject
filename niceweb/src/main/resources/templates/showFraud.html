@@ -2,11 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<<<<<<< HEAD
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraud NEWS</title>
-=======
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
@@ -23,7 +18,6 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}">
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
->>>>>>> 046db813fd28c10f1c17d4a8ea935351d5a20361
 </head>
 
 <body>
@@ -130,19 +124,11 @@
         async function fetchFraudData() {
             const search1 = encodeURIComponent(document.getElementById('search1').value);
             const search2 = encodeURIComponent(document.getElementById('search2').value);
-<<<<<<< HEAD
             //const search3 = encodeURIComponent(document.getElementById('search3').value);
         
             const serviceKey = '1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D';
             const url = `https://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?serviceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&_type=json`;
             
-=======
-            const search3 = encodeURIComponent(document.getElementById('search3').value);
-
-            const serviceKey = '1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D';
-            const url = `http://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?ServiceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&search3=${search3}&_type=json`;
-
->>>>>>> 046db813fd28c10f1c17d4a8ea935351d5a20361
             try {
                 const response = await fetch(url, {
                     method: 'GET',
