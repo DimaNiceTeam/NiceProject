@@ -91,49 +91,7 @@
         }
     </style>
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
-    <script>
-        $(function() {
-            var baseFileName = "../static/file/STAT_";
-            var fileNames = []; // 파일 이름을 저장할 배열
-        
-            for (var i = 1; i < 3; i++) {
-                var parse;
-                if (i === 1) {
-                    parse = "ALL_INFO";
-                } else if (i === 2) {
-                    parse = "REG";
-                }
-                var fullFileName = baseFileName + parse + '.csv'; // 파일 경로 + 명칭 + 확장자
-                fileNames.push(fullFileName);
-            }
-        
-            fileNames.forEach(function(fileName) {
-                $.ajax({
-                    url: fileName,
-                    dataType: 'text',
-                    success: function(data) {
-                        processFileContent(data);
-                    },
-                    error: function() {
-                        console.log("Error loading the file: " + fileName);
-                    }
-                });
-            });
-        
-            function processFileContent(data) {
-                var rows = data.split(/\r?\n|\r/);
-                var outputText = "";
-        
-                rows.forEach(function(row) {
-                    var columns = row.split(",");
-                    outputText += columns.join("") + "<br>"; // Join all columns without separator and add line break
-                });
-        
-                $('#textArea').append(outputText);
-            }
-        });
-
-    </script>
+    
 </head>
 <body>
     <div class="dropdown-container">
@@ -200,6 +158,7 @@
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script>
+
         am5.ready(function () {
 
             // Create root element
@@ -580,12 +539,13 @@
 
             // 제일 최신 데이터에 강조 표시 생성
             series.bullets.push(function(root, series, dataItem) {  
-            if (dataItem.dataContext.bullet) {    
+            if (dataItem.dataContext.bullet) {
                 var container = am5.Container.new(root, {});
                 var circle0 = container.children.push(am5.Circle.new(root, {
                     radius: 5,
                     fill: am5.color(0xff0000)
                 }));
+
                 var circle1 = container.children.push(am5.Circle.new(root, {
                     radius: 5,
                     fill: am5.color(0xff0000)

@@ -17,7 +17,7 @@ public class GlobeController {
 
     @GetMapping("/chartindex")
     public String chartindex() {
-        log.info("도착!");
+        
         return "chartindex";
     }
 }

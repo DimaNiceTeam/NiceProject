@@ -21,16 +21,20 @@
             var baseFileName = "../static/file/STAT_";
             var fileNames = []; // 파일 이름을 저장할 배열
         
-            for (var i = 1; i < 3; i++) {
+            for (var i = 1; i < 4; i++) {
                 var parse;
                 if (i === 1) {
-                    parse = "ALL_INFO";
+                    parse = "INFO";
                 } else if (i === 2) {
-                    parse = "REG";
+                    parse = "STATIC";
+                } else if (i === 3) {
+                    parse = "REG"
                 }
                 var fullFileName = baseFileName + parse + '.csv'; // 파일 경로 + 명칭 + 확장자
                 fileNames.push(fullFileName);
             }
+
+            console.log(fileNames)
 
 
             
