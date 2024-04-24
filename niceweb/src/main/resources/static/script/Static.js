@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // CSV 파싱 함수
 function parseCSV(csvString) {
-    const rows = csvString.split('\n');
+    const rows = csvString.split('\n').filter(row => row.trim() !== '');
     return rows.map(row => {
         let inQuotes = false;
         let modifiedRow = '';
@@ -42,36 +42,9 @@ function parseCSV(csvString) {
                 modifiedRow += char;
             }
         }
-        return modifiedRow.split(',').map(value => value.replace(/\|/g, ','));
+        return modifiedRow.split(',').map(value => value.replace(/\|/g, ',').trim().replace(/"/g, ''));
     });
 }
-
-// 데이터 행 찾기 및 전역 변수 업데이트
-function fetchDataForCountry(countryCode) {
-    fetch('/file/STAT_STATIC.csv')
-        .then(response => response.text())
-        .then(data => {
-            const parsedData = parseCSV(data);
-            const valueRow = parsedData.find(row => row[0].trim().replace(/"/g, '') === countryCode);
-            if (valueRow) {
-                updateGlobalVariables(valueRow, parsedData[0]);  // 헤더 정보와 함께 전달
-            } else {
-                console.log("No data found for country:", countryCode);
-            }
-        })
-        .catch(error => console.error("Error loading the CSV file:", error));
-}
-
-// 전역 변수 업데이트
-function updateGlobalVariables(rowData, headers) {
-    EXP = extractData(rowData, headers, 'EXP_');
-    IMP = extractData(rowData, headers, 'IMP_');
-    BAL = extractData(rowData, headers, 'BAL_');
-    GWT = extractData(rowData, headers, 'GWT_');
-    GDP = extractData(rowData, headers, 'GDP_');
-}
-
-
 // STAT_INFO의 데이터를 받아서 HTML에 뿌려주는 함수
 function createDataDiv(csvData) {
     const dataDiv = document.createElement('div');
@@ -99,20 +72,51 @@ function createDataDiv(csvData) {
     return dataDiv.outerHTML;
 }
 
+// 데이터 행 찾기 및 전역 변수 업데이트
+// 데이터 행 찾기 및 전역 변수 업데이트
+function fetchDataForCountry(countryCode) {
+    fetch('/file/STAT_STATIC.csv')
+        .then(response => response.text())  // CSV 파일을 텍스트로 불러옵니다.
+        .then(data => {
+            const parsedData = parseCSV(data);
+            // 특정 국가 코드에 해당하는 행을 찾습니다.
+            const valueRow = parsedData.find(row => row[0] === countryCode);
+            if (valueRow) {
+                // 모든 값을 parseFloat를 이용하여 숫자로 변환합니다.
+                const numericData = valueRow.map(value => parseFloat(value.replace(/,/g, '')) || 0);
+                // 헤더 정보를 가져옵니다.
+                const headers = parsedData[0];
+                // 업데이트 함수에 숫자로 변환된 데이터와 헤더를 전달합니다.
+                updateGlobalVariables(numericData, headers);
+            } else {
+                console.log("No data found for country:", countryCode);
+            }
+        })
+        .catch(error => console.error("Error loading the CSV file:", error));
+}
+
+// 전역 변수 업데이트
+function updateGlobalVariables(rowData, headers) {
+    EXP = extractData(rowData, headers, 'EXP_');
+    IMP = extractData(rowData, headers, 'IMP_');
+    BAL = extractData(rowData, headers, 'BAL_');
+    GWT = extractData(rowData, headers, 'GWT_');
+    GDP = extractData(rowData, headers, 'GDP_');
+}
+
+
+
+console.log(EXP);
 
 // STAT_STATIC에서 데이터 추출
-function extractData(rowData, headers, prefix) {
+function extractData(numericRowData, headers, prefix) {
     return headers.reduce((acc, header, index) => {
         if (header.startsWith(prefix)) {
-            // 데이터가 존재하면 쉼표를 제거하고 숫자로 변환, 없으면 0을 반환
-            const data = rowData[index];
-            const value = data ? parseFloat(data.replace(/,/g, '')) : 0;
-            acc.push(value);
+            acc.push(numericRowData[index]);
         }
         return acc;
     }, []);
 }
-
 // amCharts 라이브러리를 사용하여 차트 생성 및 업데이트
 // 전역 변수로 차트의 Root 객체와 인스턴스를 저장
 var chartRoot;
@@ -147,6 +151,8 @@ function initializeOrUpdateChart() {
             var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(chartRoot, {
                 renderer: am5xy.AxisRendererY.new(chartRoot, {})
             }));
+
+            
 
             // 시리즈 추가
             var series = chart.series.push(am5xy.LineSeries.new(chartRoot, {
@@ -204,13 +210,23 @@ function formatChartData(values) {
     }));
 }
 
-// 이벤트 리스너 연결
-document.querySelectorAll('.statBtn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const dataType = this.getAttribute('data-type');  // 각 버튼에 data-type 속성을 미리 설정해두어야 함
-        updateChartData(dataType);
+// // 이벤트 리스너 연결
+// document.querySelectorAll('.statBtn').forEach(btn => {
+//     btn.addEventListener('click', function() {
+//         const dataType = this.getAttribute('data-type');  // 각 버튼에 data-type 속성을 미리 설정해두어야 함
+//         updateChartData(dataType);
+//     });
+// });
+
+function attachEventListeners() {
+    // 모든 통계 버튼에 대한 이벤트 리스너 연결
+    document.querySelectorAll('.statBtn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const dataType = btn.getAttribute('data-type'); // 이 버튼의 data-type 속성 가져오기
+            updateChartData(dataType);  // 차트 데이터 업데이트 함수 호출
+        });
     });
-});
+}
 
 // 데이터 표시
 function displayData(type) {
@@ -258,12 +274,20 @@ function updateChartData(dataType) {
         case 'GDP':
             data = formatChartData(GDP);
             break;
+        default:
+            console.error("Invalid data type");
+            return;
     }
+
+    console.log(EXP);
+    console.log(IMP);
 
     // 차트 데이터 설정
     if (chartInstance) {
         var series = chartInstance.series.getIndex(0);
         series.data.setAll(data);
+    } else {
+        console.error("Chart instance not found");
     }
 }
 
@@ -326,4 +350,8 @@ function csvToTable(csvData) {
 }
 
 
-document.addEventListener("DOMContentLoaded", initializeOrUpdateChart);
+// 페이지 로드 시 실행될 초기화 함수
+document.addEventListener("DOMContentLoaded", function() {
+    initializeOrUpdateChart();  // 차트 초기화 또는 업데이트
+    attachEventListeners();     // 이벤트 리스너 연결
+});
