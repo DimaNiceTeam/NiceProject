@@ -1,3 +1,14 @@
+ //국가 코드를 두 js파일에서 유기적으로 가져올 전역변수 설정
+ var countrySelect; // 기본값 설정
+
+// HTML 내에서 선택된 국가 코드를 처리하는 함수
+function selectCountry(countryCode) {
+    countrySelect = countryCode;  // 전역 변수 업데이트
+    updateCountryInfo(countryCode);  // 국가 정보 업데이트 함수 호출
+    fetchDataForCountry(countryCode);  // 데이터 가져오기 함수 호출
+    updateCountryDetailsUI();  // UI 업데이트
+}
+
 am5.ready(function () {
 
     // Create root element
@@ -235,6 +246,18 @@ am5.ready(function () {
             .catch(error => console.error(`Error loading the CSV file:`, error));
 
         }
+
+        // 국가 상세 정보를 업데이트하는 UI 로직
+    function updateCountryDetailsUI() {
+        fetch(`/file/STAT_INFO.csv`)
+            .then(response => response.text())
+            .then(data => {
+                const parsedData = parseCSV(data);
+                const contentDiv = createDataDiv(parsedData);
+                document.getElementById('countryDetails').innerHTML = contentDiv;
+            })
+            .catch(error => console.error(`Error loading the CSV file:`, error));
+    }
 
     document.getElementById('countrySelect').addEventListener('change', function () {
         var selectedCountryId = this.value;

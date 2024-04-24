@@ -97,6 +97,8 @@ function fetchDataForCountry(countryCode) {
 
 // 전역 변수 업데이트
 function updateGlobalVariables(rowData, headers) {
+    // 차트의 각 내용을 담을 전역변수 설정
+    var EXP = [], IMP = [], BAL = [], GWT = [], GDP = [];
     EXP = extractData(rowData, headers, 'EXP_');
     IMP = extractData(rowData, headers, 'IMP_');
     BAL = extractData(rowData, headers, 'BAL_');
@@ -104,9 +106,6 @@ function updateGlobalVariables(rowData, headers) {
     GDP = extractData(rowData, headers, 'GDP_');
 }
 
-
-
-console.log(EXP);
 
 // STAT_STATIC에서 데이터 추출
 function extractData(numericRowData, headers, prefix) {
@@ -120,6 +119,7 @@ function extractData(numericRowData, headers, prefix) {
 // amCharts 라이브러리를 사용하여 차트 생성 및 업데이트
 // 전역 변수로 차트의 Root 객체와 인스턴스를 저장
 var chartRoot;
+// 차트 인스턴스를 저장할 변수
 var chartInstance;
 
 // 차트 초기화 또는 업데이트 함수
