@@ -15,62 +15,13 @@
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script th:src="@{/script/Static.js}"></script>
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
-    <script>
-        $(function() {
-            //var path = "http://localhost:8080"
-            var baseFileName = "../static/file/STAT_";
-            var fileNames = []; // 파일 이름을 저장할 배열
-        
-            for (var i = 1; i < 4; i++) {
-                var parse;
-                if (i === 1) {
-                    parse = "INFO";
-                } else if (i === 2) {
-                    parse = "STATIC";
-                } else if (i === 3) {
-                    parse = "REG"
-                }
-                var fullFileName = baseFileName + parse + '.csv'; // 파일 경로 + 명칭 + 확장자
-                fileNames.push(fullFileName);
-            }
-
-            console.log(fileNames)
-
-
-            
-            fileNames.forEach((value, index) => function() {
-                $.ajax({
-                    url: value,
-                    dataType: 'text',
-                    success:
-                        processFileContent
-                        ,
-                    error: function() {
-                        console.log("Error loading the file: " + value);
-                    }
-                });
-            });
-        
-            function processFileContent(data) {
-                var rows = data.split(/\r?\n|\r/);
-                var outputText = "";
-        
-                rows.forEach(function(row) {
-                    var columns = row.split(",");
-                    outputText += columns.join("") + "<br>"; // Join all columns without separator and add line break
-                });
-        
-                $('#textArea').append(outputText);
-            }
-        });
-
-    </script>
 </head>
 <body>
-    <div id="textarea"></div>
     <div id="insertChart"></div>
 
-    
-    
+    <div id="csv-root"></div> <!-- CSV 데이터가 표시될 위치 -->
+
+    <script th:src="@{/script/load-csv.js}"></script>
+
 </body>
 </html>
