@@ -14,6 +14,8 @@ am5.ready(function () {
 
     // Create the map chart
     // https://www.amcharts.com/docs/v5/charts/map-chart/
+    
+
     var chart = root.container.children.push(am5map.MapChart.new(root, {
         panX: "rotateX",
         panY: "rotateY",
@@ -23,8 +25,10 @@ am5.ready(function () {
         paddingLeft: 20,
         paddingRight: 20
     }));
+
     var filter = root.interfaceColors.get("shadow");
     chart.set("filter", filter);
+    
 
     var backgroundSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {}));
     backgroundSeries.mapPolygons.template.setAll({

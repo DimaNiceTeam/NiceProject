@@ -48,7 +48,7 @@ function parseCSV(csvString) {
 
 // 데이터 행 찾기 및 전역 변수 업데이트
 function fetchDataForCountry(countryCode) {
-    fetch('/path/to/STAT_STATIC.csv')
+    fetch('/file/STAT_STATIC.csv')
         .then(response => response.text())
         .then(data => {
             const parsedData = parseCSV(data);
@@ -72,7 +72,7 @@ function updateGlobalVariables(rowData, headers) {
 }
 
 
-
+// STAT_INFO의 데이터를 받아서 HTML에 뿌려주는 함수
 function createDataDiv(csvData) {
     const dataDiv = document.createElement('div');
     let headers = csvData[0];
@@ -88,7 +88,8 @@ function createDataDiv(csvData) {
             found = true;
         }
     });
-
+    
+    // 찾지 못할 경우 못찾겠다꾀꼬리
     if (!found) {
         const p = document.createElement('p');
         p.textContent = 'No data found for selected country';
@@ -98,264 +99,77 @@ function createDataDiv(csvData) {
     return dataDiv.outerHTML;
 }
 
-// 데이터 추출
+
+// STAT_STATIC에서 데이터 추출
 function extractData(rowData, headers, prefix) {
     return headers.reduce((acc, header, index) => {
         if (header.startsWith(prefix)) {
-            acc.push(parseFloat(rowData[index].replace(/,/g, '')) || 0);
+            // 데이터가 존재하면 쉼표를 제거하고 숫자로 변환, 없으면 0을 반환
+            const data = rowData[index];
+            const value = data ? parseFloat(data.replace(/,/g, '')) : 0;
+            acc.push(value);
         }
         return acc;
     }, []);
 }
 
-function createChart(data) {
-    am5.ready(function() {
+// amCharts 라이브러리를 사용하여 차트 생성 및 업데이트
+// 전역 변수로 차트의 Root 객체와 인스턴스를 저장
+var chartRoot;
+var chartInstance;
 
-        // 차트 생성
-        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-        var root = am5.Root.new("insertChart");
-    
-    
-        // 차트 테마 설정
-        // https://www.amcharts.com/docs/v5/concepts/themes/
-        root.setThemes([
-            am5themes_Animated.new(root)
-        ]);
-    
-        // 데이터 설정
-        // 각 국가에 맞는 데이터들을 꽂아넣기
-        var data = [
-        {date: new Date(2019, 5, 3).getTime(), value: 50000}
-        , {date: new Date(2020, 5, 3).getTime(), value: 52000}
-        , {date: new Date(2021, 5, 3).getTime(), value: 48000}
-        , {date: new Date(2022, 5, 3).getTime(), value: 47000}
-        , {date: new Date(2023, 5, 3).getTime(), value: 76999, bullet: true}
-        ]
-    
-        // 만약 가장 최근값이 null이라면 직전 값에 bullet(빨강 강조표시)값을 추가
-        for (let i = 1; i < data.length; i++) {
-            if (data[i].value === null) {
-                data[i - 1].bullet = true;
-            }
+// 차트 초기화 또는 업데이트 함수
+function initializeOrUpdateChart() {
+    // am5.ready는 amCharts 로드 완료를 보장
+    am5.ready(function() {
+        // Root 객체가 없으면 새로 생성
+        if (!chartRoot) {
+            chartRoot = am5.Root.new("insertChart");
+            
+            // 차트 테마 설정
+            chartRoot.setThemes([
+                am5themes_Animated.new(chartRoot)
+            ]);
+
+            // XY 차트 생성
+            var chart = chartRoot.container.children.push(am5xy.XYChart.new(chartRoot, {
+                panX: true,
+                wheelX: "panX",
+                wheelY: "zoomX"
+            }));
+
+            // 차트 구성 요소 생성 (축, 시리즈 등)
+            // X축과 Y축 추가
+            var xAxis = chart.xAxes.push(am5xy.DateAxis.new(chartRoot, {
+                baseInterval: { timeUnit: "year", count: 1 },
+                renderer: am5xy.AxisRendererX.new(chartRoot, {})
+            }));
+            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(chartRoot, {
+                renderer: am5xy.AxisRendererY.new(chartRoot, {})
+            }));
+
+            // 시리즈 추가
+            var series = chart.series.push(am5xy.LineSeries.new(chartRoot, {
+                name: "Series",
+                xAxis: xAxis,
+                yAxis: yAxis,
+                valueYField: "value",
+                valueXField: "date"
+            }));
+
+            // 차트 인스턴스 저장
+            chartInstance = chart;
+        } else {
+            // 차트가 이미 있으면 업데이트만 수행
+            updateChartData();
         }
-    
-        // xy차트 생성
-        // 2차원 차트를 생성하여 스크롤 및 줌 기능 활성화
-        // 이동 기능과 줌 기능은 필요없으므로 제거함!
-        // https://www.amcharts.com/docs/v5/charts/xy-chart/
-        var chart = root.container.children.push(am5xy.XYChart.new(root, {
-            panX: true,
-            //panY: true,
-            //wheelX: "panX",
-            //wheelY: "zoomX",
-            //pinchZoomX:true,
-            paddingLeft: 0
-        }));
-    
-        chart.get("colors").set("step", 3);
-    
-    
-    
-        // 커서 추가
-        // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-        cursor.lineY.set("visible", false);
-    
-    
-        // X축 값매기기
-        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-        var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-            maxDeviation: 0.3,
-            baseInterval: {
-            timeUnit: "year",
-            count: 1
-        },
-            renderer: am5xy.AxisRendererX.new(root, {
-            minorGridEnabled: true,
-            minGridDistance: 30
-            }),
-            tooltip: am5.Tooltip.new(root, {})
-        }));
-    
-        // 데이터 내에서 최대값 찾기(자동 크기조정 목적)
-        var maxValue = Math.max(...data.map(item => item.value));
-        var minValue = Math.min(...data.map(item => item.value));
-    
-        // y축에 값매기기
-        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-            maxDeviation: 0.3,
-            renderer: am5xy.AxisRendererY.new(root, {}),
-            min: minValue - (minValue * 0.2),   // 최소 값 설정 - 최소 데이터 크기보다 20% 더 작게
-            max: maxValue + (maxValue * 0.2),   // 최대 값 설정 - 최대 데이터 크기보다 20% 더 크게
-            strictMinMax: true,                 // min과 max의 값을 한 번 더 강조
-            extraMin: 0,                        // 축의 아래쪽 여유 공간 비율 설정 (필요하다면)
-            //extraMax: 0.1                       // 축의 위쪽 여유 공간을 10%로 설정 (필요하다면)
-        }));
-            // 축의 간격(step) 설정
-        yAxis.get("renderer").grid.template.setAll({
-            location: 0
-        });
-        yAxis.get("renderer").labels.template.setAll({
-            location: 0
-        });
-        yAxis.set("step", 10000);  // 10,000 단위로 눈금 설정
-    
-    
-        // 시리즈 객체 생성
-        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-        var series = chart.series.push(am5xy.LineSeries.new(root, {
-            name: "Series 1",
-            xAxis: xAxis,
-            yAxis: yAxis,
-            valueYField: "value",
-            valueXField: "date",
-            tooltip: am5.Tooltip.new(root, {
-            labelText: "{valueY}"
-            })
-        }));
-        series.strokes.template.setAll({
-            strokeWidth: 2,
-            strokeDasharray: [3, 3]
-        });
-    
-        // 제일 최신 데이터에 강조 표시 생성
-        series.bullets.push(function(root, series, dataItem) {  
-        if (dataItem.dataContext.bullet) {
-            var container = am5.Container.new(root, {});
-            var circle0 = container.children.push(am5.Circle.new(root, {
-                radius: 5,
-                fill: am5.color(0xff0000)
-            }));
-    
-            var circle1 = container.children.push(am5.Circle.new(root, {
-                radius: 5,
-                fill: am5.color(0xff0000)
-            }));
-    
-            circle1.animate({
-                key: "radius",
-                to: 20,
-                duration: 1000,
-                easing: am5.ease.out(am5.ease.cubic),
-                loops: Infinity
-            });
-            circle1.animate({
-                key: "opacity",
-                to: 0,
-                from: 1,
-                duration: 1000,
-                easing: am5.ease.out(am5.ease.cubic),
-                loops: Infinity
-            });
-    
-            return am5.Bullet.new(root, {
-                sprite: container
-                })
-            }
-        });
-    
-        series.data.setAll(data);
-    
-    
-        // Make stuff animate on load
-        // https://www.amcharts.com/docs/v5/concepts/animations/
-        series.appear(1000);
-        chart.appear(1000, 100);
-    
-    }); // end am5.ready()
-}
-
-// 이벤트 리스너 연결
-function attachEventListeners() {
-    document.getElementById('expBtn').addEventListener('click', () => displayData('EXP'));
-    document.getElementById('impBtn').addEventListener('click', () => displayData('IMP'));
-    document.getElementById('balBtn').addEventListener('click', () => displayData('BAL'));
-    document.getElementById('gwtBtn').addEventListener('click', () => displayData('GWT'));
-    document.getElementById('gdpBtn').addEventListener('click', () => displayData('GDP'));
-}
-
-// 데이터 표시
-function displayData(type) {
-    let data;
-    switch (type) {
-        case 'EXP':
-            data = EXP;
-            break;
-        case 'IMP':
-            data = IMP;
-            break;
-        case 'BAL':
-            data = BAL;
-            break;
-        case 'GWT':
-            data = GWT;
-            break;
-        case 'GDP':
-            data = GDP;
-            break;
-        default:
-            return;
-    }
-    //console.log(type + " data:", data); // Example to show data
-}
-
-
-
-// amCharts 라이브러리를 사용하여 차트 생성
-function initializeChart() {
-    am5.ready(function() {
-        // 차트의 루트 요소 생성
-        var root = am5.Root.new("chartdiv");
-
-        // 차트 테마 설정
-        root.setThemes([
-            am5themes_Animated.new(root)
-        ]);
-
-        // XY 차트 생성
-        var chart = root.container.children.push(am5xy.XYChart.new(root, {
-            panX: true,
-            wheelX: "panX",
-            wheelY: "zoomX"
-        }));
-
-        // X축 생성 (연도)
-        var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-            baseInterval: { timeUnit: "year", count: 1 },
-            renderer: am5xy.AxisRendererX.new(root, {})
-        }));
-
-        // Y축 생성 (값)
-        var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-            renderer: am5xy.AxisRendererY.new(root, {})
-        }));
-
-        // 시리즈 생성
-        var series = chart.series.push(am5xy.LineSeries.new(root, {
-            name: "Series 1",
-            xAxis: xAxis,
-            yAxis: yAxis,
-            valueYField: "value",
-            valueXField: "date"
-        }));
-
-        series.bullets.push(function() {
-            return am5.Bullet.new(root, {
-                sprite: am5.Circle.new(root, {
-                    radius: 5,
-                    fill: am5.color(0xff0000)
-                })
-            });
-        });
-
-        // 차트를 전역 변수에 저장
-        chartInstance = chart;
     });
 }
 
-// 차트 데이터 업데이트 함수
+// 데이터 업데이트 함수
 function updateChartData(dataType) {
     let data = [];
+    // dataType에 따라 전역 변수에서 데이터를 가져옴
     switch (dataType) {
         case 'EXP':
             data = formatChartData(EXP);
@@ -391,6 +205,70 @@ function formatChartData(values) {
 }
 
 // 이벤트 리스너 연결
+document.querySelectorAll('.statBtn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const dataType = this.getAttribute('data-type');  // 각 버튼에 data-type 속성을 미리 설정해두어야 함
+        updateChartData(dataType);
+    });
+});
+
+// 데이터 표시
+function displayData(type) {
+    let data;
+    switch (type) {
+        case 'EXP':
+            data = EXP;
+            break;
+        case 'IMP':
+            data = IMP;
+            break;
+        case 'BAL':
+            data = BAL;
+            break;
+        case 'GWT':
+            data = GWT;
+            break;
+        case 'GDP':
+            data = GDP;
+            break;
+        default:
+            return;
+    }
+    //console.log(type + " data:", data); // Example to show data
+}
+
+
+
+// 차트 데이터 업데이트 함수
+function updateChartData(dataType) {
+    let data = [];
+    switch (dataType) {
+        case 'EXP':
+            data = formatChartData(EXP);
+            break;
+        case 'IMP':
+            data = formatChartData(IMP);
+            break;
+        case 'BAL':
+            data = formatChartData(BAL);
+            break;
+        case 'GWT':
+            data = formatChartData(GWT);
+            break;
+        case 'GDP':
+            data = formatChartData(GDP);
+            break;
+    }
+
+    // 차트 데이터 설정
+    if (chartInstance) {
+        var series = chartInstance.series.getIndex(0);
+        series.data.setAll(data);
+    }
+}
+
+
+// 이벤트 리스너 연결
 function attachEventListeners() {
     document.getElementById('expBtn').addEventListener('click', () => updateChartData('EXP'));
     document.getElementById('impBtn').addEventListener('click', () => updateChartData('IMP'));
@@ -401,7 +279,7 @@ function attachEventListeners() {
 
 // 페이지 로드시 차트 초기화
 document.addEventListener("DOMContentLoaded", function() {
-    initializeChart();
+    initializeOrUpdateChart();
     attachEventListeners();
 });
 
@@ -446,3 +324,6 @@ function csvToTable(csvData) {
 
     return table.outerHTML;
 }
+
+
+document.addEventListener("DOMContentLoaded", initializeOrUpdateChart);

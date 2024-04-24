@@ -25,14 +25,15 @@
             align-items: center;
             justify-content: center;
 
-            border: 2px solid black;
+            border: 2px solid navy;
+            border-bottom: 4px solid navy;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
         }
 
         .statBtn:hover {
             height: 55px; /* hover 상태에서의 높이 */
-            background: darkblue; /* hover 상태에서의 배경색 */
+            background: navy; /* hover 상태에서의 배경색 */
             color: white; /* hover 상태에서의 글자색 */
             transform: translateY(-5px); /* 늘어난 높이의 절반만큼 위로 이동 */
         }
@@ -96,20 +97,19 @@
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
 
-    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script>
         //국가 코드를 두 js파일에서 유기적으로 가져올 전역변수 설정
         var countrySelect = ""; // 기본값 설정
 
         // 차트 인스턴스를 저장할 변수
-        var chartInstance;  
+        var chartInstance = null;  
 
         // 차트의 각 내용을 담을 전역변수 설정
         var EXP = [], IMP = [], BAL = [], GWT = [], GDP = [];
     </script>
     <script th:src="@{/script/Static.js}"></script>
     <script th:src="@{/script/Globe.js}"></script>
-    
+
 </head>
 <body>
     <div class="dropdown-container">
@@ -164,13 +164,14 @@
         <div id="staticArea">
             <div id="insertChart"></div>
         </div>
-        
     </div>
 
-    
-    
     <script>
+        
         document.addEventListener('DOMContentLoaded', function() {
+
+            // 차트 생성
+            initializeOrUpdateChart();
 
             // Globe.js에 포함된 함수가 정의된 후에 onchange이벤트 리스너가 실행되도록 설정
             var selectElement = document.getElementById('countrySelect');
@@ -184,11 +185,17 @@
                 btn.addEventListener('click', function() {
                     // 다른 모든 statBtn 요소에 대한 스타일을 초기화
                     document.querySelectorAll('.statBtn').forEach(function(otherBtn) {
-                        otherBtn.style.borderBottom = ''; // 초기 스타일로 재설정
+                        otherBtn.style.borderBottom = ''; // 다른 버튼들은 초기 스타일로 재설정
+                        otherBtn.style.height = '';
+                        //otherBtn.style.background = '';
+                        //otherBtn.style.color = '';
                     });
     
                     // 클릭된 요소의 스타일을 변경
                     btn.style.borderBottom = 'none';
+                    btn.style.height = '49px';
+                    //btn.style.background = 'navy';
+                    //btn.style.color = 'white';
                 });
 
                 //
