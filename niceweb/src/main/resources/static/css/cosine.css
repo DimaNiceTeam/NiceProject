@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+/* reset */
+@import url(lib/reset.css);
+/* library */
+@import url(lib/aos.css); /* Animate On Scroll: 웹 페이지에서 스크롤에 따라 요소들에 애니메이션 효과를 적용하는 JavaScript 라이브러리 */
+@import url(lib/swiper.css); /* Swiper: 모바일 터치 슬라이더 라이브러리 다양한 터치 이벤트와 애니메이션을 지원하여 사용자에게 부드러운 슬라이드 경험을 제공 */
+/* common css */
+@import url(_swiper-custom.css);
+@import url(_font.css);
+@import url(_color.css);
+@import url(_vars.css);
+@import url(_button.css);
+@import url(_form.css);
+@import url(_layout.css);
+@import url(_global.css);
+
+#content {
+    padding-top: 100px; /* 헤더 높이에 맞춰 조정 */
+}
+
+#cosine-list {
+    border-collapse: collapse;
+    width: 770px;
+    margin: 20px auto;
+    background-color: white;
+}
+
+#cosine-list th, #cosine-list td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#cosine-list th {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    background-color: #f8f8f8;
+    color: #000;
+}
+
+/* Hover effect for table rows */
+#cosine-list tbody tr:hover {
+    background-color: #d3d3d3;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+/* Width settings for table columns */
+#cosine-list th:nth-child(1), #cosine-list td:nth-child(1) {
+    width: 15%;
+}
+
+#cosine-list th:nth-child(2), #cosine-list td:nth-child(2) {
+    width: 55%;
+}
+
+#cosine-list th:nth-child(3), #cosine-list td:nth-child(3) {
+    width: 30%;
+}
+
+/* Dropdown and Search Button Styling */
+.dropdown-container {
+    width: 770px;
+    margin: auto;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.dropdown-container select, .dropdown-container input[type="button"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.search-input {
+    border: 2px solid #007BFF; /* 파란색 테두리 */
+    padding: 8px 10px;
+    width: 300px; /* 필요에 따라 조정 */
+    margin: 10px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.no-result {
+    color: #FF0000; /* 빨간색 텍스트 */
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+}
