@@ -17,9 +17,25 @@
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
 </head>
 <body>
+    <div class="dropdown-container">
+        <select id="continentSelect" onchange="updateCountryList()">
+            <option value="">Select Continent</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="NorthAmerica">North America</option>
+            <option value="SouthAmerica">South America</option>
+            <option value="Africa">Africa</option>
+            <option value="Oceania">Oceania</option>
+        </select>
+
+        <select id="countrySelect">
+            <option value="">Select Country</option>
+        </select>
+    </div>
+    
     <div id="insertChart"></div>
 
-    <div id="csv-root"></div> <!-- CSV 데이터가 표시될 위치 -->
+    <div id="countryDetails"></div> <!-- CSV 데이터가 표시될 위치 -->
 
     <script th:src="@{/script/load-csv.js}"></script>
 
