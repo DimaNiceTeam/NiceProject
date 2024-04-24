@@ -78,43 +78,6 @@ td {
 	-webkit-text-size-adjust: none;
 }
 
-<<<<<<< HEAD
-/****미래가 지정한 부분 start
-회사 로고 -> 미래가 임으로 지정 
-****/
-.logo {
-	font-size: 30px;
-	margin: 20px;
-	margin-bottom: 15px;
-}
-
-
-
-
-
-/*************
-
-**************/
-.join_info input {
-	height: 50px;
-	width: 250px;
-	/* 입력 요소의 높이를 50px로 지정 */
-	border-color: #FFF;
-	/* 테두리 색상을 흰색(#FFF)으로 지정 */
-	color: #2E2624;
-	/* 텍스트 색상을 어두운 갈색(#2E2624)으로 지정 */
-	font-size: 15px;
-	/* 폰트 크기를 15px로 지정 */
-	padding: 0 17px;
-	/* 내부 여백을 위아래는 0, 좌우는 17px로 지정 */
-	box-sizing: border-box;
-	/* 상자 모델을 border-box로 설정하여 내부 여백과 테두리를 포함한 크기로 지정 */
-	background-color: #F8F9FA;
-	/* 배경색을 밝은 회색(#F8F9FA)으로 지정 */
-}
-
-=======
->>>>>>> origin/feature-jin
 .header {
 	height: 100px;
 }
@@ -225,113 +188,110 @@ td {
 }
 
 <<<<<<< HEAD
+
 /* 미래가 수정 그냥 h2로 하면 안먹어서 클래스 지정하고 먹임*/
 .h2subject {
-=======
-h2 {
->>>>>>> origin/feature-jin
-	margin-top: 20px;
-	font-size: 30px;
-	font-weight: 700;
-	text-align: center;
-}
+	=======h2 {
+		>>>>>>>origin/feature-jin margin-top: 20px;
+		font-size: 30px;
+		font-weight: 700;
+		text-align: center;
+	}
 
-<<<<<<< HEAD
-.h4subject {
-	margin-left: 340px;
-	font-size: 24px;
-=======
-h4 {
-	margin-left: 340px;
-	font-size: 20px;
->>>>>>> origin/feature-jin
-	font-weight: 700;
-	margin-top: 50px;
-}
+	<<<<<<< HEAD .h4subject {
+		margin-left: 340px;
+		font-size: 24px;
+
+		=======h4 {
+			margin-left: 340px;
+			font-size: 20px;
+			>>>>>>>origin/feature-jin font-weight: 700;
+			margin-top: 50px;
+		}
 
 
-table {
-	width: calc(100% - 50%);
-	margin-left: 340px;
-	margin-top: 15px;
-	border: 1px solid;
-}
+		table {
+			width: calc(100% - 50%);
+			margin-left: 340px;
+			margin-top: 15px;
+			border: 1px solid;
+		}
 
-table,
-th,
-td {
-	border: 1px solid #e5e5e5;
-	border-collapse: collapse;
-}
+		table,
+		th,
+		td {
+			border: 1px solid #e5e5e5;
+			border-collapse: collapse;
+		}
 
-th {
-	width: 200px;
-	background-color: #eee;
-	text-align: left;
-	padding: 0 15px;
-	font-weight: 700;
-}
+		th {
+			width: 200px;
+			background-color: #eee;
+			text-align: left;
+			padding: 0 15px;
+			font-weight: 700;
+		}
 
-td {
-	padding: 15px 15px;
-	text-align: left;
-}
+		td {
+			padding: 15px 15px;
+			text-align: left;
+		}
 
-input {
-	border: 1px solid #e5e5e5;
-	height: 30px;
-	border-radius: 5px;
-}
+		input {
+			border: 1px solid #e5e5e5;
+			height: 30px;
+			border-radius: 5px;
+		}
 
 
-.agreement {
-	margin-left: 350px;
-	padding-left: 20px;
-}
+		.agreement {
+			margin-left: 350px;
+			padding-left: 20px;
+		}
 
-.label {
-	padding-left: 20px;
-}
+		.label {
+			padding-left: 20px;
+		}
 
-.join {
-	margin-top: 20px;
-	margin-right: 210px;
-	text-align: right;
-}
+		.join {
+			margin-top: 20px;
+			margin-right: 210px;
+			text-align: right;
+		}
 
-.Btn {
-	display: inline-block;
-	width: 100px;
-	;
-	font-weight: 500;
-	line-height: 2.5;
-	color: #212529;
-	background-color: rgb(0, 55, 255);
-	text-align: center;
-	text-decoration: none;
-	vertical-align: middle;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-	background-color: transparent;
-	border: 1px solid transparent;
-	padding: 0.375rem 0.75rem;
-	font-size: 1rem;
-	border-radius: 0.25rem;
-	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
+		.Btn {
+			display: inline-block;
+			width: 100px;
+			;
+			font-weight: 500;
+			line-height: 2.5;
+			color: #212529;
+			background-color: rgb(0, 55, 255);
+			text-align: center;
+			text-decoration: none;
+			vertical-align: middle;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+			background-color: transparent;
+			border: 1px solid transparent;
+			padding: 0.375rem 0.75rem;
+			font-size: 1rem;
+			border-radius: 0.25rem;
+			transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+		}
 
-.btn-primary {
-	color: #fff;
-	background-color: #0026ff;
-	border-color: #0026ff;
-}
+		.btn-primary {
+			color: #fff;
+			background-color: #0026ff;
+			border-color: #0026ff;
+		}
 
-#footer {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.8);
-	z-index: 2;
-}
+		#footer {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			background-color: rgba(255, 255, 255, 0.8);
+			z-index: 2;
+		}

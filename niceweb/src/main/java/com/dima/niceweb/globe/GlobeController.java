@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class GlobeController {
+
     @GetMapping("/globeindex")
     public String globeindex() {
 

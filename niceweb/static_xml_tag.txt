@@ -1,0 +1,18 @@
+<response>
+    <header>
+        <resultCode></resultCode>
+        <resultMsg></resultMsg>
+    </header>
+    <body>
+        <numOfRows></numOfRows>
+        <pageNo></pageNo>
+        <totalCount></totalCount>
+        <itemList>
+            <item>
+
+            </item>
+        </itemList>
+        <regDt></regDt>
+        <updDt>
+    </body>
+</response>

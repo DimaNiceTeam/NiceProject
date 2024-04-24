@@ -31,4 +31,10 @@ public class APIController {
 
         return "showOvsNews";
     }
+
+    @GetMapping("/showOvsNewsDetail")
+    public String showOvsNewsDetail() {
+
+        return "showOvsNewsDetail";
+    }
 }

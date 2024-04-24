@@ -1,45 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지원본-미래</title>
-    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
-    <!--부트스트랩5버전-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!--~~~공통 css적용을 위한 리소스-->
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>태수마이페이지</title>
+    <title>미래마이페이지</title>
     <link rel="icon" th:href="@{/images/common/favi.png}">
     <meta property="og:title" content="나이스투매치유">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image" content="http://ilmobility.co.kr/@resource/images/common/sns_share.png">
+    <!--폰트 어썸-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!--부트스트랩5버전(미래)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
     <link type="text/css" rel="stylesheet" th:href="@{/css/inquirymodal.css}">
-    <!-- <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}"> 이거 하면 모달창이나 부트스트랩 버튼이 안먹음 -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}"><!--이거 때문에 안됨-->
+    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
-    <!--여기까지~~~~-->
+    <style>
+        header {
+            margin-bottom: 20px;
+            /* header 아래에 20px의 여백을 줍니다. */
+        }
+
+        .container {
+            margin-top: 20px;
+            /* container 위에 20px의 여백을 줍니다. */
+        }
+
+        .count {
+            margin-left: 500px;
+
+        }
+
+        table {
+            width: 68%;
+            /* 화면 너비 설정 */
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+
+            margin: 1rem auto;
+            background-color: white;
+
+        }
+
+        #favoriteList th {
+            padding: 8px;
+            text-align: left;
+            text-align: center;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #favoriteList tbody tr {
+            border-bottom: 1px solid #d3d3d3;
+            /* 회색 선 추가 */
+        }
+
+        /* 테이블 올렸을 때 -호버*/
+        tbody i:hover {
+            background-color: #d3d3d3;
+            opacity: 0.9;
+            cursor: pointer;
+        }
+
+        th:nth-child(2) {
+            width: 150px;
+            /* 두 번째 열의 너비를 150px로 설정 */
+        }
+
+        #favoriteList td:nth-child(4),
+        #favoriteList td:nth-child(5),
+        #favoriteList td:nth-child(6) {
+            width: 80px;
+            /* 예시로 너비를 100px로 지정합니다. */
+        }
+
+        #favoriteList td:nth-child(2),
+        #favoriteList td:nth-child(4),
+        #favoriteList td:nth-child(5),
+        #favoriteList td:nth-child(6) {
+            text-align: center;
+            /*글씨 가운데로 조정*/
+        }
 
 
+        #favoriteList td {
+            font-size: 14px;
+            /* 폰트크기*/
+        }
 
-    <!--우선은 테이블 부분 css를 직접 적용한 페이지-->
 
+        /* tbody i:hover.fa-lg {
+            font-size: 24px;
+           
+        } */
+        td i:hover {
+            transform: scale(1.5);
+            /* 마우스를 올렸을 때 크기를 1.2배로 확대합니다. */
+            transition: transform 0.3s ease;
+            /* 부드러운 전환 효과를 추가합니다. */
+            cursor: pointer;
+            /* 마우스 커서를 포인터로 변경합니다. */
+        }
 
+        #favoriteList td:nth-child(3) a:hover {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .table-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        /* 총건수 스타일 */
+        .count {
+            margin-left: 230px;
+            font-weight: bold;
+            /* 글씨 두껍게 설정 */
+
+        }
+    </style>
     <script>
         $(function () {
-            init();
-
+            init(); // 출력 
         });
         function init() {
             let userNum = $("#userNum").val();// 로그인한 사람의 고유번호(시퀀스)
-
             $.ajax({
                 url: "/user/favCmpAll"
                 , method: 'GET'
@@ -48,28 +146,31 @@
             })
 
         }// init-end
+        // 출력 함수
         function output(resp) {
-
             let receivedData = `
-                    <tr>
-                        <th>기업명</th>
-                        <th>던스넘버</th>
-                        <th>홈페이지</th>
-                        <th>이메일</th>
-                        <th>자세히 보기</th>
-                        <th>찜기능</th>
-                    </tr>`;
+                    <thead class="favList-head">
+                        <tr>
+                            <th>기업명</th>
+                            <th>던스넘버</th>
+                            <th>홈페이지</th>
+                            <th>메일</th>
+                            <th>상세정보</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>`;
             let favCount = 0; // 총 갯수가 몇개인지 count
             $.each(resp, function (index, item) {
                 favCount += 1;
                 receivedData += `
-                        <tr>
-                            <td>${item.cmpName}</td>
-                            <td>${item.cmpDunsNo}</td>
-                            <td>${item.cmpUrl}</td>
-                            <td>${item.cmpEmail}</td>
-                            <td><input type="button"  class="btn btn-primary" attr-dunsNo=${item.cmpDunsNo} value="상세보기"></td>
-                            <td><input type="button"  class="delBtn btn btn-warning" style="color: white;" attr-favCmpNo=${item.favCmpNo} value="찜기능"></td>`
+                            <tr>
+                                <td>${item.cmpName}</td>
+                                <td>${item.cmpDunsNo}</td>
+                                <td><a href="${item.cmpUrl}" target="_blank">${item.cmpUrl}</a></td>
+                                <td><i type="button" class="sendEmail fa-regular fa-envelope fa-lg" data-bs-toggle="modal" data-bs-target="#myModal" attr-cmpEmail=${item.cmpEmail}></i></td>
+                                <td><i type="button" class="DetailBtn fa-solid fa-magnifying-glass fa-lg" data-bs-toggle="modal" data-bs-target="#Details" attr-dunsNo=${item.cmpDunsNo}></i></td>
+                                <td><i type="button" class="fa-regular fa-trash-can delBtn fa-lg" attr-favCmpNo=${item.favCmpNo}></i></td>`
+
                     ;// 찜기능은 삭제 버튼이다.
                 // 각각의 버튼에 이벤트 걸어주기 
                 receivedData += `</tr>`;
@@ -77,6 +178,8 @@
             $("#favoriteList").html(receivedData);
             $("#board-count").html(favCount);
             $(".delBtn").on('click', deleteCmp);// html로 모두 생성된 이후에 이벤트를 걸어야함 
+            $(".sendEmail").on('click', mgl);// 이메일 상세 버튼 클릭시 모달 창
+            $(".DetailBtn").on('click', Details);
         }// output 함수 종료부분
 
         // 삭제 함수 - 데이터 베이스에서 삭제함 
@@ -98,51 +201,502 @@
                 $("#board-count").html(favCount);
 
             }
+        }//function deleteCmp --end
+
+        function mgl() { // 모달창에 이메일 꽂아 넣기 !
+            let email = $(this).attr("attr-cmpEmail");
+            $("#cmpaddress").val(email);
         }
+        function Details() {
+            let dunsNo = $(this).attr("attr-dunsno"); // 던스넘버
+            $.ajax({
+                url: "/cmpSelect"
+                , method: 'GET'
+                , data: { "dunsNo": dunsNo }
+                , success: function (resp) {
+                    // 정보 가지고 오기
+                    $("#cmpName").html(resp.cmpName);
+                    $("#cmpDunsNo").html(resp.cmpDunsNo);
+                    $("#cmpSicCode").html(resp.cmpSicCode);
+                    $("#cmpNatCd").html(resp.cmpNatCd);
+                    $("#cmpNatEng").html(resp.cmpNatEng);
+                    $("#cmpAddress").html(resp.cmpAddress);
+                    $("#cmpEmp").html(resp.cmpEmp);
+                    $("#cmpMkt").html(resp.cmpMkt);
+                    $("#cmpSales").html(resp.cmpSales);
+                    $("#cmpUrl").html(resp.cmpUrl);
+                    $("#cmpUrl").attr("href", resp.cmpUrl);
+                }
+            })
+
+        }//function Details --end
     </script>
 
 </head>
 
 <body>
-    <div class="logo">
-        <a style="font-size: 30px;">NICE TO MATCH YOU</a> <!-- 우선은 폰트 크기를 직접 지정함-->
-    </div>
+    <!--상단 메뉴바-->
+    <div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+    <div id="wrap" class="wrap">
+        <header id="header" class="header">
+            <div class="header-inner">
+                <h1 class="logo">
+                    <a href="/">
+                        <span class="blind">NICE TO MATCH YOU</span>
+                    </a>
+                </h1>
+                <nav id="nav" class="nav">
+                    <div class="nav-wrap">
+                        <ul class="gnb-list">
+                            <li>
+                                <a href="" class="has-depth"><!--추후 수정 필요-->
+                                    <span>ABOUT</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="#"><!--추후 수정 필요-->
+                                            <span>NICE TO MATCH YOU</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="has-depth">
+                                    <span>SERVICE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/showovsNews}">
+                                            <span>NEWS</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/showFraud}">
+                                            <span>무역 사기사례</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/rate}">
+                                            <span>Exchange Rate</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                    <span>MATCH</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span>INFO</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/user/login}">
+                                    <span>LOGIN</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div> <!-- // .nav-wrap -->
+                </nav>
+                <!--상단 메뉴바-->
+                <div class="btns">
+                    <button type="button" class="btn open-nav" id="openMe">
+                        <span class="blind">메뉴 열기</span>
+                    </button>
+                    <button type="button" class="btn close-nav">
+                        <span class="blind">메뉴 열기</span>
+                    </button>
+                </div>
+                <divqq class="nav-bg"></divqq>
+            </div>
+        </header>
+        <br><br><br><br><br>
+        <div id="scroller" class="scroller" data-scrollbar>
 
-    <div class="gnb">
-        <ul class="menubar"> <!-- 메뉴들 상단 중앙-->
-            <li>메뉴1</li>
-            <li>메뉴2</li>
-            <li>메뉴3</li>
-            <li>메뉴4</li>
-            <li>메뉴5</li>
-        </ul>
-    </div>
-    <!--로그인한 회원의 정보 끌어오기(아직 미정이긴 함)-->
-    <section>
-        <div>
-            <span>회사이름</span> <!--회사 이름 들어갈꺼-->
-            <strong>
-                <b>담당자 이름</b> <!-- 담당자 이름-->
-            </strong>
+            <!-- 마이페이지 form 변경 -->
+            <aside> <!--왼쪽 메뉴바-->
+
+            </aside>
+
+            <section><!--프로핑 정보 보여줄 것 -->
+
+            </section>
+
+            <div class="content">
+                <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
+                <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+
+                <!--찜 기능 리스트-->
+                <div class="count">
+                    <span>총 </span><span id="board-count" style="color: #ff4dd6;"></span><span> 건</span>
+                </div>
+                <!--데이터가 꽂히는 부분-->
+                <table id="favoriteList" border="1">
+                </table>
+
+
+            </div>
+
+            <!--풋터-->
+            <footer id="footer" class="footer">
+                <div class="footer-inner">
+                    <div class="cont site">
+                        <div class="menu">
+                            <a href="#">개인정보처리방침</a>
+                            <a href="#">이용약관</a>
+                        </div>
+                        <div class="select-box">
+                            <select class="select family" title="나이스투매치유">
+                                <option value disabled selected>Family Site</option>
+                                <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B
+                                </option>
+                                <option value="http://www.ec21.co.kr/">EC21</option>
+                                <option value="https://www.valuelinku.com/">ValueLinkeU</option>
+                                <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+                                <option value="https://www.itronics.co.kr">5조</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--풋터-->
+                    <div class="cont contact">
+                        <address>
+                            <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+                            <span>대표자&nbsp;<em>주진명</em></span>
+                            <span>TEL.<em>010-2432-2450</em></span>
+                        </address>
+                        <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div><!-- id:scroller-->
+    </div><!-- // #wrap -->
+    <!--모달창-->
+    <!-- 이메일 모달창  -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">이메일 발송</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <form th:action="@{/mail/myPageSendEmail}" method="POST">
+                    <!--데이터 가지고 가는 부분-->
+                    <input type="hidden" name="inputKeyword" value="" id="emailinputKeyword">
+                    <input type="hidden" name="nation" value="" id="emailnation">
+
+                    <div class="modal-body">
+                        <!--수정해야할 부분입니다~~~~~~~~-->
+                        <input type="hidden" name="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+                        <input id="cmpaddress" name="receiver" placeholder="이메일 주소" class="form-control" value=""> <br>
+                        <input name="emailSubject" placeholder="제목" class="form-control"> <br>
+                        <textarea name="emailContent" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"
+                            class="form-control"></textarea>
+                    </div>
+
+                    <!-- Modal footer -->
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn " style="background-color: blue; color: white;"
+                            data-bs-dismiss="modal">발송</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
-    </section>
+    </div> <!--이메일 모달창 끝-->
+    <!--상세페이지 모달창-->
+    <div class="modal" id="Details">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
 
-    <!--찜한 회사 정보 출력-->
-    <h3>관심 바이어</h3>
-    <div class="content">
-        <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
-        <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <i class="fa-regular fa-building fa-xl"></i>&nbsp;&nbsp;
+                    <h3 class="modal-title" id="cmpName" style="font-size: 20px; font-weight: bolder;"></h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-        <!--찜 기능 리스트-->
-        <div>
-            <span>총 </span><span id="board-count"></span><span>건</span>
+                <!-- Modal body -->
+
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>D-U-N-S® Number</td>
+                            <td id="cmpDunsNo"></td>
+                        </tr>
+                        <tr>
+                            <td>Primary SIC Code</td>
+                            <td id="cmpSicCode"></td>
+                        </tr>
+                        <tr>
+                            <td>국가코드</td>
+                            <td id="cmpNatCd"></td>
+                        </tr>
+                        <tr>
+                            <td>국가</td>
+                            <td id="cmpNatEng"></td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td id="cmpAddress"></td>
+                        </tr>
+                        <tr>
+                            <td>Employees(All site)</td>
+                            <td id="cmpEmp"></td>
+                        </tr>
+                        <tr>
+                            <td>마케팅 등급</td>
+                            <td id="cmpMkt"></td>
+                        </tr>
+                        <tr>
+                            <td>Annual Sales</td>
+                            <td id="cmpSales"></td>
+                        </tr>
+                        <tr>
+                            <td>홈페이지</td>
+                            <td><a href="" id="cmpUrl"></a></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+
+            </div>
         </div>
-        <!--데이터가 꽂히는 부분-->
-        <table id="favoriteList">
-        </table>
+    </div><!--상세페이지 모달창 end-->
 
 
-    </div>
+
+
+    <!--상단과 하단바에 적용되는 부분-->
+    <script th:src="@{/js/lib/gsap.min.js}"></script>
+    <script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
+    <script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
+    <script th:src="@{/js/lib/aos.js}"></script>
+    <script th:src="@{/js/lib/swiper-bundle.js}"></script>
+    <script>
+        nav.current(5, 0);
+        familySite();
+
+        jQuery(function () {
+
+            setTimeout(function () {
+                $('.page-header').addClass('on');
+                $('.counter').animate({ 'opacity': '1.0' }, 300);
+            }, 150);
+
+
+
+            yearCount();
+
+            $(window).on("resize", function () {
+                yearCount();
+            });
+
+            function yearCount() {
+                $counter = $('.counter');
+                var windowWidth = window.innerWidth;
+                if (windowWidth > 961) {
+                    /*
+                    $counter.rollNumber({
+                        number: $counter[0].dataset.number, 
+                        speed:  1000, 
+                        fontStyle: {
+                            'font-size': 140,
+                        }
+                    })
+                    */
+                    $('.counter').css('font-size', '140px');
+                } else {
+                    /*
+                    $counter.rollNumber({
+                        number: $counter[0].dataset.number, 
+                        speed:  1000, 
+                        fontStyle: {
+                            'font-size': 80,
+                        }
+                    })
+                    */
+                    $('.counter').css('font-size', '80px');
+                }
+
+            }
+
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.to('.section.with .cont1', {
+                scrollTrigger: {
+                    trigger: '.section.with',
+                    start: 'top 70%-=20%',
+                    end: 'top top-=120%',
+                    scrub: 1,
+                    onEnter: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeave: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
+                    onEnterBack: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            gsap.to('.section.with .cont2', {
+                scrollTrigger: {
+                    trigger: '.section.with',
+                    start: 'top top-=140%',
+                    end: 'top top-=240%',
+                    scrub: 1,
+                    onEnter: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
+                    onEnterBack: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.with .cont2 .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            gsap.timeline({
+                scrollTrigger: {
+                    start: "top top",
+                    pin: '.section.with',
+                    end: "+=250%",
+                    pinSpacing: true,
+                    scrub: 0.5
+                },
+            }).to('.section.with .bg-wrap ', {
+                backgroundPosition: '0% 100%',
+            });
+
+
+            gsap.to('.section.growth', {
+                scrollTrigger: {
+                    trigger: '.section.growth',
+                    start: 'top 0%',
+                    end: "+=50%",
+                    pin: true,
+                    pinSpacing: true,
+                    scroller: scroller,
+                    pinType: "transform",
+                    scrub: true,
+                },
+            });
+            gsap.to('.section.growth', {
+                scrollTrigger: {
+                    trigger: '.section.growth .title-wrap',
+                    start: 'top 50%',
+                    end: "bottom+=80% 80%",
+                    scrub: true,
+                    onEnter: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
+                    onEnterBack: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.growth .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            gsap.set(".section.innovation .content-list > li", {
+                yPercent: 50,
+            });
+
+            const yPercent_vh = (coef) => window.innerHeight * (coef / 100);
+            const invTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".section.innovation",
+                    scrub: 3,
+                    start: "-30% 100%",
+                    ease: "none",
+                },
+            })
+            invTl.to(".section.innovation .content-list > li:nth-child(1)", {
+                yPercent: yPercent_vh(-8),
+                duration: 5,
+            }, "innovItem");
+            invTl.to(".section.innovation .content-list > li:nth-child(2)", {
+                yPercent: yPercent_vh(-8),
+                duration: 5,
+            }, "innovItem+=1.2",);
+
+            gsap.to('.section.inquiry', {
+                scrollTrigger: {
+                    trigger: '.section.inquiry .content-wrap',
+                    start: 'top 90%',
+                    end: "bottom+=80% 80%",
+                    scrub: true,
+                    onEnter: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeave: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
+                    onEnterBack: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            const fade = document.querySelectorAll("[data-gsap='fade']");
+            fade.forEach((item, index) => {
+                gsap.set(item, {
+                    opacity: 0,
+                }),
+                    gsap.to(item, {
+                        opacity: 1,
+                        duration: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 90%",
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+            });
+
+            const fadeUp = document.querySelectorAll("[data-gsap='fade-up']");
+            fadeUp.forEach((item, index) => {
+                gsap.set(item, {
+                    opacity: 0,
+                    yPercent: 10,
+                }),
+                    gsap.to(item, {
+                        opacity: 1,
+                        yPercent: 0,
+                        duration: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 75%",
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+            });
+
+            //swiper - product
+            var productSwiper = new Swiper("#productSwiper .swiper", {
+                autoHeight: false,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '#productSwiper .swiper-button-next',
+                    prevEl: '#productSwiper .swiper-button-prev',
+                },
+
+                breakpoints: {
+                    "100": {
+                        slidesPerView: 'auto',
+                        centeredSlides: true,
+                        autoHeight: false,
+                    },
+                    "768": {
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                        autoHeight: false,
+                    },
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

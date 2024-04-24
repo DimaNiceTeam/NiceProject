@@ -1,0 +1,307 @@
+Item,ITEM_ID,SUB_ID
+Drive Battery Cell,1,1
+Drive Battery Module,2,1
+Drive Battery Pack,3,1
+Drive Battery System,4,1
+Drive Battery Case,5,1
+Cathode Material for Drive Battery,6,1
+Anode Material for Drive Battery,7,1
+Drive Battery Cooling / Heating System,8,1
+Drive Battery Related Products,9,1
+Battery Management System,10,2
+Traction Motor / e-Axle,11,3
+Motor Core,12,3
+Resolver,13,3
+Reduction Gear for EV,14,3
+DC-DC Converter,15,4
+Inverter,16,5
+Vehicle Control Unit,17,6
+On-board Charger,18,7
+Engine Ass'y,19,8
+Cylinder Block,20,8
+Cylinder Head,21,8
+Cylinder Head Cover,22,8
+Cylinder Head Gasket,23,8
+Cylinder Liner,24,8
+Piston,25,8
+Piston Pin,26,8
+Piston Ring,27,8
+Connecting Rod,28,8
+Crankshaft,29,8
+Torsional Damper,30,8
+Flywheel,31,8
+Drive Plate,32,8
+Engine Bearing,33,8
+V-Belt,34,8
+Engine Mount,35,8
+Engine Valve,36,9
+Valve Guide / Valve Seat,37,9
+Valve Spring,38,9
+Timing System,39,9
+Timing Belt / Timing Chain,40,9
+Rocker Arm,41,9
+Camshaft,42,9
+Fuel Pump,43,10
+Fuel Hose,44,10
+Fuel Line,45,10
+Fuel Filter,46,10
+Fuel Supply System,47,10
+Fuel Supply Module,48,10
+Fuel Injection,49,10
+Diesel Injection,50,10
+Carbon Canister,51,10
+PCV Valve,52,10
+Air Intake System / Module,53,11
+Air Cleaner / Air Filter,54,11
+Intake Manifold,55,11
+Throttle Body,56,11
+Turbocharger,57,11
+Supercharger,58,11
+Inter Cooler / Charge Air Cooler,59,11
+Exhaust Cold End (Muffler),60,11
+Exhaust Manifold,61,11
+Exhaust Manifold Gasket,62,11
+Catalytic Converter,63,11
+Catalytic Converter (Washcoat),64,11
+Catalytic Converter (Substrate),65,11
+Catalytic Converter (Shell),66,11
+Gasoline Particulate Filter,67,11
+Diesel Particulate Filter,68,11
+EGR System,69,11
+Ignition Coil,70,12
+Spark Plug,71,12
+Glow Plug,72,12
+Oil Pan,73,13
+Oil Strainer / Separator,74,13
+Oil Pump,75,13
+Oil Filter,76,13
+Oil Cooler,77,13
+Water Pump,78,14
+Thermostat,79,14
+Radiator,80,14
+Radiator Hose,81,14
+Cooling Fan,82,14
+Engine Cooling Module,83,14
+Alternator / Generator,84,15
+Starter Motor,85,15
+Auxiliary Battery,86,15
+Automatic Transmission,87,16
+Torque Converter,88,16
+CVT,89,16
+Dual Clutch Transmission,90,16
+Automated Manual Transmission,91,16
+Manual Transmission,92,16
+Clutch,93,16
+Clutch Disc,94,16
+Clutch Master Cylinder,95,16
+Clutch Slave Cylinder,96,16
+Synchronizer,97,16
+Shift Lever,98,16
+Transmission Seal,99,16
+Transmission Shaft,100,16
+Axle,101,17
+Drive Shaft,102,17
+Propshaft,103,17
+Differential,104,17
+Transfer,105,17
+Radar,106,18
+LiDAR,107,18
+On-board Camera,108,19
+Air Conditioning / HVAC,109,20
+A/C Compressor,110,20
+Condenser,111,20
+Heater,112,20
+A/C Piping,113,20
+Heater Hose,114,20
+Cabin Air Filter,115,20
+ Meter,116,21
+ Display,117,21
+ Head Up Display,118,21
+Car Navigation System,119,22
+Car Audio,120,22
+In-Vehicle Infotainment Unit,121,22
+Telematics,122,22
+Antenna,123,22
+Anti-theft / Immobilizer,124,23
+Keyless Entry / Start System,125,23
+HVAC Blower Motor,126,24
+Seat Motor,127,24
+Body Mechanism Motor,128,24
+Power Steering Motor,129,24
+Cooling Fan Motor,130,24
+Other Motor,131,24
+Actuator,132,24
+Electronic Control Unit,133,25
+Wiring Harness,134,25
+Electrical Connector,135,25
+Relay,136,25
+Fuse,137,25
+Junction Box,138,25
+Switch,139,25
+Lever Combination Switch,140,25
+OBD Interface,141,25
+AC Inverter,142,25
+Horn,143,25
+Advanced Driver Assistance ECU,144,26
+Cruise Control,145,26
+Lane Keeping Assist System ECU,146,26
+Object Detection ECU,147,26
+Camera ECU,148,26
+Park Assist System,149,26
+Engine Control Unit,150,27
+Variable Valve Timing EDU,151,27
+Crank / Cam Sensor,152,27
+Oxygen Sensor,153,27
+Knock Sensor,154,27
+Pressure Sensor,155,27
+Temperature Sensor,156,27
+Air Flow Meter,157,27
+Glowplug Controller,158,27
+Fuel Pump Control ECU,159,27
+Speed Sensor / G Sensor / Angular Velocity Sensor,160,27
+Stop Start System ECU,161,27
+Pedal Sensor,162,27
+Radiator Fan Controller,163,27
+Active Engine Mount ECU,164,27
+4WD ECU,165,27
+Transmission ECU,166,27
+Body ECU,167,28
+Air Conditioner ECU,168,28
+Clearance Sonar ECU,169,28
+Door ECU,170,28
+Power Sliding Door ECU,171,28
+Power Tailgate / Trunk ECU,172,28
+Power Seat ECU,173,28
+Rain / Light Sensor,174,28
+Head Lamp ECU,175,28
+Adaptive Front-lighting System ECU ,176,28
+Headlamp Levelling ECU,177,28
+Airbag ECU,178,29
+Airbag Sensor,179,29
+Occupant Detection System,180,29
+Pre-crash Seat Belt ECU,181,29
+Power Steering ECU,182,30
+Steering Sensor,183,30
+Vehicle Stability Control ECU,184,30
+ABS ECU,185,30
+Electric Parking Brake ECU,186,30
+Electronically Controlled Suspension ECU,187,30
+Tire Pressure Monitoring System,188,30
+Instrument Panel,189,31
+Cockpit Module,190,31
+Glove Box,191,31
+A/C Ventilator,192,31
+Console,193,31
+Cup Holder,194,31
+Interior Mirror,195,31
+Inside Door Handle,196,31
+Door Panel,197,31
+Door Trim,198,31
+Trunk / Tailgate Trim,199,31
+Floor Carpet,200,31
+Floor Mat,201,31
+Headliner,202,31
+Sun Visor,203,31
+Pedal,204,31
+Seat,205,32
+Seat Adjuster / Recliner,206,32
+Seat Frame,207,32
+Seat Lumbar Support,208,32
+Seat Trim,209,32
+Headrest,210,32
+Driver Airbag,211,33
+Passenger Airbag,212,33
+Curtain Airbag,213,33
+Side Airbag,214,33
+Knee Airbag,215,33
+Pedestrian Protection Airbag,216,33
+Seat Belt,217,33
+Seat Belt Pretensioner,218,33
+Front Grille,219,34
+Spoiler,220,34
+Outside Molding,221,34
+Roof Rail,222,34
+Outside Door Handle,223,34
+Exterior Mirror,224,34
+Window Glass,225,34
+Weatherstrip,226,34
+Glass Run Channel,227,34
+Emblem,228,34
+Head Lamp,229,35
+Headlamp Cleaner,230,35
+Fog Lamp,231,35
+Rear Lamp,232,35
+High-Mounted Stop Lamp,233,35
+Exterior Lighting,234,35
+Interior Lighting,235,35
+ABS / ESC,236,36
+Parking Brake,237,36
+Brake Caliper,238,36
+Brake Pad,239,36
+Brake Rotor,240,36
+Drum Brake Assembly,241,36
+Brake Drum,242,36
+Brake Lining,243,36
+Corner Module,244,36
+Brake Tube,245,36
+Brake Line,246,36
+Brake Booster,247,36
+Vacuum Pump,248,36
+Brake Master Cylinder,249,36
+Brake Wheel Cylinder,250,36
+Steering System,251,37
+Steering Gear,252,37
+Steering Column / Shaft,253,37
+Steering Knuckle,254,37
+Steering Wheel,255,37
+Rack End,256,37
+Tie Rod End,257,37
+Power Steering Hose,258,37
+Power Steering Pump,259,37
+Power Steering Assist Unit,260,37
+Key Cylinder / Steering Lock,261,37
+Suspension Module / System,262,38
+Subframe / Suspension Member,263,38
+Suspension Control Arm,264,38
+Suspension Ball Joint,265,38
+Suspension Spring,266,38
+Shock Absorber,267,38
+Stabilizer,268,38
+Tire,269,39
+Tire Valve Core,270,39
+Wheel,271,39
+Wheel Bearing,272,39
+Wheel Cover / Cap,273,39
+Chassis Frame,274,40
+Crossmember,275,40
+Bumper,276,40
+Bumper Beam,277,40
+Front End Module,278,40
+Dash Panel,279,40
+Side Impact Beam,280,40
+Door Frame,281,40
+Door Module,282,40
+Cross Car Beam,283,40
+Fuel Tank,284,40
+Heat Shield,285,40
+Side Door Lock,286,41
+Side Door/Sliding Door Closure,287,41
+Back Door Lock / Trunk Lock,288,41
+Tailgate/Trunk Closure,289,41
+Fuel Filler,290,41
+Hinge,291,41
+Window Regulator,292,41
+Sunroof,293,41
+Convertible Roof,294,41
+Wiper System,295,41
+Wiper Arm / Wiper Blade,296,41
+Window Washer,297,41
+Duct,298,42
+Fastener,299,42
+Boot,300,42
+Grommet,301,42
+Diaphragm,302,42
+Bush,303,42
+Control Cable,304,42
+Bearing,305,42
+Acoustic Insulator,306,42

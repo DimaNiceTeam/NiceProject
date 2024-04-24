@@ -3,8 +3,10 @@
 /* reset */
 @import url(lib/reset.css);
 /* library */
-@import url(lib/aos.css); /* Animate On Scroll: 웹 페이지에서 스크롤에 따라 요소들에 애니메이션 효과를 적용하는 JavaScript 라이브러리 */
-@import url(lib/swiper.css); /* Swiper: 모바일 터치 슬라이더 라이브러리 다양한 터치 이벤트와 애니메이션을 지원하여 사용자에게 부드러운 슬라이드 경험을 제공 */
+@import url(lib/aos.css);
+/* Animate On Scroll: 웹 페이지에서 스크롤에 따라 요소들에 애니메이션 효과를 적용하는 JavaScript 라이브러리 */
+@import url(lib/swiper.css);
+/* Swiper: 모바일 터치 슬라이더 라이브러리 다양한 터치 이벤트와 애니메이션을 지원하여 사용자에게 부드러운 슬라이드 경험을 제공 */
 /* common css */
 @import url(_swiper-custom.css);
 @import url(_font.css);
@@ -17,51 +19,157 @@
 
 
 /* main */
-.main .title-wrap + .content-wrap {margin-top: 60px;}
-@media all and (max-width: 768px) {
-    .main .title-wrap + .content-wrap {margin-top: 30px;}
+.main .title-wrap+.content-wrap {
+    margin-top: 60px;
 }
-.main .section.intro {position: relative; height: var(--vh100);}
+
+@media all and (max-width: 768px) {
+    .main .title-wrap+.content-wrap {
+        margin-top: 30px;
+    }
+}
+
+.main .section.intro {
+    position: relative;
+    height: var(--vh100);
+}
+
 .main .section.intro .video-wrap,
-.main .section.intro .title-wrap {width: 100%; height: 100%;}
-.main .section.intro .title-wrap {display: -webkit-box; display: -ms-flexbox; display: flex;
-   -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
-   -webkit-box-align: center; -ms-flex-align: center; align-items: center;
-   position: absolute; top: 0; left: 0; padding: 0 80px;
+.main .section.intro .title-wrap {
+    width: 100%;
+    height: 100%;
 }
-.main .section.intro .main-title {color: var(--white); text-align: center;}
-.main .section.intro .sound-control {position: absolute; bottom: 64px; right: 3.646vw;}
-.main .section.intro .sound-control strong {min-width: 66px; font-weight: 600; font-size: 14px; color: var(--white);}
-.main .section.intro .sound-control strong + span {padding-left: 14px;}
-.main .section.intro .sound-control .svg-wrap {position: relative; top: -2px;}
-.main .section.intro .sound-control .svg-wrap svg {width: 14px; height: 18px;}
-.main .section.intro .sound-control .svg-wrap svg .bar {width: 2px; height: 2px; fill: var(--white); transform: scale(1, -1) translate(0, -18px);}
-.main .section.intro .sound-control .btn.sound.on .svg-wrap svg .bar {animation-duration: 0.5s; animation-iteration-count: infinite;}
-.main .section.intro .sound-control .svg-wrap svg .bar-1 {animation-name: equalizer1; animation-delay: 0s;}
-.main .section.intro .sound-control .svg-wrap svg .bar-2 {animation-name: equalizer2; animation-delay: 0.17s;}
-.main .section.intro .sound-control .svg-wrap svg .bar-3 {animation-name: equalizer1; animation-delay: 0.34s;}
+
+.main .section.intro .title-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 80px;
+}
+
+.main .section.intro .main-title {
+    color: var(--white);
+    text-align: center;
+}
+
+.main .section.intro .sound-control {
+    position: absolute;
+    bottom: 64px;
+    right: 3.646vw;
+}
+
+.main .section.intro .sound-control strong {
+    min-width: 66px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--white);
+}
+
+.main .section.intro .sound-control strong+span {
+    padding-left: 14px;
+}
+
+.main .section.intro .sound-control .svg-wrap {
+    position: relative;
+    top: -2px;
+}
+
+.main .section.intro .sound-control .svg-wrap svg {
+    width: 14px;
+    height: 18px;
+}
+
+.main .section.intro .sound-control .svg-wrap svg .bar {
+    width: 2px;
+    height: 2px;
+    fill: var(--white);
+    transform: scale(1, -1) translate(0, -18px);
+}
+
+.main .section.intro .sound-control .btn.sound.on .svg-wrap svg .bar {
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+.main .section.intro .sound-control .svg-wrap svg .bar-1 {
+    animation-name: equalizer1;
+    animation-delay: 0s;
+}
+
+.main .section.intro .sound-control .svg-wrap svg .bar-2 {
+    animation-name: equalizer2;
+    animation-delay: 0.17s;
+}
+
+.main .section.intro .sound-control .svg-wrap svg .bar-3 {
+    animation-name: equalizer1;
+    animation-delay: 0.34s;
+}
+
 @keyframes equalizer1 {
-    0% {height: 10px;}
-    50% {height: 4px;}
-    100% {height: 8px;}
+    0% {
+        height: 10px;
+    }
+
+    50% {
+        height: 4px;
+    }
+
+    100% {
+        height: 8px;
+    }
 }
+
 @keyframes equalizer2 {
-    0% {height: 16px;}
-    50% {height: 8px;}
-    100% {height: 18px;}
+    0% {
+        height: 16px;
+    }
+
+    50% {
+        height: 8px;
+    }
+
+    100% {
+        height: 18px;
+    }
 }
 
 @media all and (max-width: 768px) {
-    .main .section.intro {background-color: var(--navy);}
-    .main .section.intro .video-wrap video {object-fit: contain;}
-    .main .section.intro .sound-control {bottom: 36px; right: 15px;}
+    .main .section.intro {
+        background-color: var(--navy);
+    }
+
+    .main .section.intro .video-wrap video {
+        object-fit: contain;
+    }
+
+    .main .section.intro .sound-control {
+        bottom: 36px;
+        right: 15px;
+    }
 }
+
 @media all and (max-width: 960px) {
-    .main .section.intro .title-wrap {padding: 0 40px;}
-    .main .section.intro .sound-control {right: 30px;}
+    .main .section.intro .title-wrap {
+        padding: 0 40px;
+    }
+
+    .main .section.intro .sound-control {
+        right: 30px;
+    }
 }
+
 @media all and (min-width: 769px) {
-    .main .section.intro .main-title {line-height: 1.3;}
+    .main .section.intro .main-title {
+        line-height: 1.3;
+    }
 }
-
-

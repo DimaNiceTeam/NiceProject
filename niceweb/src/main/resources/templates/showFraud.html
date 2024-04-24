@@ -96,72 +96,80 @@
                 <div class="nav-bg"></div>
             </div>
         </header>
-        <div id="scroller" class="scroller" data-scrollbar>
-
-    <!-- 사기 정보 검색 form 변경 -->
-    <h1>사기 정보 검색</h1>
-    <div>
-        <input type="text" id="search1" placeholder="국가명 입력">
-        <input type="text" id="search2" placeholder="뉴스 제목 입력">
-        <input type="text" id="search3" placeholder="게시일자 입력">
-        <button onclick="fetchFraudData()">검색</button>
-    </div>
-    <div id="results">결과가 여기에 표시됩니다.</div>
+    <div id="scroller" class="scroller" data-scrollbar>
+        <br><br><br><br><br><br><br>
+        <table border="1">
+            <tr>
+                <!--<th>사기유형</th>-->
+                <th><input type="text" id="search1" placeholder="국가명 입력"></th>
+                <th><input type="text" id="search2" placeholder="뉴스 제목 입력"></th>
+                <!--<th>일자</th>-->
+                <th><button onclick="fetchFraudData()">검색</button></th>
+            </tr>
+            <tr>
+                <th>사기 유형</th>
+                <th>국가명</th>
+                <th>제목</th>
+                <th>일자</th>
+            </tr>
+            <tbody id="results"></tbody>
+        </table>
+    <!--<div id="results">결과가 여기에 표시됩니다.</div>-->
 
     <!-- Ensure the script is loaded at the end of the body to ensure all HTML elements are loaded -->
-    <script>
-        async function fetchFraudData() {
-            const search1 = encodeURIComponent(document.getElementById('search1').value);
-            const search2 = encodeURIComponent(document.getElementById('search2').value);
-            const search3 = encodeURIComponent(document.getElementById('search3').value);
-
-            const serviceKey = '1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D';
-            const url = `http://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?ServiceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&search3=${search3}&_type=json`;
-
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json'
+        <script>
+            async function fetchFraudData() {
+                const search1 = encodeURIComponent(document.getElementById('search1').value);
+                const search2 = encodeURIComponent(document.getElementById('search2').value);
+                //const search3 = encodeURIComponent(document.getElementById('search3').value);
+            
+                const serviceKey = '1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D';
+                const url = `https://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?serviceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&_type=json`;
+                
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    const data = await response.json();
+                    displayResults(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('results').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
                 }
-                const data = await response.json();
-                displayResults(data);
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('results').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
             }
-        }
 
-        function displayResults(data) {
-            const results = document.getElementById('results');
-            results.innerHTML = ''; // 결과 영역 초기화
+            function displayResults(data) {
+                const results = document.getElementById('results');
+                results.innerHTML = ''; // 결과 영역 초기화
 
-            if (data && data.response && data.response.body && data.response.body.itemList && data.response.body.itemList.item) {
-                data.response.body.itemList.item.forEach(item => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `
-                        <h3>${item.titl}</h3>
-                        <p>국가: ${item.natn}</p>
-                        <p>지역: ${item.regn}</p>
-                        <p>사기 유형: ${item.fraudType}</p>
-                        <p>게시 일자: ${item.othbcDt}</p>
-                        <p>내용: ${item.bdtCntnt}</p>
-                    `;
-                    results.appendChild(div);
-                });
-            } else {
-                results.innerHTML = '검색 결과가 없습니다.';
+                if (data && data.response && data.response.body && data.response.body.itemList && data.response.body.itemList.item) {
+                    const tbody = document.getElementById('results');
+                    data.response.body.itemList.item.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${item.fraudType}</td>
+                            <td>${item.natn}</td>
+                            <td><a href="/showFraudDetail?title=${encodeURIComponent(item.titl)}">${item.titl}</a></td>
+                            <td>${item.othbcDt}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    const tbody = document.getElementById('results');
+                    tbody.innerHTML = '<tr><td colspan="3">검색 결과가 없습니다.</td></tr>';
+                }
             }
-        }
 
-    </script>
+        </script>
     <!-- 사기사례 검색 form -->
 
-</div> <!-- scroll 끝-->
+    </div> <!-- scroll 끝-->
 
     <footer id="footer" class="footer">
         <div class="footer-inner">

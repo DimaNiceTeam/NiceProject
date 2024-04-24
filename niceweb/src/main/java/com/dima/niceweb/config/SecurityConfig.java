@@ -31,9 +31,11 @@ public class SecurityConfig {
 					,"/user/myFavCompany" // ** 마이페이지 찜기능 화면요청 get
 					,"/user/favCmpAll" // ** 찜한 회사목록 모두 출력 get
 					,"/user/favCmpDelete" // ** 찜리스에서 회사 삭제 get
-					,"/user/favCmpInsert" // ** 찜리스에서 회사 추가 get						,"/mail/sendedMail" // ** 메일함 화면 요청 get
+					,"/user/favCmpInsert" // ** 찜리스에서 회사 추가 get	
+					,"/mail/sendedMail" // ** 메일함 화면 요청 get
 					,"/mail/mailList" // ** 메일 dto리스트 반환 get
 					,"/mail/mailsend" // ** 메일 보내기 post
+					,"/mail/myPageSendEmail"
 					,"/mail/mailSelectOne" // ** 메일 dto한개 반환 get
 					,"/mail/mailDelete" // ** 메일 삭제 post
 					,"/rate" // 환율 getaaaaa!1
@@ -47,6 +49,7 @@ public class SecurityConfig {
 					,"/fonts/**"
 					,"/css/**"
 					,"/js/**"	
+					,"/video/**"
 					,"/script/**").permitAll()//permitAll()은 인증 절차 없이도 접근가능한 요청 
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.requestMatchers("/my/**").hasAnyRole("ADMIN","USER")

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVSEA Market News</title>
+</head>
+<body>
+    <h1>뉴스 상세 정보</h1>
+    <div id="newsContent">로딩 중...</div>
+
+    <script>
+        async function fetchNewsDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            const apiUrl = `https://apis.data.go.kr/B410001/kotra_overseasMarketNews/ovseaMrktNews/ovseaMrktNews?serviceKey=1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D&type=json&numOfRows=1&pageNo=1&search1=&search2=${title}&search3=&search4=&search5=I001200&search6=ECNMY%2CANA&search7=&_type=json`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                document.getElementById('newsContent').innerHTML = `
+                    <div>
+                        <p>Title:       ${data.response.body.itemList.item[0].newsTitl}</p>
+                        <p>Nation:      ${data.response.body.itemList.item[0].natn}</p>
+                        <p>Date:        ${data.response.body.itemList.item[0].othbcDt}</p>
+                        <p>             ${data.response.body.itemList.item[0].newsBdt}</p>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('newsContent').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+            }
+        }
+
+        fetchNewsDetail();
+    </script>
+</body>
+</html>

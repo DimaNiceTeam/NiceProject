@@ -30,5 +30,11 @@ public class FraudController {
         
         return "showFraud";
     }
+
+    @GetMapping("/showFraudDetail")
+    public String showFraudDetail() {
+        
+        return "showFraudDetail";
+    }
     
 }

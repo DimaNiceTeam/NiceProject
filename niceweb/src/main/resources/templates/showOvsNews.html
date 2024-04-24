@@ -10,25 +10,34 @@
     <div>
         <input type="text" id="search1" placeholder="국가명 입력">
         <input type="text" id="search2" placeholder="뉴스 제목 입력">
-        <input type="date" id="search4" placeholder="게시시작일자 입력">
-        <input type="date" id="search7" placeholder="게시종료일자 입력">
+        <!--<input type="date" id="search4" placeholder="게시시작일자 입력">
+        <input type="date" id="search7" placeholder="게시종료일자 입력">-->
         <button onclick="fetchOvsData()">검색</button>
     </div>
-    <div id="sosad">ㅁ?ㄹ</div>
-    <div id="results">결과가 여기에 표시됩니다.</div>
+    <!--<div id="sosad">ㅁ?ㄹ</div>-->
+    
+    <table border="1">
+        <tr>
+            <th>국가</th>
+            <th>제목</th>
+            <th>일자</th>
+        </tr>
+        <tbody id="results"></tbody>
+    </table>
+    <!--<div id="results">결과가 여기에 표시됩니다.</div>-->
 
     <!-- Ensure the script is loaded at the end of the body to ensure all HTML elements are loaded -->
     <script>
         async function fetchOvsData() {
             const search1 = encodeURIComponent(document.getElementById('search1').value);
             const search2 = encodeURIComponent(document.getElementById('search2').value);
-            const search4 = (document.getElementById('search4').value);
+            ///const search4 = (document.getElementById('search4').value);
             const search5 = 'I001200';
             const search6 = 'ECNMY%2CANA';
-            const search7 = (document.getElementById('search7').value);
+            //const search7 = (document.getElementById('search7').value);
         
             const serviceKey = '1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D';
-            const url = `https://apis.data.go.kr/B410001/kotra_overseasMarketNews/ovseaMrktNews/ovseaMrktNews?serviceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&search3=&search4=${search4}&search5=${search5}&search6=${search6}&search7=${search7}&_type=json`;
+            const url = `https://apis.data.go.kr/B410001/kotra_overseasMarketNews/ovseaMrktNews/ovseaMrktNews?serviceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&search3=&search5=${search5}&search6=${search6}&_type=json`;
             
             try {
                 const response = await fetch(url, {
@@ -41,7 +50,7 @@
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                sosad.innerHTML = url;
+                //sosad.innerHTML = url;
                 displayResults(data);
             } catch (error) {
                 console.error('Error:', error);
@@ -54,22 +63,19 @@
             results.innerHTML = ''; // 결과 영역 초기화
         
             if (data && data.response && data.response.body && data.response.body.itemList && data.response.body.itemList.item) {
+                const tbody = document.getElementById('results');
                 data.response.body.itemList.item.forEach(item => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `
-                                <div>
-                                    <p>Title:       ${item.newsTitl}</p>
-                                    <p>Nation:      ${item.natn}</p>
-                                    <p>URL:     <a href="${item.kotraNewsUrl}">
-                                                    ${item.kotraNewsUrl}</a></p>
-                                    <p>Date:        ${item.othbcDt}</p>
-                                    <p>${item.newsBdt}</p>
-                                </div>
-                                `;
-                    results.appendChild(div);
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${item.natn}</td>
+                        <td><a href="/showOvsNewsDetail?title=${encodeURIComponent(item.newsTitl)}">${item.newsTitl}</a></td>
+                        <td>${item.othbcDt}</td>
+                    `;
+                    tbody.appendChild(tr);
                 });
             } else {
-                results.innerHTML = '검색 결과가 없습니다.';
+                const tbody = document.getElementById('results');
+                tbody.innerHTML = '<tr><td colspan="3">검색 결과가 없습니다.</td></tr>';
             }
         }
     </script>

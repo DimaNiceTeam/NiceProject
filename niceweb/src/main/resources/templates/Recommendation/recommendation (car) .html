@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천 시스템</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .vertical-list li {
+
+            margin: 40px;
+            /* 각 항목의 마진 설정 */
+            text-align: left;
+            /* 텍스트 중앙 정렬 */
+            overflow-y: auto;
+            /* 내용이 많을 경우 스크롤바 표시 */
+        }
+
+        .toggle {
+            border-color: 1px solid #fff;
+        }
+
+        .box {
+            float: left;
+            width: 355px;
+            height: 115;
+            margin: 0 75px;
+            position: relative;
+            margin-left: 400px;
+
+        }
+
+        .dropdown-container {
+            display: none;
+            /* 초기에 숨겨진 상태 */
+            position: absolute;
+            top: 20px;
+            /* 위치 조정 필요에 따라 수정 */
+            right: 20px;
+        }
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .front {
+            position: absolute;
+            width: 30%;
+            opacity: 0.5;
+            top: 267.8px;
+            left: 99.8px;
+        }
+
+        .secondfront {
+            position: absolute;
+            width: 120%;
+            height: auto;
+            opacity: 0.5;
+            top: 197.5px;
+            left: 31.7px;
+        }
+
+        /*인테리어 */
+        .thirdfront {
+            position: absolute;
+            width: 59.4%;
+            height: auto;
+            opacity: 0.5;
+            top: 123.8px;
+            left: 216px;
+        }
+
+        /* 차체 */
+        .fourthfront {
+            position: absolute;
+            width: 97.5%;
+            height: auto;
+            opacity: 0.5;
+            top: 69.7px;
+            left: 10.2px;
+        }
+
+        .EngineImage:hover,
+        .smallpartsImage:hover,
+        .interiorImage:hover,
+        .bodyImage:hover {
+            filter: brightness(200%);
+            transition: filter 0.3s ease-in-out;
+        }
+
+        /* 노멀라이즈 시작 */
+        body,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            /* 해당 태그의 list-style을 none으로 하는 것으로 ●을 제거한다 */
+        }
+
+        a {
+            color: inherit;
+            /* 부모 엘리먼트의 값을 물려받는다 */
+            text-decoration: none;
+            /* 해당 태그의 text-decoration 속성을 none 값으로 하는 것으로 밑줄을 제거한다 */
+        }
+
+        /* 노멀라이즈 끝 */
+
+        /* 2차 이상의 메뉴를 숨기기 */
+        .side-bar>ul ul {
+            display: block;
+        }
+
+        /* 사이트의 높이를 5000px로 만들어 스크롤 생성 */
+        body {
+            height: 700px;
+            background-color: #080808;
+
+        }
+
+
+
+        /* 사이드바의 너비와 높이를 변수를 통해 통제 */
+        :root {
+            --side-bar-width: 300px;
+            --side-bar-height: 5vh;
+        }
+
+        .side-bar {
+            width: var(--side-bar-width);
+            position: fixed;
+            left: -300px;
+            /* 초기에 사이드바를 숨깁니다 */
+            top: 0;
+            height: 70px;
+            bottom: 0;
+            background-color: #020de0;
+            /* 배경색 변경 */
+            color: #fff;
+            min-height: var(--side-bar-height);
+            transition: left 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1001;
+            margin-top: calc((100vh - var(--side-bar-height)) / 10);
+            border-color: 1px solid #fff;
+        }
+
+
+        /* 사이드바가 활성화되면 왼쪽으로 이동 */
+        .active {
+            left: 0;
+        }
+
+        /* 모든 메뉴의 a에 속성값 부여 */
+        .side-bar ul>li>a {
+            display: block;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
+        }
+
+
+        /* 자식의 position이 absolute일 때 자식을 영역 안에 가두어 준다 */
+        .side-bar>ul>li {
+            position: relative;
+        }
+
+        /* 모든 메뉴가 마우스 인식 시 반응 */
+        .side-bar ul>li:hover>a {
+            background-color: #2300a2;
+
+        }
+
+        /* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
+        .side-bar>ul>li>ul:hover {
+            position: absolute;
+            background-color: #0a37ff;
+            top: 0;
+            /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+            left: 100%;
+            /* 2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+            width: 100%;
+            /* 1차 메뉴의 너비를 상속 */
+
+        }
+
+        /* 2차, 3차 메뉴의 절대 위치를 설정합니다 */
+        .side-bar>ul ul,
+        .side-bar>ul ul ul {
+            position: absolute;
+            display: none;
+            background-color: #0a37ff;
+            top: 0;
+            left: var(--side-bar-width);
+            width: var(--side-bar-width);
+            margin-left: -1px;
+            /* 부모 메뉴와의 경계선 겹침을 피하기 위해 */
+        }
+
+        /* 3차 메뉴는 2차 메뉴와 동일한 레벨에서 표시되어야 합니다. */
+        /* 3단 서브메뉴 스크롤바 설정 */
+        .side-bar ul ul ul {
+            display: block;
+            /* 이 부분은 필요에 따라 조정 */
+            position: absolute;
+            /* 이미 정의된 위치 설정을 유지 */
+            background-color: #006aff;
+            /* 배경 색상 유지 */
+            top: 0;
+            left: 100%;
+            /* 왼쪽에서 100% 떨어진 곳에 위치 */
+            /* 너비는 --side-bar-width 변수 사용 */
+            max-height: 300px;
+            /* 최대 높이 설정, 필요에 따라 조절 가능 */
+            overflow-y: auto;
+            /* 세로 방향으로 내용이 넘칠 경우 스크롤바 표시 */
+            z-index: 100;
+            /* 다른 요소들 위에 보이도록 z-index 설정 */
+            margin-left: -1px;
+            /* 서브메뉴간 경계선 겹침 방지 */
+            border: 1px solid #ffffff;
+            /* 서브메뉴의 경계를 더 명확하게 표시 */
+            scrollbar-width: none;
+            /* Firefox에서 스크롤바를 숨깁니다 */
+            width: 550px;
+            font-size: 12px;
+        }
+
+        .side-bar ul ul ul::-webkit-scrollbar {
+            display: none;
+            /* 스크롤바를 숨김 */
+        }
+
+        /* 하위 메뉴에 호버 스타일 적용 */
+        .side-bar ul li ul li:hover {
+            background-color: #ffffff;
+            /* 호버 시 배경 색상 변경 예시 */
+            color: white;
+            /* 텍스트 색상 변경 예시 */
+        }
+
+        .side-bar ul li a {
+            margin-left: 7px;
+            font-size: 1.4em;
+            /* 하위 메뉴 항목의 기본 글씨 크기로 설정 */
+        }
+
+        .col3 {
+            display: relative;
+        }
+
+
+
+        .productListContainer {
+            font-size: 16px;
+            position: absolute;
+            /* 위치를 절대적으로 지정 */
+            right: 0;
+            /* 컨테이너의 오른쪽 끝에 배치 */
+            top: 7%;
+            /* 상단으로부터 10%의 여백을 둠 */
+            width: 20%;
+            /* 너비를 20%로 설정 */
+            z-index: 1000;
+            /* 다른 요소들 위에 표시되도록 높은 z-index 값 설정 */
+            color: white;
+            /* 텍스트 색상은 흰색으로 설정 */
+            background-color: #080808;
+            /* 배경색 설정 */
+            padding: 5px;
+            /* 내부 여백 설정 */
+            box-sizing: border-box;
+            /* padding을 포함한 너비와 높이 계산 */
+            height: 670px;
+            border-left: 4px solid #7A2F60;
+            border-right: 4px;
+            /* 왼쪽에 경계선 추가 */
+            display: block;
+            overflow-y: auto;
+            /* 내용이 넘칠 경우 세로 스크롤바 활성화 */
+            scrollbar-width: none;
+            /* Firefox에서 스크롤바 숨기기 */
+            -ms-overflow-style: none;
+            /* IE, Edge에서 스크롤바 숨기기 */
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            /* 그림자 추가 */
+            border-radius: 10px;
+            /* 경계 모서리 둥글게 */
+        }
+
+
+        .itemNameList::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
+        }
+
+
+        /* 버튼 기본 스타일 */
+        button {
+            background-color: #3388ff;
+            /* 녹색 배경 */
+            color: white;
+            /* 텍스트 색상 */
+            padding: 8px 24px;
+            /* 상하, 좌우 패딩 */
+            border: none;
+            /* 테두리 없음 */
+            border-radius: 10px;
+            /* 둥근 테두리 */
+            cursor: pointer;
+            /* 커서를 포인터로 설정 */
+            transition: background-color 0.3s;
+            /* 배경색 변경 애니메이션 */
+            font-size: 14px;
+            /* 폰트 크기 */
+            box-shadow: 0px 0px 2px 2px rgba(206, 229, 255, 0.803);
+        }
+
+        /* 버튼 호버 상태 스타일 */
+        button:hover {
+            background-color: #e6f0ff;
+            /* 호버 시 배경색 변경 */
+            color: #080808;
+        }
+
+        .container .row .col .button {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        /* 화살표 기본 스타일 */
+        .container .row .col .arrow {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+
+
+        /* 상위 메뉴 화살표 위치 조정 */
+        .side-bar>ul>li>a {
+            position: relative;
+            /* 부모 요소를 relative로 설정 */
+            padding-right: 20px;
+            /* 텍스트와 화살표 사이 공간 확보 */
+        }
+
+        /* 상위 메뉴 화살표 스타일 */
+        .side-bar>ul>li>a>.arrow {
+            position: absolute;
+            right: 10px;
+            /* 오른쪽 정렬에 대한 위치 */
+            top: 50%;
+            /* 세로 중앙 정렬을 위해 top을 50%로 설정 */
+            transform: translateY(-50%);
+            /* 세로 중앙 정렬을 위한 변환 */
+        }
+
+        /* 하위 메뉴 화살표 위치 조정 */
+        .side-bar>ul>li>ul>li>a {
+            position: relative;
+            /* 부모 요소를 relative로 설정 */
+            padding-right: 20px;
+            /* 텍스트와 화살표 사이 공간 확보 */
+        }
+
+        /* 하위 메뉴 화살표 스타일 */
+        .side-bar>ul>li>ul>li>a>.arrow {
+            position: absolute;
+            right: 10px;
+            /* 오른쪽 정렬에 대한 위치 */
+            top: 50%;
+            /* 세로 중앙 정렬을 위해 top을 50%로 설정 */
+            transform: translateY(-50%);
+            /* 세로 중앙 정렬을 위한 변환 */
+        }
+
+        .submenu li {
+            position: relative;
+            /* 부모 요소를 relative로 설정하여 자식 요소인 button이 위치를 절대적으로 찾을 수 있게 함 */
+        }
+
+        .submenu button {
+            position: absolute;
+            /* 절대 위치를 사용하여 버튼을 부모 요소 기준으로 오른쪽 끝에 위치시킴 */
+            right: 10px;
+            /* 오른쪽에서 10px 떨어진 곳에 위치 */
+            top: 50%;
+            /* 버튼을 상위 요소의 중앙 높이에 위치시킴 */
+            transform: translateY(-50%);
+            /* 버튼을 수직 중앙에 위치시키기 위해 Y축 기준 50%만큼 이동 */
+        }
+
+        .side-bar ul li {
+            border-bottom: 1px solid #ffffff;
+            /* 각 항목 사이에 테두리 추가 */
+        }
+
+        /* 마지막 항목의 하단 테두리 제거 */
+        .side-bar ul li:last-child {
+            border-bottom: none;
+        }
+
+        .item-style {
+            border: 1px solid #ddd;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .item-style:hover {
+            background-color: #eaeaea;
+            color: black;
+        }
+
+        .vertical-list li {
+            display: flex;
+            align-items: baseline;
+            /* 항목들을 베이스라인에 맞춤 */
+            margin: 40px;
+            overflow-y: auto;
+        }
+
+        .index {
+            margin-right: 10px;
+            /* 번호와 텍스트 사이의 공간 */
+            white-space: nowrap;
+            /* 번호가 줄바꿈 되지 않도록 설정 */
+        }
+
+        .item-text {
+            flex-grow: 1;
+            /* 남은 공간을 모두 차지하도록 설정 */
+        }
+
+        /* Product List Container Style */
+        .productListContainer {
+            width: 300px;
+            /* 사이드바 너비 */
+            background-color: #e6f0ff;
+            /* 배경색 */
+            border-left: 1px solid #ccc;
+            /* 왼쪽 경계선 */
+            position: fixed;
+            /* 사이드바를 고정 위치에 표시 */
+            top: 0;
+            /* 상단에 맞춤 */
+            right: -300px;
+            /* 초기에는 숨김 */
+            transition: right 0.3s;
+            /* 부드러운 오른쪽으로 이동 효과 */
+            z-index: 1000;
+            /* 다른 요소들 위에 표시 */
+            height: 100vh;
+            /* 전체 높이 */
+            box-shadow: -2px 0 5px rgba(226, 236, 255, 0.2);
+            /* 그림자 효과 */
+            overflow-y: auto;
+            /* 내용이 많으면 스크롤 표시 */
+        }
+
+        /* 제목 스타일 */
+        .itemNameListTitle {
+            margin: 5px;
+            margin-bottom: 20px;
+            /* 타이틀과 리스트 아이템 사이의 간격 추가 */
+            font-size: 20px;
+            /* 글자 크기 */
+            font-weight: bold;
+            /* 글자 굵기 */
+            color: #333;
+            /* 글자 색상 */
+            text-align: center;
+            /* 중앙 정렬 */
+            padding: 20px;
+            /* 패딩 */
+            background-color: #fff;
+            /* 배경색 */
+            /* 마진 제거 */
+            border: 1px solid #b3d2ff;
+            /* 하단 테두리 */
+            border-radius: 10px;
+        }
+
+        /* 아이템 리스트 스타일 */
+        .itemNameList {
+            margin: 5px;
+            /* 마진 제거 */
+            padding: 0;
+            /* 패딩 제거 */
+            list-style: none;
+            /* 기본 목록 스타일 제거 */
+        }
+
+        .itemNameList li {
+            padding: 10px 15px;
+            /* 상하, 좌우 패딩 */
+            border-bottom: 1px solid #ccc;
+            /* 각 아이템 하단에 테두리 추가 */
+            font-size: 16px;
+            /* 글자 크기 */
+            color: #333;
+            /* 글자 색상 */
+            background-color: #ffffff;
+            /* 배경색 */
+            display: flex;
+            /* Flexbox 사용 */
+            align-items: center;
+            /* 세로 중앙 정렬 */
+            transition: background-color 0.3s;
+            /* 배경색 변화 효과 */
+            padding-top: 15px;
+            padding-bottom: 15px;
+            /* 리스트 아이템 상하 패딩 조정 */
+        }
+
+        .itemNameList li:hover {
+            background-color: #cfcfcf;
+            /* 호버 시 배경색 변경 */
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        var sidebarStates = {}; // 전역 변수로 사이드바 상태 관리
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Variables and category mappings
+            const categoryMap = {
+                'fourthfront': ['Body & Chassis'],
+                'thirdfront': ['Interior', 'Electrical and Electronic'],
+                'secondfront': ['General/ Small parts'],
+                'front': ['e-Powertrain', 'ICE Powertrain']
+            };
+            const EngineParts = {
+                'e-Powertrain': ['Drive Battery', 'Battery Management System', 'Traction Motor / e-Axle', 'DC-DC Converter', 'Inverter', 'Vehicle Control Unit', 'On-board Charger'],
+                'ICE Powertrain': ['Main Engine Parts', 'Valve Train System', 'Fuel / Injection System', 'Intake / Exhaust System', 'Ignition System', 'Lubrication System', 'Cooling System', 'Starter / Battery System', 'Transmission / Clutch', 'Driveline'],
+
+            };
+            const InteriorParts = {
+                'Electrical and Electronic': ['Milliwave and Laser Radar / LiDAR', 'On-board Camera', 'Air Conditioning / HVAC', 'Meter / Display', 'Car Navigation System / Audio / Connected', 'Security', 'Motor / Actuator', 'Switch / Connector / Harness / Other Electronics', 'ECU / Sensor(ADAS Related)', 'ECU / Sensor(Powertrain Related)', 'ECU / Sensor(Body Related)', 'ECU / Sensor(Safety Related)', 'ECU / Sensor(Chassis Related)'],
+                'Interior': ['Interior', 'Seat Related Products', 'Airbag & Safety Related Products']
+            };
+            const BodyParts = {
+                'Body & Chassis': ['Exterior', 'Lamp & Related Products', 'Brake', 'Steering', 'Suspension / Subframe', 'Wheel & Tire', 'Body / Structure / Module / Others', 'Body Components']
+            };
+            const GeneralParts = {
+                'General/ Small parts': ['General / Small Parts']
+            };
+
+            // Sidebar and Toggle Button Management
+            const toggleButtons = {
+                'interiorImage': 'systemInteriorSidebar',
+                'bodyimage': 'bodyFrameworkSidebar',
+                'smallpartsimage': 'generalpartsSidebar',
+                'engineimage': 'powerTrainSidebar'
+            };
+
+            let anySidebarFixed = false;
+
+
+            document.querySelectorAll('.toggle').forEach(toggle => {
+                toggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const subMenu = toggle.nextElementSibling;
+                    subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
+                    toggle.parentNode.querySelectorAll('.submenu').forEach(s => s !== subMenu && (s.style.display = 'none'));
+                    e.stopPropagation();
+                });
+            });
+            document.querySelectorAll('.side-bar ul>li>ul>li>a.toggle').forEach(function (toggle) {
+                toggle.addEventListener('click', function (e) {
+                    // 다른 모든 3차 메뉴를 닫고 고정 해제
+                    document.querySelectorAll('.side-bar ul ul ul').forEach(function (submenu) {
+                        submenu.style.display = 'none';
+                        // 가정: submenu에는 고정 상태를 나타내는 클래스 'fixed'가 있다고 가정
+                        submenu.classList.remove('fixed');
+                    });
+
+                    // 현재 2차 메뉴의 자식 3차 메뉴만 열기
+                    const subMenu = this.nextElementSibling;
+                    subMenu.style.display = 'block';
+                    subMenu.classList.add('fixed'); // 현재 3차 메뉴를 고정 상태로 설정
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+            document.addEventListener('click', function () {
+                document.querySelectorAll('.submenu').forEach(s => s.style.display = 'none');
+            });
+            Object.keys(toggleButtons).forEach(id => {
+                const imageElement = document.getElementById(id);
+                const sidebar = document.getElementById(toggleButtons[id]);
+                sidebarStates[toggleButtons[id]] = { isOpen: false, isFixed: false };
+                imageElement.addEventListener('mouseover', () => !anySidebarFixed && !sidebarStates[toggleButtons[id]].isFixed && (sidebar.style.left = '0px'));
+                imageElement.addEventListener('click', () => toggleSidebarState(toggleButtons[id]));
+                imageElement.addEventListener('mouseout', () => !anySidebarFixed && !sidebarStates[toggleButtons[id]].isFixed && (sidebar.style.left = '-300px'));
+            });
+
+
+            function updateCarPartsList() {
+                const category = document.getElementById('EquipSelect').value;
+                const partsSelect = document.getElementById('partsSelect');
+                partsSelect.innerHTML = '<option value="">Select Part</option>';
+                const parts = { ...EngineParts, ...InteriorParts, ...BodyParts, ...GeneralParts };
+                if (category) {
+                    partsSelect.innerHTML += parts[category].map(part => `<option value="${part}">${part}</option>`).join('');
+                }
+            }
+
+            function toggleSidebarState(id) {
+                const sidebar = document.getElementById(id);
+                const state = sidebarStates[id];
+                resetOtherSidebars(id);
+                state.isFixed = !state.isFixed;
+                anySidebarFixed = state.isFixed;
+                sidebar.style.left = state.isFixed ? '0px' : '-300px';
+            }
+
+            function resetOtherSidebars(excludeId) {
+                Object.keys(sidebarStates).forEach(key => {
+                    if (key !== excludeId) {
+                        const sidebar = document.getElementById(key);
+                        sidebar.style.left = '-300px';
+                        sidebarStates[key].isFixed = false;
+                    }
+                });
+                anySidebarFixed = sidebarStates[excludeId].isFixed;
+            }
+        });
+        // 2차 메뉴 항목에 클릭 이벤트 리스너 추가
+        document.querySelectorAll('.side-bar ul>li>ul>li>a.toggle').forEach(function (toggle) {
+            toggle.addEventListener('click', function (e) {
+                // 다른 모든 3차 메뉴를 닫고 고정 해제
+                document.querySelectorAll('.side-bar ul ul ul').forEach(function (submenu) {
+                    submenu.style.display = 'none';
+                    // 가정: submenu에는 고정 상태를 나타내는 클래스 'fixed'가 있다고 가정
+                    submenu.classList.remove('fixed');
+                });
+
+                // 현재 2차 메뉴의 자식 3차 메뉴만 열기
+                const subMenu = this.nextElementSibling;
+                subMenu.style.display = 'block';
+                subMenu.classList.add('fixed'); // 현재 3차 메뉴를 고정 상태로 설정
+
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const csvUrl = '../../static/csv/Itemtable.csv'; // 서버에 업로드된 CSV 파일의 URL
+
+            // CSV 파일에서 데이터를 로드하여 전역 변수에 저장
+            let allItems = [];
+            Papa.parse(csvUrl, {
+                download: true,
+                header: true,
+                complete: function (results) {
+                    allItems = results.data;
+                }
+            });
+
+
+            function resetOtherSidebars(excludeId) {
+                Object.keys(sidebarStates).forEach(key => {
+                    if (key !== excludeId) {
+                        const sidebar = document.getElementById(key);
+                        sidebar.style.left = '-300px';
+                        sidebarStates[key].isFixed = false;
+                    }
+                });
+                anySidebarFixed = false;
+            }
+            // SUB_ID에 해당하는 항목을 표시하는 함수
+            window.displayItemsByCategory = function displayItemsByCategory(subId, categoryName) {
+                const productListContainer = document.querySelector('.productListContainer');
+                productListContainer.style.right = '0';
+
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = ''; // 기존의 목록을 지웁니다.
+
+                const titleDiv = document.querySelector('.itemNameListTitle');
+                if (titleDiv) {
+                    titleDiv.textContent = 'PRODUCT LIST'; // 제목 업데이트
+                    titleDiv.style.display = 'block'; // 제목 보이게
+                }
+
+                // 아이템 목록 생성 및 추가
+                const itemsByCategory = allItems.filter(item => item.SUB_ID === subId);
+                itemsByCategory.forEach((item, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('item-style'); // 스타일 클래스 추가
+
+                    const indexSpan = document.createElement('span');
+                    indexSpan.className = 'index';
+                    indexSpan.textContent = `${index + 1}.`; // 번호 부분
+
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'item-text';
+                    textSpan.textContent = ` ${item.Item}`; // 텍스트 부분
+
+                    listItem.appendChild(indexSpan);
+                    listItem.appendChild(textSpan);
+                    outputDiv.appendChild(listItem);
+                });
+            };
+        });
+        // 모든 하위 메뉴 항목에 접근
+        const submenuItems = document.querySelectorAll('.submenu li a');
+
+        // 각 항목에 아이콘 추가
+        submenuItems.forEach(item => {
+            const icon = document.createElement('i');
+            icon.className = 'bx bxs-chevrons-right arrow';
+            item.prepend(icon);  // 아이콘을 링크 텍스트 앞에 추가
+
+        });
+        // 사이드바 닫기 함수
+        function closeSidebar() {
+            const productListContainer = document.querySelector('.productListContainer');
+            if (productListContainer.style.right === '0px') {
+                productListContainer.style.right = '-300px';
+            }
+        }
+
+        // 페이지의 아무 곳이나 클릭할 때 사이드바 닫기
+        document.addEventListener('click', function (event) {
+            // 사이드바나 사이드바를 여는 버튼이 아닌 곳을 클릭했는지 확인
+            if (!event.target.matches('.side-bar, .side-bar *, .search-button')) {
+                closeSidebar();
+            }
+        });
+
+        // Search 버튼에 클래스 추가 (쉽게 선택하기 위함)
+        document.querySelectorAll('.side-bar ul ul ul li button').forEach(function (button) {
+            button.classList.add('search-button');
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <aside class="side-bar" id="powerTrainSidebar">
+                    <ul class="menu">
+                        <li><a href="#none" class="toggle">Powertrain<i class='bx bxs-chevrons-right arrow'></i></a>
+                            <ul class="submenu">
+                                <li><a href="#none" class="toggle">e-Powertrain<i
+                                            class='bx bxs-chevrons-right arrow'></i></a>
+                                    <ul class="submenu" id="3rdmenu">
+                                        <li><a href="#none">Drive Battery <button
+                                                    onclick="displayItemsByCategory('1')">Search</button></a></li>
+                                        <li><a href="#none">Battery Management System <button
+                                                    onclick="displayItemsByCategory('2')">Search</button></a></li>
+                                        <li><a href="#none">Traction Motor / e-Axle <button
+                                                    onclick="displayItemsByCategory('3')">Search</button></a></li>
+                                        <li><a href="#none">DC-DC Converter <button
+                                                    onclick="displayItemsByCategory('4')">Search</button></a></li>
+                                        <li><a href="#none">Inverter <button
+                                                    onclick="displayItemsByCategory('5')">Search</button></a>
+                                        </li>
+                                        <li><a href="#none">Vehicle Control Unit <button
+                                                    onclick="displayItemsByCategory('6')">Search</button></a></li>
+                                        <li><a href="#none">On-board Charger <button
+                                                    onclick="displayItemsByCategory('7')">Search</button></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#none" class="toggle">ICE Powertrain<i
+                                            class='bx bxs-chevrons-right arrow'></i></a>
+                                    <ul class="submenu" id="3rdmenu">
+                                        <li><a href="#none">Main Engine Parts <button
+                                                    onclick="displayItemsByCategory('8')">Search</button></a></li>
+                                        <li><a href="#none">Valve Train System <button
+                                                    onclick="displayItemsByCategory('9')">Search</button></a></li>
+                                        <li><a href="#none">Fuel / Injection System <button
+                                                    onclick="displayItemsByCategory('10')">Search</button></a></li>
+                                        <li><a href="#none">Intake / Exhaust System <button
+                                                    onclick="displayItemsByCategory('11')">Search</button></a></li>
+                                        <li><a href="#none">Ignition System <button
+                                                    onclick="displayItemsByCategory('12')">Search</button></a></li>
+                                        <li><a href="#none">Lubrication System <button
+                                                    onclick="displayItemsByCategory('13')">Search</button></a></li>
+                                        <li><a href="#none">Cooling System <button
+                                                    onclick="displayItemsByCategory('14')">Search</button></a></li>
+                                        <li><a href="#none">Starter / Battery System <button
+                                                    onclick="displayItemsByCategory('15')">Search</button></a></li>
+                                        <li><a href="#none">Transmission / Clutch <button
+                                                    onclick="displayItemsByCategory('16')">Search</button></a></li>
+                                        <li><a href="#none">Driveline <button
+                                                    onclick="displayItemsByCategory('17')">Search</button></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+
+                <!-- system , 인테리어 사이드바-->
+                <aside class="side-bar" id="systemInteriorSidebar">
+                    <ul class="menu">
+                        <li><a href="#none" class="toggle">System & Interior<i
+                                    class='bx bxs-chevrons-right arrow'></i></a>
+                            <ul class="submenu">
+                                <li><a href="#none" class="toggle">Electrical and Electronic<i
+                                            class='bx bxs-chevrons-right arrow'></i>></a>
+                                    <ul class="submenu" id="3rdmenu">
+                                        <li><a href="#none">Milliwave and Laser Radar / LiDAR <button
+                                                    onclick="displayItemsByCategory('18')">Search</button></a></li>
+                                        <li><a href="#none">On-board Camera <button
+                                                    onclick="displayItemsByCategory('19')">Search</button></a></li>
+                                        <li><a href="#none">Air Conditioning / HVAC <button
+                                                    onclick="displayItemsByCategory('20')">Search</button></a></li>
+                                        <li><a href="#none">Meter / Display <button
+                                                    onclick="displayItemsByCategory('21')">Search</button></a></li>
+                                        <li><a href="#none">Car Navigation System / Audio / Connected <button
+                                                    onclick="displayItemsByCategory('22')">Search</button></a></li>
+                                        <li><a href="#none">Security <button
+                                                    onclick="displayItemsByCategory('23')">Search</button></a>
+                                        </li>
+                                        <li><a href="#none">Motor / Actuator <button
+                                                    onclick="displayItemsByCategory('24')">Search</button></a></li>
+                                        <li><a href="#none">Switch / Connector / Harness / Other Electronics <button
+                                                    onclick="displayItemsByCategory('25')">Search</button></a></li>
+                                        <li><a href="#none">ECU / Sensor(ADAS Related) <button
+                                                    onclick="displayItemsByCategory('26')">Search</button></a></li>
+                                        <li><a href="#none">ECU / Sensor(Powertrain Related) <button
+                                                    onclick="displayItemsByCategory('27')">Search</button></a></li>
+                                        <li><a href="#none">ECU / Sensor(Body Related) <button
+                                                    onclick="displayItemsByCategory('28')">Search</button></a></li>
+                                        <li><a href="#none">ECU / Sensor(Safety Related) <button
+                                                    onclick="displayItemsByCategory('29')">Search</button></a></li>
+                                        <li><a href="#none">ECU / Sensor(Chassis Related) <button
+                                                    onclick="displayItemsByCategory('30')">Search</button></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#none" class="toggle">Interior<i
+                                            class='bx bxs-chevrons-right arrow'></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="#none">Interior <button
+                                                    onclick="displayItemsByCategory('31')">Search</button></a>
+                                        </li>
+                                        <li><a href="#none">Seat Related Products <button
+                                                    onclick="displayItemsByCategory('32')">Search</button></a></li>
+                                        <li><a href="#none">Airbag & Safety Related Products <button
+                                                    onclick="displayItemsByCategory('33')">Search</button></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+
+                <!-- 바디 사이드바-->
+                <aside class="side-bar" id="bodyFrameworkSidebar">
+                    <ul class="menu">
+                        <li><a href="#none" class="toggle">Body & Framework<i
+                                    class='bx bxs-chevrons-right arrow'></i></a>
+                            <ul class="submenu">
+                                <li><a href="#none" class="toggle">Exterior<i
+                                            class='bx bxs-chevrons-right arrow'></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="#none">Exterior <button
+                                                    onclick="displayItemsByCategory('34')">Search</button></a>
+                                        </li>
+                                        <li><a href="#none">Lamp & Related Products <button
+                                                    onclick="displayItemsByCategory('35')">Search</button></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#none" class="toggle">Body & Chassis<i
+                                            class='bx bxs-chevrons-right arrow'></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="#none">Brake <button
+                                                    onclick="displayItemsByCategory('36')">Search</button></a>
+                                        </li>
+                                        <li><a href="#none">Steering <button
+                                                    onclick="displayItemsByCategory('37')">Search</button></a>
+                                        </li>
+                                        <li><a href="#none">Suspension / Subframe <button
+                                                    onclick="displayItemsByCategory('38')">Search</button></a></li>
+                                        <li><a href="#none">Wheel & Tire <button
+                                                    onclick="displayItemsByCategory('39')">Search</button></a></li>
+                                        <li><a href="#none">Body / Structure / Module / Others <button
+                                                    onclick="displayItemsByCategory('40')">Search</button></a></li>
+                                        <li><a href="#none">Body Components <button
+                                                    onclick="displayItemsByCategory('41')">Search</button></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+
+                <!--general 사이드바-->
+                <aside class="side-bar" id="generalpartsSidebar">
+                    <ul class=" menu">
+                        <li><a href="#none" class="toggle">General Parts<i class='bx bxs-chevrons-right arrow'></i></a>
+                            <ul class="submenu">
+                                <li><a href="#none" class="toggle">General Parts<i
+                                            class='bx bxs-chevrons-right arrow'></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="#none">General / Small Parts <button
+                                                    onclick="displayItemsByCategory('42')">Search</button></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+
+            <div class="col">
+                <div class="box">
+                    <div class="back"><img src="../../static/images/KakaoTalk_20240418_111511662.jpg" alt="Car Image"
+                            usemap="#carimage" coords="163,344,480,545" style="width:210%;"></div>
+                    <div class="fourthfront"><img src="../../static/images/body.png" alt="Toggle Body Sidebar"
+                            class="bodyImage" style="width:210%;" id="bodyimage"></div>
+                    <div class="thirdfront"><img src="../../static/images/interier.png" alt="Toggle Interior Sidebar"
+                            class="interiorImage" style="width:210%;" id="interiorImage"></div>
+                    <div class="secondfront"><img src="../../static/images/smallparts.png" alt="Toggle Parts Sidebar"
+                            class="smallpartsImage" style="width:100%;" id="smallpartsimage"></div>
+                    <div class="front"><img src="../../static/images/pwtrain2.png" alt="Toggle Engine Sidebar"
+                            class="EngineImage" style="width:210%;" id="engineimage"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col3">
+            <div class="productListContainer">
+                <div class="itemNameListTitle">PRODUCT LIST</div>
+                <ul class="itemNameList" id="output">
+                    <!-- 여기에 JavaScript를 통해 동적으로 리스트가 생성될 것입니다 -->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

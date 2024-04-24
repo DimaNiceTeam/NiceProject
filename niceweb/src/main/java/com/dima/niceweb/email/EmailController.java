@@ -72,6 +72,28 @@ public class EmailController {
 	}
 	
 	/**
+	 * 
+	 * @param mailDTO
+	 * @param inputkeyword
+	 * @param rttr
+	 * @return
+	 */
+	@PostMapping("/myPageSendEmail")
+	public String myPagemailsend(EmailDTO mailDTO) {
+		log.info("******여기까지 오시나"+mailDTO.toString());
+		
+		
+		
+		mailService.mailSend(mailDTO);
+		mailService.insertMail(mailDTO);// 보낸 메일함에 메시지 저장 
+		
+		
+		
+		
+		return "redirect:/user/myFavCompany";
+
+	}
+	/**
 	 * 이메일 한개 찾기 (이메일 세부사항에서 확인할 때 사용)
 	 * @param emailNum
 	 * @return
