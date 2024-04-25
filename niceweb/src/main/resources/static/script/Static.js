@@ -1,6 +1,9 @@
+var chartInstance;
+
 // csv 불러오기!!
 document.addEventListener("DOMContentLoaded", function() {
     const csvRoot = document.getElementById('countryDetails');
+    //const insertChart = document.getElementById('insertChart');
     // 파일 목록 정의
     const files = ['STAT_INFO.csv', 'STAT_STATIC.csv', 'STAT_REG.csv'];
 
@@ -14,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const contentDiv = createDataDiv(parsedData);
                     csvRoot.innerHTML += contentDiv;
                 } else if (file === 'STAT_STATIC.csv') {
+                    console.log("countrySelect: " + countrySelect);
                     fetchDataForCountry(countrySelect);  // 업데이트된 함수를 호출
                 } else if (file === 'STAT_REG.csv') {
                     const table = csvToTable(parsedData);
@@ -73,21 +77,14 @@ function createDataDiv(csvData) {
 }
 
 // 데이터 행 찾기 및 전역 변수 업데이트
-// 데이터 행 찾기 및 전역 변수 업데이트
 function fetchDataForCountry(countryCode) {
     fetch('/file/STAT_STATIC.csv')
-        .then(response => response.text())  // CSV 파일을 텍스트로 불러옵니다.
+        .then(response => response.text())
         .then(data => {
             const parsedData = parseCSV(data);
-            // 특정 국가 코드에 해당하는 행을 찾습니다.
-            const valueRow = parsedData.find(row => row[0] === countryCode);
+            const valueRow = parsedData.find(row => row[0].trim().replace(/"/g, '') === countryCode);
             if (valueRow) {
-                // 모든 값을 parseFloat를 이용하여 숫자로 변환합니다.
-                const numericData = valueRow.map(value => parseFloat(value.replace(/,/g, '')) || 0);
-                // 헤더 정보를 가져옵니다.
-                const headers = parsedData[0];
-                // 업데이트 함수에 숫자로 변환된 데이터와 헤더를 전달합니다.
-                updateGlobalVariables(numericData, headers);
+                updateGlobalVariables(valueRow, parsedData[0]);  // 헤더 정보와 함께 전달
             } else {
                 console.log("No data found for country:", countryCode);
             }
@@ -95,10 +92,12 @@ function fetchDataForCountry(countryCode) {
         .catch(error => console.error("Error loading the CSV file:", error));
 }
 
-// 전역 변수 업데이트
+
+// 차트의 각 내용을 담을 전역변수 설정
+let EXP = [], IMP = [], BAL = [], GWT = [], GDP = [];
+
 function updateGlobalVariables(rowData, headers) {
-    // 차트의 각 내용을 담을 전역변수 설정
-    var EXP = [], IMP = [], BAL = [], GWT = [], GDP = [];
+    // 각 변수에 대해 해당하는 열의 데이터를 추출합니다.
     EXP = extractData(rowData, headers, 'EXP_');
     IMP = extractData(rowData, headers, 'IMP_');
     BAL = extractData(rowData, headers, 'BAL_');
@@ -108,10 +107,10 @@ function updateGlobalVariables(rowData, headers) {
 
 
 // STAT_STATIC에서 데이터 추출
-function extractData(numericRowData, headers, prefix) {
+function extractData(rowData, headers, prefix) {
     return headers.reduce((acc, header, index) => {
         if (header.startsWith(prefix)) {
-            acc.push(numericRowData[index]);
+            acc.push(parseFloat(rowData[index].replace(/,/g, '')) || 0);
         }
         return acc;
     }, []);
@@ -124,105 +123,97 @@ var chartInstance;
 
 // 차트 초기화 또는 업데이트 함수
 function initializeOrUpdateChart() {
-    // am5.ready는 amCharts 로드 완료를 보장
     am5.ready(function() {
-        // Root 객체가 없으면 새로 생성
-        if (!chartRoot) {
-            chartRoot = am5.Root.new("insertChart");
+        // 차트가 이미 생성된 경우를 대비하여 확인
+        if (!chartInstance) {
+            var root = am5.Root.new("insertChart"); // "insertChart"는 차트를 삽입할 HTML 요소의 ID
             
             // 차트 테마 설정
-            chartRoot.setThemes([
-                am5themes_Animated.new(chartRoot)
-            ]);
+            root.setThemes([am5themes_Animated.new(root)]);
 
-            // XY 차트 생성
-            var chart = chartRoot.container.children.push(am5xy.XYChart.new(chartRoot, {
+            // 차트 생성
+            var chart = root.container.children.push(am5xy.XYChart.new(root, {
                 panX: true,
                 wheelX: "panX",
                 wheelY: "zoomX"
             }));
 
-            // 차트 구성 요소 생성 (축, 시리즈 등)
-            // X축과 Y축 추가
-            var xAxis = chart.xAxes.push(am5xy.DateAxis.new(chartRoot, {
-                baseInterval: { timeUnit: "year", count: 1 },
-                renderer: am5xy.AxisRendererX.new(chartRoot, {})
-            }));
-            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(chartRoot, {
-                renderer: am5xy.AxisRendererY.new(chartRoot, {})
-            }));
-
+            // 데이터 설정
+            // 각 국가에 맞는 데이터들을 꽂아넣기 
             
 
-            // 시리즈 추가
-            var series = chart.series.push(am5xy.LineSeries.new(chartRoot, {
-                name: "Series",
+            // 축 생성
+            var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+                baseInterval: { timeUnit: "year", count: 1 },
+                renderer: am5xy.AxisRendererX.new(root, {})
+            }));
+            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                renderer: am5xy.AxisRendererY.new(root, {})
+            }));
+
+            // 시리즈 생성
+            var series = chart.series.push(am5xy.LineSeries.new(root, {
+                name: "Series 1",
                 xAxis: xAxis,
                 yAxis: yAxis,
                 valueYField: "value",
                 valueXField: "date"
             }));
 
-            // 차트 인스턴스 저장
-            chartInstance = chart;
+            chartInstance = chart; // 전역 변수에 차트 인스턴스 저장
         } else {
-            // 차트가 이미 있으면 업데이트만 수행
-            updateChartData();
+            console.log("Chart is already initialized.");
         }
     });
 }
 
-// 데이터 업데이트 함수
-function updateChartData(dataType) {
-    let data = [];
-    // dataType에 따라 전역 변수에서 데이터를 가져옴
-    switch (dataType) {
-        case 'EXP':
-            data = formatChartData(EXP);
-            break;
-        case 'IMP':
-            data = formatChartData(IMP);
-            break;
-        case 'BAL':
-            data = formatChartData(BAL);
-            break;
-        case 'GWT':
-            data = formatChartData(GWT);
-            break;
-        case 'GDP':
-            data = formatChartData(GDP);
-            break;
-    }
+// // 데이터 업데이트 함수
+// function updateChartData(dataType) {
+//     console.log("countrySelect" + countrySelect);
+//     let data = [];
+//     // dataType에 따라 전역 변수에서 데이터를 가져옴
 
-    // 차트 데이터 설정
-    if (chartInstance) {
-        var series = chartInstance.series.getIndex(0);
-        series.data.setAll(data);
-    }
-}
+//     switch (dataType) {
+//         case 'EXP':
+//             data = formatChartData(EXP);
+//             break;
+//         case 'IMP':
+//             data = formatChartData(IMP);
+//             break;
+//         case 'BAL':
+//             data = formatChartData(BAL);
+//             break;
+//         case 'GWT':
+//             data = formatChartData(GWT);
+//             break;
+//         case 'GDP':
+//             data = formatChartData(GDP);
+//             break;
+//     }
+
+//     // 차트 데이터 설정
+//     if (chartInstance) {
+//         var series = chartInstance.series.getIndex(0);
+//         series.data.setAll(data);
+//     }
+// }
 
 // 데이터 형식 변환 함수
 function formatChartData(values) {
-    const years = [2019, 2020, 2021, 2022, 2023];  // 가정: 데이터가 이 연도들에 해당
+    const years = [2019, 2020, 2021, 2022, 2023];
     return values.map((value, index) => ({
-        date: new Date(years[index], 0, 1).getTime(),
+        date: new Date(years[index], 1, 1).getTime(),
         value: value
     }));
 }
 
-// // 이벤트 리스너 연결
-// document.querySelectorAll('.statBtn').forEach(btn => {
-//     btn.addEventListener('click', function() {
-//         const dataType = this.getAttribute('data-type');  // 각 버튼에 data-type 속성을 미리 설정해두어야 함
-//         updateChartData(dataType);
-//     });
-// });
 
 function attachEventListeners() {
     // 모든 통계 버튼에 대한 이벤트 리스너 연결
     document.querySelectorAll('.statBtn').forEach(btn => {
         btn.addEventListener('click', function() {
             const dataType = btn.getAttribute('data-type'); // 이 버튼의 data-type 속성 가져오기
+            console.log("버튼 값: " + dataType)
             updateChartData(dataType);  // 차트 데이터 업데이트 함수 호출
         });
     });
@@ -279,9 +270,8 @@ function updateChartData(dataType) {
             return;
     }
 
-    console.log(EXP);
-    console.log(IMP);
-
+    console.log("데이터" + data);
+    console.log("차트인스턴스" + chartInstance)
     // 차트 데이터 설정
     if (chartInstance) {
         var series = chartInstance.series.getIndex(0);
@@ -291,15 +281,6 @@ function updateChartData(dataType) {
     }
 }
 
-
-// 이벤트 리스너 연결
-function attachEventListeners() {
-    document.getElementById('expBtn').addEventListener('click', () => updateChartData('EXP'));
-    document.getElementById('impBtn').addEventListener('click', () => updateChartData('IMP'));
-    document.getElementById('balBtn').addEventListener('click', () => updateChartData('BAL'));
-    document.getElementById('gwtBtn').addEventListener('click', () => updateChartData('GWT'));
-    document.getElementById('gdpBtn').addEventListener('click', () => updateChartData('GDP'));
-}
 
 // 페이지 로드시 차트 초기화
 document.addEventListener("DOMContentLoaded", function() {
