@@ -12,10 +12,10 @@ import com.dima.niceweb.company.CmpDTO;
 import com.dima.niceweb.company.CmpService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
+//@Slf4j
 @RequestMapping("/user")
 @RequiredArgsConstructor 
 public class MyFavCmpController {// 마이페이지 - 찜기능 관련 컨트롤러
@@ -29,16 +29,11 @@ public class MyFavCmpController {// 마이페이지 - 찜기능 관련 컨트롤
 	 */
 	@GetMapping("/myFavCompany")
 	public String favCmp() {
-<<<<<<< HEAD
-		return "myPage/favCompany";
-	}
-=======
 		return "myPage/favCompany";// 미래한
 	}
 
 	
 	
->>>>>>> develop
 	
 	/**
 	 * 찜한 회사목록 모두 출력 

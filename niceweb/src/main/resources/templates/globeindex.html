@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
     <title>세계 지도</title>
+    <link rel="icon" th:href="@{/images/common/favi.png}">
+    <meta property="og:title" content="나이스투매치유">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="http://ilmobility.co.kr/@resource/images/common/sns_share.png">
+    <!--폰트 어썸-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!--부트스트랩5버전(미래)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="400">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/inquirymodal.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}"><!--이거 때문에 안됨-->
+    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/nice_dev.js}"></script>
     <style>
         #btnContainer {
             display: flex; /* Flexbox를 활용해 가로 정렬 */
             /*justify-content: space-between; /* 버튼들 사이에 균등하게 공간 배분 */
             align-items: center; /* 세로 중앙 정렬 */
-<<<<<<< HEAD
             height: 60px;
-=======
-            height: 55px;
->>>>>>> develop
         }
 
         .statBtn {
@@ -44,8 +59,8 @@
 
 
         #chartdiv {
-            width: 70%;
-            height: 800px;
+            width: 60%;
+            height: 600px;
             max-width: 100%;
         }
 
@@ -107,305 +122,377 @@
 
 </head>
 <body>
-    <div class="dropdown-container">
-        <select id="continentSelect" onchange="updateCountryList()">
-            <option value="">Select Continent</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="NorthAmerica">North America</option>
-            <option value="SouthAmerica">South America</option>
-            <option value="Africa">Africa</option>
-            <option value="Oceania">Oceania</option>
-        </select>
+<!--상단 메뉴바-->
+<div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+<div id="wrap" class="wrap">
+    <header id="header" class="header">
+        <div class="header-inner">
+            <h1 class="logo">
+                <a href="/">
+                    <span class="blind">NICE TO MATCH YOU</span>
+                </a>
+            </h1>
+            <nav id="nav" class="nav">
+                <div class="nav-wrap">
+                    <ul class="gnb-list">
+                        <li>
+                            <a href="" class="has-depth"><!--추후 수정 필요-->
+                                <span>ABOUT</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="#"><!--추후 수정 필요-->
+                                        <span>NICE TO MATCH YOU</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="has-depth">
+                                <span>SERVICE</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a th:href="@{/showovsNews}">
+                                        <span>NEWS</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/showFraud}">
+                                        <span>무역 사기사례</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/rate}">
+                                        <span>Exchange Rate</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                <span>MATCH</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>INFO</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/user/login}">
+                                <span>LOGIN</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div> <!-- // .nav-wrap -->
+            </nav>
+            <!--상단 메뉴바-->
+            <div class="btns">
+                <button type="button" class="btn open-nav" id="openMe">
+                    <span class="blind">메뉴 열기</span>
+                </button>
+                <button type="button" class="btn close-nav">
+                    <span class="blind">메뉴 열기</span>
+                </button>
+            </div>
+            <divqq class="nav-bg"></divqq>
+        </div>
+    </header>
+    <br><br><br><br><br>
+    <div id="scroller" class="scroller" data-scrollbar>
+        <!--데이터 꽂히는 부분 내용 들어갈 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+        <div class="content">
+            <div class="dropdown-container">
+                <select id="continentSelect" onchange="updateCountryList()">
+                    <option value="">Select Continent ▼</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="NorthAmerica">North America</option>
+                    <option value="SouthAmerica">South America</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+        
+                <select id="countrySelect" onchange="updateDetailsForCountry(this.value)">
+                    <option value="">Select Country ▼</option>
+                </select>
+            </div>
+            <div id="chartdiv"></div>
+            <div id="countryInfo">
+                <div class="flag-container">
+                    <img id="countryFlag" src="" alt="Flag">
+                    <div>
+                        <h3 id="countryName">국가를 선택하세요</h3>
+                    </div>
+                </div>
+                <hr>
+                <div id="countryDetails" style="height:0 auto;">
+                    국가 정보가 여기에 표시됩니다.
+                </div>
+                <br><br>
+                <br><br>
+                <div id="btnContainer">
+                    <div id="expBtn" class="statBtn" data-type="EXP">
+                        <p>수출</p>
+                    </div>
+                    <div id="impBtn" class="statBtn" data-type="IMP">
+                        <p>수입</p>
+                    </div>
+                    <div id="balBtn" class="statBtn" data-type="BAL" style="line-height: 1.3;">
+                        <p>무역<br>수지</p>
+                    </div>
+                    <div id="gwtBtn" class="statBtn" data-type="GWT" style="line-height: 1.3;">
+                        <p>경제<br>성장률</p>
+                    </div>
+                    <div id="gdpBtn" class="statBtn" data-type="GDP">
+                        <p>GDP</p>
+                    </div>
+                    <div id="regBtn" class="statBtn">
+                        <p>규제</p>
+                    </div>
+                </div>
+                <div id="staticArea">
+                    <div id="insertChart"></div>
+                </div>
+            </div>
 
-        <select id="countrySelect" onchange="updateDetailsForCountry(this.value)">
-            <option value="">Select Country</option>
-        </select>
-    </div>
-    <div id="chartdiv"></div>
-    <div id="countryInfo">
-        <div class="flag-container">
-            <img id="countryFlag" src="" alt="Flag">
-            <div>
-                <h3 id="countryName">국가를 선택하세요</h3>
+        <!--풋터-->
+        <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <div class="cont site">
+                    <div class="menu">
+                        <a href="#">개인정보처리방침</a>
+                        <a href="#">이용약관</a>
+                    </div>
+                    <div class="select-box">
+                        <select class="select family" title="나이스투매치유">
+                            <option value disabled selected>Family Site</option>
+                            <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B
+                            </option>
+                            <option value="http://www.ec21.co.kr/">EC21</option>
+                            <option value="https://www.valuelinku.com/">ValueLinkeU</option>
+                            <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+                            <option value="https://www.itronics.co.kr">5조</option>
+                        </select>
+                    </div>
+                </div>
+                <!--풋터-->
+                <div class="cont contact">
+                    <address>
+                        <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+                        <span>대표자&nbsp;<em>주진명</em></span>
+                        <span>TEL.<em>010-2432-2450</em></span>
+                    </address>
+                    <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                </div>
             </div>
-        </div>
-        <hr>
-        <div id="countryDetails">
-            국가 정보가 여기에 표시됩니다.
-        </div>
-        <br><br>
-        <br><br>
-        <div id="btnContainer">
-            <div id="expBtn" class="statBtn" data-type="EXP">
-                <p>수입</p>
-            </div>
-            <div id="impBtn" class="statBtn" data-type="IMP">
-                <p>수출</p>
-            </div>
-            <div id="balBtn" class="statBtn" data-type="BAL">
-                <p>무역<br>수지</p>
-            </div>
-            <div id="gwtBtn" class="statBtn" data-type="GWT">
-                <p>경제<br>성장률</p>
-            </div>
-            <div id="gdpBtn" class="statBtn" data-type="GDP">
-                <p>GDP</p>
-            </div>
-            <div id="regBtn" class="statBtn">
-                <p>규제</p>
-            </div>
-        </div>
-        <div id="staticArea">
-            <div id="insertChart"></div>
-        </div>
-    </div>
+        </footer>
+    </div><!-- id:scroller-->
+</div><!-- // #wrap -->
 
+    <!--상단과 하단바에 적용되는 부분-->
+    <script th:src="@{/js/lib/gsap.min.js}"></script>
+    <script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
+    <script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
+    <script th:src="@{/js/lib/aos.js}"></script>
+    <script th:src="@{/js/lib/swiper-bundle.js}"></script>
     <script>
-        
-<<<<<<< HEAD
-=======
-        
-            // Set themes
-            // https://www.amcharts.com/docs/v5/concepts/themes/
-            root.setThemes([
-                am5themes_Animated.new(root)
-            ]);
-        
-        
-            // Create the map chart
-            // https://www.amcharts.com/docs/v5/charts/map-chart/
-            var chart = root.container.children.push(am5map.MapChart.new(root, {
-                panX: "rotateX",
-                panY: "rotateY",
-                projection: am5map.geoOrthographic(),
-                paddingBottom: 20,
-                paddingTop: 20,
-                paddingLeft: 20,
-                paddingRight: 20
-            }));
-            var filter = root.interfaceColors.get("shadow");
-            chart.set("filter", filter);
-        
-            var backgroundSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {}));
-            backgroundSeries.mapPolygons.template.setAll({
-                fill: am5.color(0x6AE4),
-                fillOpacity: 0.9,
-                strokeOpacity: 0
+        nav.current(5, 0);
+        familySite();
+
+        jQuery(function () {
+
+            setTimeout(function () {
+                $('.page-header').addClass('on');
+                $('.counter').animate({ 'opacity': '1.0' }, 300);
+            }, 150);
+
+
+
+            yearCount();
+
+            $(window).on("resize", function () {
+                yearCount();
             });
-            backgroundSeries.data.push({
-                geometry: am5map.getGeoRectangle(90, 180, -90, -180)
-            });
-        
-        
-            // Create main polygon series for countries
-            // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
-            var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-                geoJSON: am5geodata_worldLow
-            }));
-        
-            polygonSeries.mapPolygons.template.setAll({
-                tooltipText: "{name}",
-                toggleKey: "active",
-                interactive: true,
-                fill: am5.color(0x33CC33),
-                strokeWidth: 1
-            });
-        
-            polygonSeries.mapPolygons.template.states.create("hover", {
-                fill: am5.color(0x009900) // Darker green when hovered
-            });
-        
-            polygonSeries.mapPolygons.template.states.create("active", {
-                fill: am5.color(0x006600) // Even darker green when clicked
-            });
-        
-        
-            // Create series for background fill
-            // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/#Background_polygon
-        
-            var graticuleSeries = chart.series.unshift(
-                am5map.GraticuleSeries.new(root, {
-                    step: 10
-                })
-            );
-        
-            graticuleSeries.mapLines.template.set("strokeOpacity", 0.1)
-        
-            // Set up events
-            var previousPolygon;
-        
-            polygonSeries.mapPolygons.template.on("active", function (active, target) {
-                if (previousPolygon && previousPolygon != target) {
-                    previousPolygon.set("active", false);
-                }
-                if (target.get("active")) {
-                    selectCountry(target.dataItem.get("id"));
-                }
-                previousPolygon = target;
-            });
-            const continentCountries = {
-                "Asia": ["CN", "KR", "IN", "MY", "JP", "TH", "HK", "SG", "TW", "AE", "IL", "BH", "QA", "VN", "SA", "ID", "PH", "PK", "LK", "UZ"],
-                "Europe": ["DE", "GB", "FR", "SE", "AT", "DK", "IT", "BE", "NL", "SI", "HU", "CH", "CZ", "RO", "TR", "RS", "PL", "UA", "SK", "FI", "BG", "EE", "GR", "NO", "PT", "LV", "HR", "GE", "BY", "LT", "MT", "BA", "ES"],
-                "NorthAmerica": ["US", "CA", "MX", "GT", "CR", "SV", "JM", "NI", "DO", "VG", "PA"],
-                "SouthAmerica": ["BR", "CO", "AR", "CL", "VE", "EC", "TT"],
-                "Africa": ["ZA", "NG", "EG", "MA", "KE"],
-                "Oceania": ["NZ", "AU"]
-            };
-            const countryNames = {
-                "CN": "China", "KR": "South Korea", "IN": "India", "MY": "Malaysia", "JP": "Japan", "TH": "Thailand", "HK": "Hong Kong", "SG": "Singapore", "TW": "Taiwan",
-                "AE": "United Arab Emirates", "IL": "Israel", "BH": "Bahrain", "QA": "Qatar", "VN": "Vietnam", "SA": "Saudi Arabia", "ID": "Indonesia", "PH": "Philippines", "PK": "Pakistan",
-                "LK": "Sri Lanka", "UZ": "Uzbekistan", "DE": "Germany", "GB": "United Kingdom", "FR": "France", "SE": "Sweden", "AT": "Austria", "DK": "Denmark",
-                "IT": "Italy", "BE": "Belgium", "NL": "Netherlands", "SI": "Slovenia", "HU": "Hungary", "CH": "Switzerland", "CZ": "Czech Republic", "RO": "Romania",
-                "TR": "Turkey", "RS": "Serbia", "PL": "Poland", "UA": "Ukraine", "SK": "Slovakia", "FI": "Finland", "BG": "Bulgaria", "EE": "Estonia", "GR": "Greece",
-                "NO": "Norway", "PT": "Portugal", "LV": "Latvia", "HR": "Croatia", "GE": "Georgia", "BY": "Belarus", "LT": "Lithuania", "MT": "Malta",
-                "BA": "Bosnia and Herzegovina", "ES": "Spain", "US": "United States", "CA": "Canada", "MX": "Mexico", "GT": "Guatemala", "CR": "Costa Rica", "SV": "El Salvador",
-                "JM": "Jamaica", "NI": "Nicaragua", "DO": "Dominican Republic", "VG": "British Virgin Islands", "PA": "Panama", "BR": "Brazil", "CO": "Colombia", "AR": "Argentina",
-                "CL": "Chile", "VE": "Venezuela", "EC": "Ecuador", "TT": "Trinidad and Tobago", "ZA": "South Africa", "NG": "Nigeria", "EG": "Egypt", "MA": "Morocco", "KE": "Kenya",
-                "NZ": "New Zealand", "AU": "Australia"
-            };
-            function getCountryName(code) {
-                return countryNames[code] || code;  // 국가 코드에 해당하는 이름이 없다면 코드를 그대로 반환
-            }
-        
-            function generateCountryList(continent) {
-                var ul = document.createElement('ul');
-                continentCountries[continent].forEach(function (countryCode) {
-                    var li = document.createElement('li');
-                    var a = document.createElement('a');
-                    a.href = "#";
-                    a.textContent = getCountryName(countryCode);  // 국가 코드를 국가명으로 변환
-                    a.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        selectCountry(countryCode);
-                    });
-                    li.appendChild(a);
-                    ul.appendChild(li);
-                });
-                return ul;
-            }
-            // 기존의 국가 코드 목록을 하나로 통합합니다.
-            // 모든 국가 코드 목록을 하나로 통합합니다.
-            var allContinentCountries = [].concat.apply([], Object.values(continentCountries));
-        
-            // geoJSON 데이터가 시리즈에 로드된 후에 각 국가 폴리곤에 대한 설정을 합니다.
-            polygonSeries.events.on("datavalidated", function () {
-                // 모든 데이터 항목들을 반복하면서 조건에 맞지 않는 국가들의 색상을 변경합니다.
-                polygonSeries.mapPolygons.each(function (mapPolygon) {
-                    var countryId = mapPolygon.dataItem.dataContext.id;
-                    if (!allContinentCountries.includes(countryId)) {
-                        // continentCountries에 포함되지 않는 국가의 색상을 변경합니다.
-                        mapPolygon.set("fill", am5.color(0xAAAAAA)); // 색상 코드를 변경하세요.
-                    }
-                });
-            });
-            polygonSeries.events.on("datavalidated", function () {
-                polygonSeries.mapPolygons.each(function (mapPolygon) {
-                    var countryId = mapPolygon.dataItem.dataContext.id;
-                    if (!allContinentCountries.includes(countryId)) {
-                        // continentCountries에 포함되지 않는 국가의 색상을 변경합니다.
-                        mapPolygon.set("fill", am5.color(0xCCCCCC)); // 변경하고자 하는 색상 코드로 설정하세요.
-        
-                        // 클릭을 비활성화합니다.
-                        mapPolygon.set("interactive", false);
-                    }
-                });
-            });
-        
-            function updateTooltip(target, dataItem) {
-                var countryName = countryNames[dataItem.dataContext.id] || dataItem.dataContext.name;
-                if (target.tooltip) {
-                    target.tooltip.text = countryName;
+
+            function yearCount() {
+                $counter = $('.counter');
+                var windowWidth = window.innerWidth;
+                if (windowWidth > 961) {
+
+                    $('.counter').css('font-size', '140px');
                 } else {
-                    target.tooltip = am5.Tooltip.new(root, {
-                        text: countryName
-                    });
+
+                    $('.counter').css('font-size', '80px');
                 }
-                target.showTooltip();
+
             }
-        
-            function getCountryName(code) {
-                return countryNames[code] || code;
-            }
-        
-            var lastActiveTooltip = null; // Last active tooltip
-        
-            function selectCountry(id) {
-                // 툴팁이 이미 활성화되어 있다면 숨깁니다.
-                if (lastActiveTooltip) {
-                    lastActiveTooltip.hideTooltip();
-                }
-        
-                // 선택된 국가의 데이터 항목을 가져옵니다.
-                var dataItem = polygonSeries.getDataItemById(id);
-                var target = dataItem.get("mapPolygon");
-        
-                // 대상 폴리곤이 존재한다면 실행합니다.
-                if (target) {
-                    // 대상 국가의 지리적 중심으로 지도를 이동시킵니다.
-                    moveToCountry(target.geoCentroid().longitude, target.geoCentroid().latitude);
-        
-                    // 국가 정보를 업데이트합니다.
-                    updateCountryInfo(id);
-        
-                    // 대상 폴리곤의 툴팁을 업데이트하고 활성화 상태로 설정합니다.
-                    updateTooltip(target, dataItem);
-                    target.set("active", true);
-        
-                    // 마지막으로 활성화된 툴팁을 업데이트합니다.
-                    lastActiveTooltip = target;
-                }
-            }
-        
-            function moveToCountry(longitude, latitude) {
-                chart.animate({ key: "rotationX", to: -longitude, duration: 1500 });
-                chart.animate({ key: "rotationY", to: -latitude, duration: 1500 });
-            }
-        
-            function updateCountryInfo(countryCode) {
-                var countryName = getCountryName(countryCode); // 국가 이름 가져오기
-                var flagUrl = `https://flagsapi.com/${countryCode}/flat/64.png`; // 국기 이미지 URL 생성
-        
-                document.getElementById('countryFlag').src = flagUrl; // 이미지 소스 업데이트
-                document.getElementById('countryFlag').alt = "Flag of " + countryName; // 대체 텍스트 설정
-                document.getElementById('countryName').textContent = countryName; // 국가 이름 업데이트
-                document.getElementById('countryDetails').textContent = "Details about " + countryName; // 세부 정보 업데이트
-                document.getElementById('countryInfo').style.display = 'block'; // 정보 박스 표시
-                // 이미지 세로 길이 조정
-                document.getElementById('countryFlag').style.height = '100px'; // 예시로 100px로 조정
-        
-            }
-        
-            document.getElementById('countrySelect').addEventListener('change', function () {
-                var selectedCountryId = this.value;
-                selectCountry(selectedCountryId);
+
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.to('.section.with .cont1', {
+                scrollTrigger: {
+                    trigger: '.section.with',
+                    start: 'top 70%-=20%',
+                    end: 'top top-=120%',
+                    scrub: 1,
+                    onEnter: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeave: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
+                    onEnterBack: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
+                },
             });
-        
-            document.getElementById('continentSelect').addEventListener('change', function () {
-                updateCountryList();
+
+            gsap.to('.section.with .cont2', {
+                scrollTrigger: {
+                    trigger: '.section.with',
+                    start: 'top top-=140%',
+                    end: 'top top-=240%',
+                    scrub: 1,
+                    onEnter: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
+                    onEnterBack: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.with .cont2 .masking-wrap').removeClass('show').addClass('hide'),
+                },
             });
-        
-            function updateCountryList() {
-                var continent = document.getElementById("continentSelect").value;
-                var countrySelect = document.getElementById("countrySelect");
-                countrySelect.innerHTML = '<option value="">Select Country</option>';
-                if (continent) {
-                    continentCountries[continent].forEach(function (code) {
-                        var option = document.createElement("option");
-                        option.value = code;
-                        option.textContent = getCountryName(code);
-                        countrySelect.appendChild(option);
+
+            gsap.timeline({
+                scrollTrigger: {
+                    start: "top top",
+                    pin: '.section.with',
+                    end: "+=250%",
+                    pinSpacing: true,
+                    scrub: 0.5
+                },
+            }).to('.section.with .bg-wrap ', {
+                backgroundPosition: '0% 100%',
+            });
+
+
+            gsap.to('.section.growth', {
+                scrollTrigger: {
+                    trigger: '.section.growth',
+                    start: 'top 0%',
+                    end: "+=50%",
+                    pin: true,
+                    pinSpacing: true,
+                    scroller: scroller,
+                    pinType: "transform",
+                    scrub: true,
+                },
+            });
+            gsap.to('.section.growth', {
+                scrollTrigger: {
+                    trigger: '.section.growth .title-wrap',
+                    start: 'top 50%',
+                    end: "bottom+=80% 80%",
+                    scrub: true,
+                    onEnter: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
+                    onEnterBack: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.growth .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            gsap.set(".section.innovation .content-list > li", {
+                yPercent: 50,
+            });
+
+            const yPercent_vh = (coef) => window.innerHeight * (coef / 100);
+            const invTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".section.innovation",
+                    scrub: 3,
+                    start: "-30% 100%",
+                    ease: "none",
+                },
+            })
+            invTl.to(".section.innovation .content-list > li:nth-child(1)", {
+                yPercent: yPercent_vh(-8),
+                duration: 5,
+            }, "innovItem");
+            invTl.to(".section.innovation .content-list > li:nth-child(2)", {
+                yPercent: yPercent_vh(-8),
+                duration: 5,
+            }, "innovItem+=1.2",);
+
+            gsap.to('.section.inquiry', {
+                scrollTrigger: {
+                    trigger: '.section.inquiry .content-wrap',
+                    start: 'top 90%',
+                    end: "bottom+=80% 80%",
+                    scrub: true,
+                    onEnter: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeave: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
+                    onEnterBack: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            const fade = document.querySelectorAll("[data-gsap='fade']");
+            fade.forEach((item, index) => {
+                gsap.set(item, {
+                    opacity: 0,
+                }),
+                    gsap.to(item, {
+                        opacity: 1,
+                        duration: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 90%",
+                            toggleActions: 'play none none reverse',
+                        },
                     });
+            });
+
+            const fadeUp = document.querySelectorAll("[data-gsap='fade-up']");
+            fadeUp.forEach((item, index) => {
+                gsap.set(item, {
+                    opacity: 0,
+                    yPercent: 10,
+                }),
+                    gsap.to(item, {
+                        opacity: 1,
+                        yPercent: 0,
+                        duration: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 75%",
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+            });
+
+            //swiper - product
+            var productSwiper = new Swiper("#productSwiper .swiper", {
+                autoHeight: false,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '#productSwiper .swiper-button-next',
+                    prevEl: '#productSwiper .swiper-button-prev',
+                },
+
+                breakpoints: {
+                    "100": {
+                        slidesPerView: 'auto',
+                        centeredSlides: true,
+                        autoHeight: false,
+                    },
+                    "768": {
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                        autoHeight: false,
+                    },
                 }
-            }
+            });
         });
-        
-        
-        
     </script>
     <script>
-        // statBtn클래스를 가지는 div태그 설정
->>>>>>> develop
+        
         document.addEventListener('DOMContentLoaded', function() {
 
             // 차트 생성

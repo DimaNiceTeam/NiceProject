@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
+//@Slf4j
 @RequiredArgsConstructor 
 public class CompanyController { // 크롤링한 회사 데이터 컨트롤러 
 	private final CmpService cmpService;

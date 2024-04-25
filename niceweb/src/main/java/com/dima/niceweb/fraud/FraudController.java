@@ -36,5 +36,4 @@ public class FraudController {
         
         return "showFraudDetail";
     }
-    
 }
