@@ -53,7 +53,8 @@ public class SecurityConfig {
 					,"/script/**").permitAll()//permitAll()은 인증 절차 없이도 접근가능한 요청 
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.requestMatchers("/my/**").hasAnyRole("ADMIN","USER")
-				.anyRequest().authenticated() // 위에는 권한에 따라 분리를 하였고, 기타 다른 경로눈 인증된 사용자만 접근 가능, 가장 마지막에 둘것 
+				.anyRequest().permitAll()
+				//.authenticated() // 위에는 권한에 따라 분리를 하였고, 기타 다른 경로눈 인증된 사용자만 접근 가능, 가장 마지막에 둘것 
 				);
 	// Custom Login 설정 : 내가 만든 로그인 화면 
 	http

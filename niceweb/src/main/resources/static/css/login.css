@@ -75,7 +75,7 @@ LOGIN
   width: 100%;
   padding: 12px 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   transition: border 0.3s ease;
 }
 

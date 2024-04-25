@@ -40,12 +40,21 @@
 
         }
 
-        /* 테이블 크기와 윤곽선 조정/ */
-        table {
+        /* 테이블 제목과 테이블 왼쪽 너비 맞춤 */
+        div.table-heading {
             width: 68%;
+            margin: 0 auto;
+        }
+
+        div.table-heading h2 {
+            text-align: left;
+        }
+
+
+        table {
+            width: 100%;
             /* 화면 너비 설정 */
-            margin-left: auto;
-            margin-right: auto;
+
             border-collapse: collapse;
 
             margin: 1rem auto;
@@ -57,6 +66,7 @@
             border-bottom: 1px solid #d3d3d3;
             /* 회색 선 추가 */
         }
+
 
         #sendedEmail-list th {
             padding: 8px;
@@ -132,16 +142,6 @@
             cursor: pointer;
             /* 마우스 커서를 포인터로 변경합니다. */
         }
-
-        .table-heading h2 {
-            width: 68%;
-            /* margin: 0; */
-            /* 기본 마진 제거 */
-            margin-left: 142px;
-            /* 왼쪽 여백을 테이블의 왼쪽 여백과 동일하게 설정합니다. */
-            text-align: left;
-            /* 텍스트를 왼쪽 정렬합니다. */
-        }
     </style>
     <script>
         $(function () {
@@ -189,7 +189,7 @@
                 receivedData += `</tr>`;
             });//each
 
-            $("#sendedEmail-list").html(receivedData);
+            $("#sendedEmail-list").append(receivedData);
 
             //이메일 세부사항 모당창에 내용 집어 넣는 부분 - ajax로 넘어갔다오기 
             $(".emailModal").on('click', mailDetails);
@@ -335,9 +335,6 @@
             </section>
             <!--데이터 꽂히는 부분-->
             <div class="content">
-                <div class="table-heading">
-                    <h2>보낸 메일함</h2>
-                </div>
 
 
                 <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
@@ -345,10 +342,14 @@
                 <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
                 <span id="noResult"></span><!--보낸 메일함이 적을때 출력합니다.
                     -->
+                <div class="table-heading">
+                    <div>
+                        <h2>보낸 메일함</h2>
+                    </div>
+                    <table id="sendedEmail-list"> <!--보낸 편지 출력-->
 
-                <table id="sendedEmail-list"> <!--보낸 편지 출력-->
-                </table>
-
+                    </table>
+                </div>
 
 
             </div>
