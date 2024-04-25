@@ -139,10 +139,6 @@ function initializeOrUpdateChart() {
                 wheelY: "zoomX"
             }));
 
-            // 데이터 설정
-            // 각 국가에 맞는 데이터들을 꽂아넣기 
-            
-
             // 축 생성
             var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
                 baseInterval: { timeUnit: "year", count: 1 },
@@ -161,6 +157,53 @@ function initializeOrUpdateChart() {
                 valueXField: "date"
             }));
 
+            // 데이터 null 처리 및 직전 값 강조
+            for (let i = 1; i < data.length; i++) {
+                if (data[i].value === null) {
+                    data[i - 1].bullet = true;
+                }
+            }
+
+            // 커서 추가
+            var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+            cursor.lineY.set("visible", false);
+
+            // 제일 최신 데이터에 강조 표시 생성
+            series.bullets.push(function(root, series, dataItem) {
+                if (dataItem.dataContext.bullet) {
+                    var container = am5.Container.new(root, {});
+                    var circle0 = container.children.push(am5.Circle.new(root, {
+                        radius: 5,
+                        fill: am5.color(0xff0000)
+                    }));
+
+                    var circle1 = container.children.push(am5.Circle.new(root, {
+                        radius: 5,
+                        fill: am5.color(0xff0000)
+                    }));
+
+                    circle1.animate({
+                        key: "radius",
+                        to: 20,
+                        duration: 1000,
+                        easing: am5.ease.out(am5.ease.cubic),
+                        loops: Infinity
+                    });
+                    circle1.animate({
+                        key: "opacity",
+                        to: 0,
+                        from: 1,
+                        duration: 1000,
+                        easing: am5.ease.out(am5.ease.cubic),
+                        loops: Infinity
+                    });
+
+                    return am5.Bullet.new(root, {
+                        sprite: container
+                    });
+                }
+            });
+
             chartInstance = chart; // 전역 변수에 차트 인스턴스 저장
         } else {
             console.log("Chart is already initialized.");
@@ -168,36 +211,6 @@ function initializeOrUpdateChart() {
     });
 }
 
-// // 데이터 업데이트 함수
-// function updateChartData(dataType) {
-//     console.log("countrySelect" + countrySelect);
-//     let data = [];
-//     // dataType에 따라 전역 변수에서 데이터를 가져옴
-
-//     switch (dataType) {
-//         case 'EXP':
-//             data = formatChartData(EXP);
-//             break;
-//         case 'IMP':
-//             data = formatChartData(IMP);
-//             break;
-//         case 'BAL':
-//             data = formatChartData(BAL);
-//             break;
-//         case 'GWT':
-//             data = formatChartData(GWT);
-//             break;
-//         case 'GDP':
-//             data = formatChartData(GDP);
-//             break;
-//     }
-
-//     // 차트 데이터 설정
-//     if (chartInstance) {
-//         var series = chartInstance.series.getIndex(0);
-//         series.data.setAll(data);
-//     }
-// }
 
 // 데이터 형식 변환 함수
 function formatChartData(values) {
@@ -222,7 +235,6 @@ function attachEventListeners() {
 
 // 데이터 표시
 function displayData(type) {
-    let data;
     switch (type) {
         case 'EXP':
             data = EXP;
@@ -244,8 +256,6 @@ function displayData(type) {
     }
     //console.log(type + " data:", data); // Example to show data
 }
-
-
 
 // 차트 데이터 업데이트 함수
 function updateChartData(dataType) {
@@ -326,6 +336,11 @@ function csvToTable(csvData) {
 
 // 페이지 로드 시 실행될 초기화 함수
 document.addEventListener("DOMContentLoaded", function() {
-    initializeOrUpdateChart();  // 차트 초기화 또는 업데이트
-    attachEventListeners();     // 이벤트 리스너 연결
+    var statBtn = document.querySelector('.statBtn');  // 'statBtn' 클래스를 가진 div 선택
+    if (statBtn) {
+        statBtn.addEventListener('click', function() {
+            initializeOrUpdateChart();  // 차트 초기화 또는 업데이트
+            attachEventListeners();     // 이벤트 리스너 연결
+        });
+    }
 });
