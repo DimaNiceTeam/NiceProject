@@ -23,11 +23,19 @@
         //aa();
 
         function aa() {
+<<<<<<< HEAD
             let a = "sdfsfs";
             let englishRegex = /^[a-z|A-Z]+$/;
             let koreanRegex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 
             if (englishRegex.test(a)) { // 영문이 아닐경우 
+=======
+            let a = "aaa";
+            let englishRegex = /^[a-z|A-Z]+$/;
+            let koreanRegex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
+            if (!englishRegex.test(a)) { // 영문이 아닐경우 
+>>>>>>> develop
                 alert(englishRegex.test(a));
 
             }
@@ -100,6 +108,7 @@
                 $("#userSicCd").focus();
                 return false;
             }
+<<<<<<< HEAD
             if ($("#userKeyWord").val().length != 0) { // 관심 품목 키워드가 입력되었는데 
                 if ($(!englishRegex.test($("#userKeyWord").val()))) { // 영문이 아닐경우 
                     alert("관심 품목을 영문으로 입력해주세요.");
@@ -107,6 +116,16 @@
                     return false;
                 }
             }
+=======
+            // 수정필요
+            // if ($("#userKeyWord").val().length != 0) { // 관심 품목 키워드가 입력되었는데 
+            //     if ($(!englishRegex.test($("#userKeyWord").val()))) { // 영문이 아닐경우 
+            //         alert("관심 품목을 영문으로 입력해주세요.");
+            //         $("#userKeyWord").focus();
+            //         return false;
+            //     }
+            // }
+>>>>>>> develop
 
             if (!$("#agreementCheckbox").is(":checked")) {
                 alert("필수 이용약관에 동의해주세요");

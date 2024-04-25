@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>NICE TO MATCH YOU</title>
+	<link rel="icon" th:href="@{/images/common/favi.png}">
+	<meta property="og:title" content="나이스투매치유">
+	<meta property="og:image:type" content="image/png">
+	<meta property="og:image" content="http://ilmobility.co.kr/@resource/images/common/sns_share.png">
+	<!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
+	<meta property="og:image:width" content="800">
+	<meta property="og:image:height" content="400">
+	<link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}">
+	<script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/js/nice_dev.js}"></script>
+</head>
+
+<body>
+	<div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+	<div id="wrap" class="wrap">
+		<header id="header" class="header">
+			<div class="header-inner">
+				<h1 class="logo">
+					<a href="/">
+						<span class="blind">NICE TO MATCH YOU</span>
+					</a>
+				</h1>
+				<nav id="nav" class="nav">
+					<div class="nav-wrap">
+						<ul class="gnb-list">
+							<li>
+								<a href="" class="has-depth">
+									<span>ABOUT</span>
+								</a>
+								<ul>
+									<li>
+										<a href="about.html"><!--페이지 나중에 삽입-->
+											<span>NICE TO MATCH YOU</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="" class="has-depth">
+									<span>SERVICE</span>
+								</a>
+								<ul>
+									<li>
+										<a href="">
+											<span>NEWS</span>
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/showFraud}">
+											<span>무역 사기사례</span>
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/rate}">
+											<span>Exchange Rate</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a th:href="@{/search}">
+									<span>MATCH</span>
+								</a>
+							</li>
+							<li>
+								<a href=""><!--수정 필요-->
+									<span>INFO</span>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/user/login}">
+									<span>LOGIN</span>
+								</a>
+							</li>
+						</ul>
+					</div> <!-- // .nav-wrap -->
+				</nav>
+				<div class="btns">
+					<button type="button" class="btn open-nav" id="openMe">
+						<span class="blind">메뉴 열기</span>
+					</button>
+					<button type="button" class="btn close-nav">
+						<span class="blind">메뉴 열기</span>
+					</button>
+				</div>
+				<div class="nav-bg"></div>
+			</div>
+		</header>
+
+		<div id="scroller" class="scroller" data-scrollbar>
+			<div id="container" class="container">
+				<div id="content" class="main">
+					<section class="section intro">
+						<div class="video-wrap">
+							<video muted="" autoplay="" loop="" playsinline="">
+								<source th:src="@{/video/intro_video_ver_1.mp4}" type="video/mp4">
+							</video>
+						</div>
+
+					</section>
+				</div><!-- // #container -->
+
+				<footer id="footer" class="footer">
+					<div class="footer-inner">
+						<div class="cont site">
+							<div class="menu">
+								<a href="">개인정보처리방침</a>
+								<a href="">이용약관</a>
+							</div>
+							<div class="select-box">
+								<select class="select family" title="나이스투매치유">
+									<option value disabled selected>Family Site</option>
+									<option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B
+									</option>
+									<option value="http://www.ec21.co.kr/">EC21</option>
+									<option value="https://www.valuelinku.com/">ValueLinkeU</option>
+									<option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+									<option value="https://www.itronics.co.kr">PASSWIN</option>
+								</select>
+							</div>
+						</div>
+						<div class="cont contact">
+							<address>
+								<span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+								<span>대표자&nbsp;<em>주진명</em></span>
+								<span>TEL.<em>010-2432-2450</em></span>
+							</address>
+							<p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div><!-- // #wrap -->
+
+		<script th:src="@{/js/lib/gsap.min.js}"></script>
+		<script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
+		<script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
+		<script th:src="@{/js/lib/aos.js}"></script>
+		<script th:src="@{/js/lib/swiper-bundle.js}"></script>
+		<script>
+
+			jQuery(function () {
+
+				setTimeout(function () {
+					$('.intro .masking-wrap').addClass('show');
+				}, 150);
+
+				gsap.registerPlugin(ScrollTrigger);
+
+				// key visual 
+				var esgTl = gsap.defaults({
+					ease: "power1.inOut",
+					duration: 2
+				});
+				var kv_intro = gsap.timeline();
+				//kv_inno_tl();
+
+
+				ScrollTrigger.matchMedia({
+					"(min-width: 961px)": function () {
+						esgTl = gsap.timeline({
+							scrollTrigger: {
+								trigger: "#pinSec",
+								start: 'top top',
+								end: '+=300%',
+								pin: true,
+								scrub: 5,
+								markers: false,
+								// onEnter: () => {
+								// 	$('.esg').css('z-index',"1")
+								// },
+								// onLeave: () => {
+								// 	$('.esg').css('z-index',"-1")
+								// },
+							},
+						});
+						esgTl.addLabel("innoBlindIn", "+=5");
+						esgTl.to($(".section.esg .left"), {
+							yPercent: 25,
+							duration: 10,
+							ease: Power1.in,
+						}, "innoBlindIn");
+						esgTl.to($(".section.esg .right"), {
+							yPercent: -25,
+							duration: 10,
+							ease: Power1.in
+						}, "innoBlindIn");
+
+						esgTl.addLabel("innoMenuSlide1", "+=5");
+						esgTl.to($(".section.esg .left"), {
+							yPercent: 50,
+							duration: 10
+						}, "innoMenuSlide1");
+						esgTl.to($(".section.esg .right"), {
+							yPercent: -50,
+							duration: 10
+						}, "innoMenuSlide1");
+
+						esgTl.addLabel("innoMenuSlide2", "+=5");
+						esgTl.to($(".section.esg .left"), {
+							yPercent: 75,
+							duration: 10
+						}, "innoMenuSlide2");
+						esgTl.to($(".section.esg .right"), {
+							yPercent: -75,
+							duration: 10
+						}, "innoMenuSlide2");
+
+						esgTl.addLabel("innoMenuSlide3", "+=5");
+						esgTl.to($(".section.esg .left"), {
+							yPercent: 100,
+							duration: 10
+						}, "innoMenuSlide3");
+						esgTl.to($(".section.esg .right"), {
+							yPercent: -100,
+							duration: 10
+						}, "innoMenuSlide3");
+						esgTl.to($(".section.esg .left"), {
+							yPercent: 100,
+							duration: 10
+						}, "+=5");
+						esgTl.to($(".section.esg .right"), {
+							yPercent: -100,
+							duration: 10
+						}, "+=5");
+
+						gsap.to('.section.make', {
+							scrollTrigger: {
+								trigger: '.section.make',
+								start: 'top 0%',
+								end: "+=50%",
+								pin: true,
+								pinSpacing: true,
+								scroller: scroller,
+								pinType: "transform",
+								scrub: true,
+							},
+						});
+					},
+					"(max-width: 960px)": function () {
+						const fade = document.querySelectorAll(".section.esg .left .item");
+						fade.forEach((item, index) => {
+							gsap.set(item, {
+								opacity: 0,
+								yPercent: 10,
+							}),
+								gsap.to(item, {
+									opacity: 1,
+									yPercent: 0,
+									duration: 1,
+									ease: "none",
+									scrollTrigger: {
+										trigger: item,
+										start: "top 75%",
+										toggleActions: 'play none none reverse',
+									},
+								});
+						});
+					},
+					"all": function () {
+						gsap.to('.section.make', {
+							scrollTrigger: {
+								trigger: '.section.make .title-wrap',
+								start: 'top 50%',
+								end: "bottom+=80% 80%",
+								scrub: true,
+								onEnter: () => $('.section.make .masking-wrap').removeClass('hide').addClass('show'),
+								onEnterBack: () => $('.section.make .masking-wrap').removeClass('hide').addClass('show'),
+								onLeaveBack: () => $('.section.make .masking-wrap').removeClass('show').addClass('hide'),
+							},
+						});
+
+						const fade = document.querySelectorAll("[data-gsap='fade']");
+						fade.forEach((item, index) => {
+							gsap.set(item, {
+								opacity: 0,
+							}),
+								gsap.to(item, {
+									opacity: 1,
+									duration: 1,
+									ease: "none",
+									scrollTrigger: {
+										trigger: item,
+										start: "top 90%",
+										toggleActions: 'play none none reverse',
+									},
+								});
+						});
+
+						const fadeUp = document.querySelectorAll("div:not(.title-wrap)[data-gsap='fade-up']");
+						fadeUp.forEach((item, index) => {
+							gsap.set(item, {
+								opacity: 0,
+								yPercent: 10,
+							}),
+								gsap.to(item, {
+									opacity: 1,
+									yPercent: 0,
+									duration: 1,
+									ease: "none",
+									scrollTrigger: {
+										trigger: item,
+										start: "top 75%",
+										toggleActions: 'play none none reverse',
+									},
+								});
+						});
+
+						const fadeUpTitle = document.querySelectorAll(".title-wrap[data-gsap='fade-up']");
+						fadeUpTitle.forEach((item, index) => {
+							gsap.set(item, {
+								opacity: 0,
+								yPercent: 80,
+							}),
+								gsap.to(item, {
+									opacity: 1,
+									yPercent: 0,
+									duration: 1,
+									ease: "none",
+									scrollTrigger: {
+										trigger: item,
+										start: "top 90%",
+										toggleActions: 'play none none reverse',
+									},
+								});
+						});
+					},
+				});
+
+				//swiper - news
+				var newsSwiper = new Swiper("#newsSwiper .swiper", {
+					autoHeight: false,
+					slidesPerView: 1,
+					spaceBetween: 10,
+					// pagination: {
+					// 	el: "#newsSwiper .swiper-pagination",
+					// 	clickable: true
+					// },
+					navigation: {
+						nextEl: '#newsSwiper .swiper-button-next',
+						prevEl: '#newsSwiper .swiper-button-prev',
+					},
+					breakpoints: {
+						"768": {
+							slidesPerView: 2,
+							spaceBetween: 20,
+							autoHeight: false,
+						},
+						"961": {
+							slidesPerView: 3,
+							spaceBetween: 20,
+							autoHeight: false,
+						},
+					}
+				});
+
+				const breakpoint = window.matchMedia('(max-width:768px)');
+				let invSwiper;
+
+				const breakpointChecker = function () {
+					if (breakpoint.matches === true) {
+						if (invSwiper !== undefined) invSwiper.destroy(true, true);
+					} else if (breakpoint.matches === false) {
+						return enableSwiper();
+					}
+				};
+
+				const enableSwiper = function () {
+					invSwiper = new Swiper('#invSwiper', {
+						slidesPerView: "auto",
+						spaceBetween: 0,
+						loop: true,
+						freeMode: true,
+						speed: 2500,
+						centeredSlides: true,
+						allowTouchMove: false,
+						autoplay: {
+							delay: 0,
+							disableOnInteraction: true,
+						},
+						scrollbar: {
+							el: ".swiper-scrollbar",
+						},
+					});
+				};
+
+				breakpoint.addListener(breakpointChecker);
+				breakpointChecker();
+
+				var windowWidth = window.innerWidth;
+				if (windowWidth > 961) {
+					$('.main .section.changer .content-list > li').mouseenter(function () {
+						$(this).addClass('hover').siblings().removeClass('hover')
+					});
+					$('.main .section.changer .content-list > li').mouseleave(function () {
+						$('.main .section.changer .content-list > li').removeClass('hover')
+					});
+					$('.main .section.product .data-list > li').mouseenter(function () {
+						$(this).addClass('hover').siblings().removeClass('hover')
+					});
+					$('.main .section.product .data-list > li').mouseleave(function () {
+						$('.main .section.product .data-list > li').removeClass('hover')
+					});
+				} else {
+					$('.main .section.changer .content-list > li,.main .section.product .data-list > li').eq(0).addClass('hover');
+					$('.main .section.changer .content-list > li > a, .main .section.product .data-list > li > a').on('click', function (e) {
+						e.stopImmediatePropagation();
+						e.preventDefault();
+
+						var moTarget = $(this).closest('li'),
+							realTarget = $(this).attr('href');
+
+						if ($(moTarget).hasClass('hover')) {
+							location.href = realTarget;
+						} else {
+							$(moTarget).addClass('hover');
+							$(moTarget).siblings('li').removeClass('hover');
+						}
+					});
+				}
+
+
+			});
+		</script>
+</body>
+
+</html>

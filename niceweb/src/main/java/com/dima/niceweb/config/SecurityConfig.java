@@ -31,14 +31,23 @@ public class SecurityConfig {
 					,"/user/myFavCompany" // ** 마이페이지 찜기능 화면요청 get
 					,"/user/favCmpAll" // ** 찜한 회사목록 모두 출력 get
 					,"/user/favCmpDelete" // ** 찜리스에서 회사 삭제 get
+<<<<<<< HEAD
 					,"/user/favCmpInsert" // ** 찜리스에서 회사 추가 get						,"/mail/sendedMail" // ** 메일함 화면 요청 get
 					,"/mail/mailList" // ** 메일 dto리스트 반환 get
 					,"/mail/mailsend" // ** 메일 보내기 post
+=======
+					,"/user/favCmpInsert" // ** 찜리스에서 회사 추가 get	
+					,"/mail/sendedMail" // ** 메일함 화면 요청 get
+					,"/mail/mailList" // ** 메일 dto리스트 반환 get
+					,"/mail/mailsend" // ** 메일 보내기 post
+					,"/mail/myPageSendEmail"
+>>>>>>> develop
 					,"/mail/mailSelectOne" // ** 메일 dto한개 반환 get
 					,"/mail/mailDelete" // ** 메일 삭제 post
 					,"/rate" // 환율 getaaaaa!1
 					,"/fraud" // * 사기 get
 					,"/showFraud" //* 사기 get
+<<<<<<< HEAD
 					,"/showFraudDetail"
 					,"/showOvsNews"
 					,"/showOvsNewsDetail"
@@ -48,15 +57,31 @@ public class SecurityConfig {
 					,"/cmpSelect" // ** 회사 상세보기 get
 					,"/predict" // ** fast api사용 post
 					,"/file/**"
+=======
+					,"/globeindex" // * get
+					,"/search" //**추천 알고리즘 검색 화면 요청 get
+					,"/cmpSelect" // ** 회사 상세보기 get
+					,"/predict" // ** fast api사용 post
+>>>>>>> develop
 					,"/images/**"
 					,"/fonts/**"
 					,"/css/**"
 					,"/js/**"	
+<<<<<<< HEAD
 					,"/script/**").permitAll()//permitAll()은 인증 절차 없이도 접근가능한 요청 
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.requestMatchers("/my/**").hasAnyRole("ADMIN","USER")
 				.anyRequest().permitAll() // 위에는 권한에 따라 분리를 하였고, 기타 다른 경로눈 인증된 사용자만 접근 가능, 가장 마지막에 둘것 
 				); // authenticated()로 바꾸기
+=======
+					,"/video/**"
+					,"/script/**").permitAll()//permitAll()은 인증 절차 없이도 접근가능한 요청 
+				.requestMatchers("/admin/**").hasRole("ADMIN")
+				.requestMatchers("/my/**").hasAnyRole("ADMIN","USER")
+				.anyRequest().permitAll()
+				//.authenticated() // 위에는 권한에 따라 분리를 하였고, 기타 다른 경로눈 인증된 사용자만 접근 가능, 가장 마지막에 둘것 
+				);
+>>>>>>> develop
 	// Custom Login 설정 : 내가 만든 로그인 화면 
 	http
 		.formLogin((auth)->auth

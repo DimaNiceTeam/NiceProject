@@ -13,6 +13,10 @@
 ##피클 파일 수정 
 **/dense_matrix.pickle
 **/dataframe.pickle
+<<<<<<< HEAD
+=======
+**/main.py
+>>>>>>> develop
 
 ## sql문 수정
 **/.sql

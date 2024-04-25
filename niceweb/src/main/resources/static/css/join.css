@@ -225,6 +225,7 @@ td {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 미래가 수정 그냥 h2로 하면 안먹어서 클래스 지정하고 먹임*/
 .h2subject {
 =======
@@ -248,90 +249,112 @@ h4 {
 	font-weight: 700;
 	margin-top: 50px;
 }
+=======
+
+/* 미래가 수정 그냥 h2로 하면 안먹어서 클래스 지정하고 먹임*/
+.h2subject {
+	=======h2 {
+		>>>>>>>origin/feature-jin margin-top: 20px;
+		font-size: 30px;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	<<<<<<< HEAD .h4subject {
+		margin-left: 340px;
+		font-size: 24px;
+
+		=======h4 {
+			margin-left: 340px;
+			font-size: 20px;
+			>>>>>>>origin/feature-jin font-weight: 700;
+			margin-top: 50px;
+		}
+>>>>>>> develop
 
 
-table {
-	width: calc(100% - 50%);
-	margin-left: 340px;
-	margin-top: 15px;
-	border: 1px solid;
-}
+		table {
+			width: calc(100% - 50%);
+			margin-left: 340px;
+			margin-top: 15px;
+			border: 1px solid;
+		}
 
-table,
-th,
-td {
-	border: 1px solid #e5e5e5;
-	border-collapse: collapse;
-}
+		table,
+		th,
+		td {
+			border: 1px solid #e5e5e5;
+			border-collapse: collapse;
+		}
 
-th {
-	width: 200px;
-	background-color: #eee;
-	text-align: left;
-	padding: 0 15px;
-	font-weight: 700;
-}
+		th {
+			width: 200px;
+			background-color: #eee;
+			text-align: left;
+			padding: 0 15px;
+			font-weight: 700;
+		}
 
-td {
-	padding: 15px 15px;
-	text-align: left;
-}
+		td {
+			padding: 15px 15px;
+			text-align: left;
+		}
 
-input {
-	border: 1px solid #e5e5e5;
-	height: 30px;
-	border-radius: 5px;
-}
+		input {
+			border: 1px solid #e5e5e5;
+			height: 30px;
+			border-radius: 5px;
+		}
 
 
-.agreement {
-	margin-left: 350px;
-	padding-left: 20px;
-}
+		.agreement {
+			margin-left: 350px;
+			padding-left: 20px;
+		}
 
-.label {
-	padding-left: 20px;
-}
+		.label {
+			padding-left: 20px;
+		}
 
-.join {
-	margin-top: 20px;
-	margin-right: 210px;
-	text-align: right;
-}
+		.join {
+			margin-top: 20px;
+			margin-right: 210px;
+			text-align: right;
+		}
 
-.Btn {
-	display: inline-block;
-	width: 100px;
-	;
-	font-weight: 500;
-	line-height: 2.5;
-	color: #212529;
-	background-color: rgb(0, 55, 255);
-	text-align: center;
-	text-decoration: none;
-	vertical-align: middle;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-	background-color: transparent;
-	border: 1px solid transparent;
-	padding: 0.375rem 0.75rem;
-	font-size: 1rem;
-	border-radius: 0.25rem;
-	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
+		.Btn {
+			display: inline-block;
+			width: 100px;
+			;
+			font-weight: 500;
+			line-height: 2.5;
+			color: #212529;
+			background-color: rgb(0, 55, 255);
+			text-align: center;
+			text-decoration: none;
+			vertical-align: middle;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+			background-color: transparent;
+			border: 1px solid transparent;
+			padding: 0.375rem 0.75rem;
+			font-size: 1rem;
+			border-radius: 0.25rem;
+			transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+		}
 
-.btn-primary {
-	color: #fff;
-	background-color: #0026ff;
-	border-color: #0026ff;
-}
+		.btn-primary {
+			color: #fff;
+			background-color: #0026ff;
+			border-color: #0026ff;
+		}
 
-#footer {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.8);
-	z-index: 2;
-}
+		#footer {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			background-color: rgba(255, 255, 255, 0.8);
+			z-index: 2;
+		}
