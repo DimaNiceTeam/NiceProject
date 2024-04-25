@@ -1,0 +1,28 @@
+diff a/niceweb/DB_DDL.sql b/niceweb/DB_DDL.sql	(rejected hunks)
+@@ -1,26 +1,5 @@
+ 
+ /*
+-<<<<<<< HEAD
+-내 SQL선생님
+-https://gent.tistory.com/361
+-
+-이 파일에 생성되어있는 테이블
+-
+-- 카테고리 테이블 (CTGY)
+-    - 대분류 (MAIN_CTGY)
+-    - 소분류 (SUB_CTGY)
+-    - 상품명 (ITEM_NM)
+-
+-- URL 테이블(CLIENT)
+-    - 회사 (CMP)
+-    - 국가 (NTN)
+-        - 국가코드변환 (NTN_TEXT)
+-    - 회사정보(INFO)
+-*/
+-
+-
+--- 카테고리 테이블 생성
+-=======
+ �� SQL������
+ https://gent.tistory.com/361
+ 
