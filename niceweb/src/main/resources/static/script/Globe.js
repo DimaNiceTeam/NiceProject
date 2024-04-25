@@ -299,9 +299,13 @@ am5.ready(function () {
                 const parsedData = parseCSV(data);
                 const contentDiv = createDataDiv(parsedData, countryCode); // 수정된 countrySelect 값을 사용
                 document.getElementById('countryDetails').innerHTML = contentDiv;
-                //document.getElementById('insertChart').innerHTML = 
+                updateChartData('EXP');
+                updateChartData('IMP');
+                updateChartData('BAL');
+                updateChartData('GWT');
+                updateChartData('GDP');
             })
             .catch(error => console.error(`Error loading the CSV file:`, error));
     }
 });
-    
+

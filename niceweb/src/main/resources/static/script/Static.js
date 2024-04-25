@@ -95,6 +95,7 @@ function fetchDataForCountry(countryCode) {
 
 // 차트의 각 내용을 담을 전역변수 설정
 let EXP = [], IMP = [], BAL = [], GWT = [], GDP = [];
+let data = [];
 
 function updateGlobalVariables(rowData, headers) {
     // 각 변수에 대해 해당하는 열의 데이터를 추출합니다.
@@ -248,7 +249,7 @@ function displayData(type) {
 
 // 차트 데이터 업데이트 함수
 function updateChartData(dataType) {
-    let data = [];
+    
     switch (dataType) {
         case 'EXP':
             data = formatChartData(EXP);
@@ -281,15 +282,7 @@ function updateChartData(dataType) {
     }
 }
 
-
-// 페이지 로드시 차트 초기화
-document.addEventListener("DOMContentLoaded", function() {
-    initializeOrUpdateChart();
-    attachEventListeners();
-});
-
-
-// REGL 데이터를 테이블 형식으로 저장
+// STAT_REG 데이터를 테이블 형식으로 저장
 function csvToTable(csvData) {
     const table = document.createElement('table');
     table.setAttribute('border', '1');
