@@ -22,16 +22,21 @@ public class SearchController {
 
 	@GetMapping("/search")
 	public String searchProduct(
-			@RequestParam(name="inputKeyword", defaultValue = "")String inputKeyword, 
-			@RequestParam(name="nation", defaultValue = "")String nation,
+			@RequestParam(name = "inputKeyword", defaultValue = "") String inputKeyword,
+			@RequestParam(name = "nation", defaultValue = "") String nation,
 			Model model) {
-		
-		model.addAttribute("inputKeyword",inputKeyword);
-		model.addAttribute("nation",nation);
-		
-		
-		//return "Company/cosine";
+
+		model.addAttribute("inputKeyword", inputKeyword);
+		model.addAttribute("nation", nation);
+
+		// return "Company/cosine";
 		return "Stat/mirae";
+	}
+
+	@GetMapping("/categorySearch")
+	public String categorySearch() {
+
+		return "/Recommendation/recommendationByCar";
 	}
 
 	@PostMapping("/predict")
