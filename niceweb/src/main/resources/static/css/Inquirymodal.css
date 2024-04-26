@@ -31,9 +31,9 @@
 #chartdiv {
     order: 0; /* 첫 번째 위치 */
     flex: 0 0 55%; /* flex-grow, flex-shrink, flex-basis */ 
-    height: 800px;
+    height: 700px;
     width: 60%;
-    margin-top: 180px;
+    margin-top: 100px;
     margin-bottom: 180px;
     margin-left:30px;
     border-right: 5px dotted var(--blue); /* 점선 경계선 추가, 색상은 --blue 사용 */    
@@ -140,7 +140,7 @@ dropdown
     height: auto;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-    margin-top: 180px;
+    margin-top: 30px;
     margin-right: 40px;
 }
 
