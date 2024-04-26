@@ -90,6 +90,10 @@ public class LoginUserDetails implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.userName;
 	}
+	
+	public Long getUserNum() {
+	    return this.userNum;
+	}
 
 	@Override
 	public boolean isAccountNonExpired() {

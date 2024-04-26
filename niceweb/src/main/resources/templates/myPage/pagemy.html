@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>사기사례 검색</title>
+    <title>미래마이페이지</title>
     <link rel="icon" th:href="@{/images/common/favi.png}">
     <meta property="og:title" content="나이스투매치유">
     <meta property="og:image:type" content="image/png">
@@ -27,128 +27,6 @@
 
     <script>
     </script>
-    <style>
-        header {
-            margin-bottom: 20px;
-            /* header 아래에 20px의 여백을 줍니다. */
-        }
-
-        .content {
-            margin-top: 200px;
-        }
-
-        .searchBox {
-            margin-top: 120px;
-            /* 화면 상단에서 떨어진 정도 */
-        }
-
-        /**페이지 헤더**/
-        .page-header {
-            text-align: center;
-            font-size: 36px;
-            margin-top: 150px;
-            margin-bottom: 50px;
-        }
-
-        /* 검색창 영역*/
-        div.search {
-            width: 560px;
-            margin: 0 auto;
-            background-color: white;
-            width: 500px;
-            height: 50px;
-            border-radius: 25px;
-            /* box-shadow: 5px 5px 5px gray; */
-            padding-left: 10px;
-            border: 1px solid gray;
-
-        }
-
-        div.search {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        input {
-            display: inline-block;
-            /* width: 100px; */
-
-            /* padding: 15px 5px 5px 5px; */
-            margin-left: 20px;
-            /*margin: 5px 0px 0px 20px;*/
-            border: 0px;
-            outline: none;
-
-            font-size: 16px;
-
-        }
-
-        #search1 {
-            margin-left: 20px;
-            width: 80px;
-        }
-
-        #search2 {
-            margin-left: 20px;
-            text-align: center;
-
-        }
-
-        .lineIcon {
-            height: 20px;
-        }
-
-        /* 테이블 출력 부분 */
-
-        /**************************
-        *******************************/
-        /* 테이블 제목과 테이블 왼쪽 너비 맞춤 */
-        .count {
-            font-weight: bolder;
-
-        }
-
-        .content {
-            width: 68%;
-            margin: 0 auto;
-        }
-
-
-        /* div.table-content {
-            width: 68%;
-            margin: 0 auto;
-            margin-bottom: 100px;
-        } */
-
-        table th {
-            padding: 8px;
-            text-align: left;
-            text-align: center;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            color: #000;
-            font-weight: bold;
-        }
-
-        #results tr {
-            border-bottom: 1px solid #d3d3d3;
-            /* 회색 선 추가 */
-        }
-
-        .showDetails:hover {
-
-            color: #ff4dd6;
-            /* 원하는 크기로 조정하세요 */
-        }
-
-        #results td:nth-child(2),
-        #results td:nth-child(3),
-        #results td:nth-child(4) {
-            text-align: center;
-            /* 가운데 정렬로 수정 */
-        }
-    </style>
 
 </head>
 
@@ -216,7 +94,7 @@
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a href="" class="has-depth">
+                                <a th:href="@{/user/myPage}" class="has-depth">
                                     <span>MyPage</span>
                                 </a>
                                 <ul>
@@ -249,104 +127,7 @@
 
 
             <!--데이터 꽂히는 부분 내용 들어갈 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
             <div class="content">
-                <div class="page-header on">
-                    <h2>무역 사기사례</h2>
-                </div>
-                <!--검색창-->
-                <div class="searchBox">
-                    <div class="search">
-                        <input type="text" id="search1" placeholder="국가명 입력">
-                        <img th:src="@{/images/line.png}" alt="" class="lineIcon">
-                        <input type="text" id="search2" placeholder="뉴스 제목 입력">
-                        <i type="button" class="fa-solid fa-magnifying-glass" onclick="fetchFraudData()"></i>
-
-                    </div>
-
-                    <!-- <button onclick="fetchFraudData()">검색</button> -->
-                </div>
-
-                <br><br>
-                <!--테이블 출력 부분-->
-
-                <div class="table-content">
-                    <div class="count">
-                        <span>총 </span><span id="board-count" style="color: #ff4dd6;"></span><span> 건</span>
-                    </div>
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>제목</th>
-                                <th>사기 유형</th>
-                                <th>국가명</th>
-                                <th>일자</th>
-                            </tr>
-                        </thead>
-                        <tbody id="results"></tbody>
-                    </table>
-                </div>
-                <!--<div id="results">결과가 여기에 표시됩니다.</div>-->
-
-                <!-- 검색 버튼 누를시 실행되는 함수 -->
-                <script>
-                    async function fetchFraudData() {
-                        const search1 = encodeURIComponent(document.getElementById('search1').value);
-                        const search2 = encodeURIComponent(document.getElementById('search2').value);
-                        //const search3 = encodeURIComponent(document.getElementById('search3').value);
-
-                        const serviceKey = '1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D';
-                        const url = `https://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?serviceKey=${serviceKey}&type=json&numOfRows=10&pageNo=1&search1=${search1}&search2=${search2}&_type=json`;
-
-                        try {
-                            const response = await fetch(url, {
-                                method: 'GET',
-                                headers: {
-                                    'Accept': 'application/json'
-                                }
-                            });
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            const data = await response.json();
-                            displayResults(data);
-                        } catch (error) {
-                            console.error('Error:', error);
-                            document.getElementById('results').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
-                        }
-                    }
-
-                    function displayResults(data) {
-                        const results = document.getElementById('results');
-                        results.innerHTML = ''; // 결과 영역 초기화
-
-                        if (data && data.response && data.response.body && data.response.body.itemList && data.response.body.itemList.item) {
-                            const tbody = document.getElementById('results');
-                            let count = 0;
-                            data.response.body.itemList.item.forEach(item => {
-                                count += 1;
-                                let fraudType = item.fraudType;
-                                if (item.fraudType == "") {
-                                    fraudType = "-";
-                                }
-                                const tr = document.createElement('tr');
-                                tr.innerHTML = `
-                                <td><a class="showDetails" href="/showFraudDetail?title=${encodeURIComponent(item.titl)}">${item.titl}</a></td>
-                                            <td>${fraudType}</td>
-                                            <td>${item.natn}</td>
-                                            <td>${item.othbcDt}</td>
-                                        `;
-                                tbody.appendChild(tr);
-                            });
-                            $("#board-count").html(count);
-                        } else {
-                            const tbody = document.getElementById('results');
-                            tbody.innerHTML = '<tr><td colspan="3">검색 결과가 없습니다.</td></tr>';
-                        }
-                    }
-
-                </script>
-                <!-- 사기사례 검색 form -->
 
 
 

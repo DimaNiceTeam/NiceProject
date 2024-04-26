@@ -28,6 +28,11 @@ public class UserController {
 	public String join() {
 		return"Join/join";
 	}
+	
+	@GetMapping("/myPage")
+	public String myPage() {
+		return"myPage/pagemy";
+	}
 	/**
 	 * 회원 가입 정보 DB에 저장 
 	 * @param userDTO
@@ -45,7 +50,7 @@ public class UserController {
 	}
 	@GetMapping("/login")
 	public String login() {
-		return"login/login";
+		return"login/logincopy";
 	}
 
 	@GetMapping("/find")

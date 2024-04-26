@@ -1,297 +1,265 @@
 @charset "UTF-8";
 
+/* reset */
+@import url(lib/reset.css);
+/* library */
+@import url(lib/aos.css);
+/* Animate On Scroll: 웹 페이지에서 스크롤에 따라 요소들에 애니메이션 효과를 적용하는 JavaScript 라이브러리 */
+@import url(lib/swiper.css);
+/* Swiper: 모바일 터치 슬라이더 라이브러리 다양한 터치 이벤트와 애니메이션을 지원하여 사용자에게 부드러운 슬라이드 경험을 제공 */
+/* common css */
+@import url(_swiper-custom.css);
+@import url(_font.css);
+@import url(_color.css);
+@import url(_vars.css);
+@import url(_button.css);
+@import url(_form.css);
+@import url(_layout.css);
+@import url(_global.css);
 
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-font,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-option,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-input,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	list-style: none;
-	font-size: 14px;
-	font-weight: 400;
-	color: #444;
-	letter-spacing: -0.5px;
-	vertical-align: baseline;
-	background: transparent;
-	-webkit-text-size-adjust: none;
+body {
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* 컨텐츠를 세로로 정렬합니다. */
+    align-items: center;
+    /* 가로 중앙 정렬 */
+    justify-content: center;
+    /* 세로 중앙 정렬 */
 }
 
-.header {
-	height: 100px;
+#content {
+    width: 100%;
+    /* 콘텐츠 영역을 전체 너비로 설정 */
+    max-width: 800px;
+    /* 콘텐츠 최대 너비 제한 */
+    margin: 0 auto;
+    /* 상하 마진 없이 좌우 마진 자동으로 설정하여 중앙 정렬 */
+    padding-top: 50px;
+    /* 상단 패딩 조정 */
+    padding-bottom: 50px;
+    /* 하단 패딩 조정 */
 }
 
-
-.gnb .menubar li {
-	padding: 0 50px;
-	display: inline-block;
-	list-style-type: none;
-	justify-content: center;
-	margin: center;
-	font-size: 20px;
-
-
-}
-
-.myPage {
-	margin-top: 30px;
-	margin-left: 15px;
-	display: inline-block;
-	list-style-type: none;
-	position: relative;
-	width: 180px;
-	background-color: #fff;
-	font-size: 14px;
-	text-align: center;
-
-}
-
-.myPage .myPageBox {
-	padding: 22px 18px;
-	border: 1px solid #e5e5e5;
-}
-
-.myPage .myPageBox .BoxTitle {
-	padding: 0 0 12px 0;
-	font-size: 20px;
-	line-height: 1.0;
-	font-weight: 700;
-}
-
-.lnb {
-	padding: 0;
-	list-style-position: inside;
-}
-
-.lnb .myPageList {
-	list-style-type: none;
-}
-
-.lnb .myPagebtn {
-	margin: 0 25px;
-	position: relative;
-	padding: 5px 0;
-	overflow: hidden;
-	font-size: 13px;
-	white-space: normal;
-	text-align: left;
-	word-wrap: break-word;
-	display: -webkit-box;
-	-webkit-line-clamp: 1;
-	-webkit-box-orient: vertical;
-}
-
-.info {
-	display: inline-block;
-	width: calc(100% - 244px);
-	margin-left: 30px;
-	vertical-align: top;
-
-}
-
-.companyName {
-	position: relative;
-	margin-top: 30px;
-	padding: 14px 30px;
-	font-size: 0;
-	border: 1px solid #e5e5e5;
-}
-
-.companyName span {
-	display: block;
-	margin-bottom: 3px;
-	font-size: 18px;
-	line-height: 1;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 1050px;
-}
-
-.companyName strong b {
-	display: inline-block;
-	font-size: 22px;
-	line-height: 31px;
-	font-weight: 700;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 1050px;
-}
-
-.tit {
-	margin-top: 30px;
-	margin-left: 60px;
-	font-size: 25px;
-	font-weight: 700;
-}
-
-<<<<<<< HEAD
-
-/* 미래가 수정 그냥 h2로 하면 안먹어서 클래스 지정하고 먹임*/
 .h2subject {
-	=======h2 {
-		>>>>>>>origin/feature-jin margin-top: 20px;
-		font-size: 30px;
-		font-weight: 700;
-		text-align: center;
-	}
+    font-size: 40px;
+    /* 타이틀 폰트 크기 조정 */
+    font-weight: bold;
+    /* 타이틀 볼드 처리 */
+    margin-top: 0;
+    /* 타이틀 상단 마진 제거 */
+    margin-bottom: 10px;
+    /* 타이틀과 폼 사이의 하단 마진 설정 */
+    text-align: center;
+    /* 중앙 정렬 */
+}
 
-	<<<<<<< HEAD .h4subject {
-		margin-left: 340px;
-		font-size: 24px;
+/* 입력창 스타일 조정 */
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='name'] {
+    width: 100%;
+    /* 입력창 너비를 가득 채우도록 설정 */
+    padding: 12px 20px;
+    /* 내부 패딩을 늘려 가독성 향상 */
+    margin-top: 8px;
+    /* 입력창 상단의 여백 설정 */
+    margin-bottom: 16px;
+    /* 입력창 하단의 여백 설정 */
+    display: inline-block;
+    /* 인라인 블록 요소로 설정 */
+    border: 2px solid #ccc;
+    /* 테두리 더 뚜렷하게 설정 */
+    border-radius: 20px;
+    /* 모서리를 약간 둥글게 설정 */
+    box-sizing: border-box;
+    /* 박스 사이징 설정으로 패딩이 너비에 포함되도록 설정 */
+    background-color: #f8f8f8;
+    /* 입력창 배경색 설정 */
+}
 
-		=======h4 {
-			margin-left: 340px;
-			font-size: 20px;
-			>>>>>>>origin/feature-jin font-weight: 700;
-			margin-top: 50px;
-		}
+#countrySelect {
+    width: 100%;
+    /* 입력창 너비를 가득 채우도록 설정 */
+    padding: 12px 20px;
+    /* 내부 패딩을 늘려 가독성 향상 */
+    margin-top: 8px;
+    /* 입력창 상단의 여백 설정 */
+    margin-bottom: 16px;
+    /* 입력창 하단의 여백 설정 */
+    display: inline-block;
+    /* 인라인 블록 요소로 설정 */
+    border: 2px solid #ccc;
+    /* 테두리 더 뚜렷하게 설정 */
+    border-radius: 20px;
+    /* 모서리를 약간 둥글게 설정 */
+    box-sizing: border-box;
+    /* 박스 사이징 설정으로 패딩이 너비에 포함되도록 설정 */
+    background-color: #f8f8f8;
+    /* 입력창 배경색 설정 */
+    cursor: pointer;
+}
+
+/* 입력창 포커스 시 스타일 조정 */
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+input[type='name']:focus {
+    background-color: #e8e8e8;
+    /* 포커스 시 배경색 변경 */
+    border-color: #a0a0a0;
+    /* 포커스 시 테두리 색상 변경 */
+    outline: none;
+    /* 기본 아웃라인 제거 */
+}
+
+#countrySelect:focus {
+    background-color: #e8e8e8;
+    /* 포커스 시 배경색 변경 */
+    border-color: #a0a0a0;
+    /* 포커스 시 테두리 색상 변경 */
+    outline: none;
+    /* 기본 아웃라인 제거 */
+    cursor: pointer;
+}
 
 
-		table {
-			width: calc(100% - 50%);
-			margin-left: 340px;
-			margin-top: 15px;
-			border: 1px solid;
-		}
+/* 회원가입 폼 스타일 */
+.join_info {
+    width: 100%;
+    /* 폼 너비 전체로 설정 */
+    margin-top: 20px;
+    /* 폼 상단 마진 설정 */
+    border-collapse: collapse;
+    /* 테이블 테두리 겹침 제거 */
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 폼에 그림자 효과 추가 */
+}
 
-		table,
-		th,
-		td {
-			border: 1px solid #e5e5e5;
-			border-collapse: collapse;
-		}
+.join_info th {
+    background-color: #f3f3f3;
+    /* 헤더 배경색 변경 */
+    width: 150px;
+}
 
-		th {
-			width: 200px;
-			background-color: #eee;
-			text-align: left;
-			padding: 0 15px;
-			font-weight: 700;
-		}
+.join_info th,
+.join_info td {
+    text-align: left;
+    /* 텍스트 왼쪽 정렬 */
+    padding: 15px;
+    /* 패딩 설정 */
+}
 
-		td {
-			padding: 15px 15px;
-			text-align: left;
-		}
+/* 제목 스타일링 */
+.h4subject {
+    margin-top: 20px;
+    font-size: 24px;
+    text-align: left;
+    /* 왼쪽 정렬 */
+    margin-bottom: 10px;
+    /* 하단 마진 설정 */
+    padding-left: 15px;
+    /* 좌측 패딩 설정 */
+    font-weight: bold;
+    /* 볼드 처리 */
+}
 
-		input {
-			border: 1px solid #e5e5e5;
-			height: 30px;
-			border-radius: 5px;
-		}
+/* 동의 체크박스 스타일 */
+/* 원래 체크박스를 숨깁니다 */
+/* 원래 체크박스를 숨깁니다 */
+.checkbox {
+    display: none;
+}
 
+/* 라벨을 커스텀 체크박스 디자인으로 꾸밉니다 */
+.checkbox-label {
+    position: relative;
+    padding-left: 35px;
+    /* 체크박스 아이콘을 넣기 위한 공간 */
+    cursor: pointer;
+    /* 마우스 오버 시 포인터 모양으로 변경 */
+    user-select: none;
+    /* 텍스트 선택 방지 */
+}
 
-		.agreement {
-			margin-left: 350px;
-			padding-left: 20px;
-		}
+/* 라벨의 가상 요소를 이용하여 체크박스 아이콘을 만듭니다 */
+.checkbox-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    /* 체크박스의 크기 */
+    height: 25px;
+    border: 2px solid #ddd;
+    /* 체크박스의 테두리 */
+    border-radius: 20px;
+    /* 체크박스 모서리를 둥글게 */
+    background: #f8f8f8;
+    /* 체크박스 배경색 */
+}
 
-		.label {
-			padding-left: 20px;
-		}
+/* 체크된 상태의 스타일 */
+.checkbox:checked+.checkbox-label::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #000;
+    /* 체크 표시 색상 */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    /* 체크 표시를 기울임 */
+}
 
-		.join {
-			margin-top: 20px;
-			margin-right: 210px;
-			text-align: right;
-		}
+/* 회원가입 버튼 기본 스타일 */
+.join {
+    text-align: center;
+    /* 인라인 또는 인라인 블록 요소를 중앙에 배치 */
+}
 
-		.Btn {
-			display: inline-block;
-			width: 100px;
-			;
-			font-weight: 500;
-			line-height: 2.5;
-			color: #212529;
-			background-color: rgb(0, 55, 255);
-			text-align: center;
-			text-decoration: none;
-			vertical-align: middle;
-			cursor: pointer;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-			background-color: transparent;
-			border: 1px solid transparent;
-			padding: 0.375rem 0.75rem;
-			font-size: 1rem;
-			border-radius: 0.25rem;
-			transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-		}
+/* 기존 스타일 유지 */
+.join .btn-primary {
+    padding: 10px 20px;
+    background-color: var(--light-blue-2);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 50px;
+    /* 버튼 위의 여백 */
+    display: inline-block;
+    /* 인라인 블록으로 설정하여 text-align 속성이 적용되도록 함 */
+}
 
-		.btn-primary {
-			color: #fff;
-			background-color: #0026ff;
-			border-color: #0026ff;
-		}
+/* 버튼에 마우스를 올렸을 때의 스타일 */
+.join .btn-primary:hover {
+    background-color: var(--blue);
+}
 
-		#footer {
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-			background-color: rgba(255, 255, 255, 0.8);
-			z-index: 2;
-		}
+/* 경고 메세지 */
+#userId+span,
+/* 아이디 입력 필드에 대한 경고 메시지 */
+#userPwd+span,
+/* 비밀번호 입력 필드에 대한 경고 메시지 */
+#userPwdConfirm+span {
+    /* 비밀번호 확인 입력 필드에 대한 경고 메시지 */
+    display: block;
+    /* span을 블록 요소로 만들어 줄바꿈 추가 */
+    color: #d9534f;
+    /* 경고 텍스트는 일반적으로 빨간색을 사용 */
+    font-size: 0.8em;
+    /* 텍스트 크기는 상대적으로 작게 조정 */
+    margin-top: 5px;
+    /* 입력 필드와의 간격 */
+    text-align: left;
+    /* 텍스트 왼쪽 정렬 */
+}

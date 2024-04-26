@@ -2,72 +2,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
     <title>추천 알고리즘</title>
-    <!--모달창을 위한 페이지-->
+    <link rel="icon" th:href="@{/images/common/favi.png}">
+    <meta property="og:title" content="나이스투매치유">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image" content="http://ilmobility.co.kr/@resource/images/common/sns_share.png">
+    <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="400">
+    <!--폰트 어썸-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/cosine.css}">
+    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/nice_dev.js}"></script>
+    <!--모달창을 위한 페이지 5버전-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
-    <!--테이블 관련 임의로 넣어본 css-->
     <style>
-        table {
-            border-collapse: collapse;
-            width: 770px;
-            margin: 1rem auto;
-            background-color: white;
-            font-size: 13px;
-        }
+        /* 모달창 닫기 버튼 css */
+        .closeBtn {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
 
-        thead {
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 테이블 행 */
-        td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
             text-align: center;
-        }
-
-        th {
-            padding: 8px;
-            text-align: left;
-            text-align: center;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            color: #000;
-        }
-
-        /* 테이블 올렸을 때 */
-        tbody tr:hover {
-            background-color: #d3d3d3;
-            opacity: 0.9;
+            text-decoration: none;
+            vertical-align: middle;
             cursor: pointer;
-        }
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
 
-        /* 테이블 비율 */
-        th:nth-child(1),
-        td:nth-child(1) {
-            width: 15%;
-        }
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
-        th:nth-child(2),
-        td:nth-child(2) {
-            width: 55%;
-        }
-
-        th:nth-child(3),
-        td:nth-child(3) {
-            width: 30%;
-        }
-
-        th,
-        td {
-            border-left: none;
-            border-right: none;
         }
     </style>
 
@@ -77,8 +56,6 @@
 
             $("#continentSelect").on('change', updateCountryList);
             $("#searchBtn").on('click', cosineSimilarity);
-
-            cosineSimilarity();
 
 
         });
@@ -149,6 +126,7 @@
                 , async: false
                 , data: sendData
                 , success: function (resp) {
+
                     if (resp.length == 0) {
                         $("#cosine-list").html("");
                         $("#noResult").html("검색된 결과가 없습니다.");
@@ -174,11 +152,9 @@
                             <td>${item.CMP_NM}</td>
                             <td>${item.NAT_CD}</td>
                             <td>${item.EML}</td>
-                            <td><a class="btn btn-primary email" data-bs-toggle="modal" data-bs-target="#myModal" cmpEmail="${item.EML}">
-        Email
-    </a></td>
-                            <td><button class="btn btn-warning plusMyCmp" style="color: white;" attr-dunsNo=${item.DUNS_NO}>찜</button></td>
-                            <td><button class="btn btn-success DetailBtn" data-bs-toggle="modal" data-bs-target="#Details" attr-dunsNo=${item.DUNS_NO}>상세</button></td>
+                            <td><i type="button" class="email fa-regular fa-envelope fa-lg" data-bs-toggle="modal" data-bs-target="#myModal" cmpEmail="${item.EML}"></i></td>
+                            <td><i type="button" class="plusMyCmp fa-solid fa-star" data-bs-toggle="modal" attr-dunsNo=${item.DUNS_NO}></i></td>
+                            <td><i type="button" class="DetailBtn fa-solid fa-magnifying-glass fa-lg" data-bs-toggle="modal" data-bs-target="#Details" attr-dunsNo=${item.DUNS_NO}></i></td>
                         </tr>`;
                         });//each 
                         $("#noResult").html("");
@@ -247,40 +223,182 @@
             })
 
         }//function Details --end
-    </script>
 
+        //아이콘 이벤트 리스너 추가
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.fa').forEach(function (icon) {
+                icon.addEventListener('click', function () {
+                    // 'active' 클래스 토글
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 
 </head>
 
 <body>
-    <h2>추천 알고리즘</h2>
-    <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
-    <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
-    <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+    <div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+    <div id="wrap" class="wrap">
+        <header id="header" class="header">
+            <div class="header-inner">
+                <h1 class="logo">
+                    <a href="/">
+                        <span class="blind">NICE TO MATCH YOU</span>
+                    </a>
+                </h1>
+                <nav id="nav" class="nav">
+                    <div class="nav-wrap">
+                        <ul class="gnb-list">
+                            <li>
+                                <a href="" class="has-depth">
+                                    <span>ABOUT</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="#"><!--페이지 나중에 삽입-->
+                                            <span>NICE TO MATCH YOU</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="has-depth">
+                                    <span>SERVICE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/showOvsNews}">
+                                            <span>NEWS</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/showFraud}">
+                                            <span>무역 사기사례</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/rate}">
+                                            <span>Exchange Rate</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a th:href="@{/search}">
+                                    <span>MATCH</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><!--수정 필요-->
+                                    <span>INFO</span>
+                                </a>
+                            </li>
+                            <li sec:authorize="isAnonymous()">
+                                <a th:href="@{/user/login}">
+                                    <span>Login</span>
+                                </a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/myPage}" class="has-depth">
+                                    <span>MyPage</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
 
-    <form th:action="@{/predict}" method="POST">
-        품목 검색<input type="text" placeholder="상품을 입력하세요" id="search" name="inputKeyword" th:value="${inputKeyword}">
-    </form>
-    <div class="dropdown-container">
-        <select id="continentSelect" onchange="updateCountryList()">
-            <option value="all">모든 국가</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="NorthAmerica">North America</option>
-            <option value="SouthAmerica">South America</option>
-            <option value="Africa">Africa</option>
-            <option value="Oceania">Oceania</option>
-        </select>
+                                </ul>
+                            </li>
 
-        <select id="countrySelect">
-            <option th:value="${nation}">Select Country</option>
-        </select>
-        <input type="button" value="검색" id="searchBtn">
-    </div>
-    <span id="noResult"></span>
-    <table id="cosine-list"> <!--추천 알고리즘-->
-    </table>
+                        </ul>
+                    </div> <!-- // .nav-wrap -->
+                </nav>
+                <div class="btns">
+                    <button type="button" class="btn open-nav" id="openMe">
+                        <span class="blind">메뉴 열기</span>
+                    </button>
+                    <button type="button" class="btn close-nav">
+                        <span class="blind">메뉴 열기</span>
+                    </button>
+                </div>
+                <div class="nav-bg"></div>
+            </div>
+        </header>
 
+        <div id="scroller" class="scroller" data-scrollbar>
+            <div id="container" class="container">
+                <div id="content" class="main">
+
+                    <!-- cosine 시작 -->
+                    <h2>MATCH</h2>
+                    <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
+                    <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
+                    <input type="hidden" id="userNum" value="1"><!--우선은 임의로 만들어봄 -->
+
+                    <form th:action="@{/predict}" method="POST">
+                        <div class="search">
+                            <input type="text" placeholder="키워드 입력" id="search" name="inputKeyword"
+                                th:value="${inputKeyword}">
+                            <img type=button
+                                src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
+                                id="searchBtn">
+                        </div>
+                    </form>
+                    <div class="dropdown-container">
+                        <select id="continentSelect" onchange="updateCountryList()">
+                            <option value="all">모든 국가</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="NorthAmerica">North America</option>
+                            <option value="SouthAmerica">South America</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+
+                        <select id="countrySelect">
+                            <option th:value="${nation}">Select Country</option>
+                        </select>
+                        <!-- <input type="button" value="검색" id="searchBtn"> -->
+                    </div>
+                    <span id="noResult"></span>
+                    <table id="cosine-list"> <!--추천 알고리즘-->
+                    </table>
+                </div>
+            </div>
+            <footer id="footer" class="footer">
+                <div class="footer-inner">
+                    <div class="cont site">
+                        <div class="menu">
+                            <a href="/privacy.html">개인정보처리방침</a>
+                            <a href="/terms.html">이용약관</a>
+                        </div>
+                        <div class="select-box">
+                            <select class="select family" title="나이스투매치유">
+                                <option value disabled selected>Family Site</option>
+                                <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B</option>
+                                <option value="http://www.ec21.co.kr/">EC21</option>
+                                <option value="https://www.valuelinku.com/">ValueLinkeU</option>
+                                <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+                                <option value="https://www.itronics.co.kr">PASSWIN</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cont contact">
+                        <address>
+                            <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+                            <span>대표자&nbsp;<em>주진명</em></span>
+                            <span>TEL.<em>010-2432-2450</em></span>
+                        </address>
+                        <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div><!-- // #wrap -->
     <!-- 이메일 모달창  -->
     <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -299,8 +417,9 @@
                     <input type="hidden" name="nation" value="" id="emailnation">
 
                     <div class="modal-body">
-                        <!--수정해야할 부분입니다~~~~~~~~-->
-                        <input type="hidden" name="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+                        <!--사용자 고유 pk(사용자 DB에 저장하기 위함)-->
+                        <input type="hidden" id="userNum" name="userNum"
+                            th:value="${#authentication.principal.userNum}">
                         <input id="cmpaddress" name="receiver" placeholder="이메일 주소" class="form-control" value=""> <br>
                         <input name="emailSubject" placeholder="제목" class="form-control"> <br>
                         <textarea name="emailContent" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"
@@ -312,7 +431,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn " style="background-color: blue; color: white;"
                             data-bs-dismiss="modal">발송</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="closeBtn" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
 
@@ -376,19 +495,307 @@
 
 
                 <div class="modal-footer">
-
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="closeBtn" data-bs-dismiss="modal">Close</button>
                 </div>
 
 
             </div>
         </div>
-    </div><!--상세페이지 모달창 end-->
+    </div>
+    <!-- cosine 끝 -->
+
+
+    <script th:src="@{/js/lib/gsap.min.js}"></script>
+    <script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
+    <script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
+    <script th:src="@{/js/lib/aos.js}"></script>
+    <script th:src="@{/js/lib/swiper-bundle.js}"></script>
+    <script>
+
+        jQuery(function () {
+
+            setTimeout(function () {
+                $('.intro .masking-wrap').addClass('show');
+            }, 150);
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            // key visual 
+            var esgTl = gsap.defaults({
+                ease: "power1.inOut",
+                duration: 2
+            });
+            var kv_intro = gsap.timeline();
+            //kv_inno_tl();
 
 
 
+            ScrollTrigger.matchMedia({
+                "(min-width: 961px)": function () {
+                    esgTl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: "#pinSec",
+                            start: 'top top',
+                            end: '+=300%',
+                            pin: true,
+                            scrub: 5,
+                            markers: false,
+                            // onEnter: () => {
+                            // 	$('.esg').css('z-index',"1")
+                            // },
+                            // onLeave: () => {
+                            // 	$('.esg').css('z-index',"-1")
+                            // },
+                        },
+                    });
+                    esgTl.addLabel("innoBlindIn", "+=5");
+                    esgTl.to($(".section.esg .left"), {
+                        yPercent: 25,
+                        duration: 10,
+                        ease: Power1.in,
+                    }, "innoBlindIn");
+                    esgTl.to($(".section.esg .right"), {
+                        yPercent: -25,
+                        duration: 10,
+                        ease: Power1.in
+                    }, "innoBlindIn");
+
+                    esgTl.addLabel("innoMenuSlide1", "+=5");
+                    esgTl.to($(".section.esg .left"), {
+                        yPercent: 50,
+                        duration: 10
+                    }, "innoMenuSlide1");
+                    esgTl.to($(".section.esg .right"), {
+                        yPercent: -50,
+                        duration: 10
+                    }, "innoMenuSlide1");
+
+                    esgTl.addLabel("innoMenuSlide2", "+=5");
+                    esgTl.to($(".section.esg .left"), {
+                        yPercent: 75,
+                        duration: 10
+                    }, "innoMenuSlide2");
+                    esgTl.to($(".section.esg .right"), {
+                        yPercent: -75,
+                        duration: 10
+                    }, "innoMenuSlide2");
+
+                    esgTl.addLabel("innoMenuSlide3", "+=5");
+                    esgTl.to($(".section.esg .left"), {
+                        yPercent: 100,
+                        duration: 10
+                    }, "innoMenuSlide3");
+                    esgTl.to($(".section.esg .right"), {
+                        yPercent: -100,
+                        duration: 10
+                    }, "innoMenuSlide3");
+                    esgTl.to($(".section.esg .left"), {
+                        yPercent: 100,
+                        duration: 10
+                    }, "+=5");
+                    esgTl.to($(".section.esg .right"), {
+                        yPercent: -100,
+                        duration: 10
+                    }, "+=5");
+
+                    gsap.to('.section.make', {
+                        scrollTrigger: {
+                            trigger: '.section.make',
+                            start: 'top 0%',
+                            end: "+=50%",
+                            pin: true,
+                            pinSpacing: true,
+                            scroller: scroller,
+                            pinType: "transform",
+                            scrub: true,
+                        },
+                    });
+                },
+                "(max-width: 960px)": function () {
+                    const fade = document.querySelectorAll(".section.esg .left .item");
+                    fade.forEach((item, index) => {
+                        gsap.set(item, {
+                            opacity: 0,
+                            yPercent: 10,
+                        }),
+                            gsap.to(item, {
+                                opacity: 1,
+                                yPercent: 0,
+                                duration: 1,
+                                ease: "none",
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 75%",
+                                    toggleActions: 'play none none reverse',
+                                },
+                            });
+                    });
+                },
+                "all": function () {
+                    gsap.to('.section.make', {
+                        scrollTrigger: {
+                            trigger: '.section.make .title-wrap',
+                            start: 'top 50%',
+                            end: "bottom+=80% 80%",
+                            scrub: true,
+                            onEnter: () => $('.section.make .masking-wrap').removeClass('hide').addClass('show'),
+                            onEnterBack: () => $('.section.make .masking-wrap').removeClass('hide').addClass('show'),
+                            onLeaveBack: () => $('.section.make .masking-wrap').removeClass('show').addClass('hide'),
+                        },
+                    });
+
+                    const fade = document.querySelectorAll("[data-gsap='fade']");
+                    fade.forEach((item, index) => {
+                        gsap.set(item, {
+                            opacity: 0,
+                        }),
+                            gsap.to(item, {
+                                opacity: 1,
+                                duration: 1,
+                                ease: "none",
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 90%",
+                                    toggleActions: 'play none none reverse',
+                                },
+                            });
+                    });
+
+                    const fadeUp = document.querySelectorAll("div:not(.title-wrap)[data-gsap='fade-up']");
+                    fadeUp.forEach((item, index) => {
+                        gsap.set(item, {
+                            opacity: 0,
+                            yPercent: 10,
+                        }),
+                            gsap.to(item, {
+                                opacity: 1,
+                                yPercent: 0,
+                                duration: 1,
+                                ease: "none",
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 75%",
+                                    toggleActions: 'play none none reverse',
+                                },
+                            });
+                    });
+
+                    const fadeUpTitle = document.querySelectorAll(".title-wrap[data-gsap='fade-up']");
+                    fadeUpTitle.forEach((item, index) => {
+                        gsap.set(item, {
+                            opacity: 0,
+                            yPercent: 80,
+                        }),
+                            gsap.to(item, {
+                                opacity: 1,
+                                yPercent: 0,
+                                duration: 1,
+                                ease: "none",
+                                scrollTrigger: {
+                                    trigger: item,
+                                    start: "top 90%",
+                                    toggleActions: 'play none none reverse',
+                                },
+                            });
+                    });
+                },
+            });
+
+            //swiper - news
+            var newsSwiper = new Swiper("#newsSwiper .swiper", {
+                autoHeight: false,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                // pagination: {
+                // 	el: "#newsSwiper .swiper-pagination",
+                // 	clickable: true
+                // },
+                navigation: {
+                    nextEl: '#newsSwiper .swiper-button-next',
+                    prevEl: '#newsSwiper .swiper-button-prev',
+                },
+                breakpoints: {
+                    "768": {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                        autoHeight: false,
+                    },
+                    "961": {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                        autoHeight: false,
+                    },
+                }
+            });
+
+            const breakpoint = window.matchMedia('(max-width:768px)');
+            let invSwiper;
+
+            const breakpointChecker = function () {
+                if (breakpoint.matches === true) {
+                    if (invSwiper !== undefined) invSwiper.destroy(true, true);
+                } else if (breakpoint.matches === false) {
+                    return enableSwiper();
+                }
+            };
+
+            const enableSwiper = function () {
+                invSwiper = new Swiper('#invSwiper', {
+                    slidesPerView: "auto",
+                    spaceBetween: 0,
+                    loop: true,
+                    freeMode: true,
+                    speed: 2500,
+                    centeredSlides: true,
+                    allowTouchMove: false,
+                    autoplay: {
+                        delay: 0,
+                        disableOnInteraction: true,
+                    },
+                    scrollbar: {
+                        el: ".swiper-scrollbar",
+                    },
+                });
+            };
+
+            breakpoint.addListener(breakpointChecker);
+            breakpointChecker();
+
+            var windowWidth = window.innerWidth;
+            if (windowWidth > 961) {
+                $('.main .section.changer .content-list > li').mouseenter(function () {
+                    $(this).addClass('hover').siblings().removeClass('hover')
+                });
+                $('.main .section.changer .content-list > li').mouseleave(function () {
+                    $('.main .section.changer .content-list > li').removeClass('hover')
+                });
+                $('.main .section.product .data-list > li').mouseenter(function () {
+                    $(this).addClass('hover').siblings().removeClass('hover')
+                });
+                $('.main .section.product .data-list > li').mouseleave(function () {
+                    $('.main .section.product .data-list > li').removeClass('hover')
+                });
+            } else {
+                $('.main .section.changer .content-list > li,.main .section.product .data-list > li').eq(0).addClass('hover');
+                $('.main .section.changer .content-list > li > a, .main .section.product .data-list > li > a').on('click', function (e) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+
+                    var moTarget = $(this).closest('li'),
+                        realTarget = $(this).attr('href');
+
+                    if ($(moTarget).hasClass('hover')) {
+                        location.href = realTarget;
+                    } else {
+                        $(moTarget).addClass('hover');
+                        $(moTarget).siblings('li').removeClass('hover');
+                    }
+                });
+            }
 
 
+        });
+    </script>
 </body>
 
 </html>

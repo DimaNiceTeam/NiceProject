@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>미래마이페이지</title>
+    <title>관심 바이어</title>
     <link rel="icon" th:href="@{/images/common/favi.png}">
     <meta property="og:title" content="나이스투매치유">
     <meta property="og:image:type" content="image/png">
@@ -43,11 +43,6 @@
             margin-top: 150px;
             margin-bottom: 50px;
         }
-
-
-
-
-
 
         #favoriteList th {
             padding: 8px;
@@ -117,6 +112,54 @@
             align-items: center;
         }
 
+        .primaryBtn {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+        }
+
+        /* 모달창 닫기 버튼 css */
+        .closeBtn {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+        }
+
         /* 총건수 스타일 */
     </style>
     <script>
@@ -125,6 +168,8 @@
         });
         function init() {
             let userNum = $("#userNum").val();// 로그인한 사람의 고유번호(시퀀스)
+
+
             $.ajax({
                 url: "/user/favCmpAll"
                 , method: 'GET'
@@ -236,24 +281,24 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="" class="has-depth"><!--추후 수정 필요-->
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="#"><!--추후 수정 필요-->
+                                        <a href="#"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/showovsNews}">
+                                        <a th:href="@{/showOvsNews}">
                                             <span>NEWS</span>
                                         </a>
                                     </li>
@@ -270,20 +315,34 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href=""><!--수정 필요-->
                                     <span>INFO</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>LOGIN</span>
+                                    <span>Login</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/myPage}" class="has-depth">
+                                    <span>MyPage</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>
@@ -312,10 +371,10 @@
             </section>
 
             <div class="content">
-                <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
-                <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+                <input type="hidden" id="loginId" th:value="${#authentication.name}">
+
                 <div class="page-header on">
-                    <h2>보낸 메일함</h2>
+                    <h2>관심 바이어</h2>
                 </div>
 
                 <!--찜 기능 리스트-->
@@ -381,8 +440,9 @@
                     <input type="hidden" name="nation" value="" id="emailnation">
 
                     <div class="modal-body">
-                        <!--수정해야할 부분입니다~~~~~~~~-->
-                        <input type="hidden" name="userNum" value="1"><!--우선은 임으로 만들어봄 -->
+                        <!-- <input type="hidden" name="userNum" value="1"> -->
+                        <input type="hidden" id="userNum" name="userNum"
+                            th:value="${#authentication.principal.userNum}">
                         <input id="cmpaddress" name="receiver" placeholder="이메일 주소" class="form-control" value=""> <br>
                         <input name="emailSubject" placeholder="제목" class="form-control"> <br>
                         <textarea name="emailContent" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"
@@ -392,9 +452,8 @@
                     <!-- Modal footer -->
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn " style="background-color: blue; color: white;"
-                            data-bs-dismiss="modal">발송</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="primaryBtn" data-bs-dismiss="modal">발송</button>
+                        <button type="button" class="closeBtn" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
 
@@ -460,7 +519,7 @@
 
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="closeBtn" data-bs-dismiss="modal">Close</button>
                 </div>
 
 

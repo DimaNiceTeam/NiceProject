@@ -11,13 +11,11 @@
     <link rel="icon" th:href="@{/images/common/favi.png}">
     <meta property="og:title" content="나이스투매치유">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image" content="http://ilmobility.co.kr/@resource/images/common/sns_share.png">
-    <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
     <link type="text/css" rel="stylesheet" th:href="@{/css/join.css}">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/myPage.css}">
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/nice_dev.js}"></script>
     <script>
 
         //aa();
@@ -272,9 +270,6 @@
 
             }
         }
-
-
-
     </script>
 </head>
 
@@ -292,54 +287,55 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="about.html" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="about.html">
+                                        <a href="#"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="service.html" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/showOvsNews}">
                                             <span>NEWS</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/showFraud}">
                                             <span>무역 사기사례</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/rate}">
                                             <span>Exchange Rate</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="match.html">
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="info.html">
+                                <a href=""><!--수정 필요-->
                                     <span>INFO</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="join.html">
-                                    <span>LOGIN</span>
+                                <a th:href="@{/user/login}">
+                                    <span>Login</span>
                                 </a>
                             </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>
@@ -357,162 +353,154 @@
         <div id="scroller" class="scroller" data-scrollbar>
             <div id="container" class="container">
                 <div id="content" class="sub join home">
-                    <div class="gutter-262 page-header">
-                        <div class="full-h">
-                            <div class="title-wrap ta-c">
 
-                                <!-- 회원가입 form 변경 -->
-                                <hr>
+                    <!-- 회원가입 form 변경 -->
+                    <form th:action="@{/user/joinProc}" method="post" onsubmit="return checkjoinform()">
+                        <!--onsubmit : ajax 로만 걸기 -->
+                        <section>
+                            <div>
                                 <h2 class="h2subject">회원 가입</h2>
+                            </div>
+                            <div>
+                                <h4 class="h4subject">개인 정보</h4>
+                            </div>
+                            <table border="1" class="join_info">
+                                <tr>
+                                    <th>아이디</th>
+                                    <td>
+                                        <input type="text" id="userId" name="userId" attr-checkid="false">
+                                        <!-- 사용자 아이디 입력-->
+                                        <span id="warnId" style="font-size: 0.8em;"></span><!--중복 아이디 확인가능 텍스트 삽입-->
+                                    </td>
 
-                                <form th:action="@{/user/joinProc}" method="post" onsubmit="return checkjoinform()">
-                                    /<!--onsubmit : ajax 로만 걸기 -->
-                                    <section>
-                                        <div>
-                                            <h4 class="h4subject">개인 정보</h4>
-                                        </div>
-                                        <table border="1" class="join_info">
-                                            <tr>
-                                                <th>아이디</th>
-                                                <td>
-                                                    <input type="text" id="userId" name="userId" attr-checkid="false">
-                                                    <!-- 사용자 아이디 입력-->
-                                                    <span id="warnId"
-                                                        style="font-size: 0.8em;"></span><!--중복 아이디 확인가능 텍스트 삽입-->
-                                                </td>
+                                </tr>
+                                <tr>
+                                    <th>비밀번호</th>
+                                    <td colspan="2">
+                                        <input type="password" class="password" id="userPwd" name="userPwd">
+                                        <span id="warnPwd" style="font-size: 0.8em;"></span>
+                                        <!-- <div>8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div> -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>비밀번호 확인</th> <!-- 비밀번호가 다른지 확인 필수-->
+                                    <td>
+                                        <input type="password" placeholder="비밀번호 확인" id="userPwdConfirm"
+                                            attr-checkpwd="false">
+                                        <span id="warnPwdConfirm" style="font-size: 0.8em;"></span>
 
-                                            </tr>
-                                            <tr>
-                                                <th>비밀번호</th>
-                                                <td colspan="2">
-                                                    <input type="password" class="password" id="userPwd" name="userPwd">
-                                                    <span id="warnPwd" style="font-size: 0.8em;"></span>
-                                                    <!-- <div>8글자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</div> -->
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>비밀번호 확인</th> <!-- 비밀번호가 다른지 확인 필수-->
-                                                <td>
-                                                    <input type="password" placeholder="비밀번호 확인" id="userPwdConfirm"
-                                                        attr-checkpwd="false">
-                                                    <span id="warnPwdConfirm" style="font-size: 0.8em;"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>담당자 이메일</th>
+                                    <td>
+                                        <input type="email" id="userEmail" name="userEmail">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>담당자 이름(영문)</th>
+                                    <td>
+                                        <input type="text" id="userName" name="userName">
+                                </tr>
+                                <tr>
+                                    <th>담당자 연락처</th>
+                                    <td>
+                                        <input type="text" id="userPhone" name="userPhone"
+                                            placeholder="(-)를 제외한 숫자만 입력">
+                                    </td>
+                                </tr>
+                            </table>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>담당자 이메일</th>
-                                                <td>
-                                                    <input type="email" id="userEmail" name="userEmail">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>담당자 이름(영문)</th>
-                                                <td>
-                                                    <input type="text" id="userName" name="userName">
-                                            </tr>
-                                            <tr>
-                                                <th>담당자 연락처</th>
-                                                <td>
-                                                    <input type="text" id="userPhone" name="userPhone"
-                                                        placeholder="(-)를 제외한 숫자만 입력">
-                                                </td>
-                                            </tr>
-                                        </table>
+                            <h4 class="h4subject"> 회사정보 </h4>
 
-                                        <h4 class="h4subject"> 회사정보 </h4>
-
-                                        <table border="1" class="join_info">
-                                            <tr>
-                                                <th>회사명(영문)</th>
-                                                <td>
-                                                    <input type="text" id="userCmpEng" name="userCmpEng">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>회사명(국문)</th>
-                                                <td>
-                                                    <input type="text" id="userCmpKor" name="userCmpKor">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>국가</th>
-                                                <td>
-                                                    <select id="countrySelect" name="userNtn">
-                                                        <option value="">국가 선택</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>회사 대표이메일</th>
-                                                <td>
-                                                    <input type="email" id="userPubEmail" name="userPubEmail">
-                                            </tr>
-                                            <tr>
-                                                <th>대표자명(영문)</th>
-                                                <td>
-                                                    <input type="name" id="userCeoEng" name="userCeoEng">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>대표자명(국문)</th>
-                                                <td>
-                                                    <input type="name" id="userCeoKor" name="userCeoKor">
-                                                </td>
-                                            </tr>
+                            <table border="1" class="join_info">
+                                <tr>
+                                    <th>회사명(영문)</th>
+                                    <td>
+                                        <input type="text" id="userCmpEng" name="userCmpEng">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>회사명(국문)</th>
+                                    <td>
+                                        <input type="text" id="userCmpKor" name="userCmpKor">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>국가</th>
+                                    <td>
+                                        <select id="countrySelect" name="userNtn">
+                                            <option value="">국가 선택</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>회사 대표이메일</th>
+                                    <td>
+                                        <input type="email" id="userPubEmail" name="userPubEmail">
+                                </tr>
+                                <tr>
+                                    <th>대표자명(영문)</th>
+                                    <td>
+                                        <input type="name" id="userCeoEng" name="userCeoEng">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>대표자명(국문)</th>
+                                    <td>
+                                        <input type="name" id="userCeoKor" name="userCeoKor">
+                                    </td>
+                                </tr>
 
 
-                                            <tr>
-                                                <th>던스번호</th>
-                                                <td>
-                                                    <input type="text" id="userDunsNo" name="userDunsNo">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>회사 주소</th>
-                                                <td>
-                                                    <input type="text" id="userUrl" name="userUrl">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>홈페이지 주소</th>
-                                                <td>
-                                                    <input type="text" id="userAdr" name="userAdr">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>자사 취급 품목(영문)</th>
-                                                <td>
-                                                    <input type="text" id="userSicCd" name="userSicCd">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>관심 품목 키워드(영문)</th>
-                                                <td>
-                                                    <input type="text" id="userKeyWord" name="userKeyWord">
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </section>
-                                    <div class="agreement">
-                                        <input type="checkbox" class="checkbox" id="agreementCheckbox">
-                                        <label for="agreementCheckbox" class="checkbox-label">필수 이용약관 및 개인정보 수집 및 이용,
-                                            마케팅 정보 수신에 모두
-                                            동의합니다.</label>
-                                    </div>
-                                    <!-- <div class="join">
+                                <tr>
+                                    <th>던스번호</th>
+                                    <td>
+                                        <input type="text" id="userDunsNo" name="userDunsNo">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>회사 주소</th>
+                                    <td>
+                                        <input type="text" id="userUrl" name="userUrl">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>홈페이지 주소</th>
+                                    <td>
+                                        <input type="text" id="userAdr" name="userAdr">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>자사 취급 품목(영문)</th>
+                                    <td>
+                                        <input type="text" id="userSicCd" name="userSicCd">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>관심 품목 키워드(영문)</th>
+                                    <td>
+                                        <input type="text" id="userKeyWord" name="userKeyWord">
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
+                        <div class="agreement">
+                            <input type="checkbox" class="checkbox" id="agreementCheckbox">
+                            <label for="agreementCheckbox" class="checkbox-label">필수 이용약관 및 개인정보 수집 및 이용,
+                                마케팅 정보 수신에 모두
+                                동의합니다.</label>
+                        </div>
+                        <!-- <div class="join">
             <a type="button" class="join Btn btn-primary"> 가입하기</a>
         </div> -->
-                                    <div class="join">
-                                        <input type="submit" id="submitBtn" value="회원가입" class="join Btn btn-primary">
-                                        <!--유효성 검사 끝나면 버튼 클릭 할 수 있도록 하기 -->
-                                    </div>
-                                </form>
-                                <!-- 회원가입 form -->
-
-
-                            </div>
+                        <div class="join">
+                            <input type="submit" id="submitBtn" value="회원가입" class="join Btn btn-primary">
+                            <!--유효성 검사 끝나면 버튼 클릭 할 수 있도록 하기 -->
                         </div>
-                    </div> <!-- // .page-header -->
+                    </form>
+                    <!-- 회원가입 form -->
+
                 </div><!-- // #content -->
             </div><!-- // #container -->
 

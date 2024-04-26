@@ -53,6 +53,7 @@ public class EmailService {
 		
 		// mailDTO의 사용자 고유 넘버를 통해 사용자ENTITY를 찾아온다. 
 		UserEntity userEntity = userRepository.findById(mailDTO.getUserNum()).get();
+		//log.info("저장이 되는지에 대한 여부를 묻는다!!"+userEntity.toString());
 		
 		EmailEntity emailEntity = EmailEntity.toEntity(mailDTO, userEntity);
 		emailRepository.save(emailEntity);
