@@ -31,10 +31,6 @@ public class SearchController {
 		
 		
 		return "Company/cosine";
-<<<<<<< HEAD
-		//return "Stat/mirae";
-=======
->>>>>>> 7023f175bc30f446308f6ffc956582efd34f44e9
 	}
 
 	@PostMapping("/predict")
