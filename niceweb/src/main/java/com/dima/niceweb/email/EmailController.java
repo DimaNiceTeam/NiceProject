@@ -57,7 +57,8 @@ public class EmailController {
 	public String sendMail(EmailDTO mailDTO, InputKeywordDTO inputkeyword, RedirectAttributes rttr) {
 		
 		
-		
+		log.info("~~~~~~ 찜리스트의 메일보내기임 ");
+//		log.info(mailDTO.getUserNum().toString());
 		mailService.mailSend(mailDTO);
 		mailService.insertMail(mailDTO);// 보낸 메일함에 메시지 저장 
 		
@@ -86,6 +87,7 @@ public class EmailController {
 		
 		mailService.mailSend(mailDTO);
 		mailService.insertMail(mailDTO);// 보낸 메일함에 메시지 저장 
+		log.info("여기까지는 ㅇ~~~~~~~~~~~~~~~~~~~~~~");
 		
 		
 		
