@@ -407,12 +407,8 @@
             <div class="content">
                 <div class="page-header on">
                     <h2>보낸 메일함</h2>
+                    <input type="hidden" id="userNum" th:value="${#authentication.principal.userNum}">
                 </div>
-
-
-                <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
-                <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
-                <input type="hidden" id="userNum" value="1"><!--우선은 임으로 만들어봄 -->
                 <span id="noResult"></span><!--보낸 메일함이 적을때 출력합니다.
                     -->
                 <div class="table-heading">

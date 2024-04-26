@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+=======
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>>>>>>> c7a172937123ddf054a49fa5577e16b408fbb89c
 
 <head>
 	<meta charset="utf-8">
@@ -77,11 +81,33 @@
 									<span>INFO</span>
 								</a>
 							</li>
+<<<<<<< HEAD
 							<li>
 								<a th:href="@{/user/login}">
 									<span>LOGIN</span>
 								</a>
 							</li>
+=======
+							<li sec:authorize="isAnonymous()">
+								<a th:href="@{/user/login}">
+									<span>Login</span>
+								</a>
+							</li>
+							<li sec:authorize="isAuthenticated()">
+								<a href="" class="has-depth">
+									<span>MyPage</span>
+								</a>
+								<ul>
+									<li>
+										<a th:href="@{/user/logout}">
+											<span>Logout</span>
+										</a>
+									</li>
+
+								</ul>
+							</li>
+
+>>>>>>> c7a172937123ddf054a49fa5577e16b408fbb89c
 						</ul>
 					</div> <!-- // .nav-wrap -->
 				</nav>
@@ -176,12 +202,16 @@
 								pin: true,
 								scrub: 5,
 								markers: false,
+<<<<<<< HEAD
 								// onEnter: () => {
 								// 	$('.esg').css('z-index',"1")
 								// },
 								// onLeave: () => {
 								// 	$('.esg').css('z-index',"-1")
 								// },
+=======
+								
+>>>>>>> c7a172937123ddf054a49fa5577e16b408fbb89c
 							},
 						});
 						esgTl.addLabel("innoBlindIn", "+=5");
