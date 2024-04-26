@@ -299,6 +299,7 @@ am5.ready(function () {
                 const parsedData = parseCSV(data);
                 const contentDiv = createDataDiv(parsedData, countryCode); // 수정된 countrySelect 값을 사용
                 document.getElementById('countryDetails').innerHTML = contentDiv;
+
                 updateChartData('EXP');
                 updateChartData('IMP');
                 updateChartData('BAL');

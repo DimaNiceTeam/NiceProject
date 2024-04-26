@@ -49,6 +49,7 @@ function parseCSV(csvString) {
         return modifiedRow.split(',').map(value => value.replace(/\|/g, ',').trim().replace(/"/g, ''));
     });
 }
+
 // STAT_INFO의 데이터를 받아서 HTML에 뿌려주는 함수
 function createDataDiv(csvData) {
     const dataDiv = document.createElement('div');
@@ -135,17 +136,34 @@ function initializeOrUpdateChart() {
             // 차트 생성
             var chart = root.container.children.push(am5xy.XYChart.new(root, {
                 panX: true,
-                wheelX: "panX",
-                wheelY: "zoomX"
+                paddingLeft: 0
             }));
 
-            // 축 생성
+            // x축 생성
             var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-                baseInterval: { timeUnit: "year", count: 1 },
-                renderer: am5xy.AxisRendererX.new(root, {})
+                maxDeviation: 0.3,
+                baseInterval: {
+                    timeUnit: "year", 
+                    count: 1
+                },
+                renderer: am5xy.AxisRendererX.new(root, {
+                    minorGridEnabled: true, 
+                    minGridDistance: 30
+                }),
+                tooltip: am5.Tooltip.new(root, {})
             }));
+
+            // 데이터 내에서 최대값 찾기(자동 크기조정 목적)
+            // var maxValue = Math.max(...data.map(item => item.value));
+            // var minValue = Math.min(...data.map(item => item.value));
+
+            // y축 생성
             var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                renderer: am5xy.AxisRendererY.new(root, {})
+                maxDeviation: 0.3,
+                
+                renderer: am5xy.AxisRendererY.new(root, {}),
+                extraMin: 0.1,                      // 축의 아래쪽 여유 공간 비율 설정 (필요하다면)
+                extraMax: 0.1                       // 축의 위쪽 여유 공간 비율 설정 (필요하다면)
             }));
 
             // 시리즈 생성
@@ -154,7 +172,10 @@ function initializeOrUpdateChart() {
                 xAxis: xAxis,
                 yAxis: yAxis,
                 valueYField: "value",
-                valueXField: "date"
+                valueXField: "date",
+                tooltip: am5.Tooltip.new(root, {
+                    labelText: "{valueY}"
+                })
             }));
 
             // 데이터 null 처리 및 직전 값 강조
@@ -215,10 +236,41 @@ function initializeOrUpdateChart() {
 // 데이터 형식 변환 함수
 function formatChartData(values) {
     const years = [2019, 2020, 2021, 2022, 2023];
-    return values.map((value, index) => ({
-        date: new Date(years[index], 1, 1).getTime(),
-        value: value
-    }));
+    let results = []; // 최종 데이터를 저장할 배열
+
+    for (let index = 0; index < values.length; index++) {
+        let value = values[index];
+        // 값이 0이면 null 처리
+        let formattedValue = (value === 0 ? null : value);
+
+        // 데이터 객체 생성
+        let dataObject = {
+            date: new Date(years[index], 0, 1).getTime(),
+            value: formattedValue
+        };
+
+        results.push(dataObject); // 결과 배열에 추가
+    }
+
+    // 마지막 값을 검사하고 bullet 설정
+    if (results.length > 0) {
+        let lastIndex = results.length - 1;
+        if (results[lastIndex].value === null) {
+            // 마지막 값이 null이라면, 마지막 유효 값 찾기
+            for (let i = lastIndex - 1; i >= 0; i--) {
+                if (results[i].value !== null) {
+                    results[i].bullet = true;
+                    break; // 유효 값에 bullet 설정 후 반복 종료
+                }
+            }
+        } else {
+            // 마지막 값이 유효하다면 그 값에 bullet 설정
+            results[lastIndex].bullet = true;
+        }
+    }
+
+
+    return results;
 }
 
 
@@ -262,18 +314,23 @@ function updateChartData(dataType) {
     
     switch (dataType) {
         case 'EXP':
+            data = [0,0,0,0,0];
             data = formatChartData(EXP);
             break;
         case 'IMP':
+            data = [0,0,0,0,0];
             data = formatChartData(IMP);
             break;
         case 'BAL':
+            data = [0,0,0,0,0];
             data = formatChartData(BAL);
             break;
         case 'GWT':
+            data = [0,0,0,0,0];
             data = formatChartData(GWT);
             break;
         case 'GDP':
+            data = [0,0,0,0,0];
             data = formatChartData(GDP);
             break;
         default:
