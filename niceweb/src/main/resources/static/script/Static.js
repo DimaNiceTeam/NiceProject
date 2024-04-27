@@ -50,18 +50,34 @@ function parseCSV(csvString) {
     });
 }
 
+
+
 // STAT_INFO의 데이터를 받아서 HTML에 뿌려주는 함수
 function createDataDiv(csvData) {
     const dataDiv = document.createElement('div');
     let headers = csvData[0];
     let found = false;
 
+    // 아래 함수에 쓰일 컬럼네임:출력데이터 dictionary 생성
+
+    const outputName = {
+        'STAT_NTN' : '국가명',
+        'STAT_POP' : '인구수',
+        'STAT_CPT' : '수도',
+        'STAT_LAN' : '언어'
+}
+
     csvData.forEach((row, index) => {
         if (index !== 0 && row[0].trim().replace(/"/g, '') === countrySelect) {
             row.forEach((cell, cellIndex) => {
-                const p = document.createElement('p');
-                p.textContent = `${headers[cellIndex].trim().replace(/"/g, '')}: ${cell.trim().replace(/"/g, '')}`;
-                dataDiv.appendChild(p);
+                // 열값이 0보다 클 때 = 첫번째 열 제외 = STAT_ID값 미출력!
+                if (cellIndex > 0) {
+                    // header에 매핑된 값을 찾거나, 없으면 원래 header 값을 사용
+                    const headerLabel = outputName[headers[cellIndex].trim().replace(/"/g, '')] || headers[cellIndex].trim().replace(/"/g, '');
+                    const p = document.createElement('p');
+                    p.textContent = `${headerLabel}: ${cell.trim().replace(/"/g, '')}`;
+                    dataDiv.appendChild(p);
+                }
             });
             found = true;
         }
@@ -390,8 +406,18 @@ function csvToTable(csvData) {
     return table.outerHTML;
 }
 
+// 차트 까꿍
+function ggaggung() {
+    document.getElementById('insertChart').style.display = 'block';
+}
+// 버튼 클릭시 차트 보이게 하기
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.statBtn').forEach(btn => {
+        btn.addEventListener('click', ggaggung);
+    });
+});
 
-// 페이지 로드 시 실행될 초기화 함수
+// statBtn들 관리
 document.addEventListener("DOMContentLoaded", function() {
     var statBtn = document.querySelector('.statBtn');  // 'statBtn' 클래스를 가진 div 선택
     if (statBtn) {
@@ -401,3 +427,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// statBtn 초기화 함수  <-- Globe.js에서 사용함!
+function resetStatButtonStyles() {
+    document.querySelectorAll('.statBtn').forEach(btn => {
+        btn.style.borderBottom = '4px solid navy'; // 초기 borderBottom 스타일
+        btn.style.height = '50px'; // 초기 height 스타일
+        btn.style.transform = '';
+        btn.style.background = ''; // 초기 background 스타일 (지정되어 있지 않은 경우)
+        btn.style.color = ''; // 초기 color 스타일 (지정되어 있지 않은 경우)
+        btn.style.transform = ''; // 초기 transform 스타일 (지정되어 있지 않은 경우)
+    });
+}
+

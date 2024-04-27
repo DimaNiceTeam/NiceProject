@@ -147,10 +147,10 @@
                     <div id="impBtn" class="statBtn" data-type="IMP">
                         <p>수입</p>
                     </div>
-                    <div id="balBtn" class="statBtn" data-type="BAL" style="line-height: 1.3;">
+                    <div id="balBtn" class="statBtn" data-type="BAL" style="line-height: 1.15;">
                         <p>무역<br>수지</p>
                     </div>
-                    <div id="gwtBtn" class="statBtn" data-type="GWT" style="line-height: 1.3;">
+                    <div id="gwtBtn" class="statBtn" data-type="GWT" style="line-height: 1.15;">
                         <p>경제<br>성장률</p>
                     </div>
                     <div id="gdpBtn" class="statBtn" data-type="GDP">
@@ -420,13 +420,15 @@
                     document.querySelectorAll('.statBtn').forEach(function(otherBtn) {
                         otherBtn.style.borderBottom = ''; // 다른 버튼들은 초기 스타일로 재설정
                         otherBtn.style.height = '';
+                        otherBtn.style.transform = '';
                         //otherBtn.style.background = '';
                         //otherBtn.style.color = '';
                     });
     
                     // 클릭된 요소의 스타일을 변경
                     btn.style.borderBottom = 'none';
-                    btn.style.height = '49px';
+                    btn.style.height = '60px';
+                    btn.style.transform = 'translateY(-5px)';
                     //btn.style.background = 'navy';
                     //btn.style.color = 'white';
                 });

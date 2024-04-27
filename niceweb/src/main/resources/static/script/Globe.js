@@ -290,6 +290,7 @@ am5.ready(function () {
         }
     }
 
+
     // 전역변수 countrySelect 업데이트 코드
     function updateDetailsForCountry(countryCode) {
         fetch(`/file/STAT_INFO.csv`)
@@ -303,6 +304,10 @@ am5.ready(function () {
                 updateChartData('BAL');
                 updateChartData('GWT');
                 updateChartData('GDP');
+                // 국가 코드가 변경 = 통계 차트 숨기기!
+                document.getElementById('insertChart').style.display = 'none';
+                // 국가 코드가 변경 = statBtn스타일 초기화! <-- Static.js에서 정의되어있음
+                resetStatButtonStyles();
             })
             .catch(error => console.error(`Error loading the CSV file:`, error));
     }

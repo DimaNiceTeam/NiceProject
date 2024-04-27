@@ -106,7 +106,7 @@ dropdown
 .statBtn {
     display: flex; /* Flexbox를 활용해 요소 내부 컨텐츠 중앙 정렬 */
     width: 75px;
-    height: 45px;
+    height: 50px;
     transition: all 0.3s ease;
 
     font-size: 1.05em;
@@ -123,7 +123,7 @@ dropdown
 }
 
 .statBtn:hover {
-    height: 55px; /* hover 상태에서의 높이 */
+    height: 60px; /* hover 상태에서의 높이 */
     background: navy; /* hover 상태에서의 배경색 */
     color: white; /* hover 상태에서의 글자색 */
     transform: translateY(-5px); /* 늘어난 높이의 절반만큼 위로 이동 */
