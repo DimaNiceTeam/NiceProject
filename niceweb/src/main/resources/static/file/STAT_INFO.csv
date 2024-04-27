@@ -44,3 +44,22 @@ GR,그리스(Hellenic Republic),"10432481 (자료원: ELSTAT, 2021년 기준(가
 HR,크로아티아 공화국(Republic of Croatia),"3871833 (자료원: 크로아티아 통계청, 2021년 인구조사)",자그레브(Zagreb),크로아티아어(라틴문자 사용)
 PK,파키스탄 이슬람공화국(Islamic Republic of Pakistan),241490000 (자료원: 파키스탄 통계청(2023 기준)),이슬라마바드(Islamabad),"국어는 우르두어(Urdu)이며, 영어는 상용&middot;공용어이다. 지역별로 펀잡어, 신드어, 푸쉬트어, 발루치어 등 24개 지방 언어가 있다. "
 MA,"모로코 왕국(불어: Royaume du Maroc, 영어: Kingdom of Morocco)",37176778 (자료원: Higher Planning Commission / 2023년 12월 10일),라바트(Rabat),"아랍어, 베르베르어(공용어), 불어(상용어)"
+RU,러시아(Russia),"146710000 (자료원: 러시아 통계청, 2023년 10월 기준)","모스크바(Moscow, 13,100,000명, 2023년 1월 기준)","러시아어, 문맹률 0.6%"
+CH,스위스 연방 공화국(Swiss Confederation),"8815385 (자료원: 스위스 통계청, 2022년 기준(2023년 11월 최신자료))",베른(Bern)," 독일어(62%), 프랑스어(22.7%), 이탈리아어(8.2%), 로망슈어(0.5%), 기타 언어(22.7%)"
+RS,세르비아공화국(Republic of Serbia),"6641197 (자료원: 세르비아 통계청, 2023년 1월 기준)",베오그라드(Belgrade),"세르비아어(라틴문자, 키릴문자 사용)"
+IL,이스라엘,"9795000 (자료원: Central Bureau of Statistics of Israel, 2023.9.12)","자국법상 수도는 예루살렘이지만, 국제법상 텔아비브를 수도로 인정 ","히브리어(공용어), 아랍어(아랍 소수민 공식언어), 영어 및 러시아어 (상용어)"
+HK,중화인민공화국홍콩특별행정구(The Government of the Hong Kong S.A.R of the People&#39;s Republic of China),"7498100 (자료원: Census and Statistics Department, 2023년 중순 잠정치)",,"광동어, 보통어, 영어"
+SG,싱가포르 공화국(Republic of Singapore),"5917600 (자료원: 싱가포르 통계청(DOS), 2023년)",싱가포르(도시국가),"영어, 중국어(기타 중국어 방언 호키엔어, 광동어, 테오추어, 하카어 포함, 말레이어, 타밀어 등 4개 공용어"
+GT,과테말라 공화국(Guatemala),"19379000 (자료원: IMF, 2023년 10월 기준)",과테말라시티,스페인어(기타 약 21개의 마야 토착언어 및 2개의 원주민어 존재)
+NG,나이지리아 연방공화국(Federal Republic of Nigeria),218500000 (자료원: EIU(2022)),아부자(Abuja),"영어(공용어), Hausa어, Yoruba어, Ibo어 등 각 토착어"
+PT,포르투갈 공화국(The Portuguese Republice),"10379007 (자료원: Worldbank Indicator(2023년 11월 조회 기준, 2022년 수치))","리스본(영어 Lisbon, 포어 Lisboa)",포르투갈어
+CL,칠레공화국(Rep&uacute;blica de Chile),"19960889 (자료원: 칠레 통계청, 2023년 6월 예상 인구 기준)",산티아고(Santiago),스페인어
+VE,베네수엘라 볼리바르 공화국(Rep&uacute;blica Bolivariana de Venezuela),"28199867 (자료원: (자료원: 세계은행, 2021년))",카라카스(Caracas),스페인어
+GE,조지아 ,3736400 (자료원: www.geostat.ge ),트빌리시,"조지아어(공용어), 러시아어(통용어)"
+BY,벨라루스(Republic of Belarus),"9200617 (자료원: 벨라루스 통계청, 2023년 1월 공표 기준 (매년 1월 발표))",민스크(Minsk),"벨라루스어, 러시아어 둘 다 국어(national language)로 사용된다. 러시아어는 1995년 국민투표를 통해 국어로 채택되었으며, 일상에서는 러시아어가 더 많이 쓰인다."
+KE,케냐 공화국(The Republic of Kenya),54000000 (자료원: EIU 2023년 4월 국가 보고서),나이로비(Nairobi),"영어(공용어), 스와힐리어(통용어), 40개 이상의 현지 부족언어"
+LK,스리랑카 민주 사회주의 공화국(Democratic Socialist Republic of Sri Lanka),"22181000 (자료원: 스리랑카 중앙은행 연간보고서, 2022 기준)",스리자야와르데네푸라코테(Sri Jayawardenepura Kotte),싱할라 및 타밀어
+EC,에콰도르(Republic of Ecuador),"18290512 (자료원: 에콰도르 통계청, 2023년 5월 기준)",키토(Quito),"스페인어 및 11개 기타 부족어(케추아, 슈아르 등)"
+DO,도미니카공화국(Dominican Republic),"10790744 (자료원: CIA fact book(2023년 11월 기준, 2023년도 추정치))",산토도밍고(Santo Domingo),스페인어
+UZ,우즈베키스탄(Republic of Uzbekistan),"36372000 (자료원: 우즈베키스탄 통계청, 2023년 11월 기준)",타슈켄트(Tashkent),"우즈베키스탄어(국어), 러시아어(공용어)"
+PA,파나마(Republic of Panama),"4395414 (자료원: 파나마 통계청(INEC), 2022 기준)",파나마시티(Panama City),스페인어
