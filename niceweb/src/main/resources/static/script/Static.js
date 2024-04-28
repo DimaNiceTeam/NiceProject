@@ -1,3 +1,7 @@
+// 이 js파일은 globeindex.html과 showReg.html에 연결됨
+// 이 js파일은 Globe.js파일과 상호연결되어있음
+
+
 var chartInstance;
 
 // csv 불러오기!!
@@ -5,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const csvRoot = document.getElementById('countryDetails');
     //const insertChart = document.getElementById('insertChart');
     // 파일 목록 정의
-    const files = ['STAT_INFO.csv', 'STAT_STATIC.csv', 'STAT_REG.csv'];
+    const files = ['STAT_INFO.csv', 'STAT_STATIC.csv'];
 
     // 각 파일에 대해 처리
     files.forEach(file => {
@@ -19,9 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else if (file === 'STAT_STATIC.csv') {
                     console.log("countrySelect: " + countrySelect);
                     fetchDataForCountry(countrySelect);  // 업데이트된 함수를 호출
-                } else if (file === 'STAT_REG.csv') {
-                    const table = csvToTable(parsedData);
-                    csvRoot.innerHTML += table;
                 }
             })
             .catch(error => console.error(`Error loading the CSV file ${file}:`, error));
@@ -50,18 +51,34 @@ function parseCSV(csvString) {
     });
 }
 
+
+
 // STAT_INFO의 데이터를 받아서 HTML에 뿌려주는 함수
 function createDataDiv(csvData) {
     const dataDiv = document.createElement('div');
     let headers = csvData[0];
     let found = false;
 
+    // 아래 함수에 쓰일 컬럼네임:출력데이터 dictionary 생성
+
+    const outputName = {
+        'STAT_NTN' : '국가명',
+        'STAT_POP' : '인구수',
+        'STAT_CPT' : '수도',
+        'STAT_LAN' : '언어'
+}
+
     csvData.forEach((row, index) => {
         if (index !== 0 && row[0].trim().replace(/"/g, '') === countrySelect) {
             row.forEach((cell, cellIndex) => {
-                const p = document.createElement('p');
-                p.textContent = `${headers[cellIndex].trim().replace(/"/g, '')}: ${cell.trim().replace(/"/g, '')}`;
-                dataDiv.appendChild(p);
+                // 열값이 0보다 클 때 = 첫번째 열 제외 = STAT_ID값 미출력!
+                if (cellIndex > 0) {
+                    // header에 매핑된 값을 찾거나, 없으면 원래 header 값을 사용
+                    const headerLabel = outputName[headers[cellIndex].trim().replace(/"/g, '')] || headers[cellIndex].trim().replace(/"/g, '');
+                    const p = document.createElement('p');
+                    p.textContent = `${headerLabel}: ${cell.trim().replace(/"/g, '')}`;
+                    dataDiv.appendChild(p);
+                }
             });
             found = true;
         }
@@ -233,45 +250,7 @@ function initializeOrUpdateChart() {
 }
 
 
-// 데이터 형식 변환 함수
-function formatChartData(values) {
-    const years = [2019, 2020, 2021, 2022, 2023];
-    let results = []; // 최종 데이터를 저장할 배열
 
-    for (let index = 0; index < values.length; index++) {
-        let value = values[index];
-        // 값이 0이면 null 처리
-        let formattedValue = (value === 0 ? null : value);
-
-        // 데이터 객체 생성
-        let dataObject = {
-            date: new Date(years[index], 0, 1).getTime(),
-            value: formattedValue
-        };
-
-        results.push(dataObject); // 결과 배열에 추가
-    }
-
-    // 마지막 값을 검사하고 bullet 설정
-    if (results.length > 0) {
-        let lastIndex = results.length - 1;
-        if (results[lastIndex].value === null) {
-            // 마지막 값이 null이라면, 마지막 유효 값 찾기
-            for (let i = lastIndex - 1; i >= 0; i--) {
-                if (results[i].value !== null) {
-                    results[i].bullet = true;
-                    break; // 유효 값에 bullet 설정 후 반복 종료
-                }
-            }
-        } else {
-            // 마지막 값이 유효하다면 그 값에 bullet 설정
-            results[lastIndex].bullet = true;
-        }
-    }
-
-
-    return results;
-}
 
 
 function attachEventListeners() {
@@ -279,7 +258,10 @@ function attachEventListeners() {
     document.querySelectorAll('.statBtn').forEach(btn => {
         btn.addEventListener('click', function() {
             const dataType = btn.getAttribute('data-type'); // 이 버튼의 data-type 속성 가져오기
-            console.log("버튼 값: " + dataType)
+
+            // 제대로 선택한 버튼이 눌리고, 해당 값을 가져오는지 확인하는 콘솔로그 출력
+            //console.log("버튼 값: " + dataType)
+
             updateChartData(dataType);  // 차트 데이터 업데이트 함수 호출
         });
     });
@@ -333,13 +315,19 @@ function updateChartData(dataType) {
             data = [0,0,0,0,0];
             data = formatChartData(GDP);
             break;
+        case 'REG':
+            var newUrl = 'showReg?country=' + encodeURIComponent(countrySelect);
+            window.open(newUrl, '_blank');
+            break;
         default:
             console.error("Invalid data type");
             return;
     }
 
-    console.log("데이터" + data);
-    console.log("차트인스턴스" + chartInstance)
+    // 데이터 확인용 콘솔출력
+    //console.log("데이터" + data);
+    //console.log("차트인스턴스" + chartInstance)
+    
     // 차트 데이터 설정
     if (chartInstance) {
         var series = chartInstance.series.getIndex(0);
@@ -349,49 +337,58 @@ function updateChartData(dataType) {
     }
 }
 
-// STAT_REG 데이터를 테이블 형식으로 저장
-function csvToTable(csvData) {
-    const table = document.createElement('table');
-    table.setAttribute('border', '1');
+// 데이터 형식 변환 함수
+function formatChartData(values) {
+    const years = [2019, 2020, 2021, 2022, 2023];
+    let results = []; // 최종 데이터를 저장할 배열
 
-    // 첫 번째 행은 헤더라고 가정하고 모두 추가
-    const headerRow = document.createElement('tr');
-    csvData[0].forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header.trim().replace(/"/g, '');
-        headerRow.appendChild(th);
-    });
-    table.appendChild(headerRow);
+    for (let index = 0; index < values.length; index++) {
+        let value = values[index];
+        // 값이 0이면 null 처리
+        let formattedValue = (value === 0 ? null : value);
 
-    // 데이터 행 중 countrySelect 값과 일치하는 첫 번째 열의 값만 있는 행을 찾아 추가
-    let found = false;
-    csvData.slice(1).forEach(row => {
-        if (row[0].trim().replace(/"/g, '') === countrySelect) {
-            const dataRow = document.createElement('tr');
-            row.forEach(cell => {
-                const td = document.createElement('td');
-                td.textContent = cell.trim().replace(/"/g, '');
-                dataRow.appendChild(td);
-            });
-            table.appendChild(dataRow);
-            found = true; // 일치하는 행을 찾았음
-        }
-    });
+        // 데이터 객체 생성
+        let dataObject = {
+            date: new Date(years[index], 0, 1).getTime(),
+            value: formattedValue
+        };
 
-    if (!found) { // 일치하는 행을 찾지 못한 경우
-        const noDataRow = document.createElement('tr');
-        const td = document.createElement('td');
-        td.setAttribute('colspan', csvData[0].length);
-        td.textContent = 'No data found for selected country';
-        noDataRow.appendChild(td);
-        table.appendChild(noDataRow);
+        results.push(dataObject); // 결과 배열에 추가
     }
 
-    return table.outerHTML;
+    // 마지막 값을 검사하고 bullet 설정
+    if (results.length > 0) {
+        let lastIndex = results.length - 1;
+        if (results[lastIndex].value === null) {
+            // 마지막 값이 null이라면, 마지막 유효 값 찾기
+            for (let i = lastIndex - 1; i >= 0; i--) {
+                if (results[i].value !== null) {
+                    results[i].bullet = true;
+                    break; // 유효 값에 bullet 설정 후 반복 종료
+                }
+            }
+        } else {
+            // 마지막 값이 유효하다면 그 값에 bullet 설정
+            results[lastIndex].bullet = true;
+        }
+    }
+
+
+    return results;
 }
 
+// 차트 까꿍
+function ggaggung() {
+    document.getElementById('insertChart').style.display = 'block';
+}
+// 버튼 클릭시 차트 보이게 하기
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.statBtn').forEach(btn => {
+        btn.addEventListener('click', ggaggung);
+    });
+});
 
-// 페이지 로드 시 실행될 초기화 함수
+// statBtn들 관리
 document.addEventListener("DOMContentLoaded", function() {
     var statBtn = document.querySelector('.statBtn');  // 'statBtn' 클래스를 가진 div 선택
     if (statBtn) {
@@ -401,3 +398,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// statBtn 초기화 함수  <-- Globe.js에서 사용함!
+function resetStatButtonStyles() {
+    document.querySelectorAll('.statBtn').forEach(btn => {
+        btn.style.borderBottom = '4px solid navy'; // 초기 borderBottom 스타일
+        btn.style.height = '50px'; // 초기 height 스타일
+        btn.style.transform = '';
+        btn.style.background = ''; // 초기 background 스타일 (지정되어 있지 않은 경우)
+        btn.style.color = ''; // 초기 color 스타일 (지정되어 있지 않은 경우)
+        btn.style.transform = ''; // 초기 transform 스타일 (지정되어 있지 않은 경우)
+    });
+}
