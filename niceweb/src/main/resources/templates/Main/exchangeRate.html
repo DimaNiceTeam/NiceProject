@@ -28,7 +28,7 @@
             $("#exchangeFrom").change(showrate);
             $("#exchangeTo").change(showrate);
             $('#amount').change(showrate);
-            init();
+            //init(); 실험용 
 
 
         });
@@ -36,45 +36,30 @@
             let endpoint = 'convert';
             let access_key = '58dfaebb4ddb4d8dea6360b93171efff';
 
-            // define from currency, to currency, and amountㄴ
+
             let from = 'EUR';
             let to = 'GBP';
             let amount = '10';
             let arr = 'http://api.currencylayer.com/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount;
-            alert(arr);
+
 
 
             // execute the conversion using the "convert" endpoint:
             $.ajax({
-                url: arr,
-                dataType: 'jsonp',
-                success: function (json) {
-                    // console.log(json.result)
+                url: 'http://apilayer.net/api/convert?access_key=58dfaebb4ddb4d8dea6360b93171efff&from=EUR&to=GBP&amount=10',
+                dataType: 'json',
+                success: function (resp) {
+                    // console.log(json.result)s
                     // alert(json.result)
-                    alert(json.result);
+                    alert(resp.result);
 
                 }
             });
-            // $.ajax({
-            //     url: 'https://api.currencylayer.com/' + endpoint,
-            //     dataType: 'jsonp',
-            //     data: {
-            //         access_key: access_key,
-            //         from: from,
-            //         to: to,
-            //         amount: amount
-            //     },
-            //     success: function (response) {
-            //         // 서버에서 응답을 확인하여 올바르게 처리
-            //         console.log(response);
-            //         alert(response.result);
-            //     }
-            // });
+
         }
         function showrate() {
             let endpoint = 'convert';
-            //let access_key = 'dfb151f54a6885a76957931b4e3c05dd';  // can't reveal API key
-            //let access_key = '42a8f360ca4613872492303045900812';  // can't reveal API key
+
             access_key = '58dfaebb4ddb4d8dea6360b93171efff';
 
 
@@ -82,15 +67,11 @@
             let to = $("#exchangeTo").val();
             let amount = $('#amount').val();
             $.ajax({
-                //url: 'https://api.currencylaysser.com/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
 
-                // url: 'https://api.currencylayer.com/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
-                url: 'http://api.currencylayer.com/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
+                url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
                 dataType: 'jsonp',
                 success: function (json) {
-                    //alert(json.result);
-                    // var resultText = JSON.stringify(json.result);
-                    // alert("하이", resultText);
+                    ㄴ
                     $("#rate-result").html(json.result)
 
                 }
