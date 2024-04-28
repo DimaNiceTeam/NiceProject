@@ -1,5 +1,172 @@
 @charset "UTF-8";
+/* reset */
+@import url(lib/reset.css);
+/* library */
+@import url(lib/aos.css);
+/* Animate On Scroll: 웹 페이지에서 스크롤에 따라 요소들에 애니메이션 효과를 적용하는 JavaScript 라이브러리 */
+@import url(lib/swiper.css);
+/* Swiper: 모바일 터치 슬라이더 라이브러리 다양한 터치 이벤트와 애니메이션을 지원하여 사용자에게 부드러운 슬라이드 경험을 제공 */
+/* common css */
+@import url(_swiper-custom.css);
+@import url(_font.css);
+@import url(_color.css);
+@import url(_vars.css);
+@import url(_button.css);
+@import url(_form.css);
+@import url(_layout.css);
+@import url(_global.css);
 
+.content {
+    display: flex; /* Flexbox 레이아웃 활성화 */
+    flex-direction: row; /* 아이템들을 가로로 나란히 배치 */
+    justify-content: space-between; /* 아이템들 사이에 균등하게 공간을 둠 */
+    align-items: center; /* 아이템들을 세로축 중앙에 배치 */
+    margin: auto; /* 페이지 중앙에 배치 */
+    max-width: 1620px; /* 전체 너비 설정 */
+}
+
+/*****
+지구본 
+******/
+#chartdiv {
+    order: 0; /* 첫 번째 위치 */
+    flex: 0 0 55%; /* flex-grow, flex-shrink, flex-basis */ 
+    height: 700px;
+    width: 60%;
+    margin-top: 100px;
+    margin-bottom: 180px;
+    margin-left:30px;
+    border-right: 5px dotted var(--blue); /* 점선 경계선 추가, 색상은 --blue 사용 */    
+}
+
+
+/******* 
+dropdown
+********/
+/* 전체 틀 */
+.dropdown-container {
+    order: 2; /* 세 번째 위치 */
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left:10px;
+    margin-right:10px;
+    gap: 5px; /* 옵션 사이 간격 설정 */
+    color: var(--dark-gray);
+    margin-top: -800px;
+}
+
+/* 대륙 선택 */
+#continentSelect {
+    text-align: center;
+    padding: 10px 15px;
+    border: 2px solid var(--blue-gray-1);
+    border-radius: 20px;
+    background-color: var(--white);
+    color: var(--dark-gray);
+    cursor: pointer
+}
+
+/* 대륙 선택 옵션 */
+#continentSelect option {
+    text-align: left;
+    /* 옵션 텍스트 왼쪽 정렬 */
+    padding-left: 10px;
+    /* 왼쪽 패딩 설정 */
+}
+
+/* 국가 선택 */
+#countrySelect {
+    text-align: center;
+    padding: 10px 15px;
+    border: 2px solid var(--blue-gray-1);
+    border-radius: 20px;
+    background-color: var(--white);
+    color: var(--dark-gray);
+    cursor: pointer
+}
+
+/* 국가 선택 옵션 */
+#countrySelect option {
+    text-align: left;
+    /* 옵션 텍스트 왼쪽 정렬 */
+    padding-left: 10px;
+    /* 왼쪽 패딩 설정 */
+}
+
+/* 무역 통계 */
+#btnContainer {
+    display: flex; /* Flexbox를 활용해 가로 정렬 */
+    /*justify-content: space-between; /* 버튼들 사이에 균등하게 공간 배분 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 60px;
+}
+
+.statBtn {
+    display: flex; /* Flexbox를 활용해 요소 내부 컨텐츠 중앙 정렬 */
+    width: 75px;
+    height: 50px;
+    transition: all 0.3s ease;
+
+    font-size: 1.05em;
+    font-weight: bold;
+
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid navy;
+    border-bottom: 4px solid navy;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.statBtn:hover {
+    height: 60px; /* hover 상태에서의 높이 */
+    background: navy; /* hover 상태에서의 배경색 */
+    color: white; /* hover 상태에서의 글자색 */
+    transform: translateY(-5px); /* 늘어난 높이의 절반만큼 위로 이동 */
+}
+
+#countryInfo {
+    display: none;
+    position: absolute;
+    top: 100px;
+    right: 50px;
+    padding: 15px;
+    background-color: rgb(255, 255, 255);
+    width: 450px;
+    height: auto;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    margin-top: 30px;
+    margin-right: 40px;
+}
+
+.flag-container {
+    display: flex;
+    align-items: center;
+}
+
+#countryFlag {
+    width: 100px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+#countryName {
+    font-size: 32px;
+}
+
+#insertChart {
+    width: 450px;
+    height: 300px;
+}
+
+/***** 
+모달창 
+******/
 .modalTitle {
     height: 25px;
     width: 350px;

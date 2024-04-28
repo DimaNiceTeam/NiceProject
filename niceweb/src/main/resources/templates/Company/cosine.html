@@ -409,60 +409,152 @@
                 </form>
 
             </div>
-        </div>
-    </div> <!--이메일 모달창 끝-->
-    <!--상세페이지 모달창-->
-    <div class="modal" id="Details">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
+        </header>
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title" id="cmpName"></h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+        <div id="scroller" class="scroller" data-scrollbar>
+            <div id="container" class="container">
+                <div id="content" class="main">
 
-                <!-- Modal body -->
+                    <!-- cosine 시작 -->
+                    <h2>MATCH</h2>
+                    <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
+                    <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
+                    <input type="hidden" id="userNum" value="1"><!--우선은 임의로 만들어봄 -->
 
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td>D-U-N-S® Number</td>
-                            <td id="cmpDunsNo"></td>
-                        </tr>
-                        <tr>
-                            <td>Primary SIC Code</td>
-                            <td id="cmpSicCode"></td>
-                        </tr>
-                        <tr>
-                            <td>국가코드</td>
-                            <td id="cmpNatCd"></td>
-                        </tr>
-                        <tr>
-                            <td>국가</td>
-                            <td id="cmpNatEng"></td>
-                        </tr>
-                        <tr>
-                            <td>주소</td>
-                            <td id="cmpAddress"></td>
-                        </tr>
-                        <tr>
-                            <td>Employees(All site)</td>
-                            <td id="cmpEmp"></td>
-                        </tr>
-                        <tr>
-                            <td>마케팅 등급</td>
-                            <td id="cmpMkt"></td>
-                        </tr>
-                        <tr>
-                            <td>Annual Sales</td>
-                            <td id="cmpSales"></td>
-                        </tr>
-                        <tr>
-                            <td>홈페이지</td>
-                            <td><a href="" id="cmpUrl"></a></td>
-                        </tr>
+                    <form th:action="@{/predict}" method="POST">
+                        <div class="search">
+                            <input type="text" placeholder="키워드 입력" id="search" name="inputKeyword"
+                                th:value="${inputKeyword}">
+                            <img type=button
+                                src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
+                                id="searchBtn">
+                        </div>
+                    </form>
+                    <div class="dropdown-container">
+                        <select id="continentSelect" onchange="updateCountryList()">
+                            <option value="all">모든 국가</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="NorthAmerica">North America</option>
+                            <option value="SouthAmerica">South America</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
+
+                        <select id="countrySelect">
+                            <option th:value="${nation}">Select Country</option>
+                        </select>
+                        <!-- <input type="button" value="검색" id="searchBtn"> -->
+                    </div>
+                    <span id="noResult"></span>
+                    <table id="cosine-list"> <!--추천 알고리즘-->
                     </table>
+
+                    <!-- 이메일 모달창  -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">이메일 발송</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <form th:action="@{/mail/mailsend}" method="POST">
+                                    <!--데이터 가지고 가는 부분-->
+                                    <input type="hidden" name="inputKeyword" value="" id="emailinputKeyword">
+                                    <input type="hidden" name="nation" value="" id="emailnation">
+
+                                    <div class="modal-body">
+                                        <!--수정해야할 부분입니다~~~~~~~~-->
+                                        <input type="hidden" name="userNum" value="1"><!--우선은 임의로 만들어봄 -->
+                                        <input id="cmpaddress" name="receiver" placeholder="이메일 주소" class="form-control"
+                                            value=""> <br>
+                                        <input name="emailSubject" placeholder="제목" class="form-control"> <br>
+                                        <textarea name="emailContent" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"
+                                            class="form-control"></textarea>
+                                    </div>
+
+                                    <!-- Modal footer -->
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn " style="background-color: blue; color: white;"
+                                            data-bs-dismiss="modal">발송</button>
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div> <!--이메일 모달창 끝-->
+                    <!--상세페이지 모달창-->
+                    <div class="modal" id="Details">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="cmpName"></h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+
+                                <div class="modal-body">
+                                    <table>
+                                        <tr>
+                                            <td>D-U-N-S® Number</td>
+                                            <td id="cmpDunsNo"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Primary SIC Code</td>
+                                            <td id="cmpSicCode"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>국가코드</td>
+                                            <td id="cmpNatCd"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>국가</td>
+                                            <td id="cmpNatEng"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>주소</td>
+                                            <td id="cmpAddress"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employees(All site)</td>
+                                            <td id="cmpEmp"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>마케팅 등급</td>
+                                            <td id="cmpMkt"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Annual Sales</td>
+                                            <td id="cmpSales"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>홈페이지</td>
+                                            <td><a href="" id="cmpUrl"></a></td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- cosine 끝 -->
 
                 </div>
 
@@ -473,6 +565,34 @@
 
 
             </div>
+            <footer id="footer" class="footer">
+                <div class="footer-inner">
+                    <div class="cont site">
+                        <div class="menu">
+                            <a href="/privacy.html">개인정보처리방침</a>
+                            <a href="/terms.html">이용약관</a>
+                        </div>
+                        <div class="select-box">
+                            <select class="select family" title="나이스투매치유">
+                                <option value disabled selected>Family Site</option>
+                                <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B</option>
+                                <option value="http://www.ec21.co.kr/">EC21</option>
+                                <option value="https://www.valuelinku.com/">ValueLinkeU</option>
+                                <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+                                <option value="https://www.itronics.co.kr">PASSWIN</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cont contact">
+                        <address>
+                            <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+                            <span>대표자&nbsp;<em>주진명</em></span>
+                            <span>TEL.<em>010-2432-2450</em></span>
+                        </address>
+                        <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
     <!-- cosine 끝 -->

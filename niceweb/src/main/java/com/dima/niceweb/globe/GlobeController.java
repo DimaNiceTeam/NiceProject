@@ -11,4 +11,10 @@ public class GlobeController {
 
         return "globeindex";
     }
+
+    @GetMapping("/showReg")
+    public String showReg() {
+
+        return "showReg";
+    }
 }
