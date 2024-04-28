@@ -28,26 +28,31 @@
             $("#exchangeFrom").change(showrate);
             $("#exchangeTo").change(showrate);
             $('#amount').change(showrate);
-            //init();
+            init();
 
 
         });
         function init() {
-            endpoint = 'convert';
-            access_key = '58dfaebb4ddb4d8dea6360b93171efff';
+            let endpoint = 'convert';
+            let access_key = '58dfaebb4ddb4d8dea6360b93171efff';
 
             // define from currency, to currency, and amountㄴ
-            from = 'EUR';
-            to = 'GBP';
-            amount = '10';
+            let from = 'EUR';
+            let to = 'GBP';
+            let amount = '10';
+            let arr = 'http://api.currencylayer.com/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount;
+            alert(arr);
+
 
             // execute the conversion using the "convert" endpoint:
             $.ajax({
-                url: 'http://api.currencylayer.com/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
+                url: arr,
                 dataType: 'jsonp',
                 success: function (json) {
-                    console.log(json.result)
-                    alert(json)
+                    // console.log(json.result)
+                    // alert(json.result)
+                    alert(json.result);
+
                 }
             });
             // $.ajax({
