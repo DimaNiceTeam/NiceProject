@@ -264,7 +264,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="#"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -308,7 +308,7 @@
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a href="" class="has-depth">
+                                <a th:href="@{/user/myPage}" class="has-depth">
                                     <span>MyPage</span>
                                 </a>
                                 <ul>

@@ -43,4 +43,10 @@ public class SearchController {
 		return result;
 
 	}
+	
+	   @GetMapping("/categorySearch")
+	   public String categorySearch() {
+
+	      return "/Recommendation/recommendationByCar";
+	   }
 }

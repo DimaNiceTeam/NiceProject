@@ -109,7 +109,7 @@
                 <input type="hidden" id="loginId" th:value="${#authentication.name}">
                 <input type="hidden" id="boardNum" th:value="${board.boardNum}">
 
-                    <h2>공지사항 보기</h2>
+                <h2>공지사항 보기</h2>
             </div> <!-- .container 끝 -->
 
 
@@ -168,35 +168,35 @@
             </div> <!-- .content 끝 -->
             <!-- FraudDetail form -->
 
-    <footer id="footer" class="footer">
-        <div class="footer-inner">
-            <div class="cont site">
-                <div class="menu">
-                    <a href="/privacy.html">개인정보처리방침</a>
-                    <a href="/terms.html">이용약관</a>
+            <footer id="footer" class="footer">
+                <div class="footer-inner">
+                    <div class="cont site">
+                        <div class="menu">
+                            <a href="/privacy.html">개인정보처리방침</a>
+                            <a href="/terms.html">이용약관</a>
+                        </div>
+                        <div class="select-box">
+                            <select class="select family" title="나이스투매치유">
+                                <option value disabled selected>Family Site</option>
+                                <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B</option>
+                                <option value="http://www.ec21.co.kr/">EC21</option>
+                                <option value="https://www.valuelinku.com/">ValueLinkeU</option>
+                                <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+                                <option value="https://www.itronics.co.kr">5조</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cont contact">
+                        <address>
+                            <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+                            <span>대표자&nbsp;<em>주진명</em></span>
+                            <span>TEL.<em>010-2432-2450</em></span>
+                        </address>
+                        <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                    </div>
                 </div>
-                <div class="select-box">
-                    <select class="select family" title="나이스투매치유">
-                        <option value disabled selected>Family Site</option>
-                        <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B</option>
-                        <option value="http://www.ec21.co.kr/">EC21</option>
-                        <option value="https://www.valuelinku.com/">ValueLinkeU</option>
-                        <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
-                        <option value="https://www.itronics.co.kr">5조</option>
-                    </select>
-                </div>
-            </div>
-            <div class="cont contact">
-                <address>
-                    <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
-                    <span>대표자&nbsp;<em>주진명</em></span>
-                    <span>TEL.<em>010-2432-2450</em></span>
-                </address>
-                <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
-            </div>
+            </footer>
         </div>
-    </footer>
-    </div>
     </div><!-- // #wrap -->
 
     <script th:src="@{/js/lib/gsap.min.js}"></script>

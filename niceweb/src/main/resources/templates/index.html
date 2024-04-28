@@ -39,7 +39,7 @@
 								</a>
 								<ul>
 									<li>
-										<a href="#"><!--페이지 나중에 삽입-->
+										<a th:href="@{/about}"><!--페이지 나중에 삽입-->
 											<span>NICE TO MATCH YOU</span>
 										</a>
 									</li>
@@ -77,23 +77,10 @@
 									<span>INFO</span>
 								</a>
 							</li>
-							<li sec:authorize="isAnonymous()">
+							<li>
 								<a th:href="@{/user/login}">
 									<span>Login</span>
 								</a>
-							</li>
-							<li sec:authorize="isAuthenticated()">
-								<a href="" class="has-depth">
-									<span>MyPage</span>
-								</a>
-								<ul>
-									<li>
-										<a th:href="@{/user/logout}">
-											<span>Logout</span>
-										</a>
-									</li>
-
-								</ul>
 							</li>
 
 						</ul>

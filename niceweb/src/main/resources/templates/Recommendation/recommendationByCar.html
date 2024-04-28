@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>추천 시스템</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link th:href='@{https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css}' rel='stylesheet'>
     <style>
         .vertical-list li {
 
@@ -530,9 +530,9 @@
             /* 호버 시 배경색 변경 */
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js}"></script>
+    <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
+    <script th:inline="javascript">
 
         var sidebarStates = {}; // 전역 변수로 사이드바 상태 관리
 
@@ -663,7 +663,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            const csvUrl = '../../static/csv/Itemtable.csv'; // 서버에 업로드된 CSV 파일의 URL
+            const csvUrl = '/csv/Itemtable.csv'; // 서버에 업로드된 CSV 파일의 URL
 
             // CSV 파일에서 데이터를 로드하여 전역 변수에 저장
             let allItems = [];
@@ -713,6 +713,17 @@
                     const textSpan = document.createElement('span');
                     textSpan.className = 'item-text';
                     textSpan.textContent = ` ${item.Item}`; // 텍스트 부분
+
+                    const link = document.createElement('a');
+                    link.href = `search?inputKeyword=${encodeURIComponent(item.Item)}`;
+                    link.textContent = item.Item;
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        window.location.href = this.href;
+                    });
+
+                    textSpan.innerHTML = ''; // Clear previous text
+                    textSpan.appendChild(link);
 
                     listItem.appendChild(indexSpan);
                     listItem.appendChild(textSpan);
@@ -927,15 +938,15 @@
 
             <div class="col">
                 <div class="box">
-                    <div class="back"><img src="../../static/images/KakaoTalk_20240418_111511662.jpg" alt="Car Image"
+                    <div class="back"><img th:src="@{/images/KakaoTalk_20240418_111511662.jpg}" alt="Car Image"
                             usemap="#carimage" coords="163,344,480,545" style="width:210%;"></div>
-                    <div class="fourthfront"><img src="../../static/images/body.png" alt="Toggle Body Sidebar"
+                    <div class="fourthfront"><img th:src="@{/images/body.png}" alt="Toggle Body Sidebar"
                             class="bodyImage" style="width:210%;" id="bodyimage"></div>
-                    <div class="thirdfront"><img src="../../static/images/interier.png" alt="Toggle Interior Sidebar"
+                    <div class="thirdfront"><img th:src="@{/images/interier.png}" alt="Toggle Interior Sidebar"
                             class="interiorImage" style="width:210%;" id="interiorImage"></div>
-                    <div class="secondfront"><img src="../../static/images/smallparts.png" alt="Toggle Parts Sidebar"
+                    <div class="secondfront"><img th:src="@{/images/smallparts.png}" alt="Toggle Parts Sidebar"
                             class="smallpartsImage" style="width:100%;" id="smallpartsimage"></div>
-                    <div class="front"><img src="../../static/images/pwtrain2.png" alt="Toggle Engine Sidebar"
+                    <div class="front"><img th:src="@{/images/pwtrain2.png}" alt="Toggle Engine Sidebar"
                             class="EngineImage" style="width:210%;" id="engineimage"></div>
                 </div>
             </div>
