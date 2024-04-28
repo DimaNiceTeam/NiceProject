@@ -13,6 +13,6 @@ public class MainController {
 	 @GetMapping("/about")
 	    public String about() {
 
-	        return "Main/about";
+	        return "/Main/about";
 	    }
 }
