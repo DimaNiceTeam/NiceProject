@@ -225,34 +225,34 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="about.html" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="about.html">
+                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="service.html" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/showOvsNews}">
                                             <span>NEWS</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/showFraud}">
                                             <span>무역 사기사례</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/rate}">
                                             <span>Exchange Rate</span>
                                         </a>
                                     </li>
@@ -264,15 +264,29 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="info.html">
+                                <a href=""><!--수정 필요-->
                                     <span>INFO</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>LOGIN</span>
+                                    <span>Login</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/myPage}" class="has-depth">
+                                    <span>MyPage</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>

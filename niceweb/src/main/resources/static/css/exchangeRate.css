@@ -1,0 +1,88 @@
+<style>.content {
+    /* content가 화면의 68%를 차지하도록 설정 */
+    margin: 0 auto;
+    /* 가운데 정렬 */
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+/*페이지 헤더*/
+.page-header {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+.crateCal {
+    /* crateCal 스타일 설정 */
+    margin: 0 auto;
+    /* 가운데 정렬 */
+    margin-bottom: 60px;
+}
+
+
+/* 이게 화면의 가운데 위치되도록 함 */
+.selectFirst,
+.selectSecond {
+    /* 첫번째와 두번째 선택 영역의 스타일 설정 */
+    text-align: center;
+    /* 텍스트를 가운데 정렬 */
+}
+
+
+.selectBox {
+    width: 200px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+
+}
+
+.selectFirst {
+    margin-bottom: 20px;
+
+}
+
+.eqalSign {
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+
+
+
+
+
+table {
+    width: 68%;
+    margin: 0 auto;
+
+}
+
+#amount,
+#amountDown {
+    width: 200px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    appearance: none;
+    text-align: left;
+    background-color: aliceblue;
+
+}
+
+</style>

@@ -94,7 +94,9 @@ public class SecurityConfig {
 		BCryptPasswordEncoder bCryptPasswordEncoder() {
 			return new BCryptPasswordEncoder();
 		}
+		
 	
+		
 	
 
 }
