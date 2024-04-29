@@ -1,4 +1,4 @@
-// 이 js파일은 globeindex.html과 showReg.html에 연결됨
+ // 이 js파일은 globeindex.html과 showReg.html에 연결됨
 // 이 js파일은 Globe.js파일과 상호연결되어있음
 
 
