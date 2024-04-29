@@ -30,33 +30,33 @@ CREATE TABLE CTGY
     , ITEM_ID   VARCHAR2(50)
 );
     
-            CREATE VIEW MAIN_CTGY
-                AS
-                    SELECT  MAIN_ID
-                            , MAIN_NM
-                    FROM CTGY
-                    WITH READ ONLY
-                ;
+            -- CREATE VIEW MAIN_CTGY
+            --     AS
+            --         SELECT  MAIN_ID
+            --                 , MAIN_NM
+            --         FROM CTGY
+            --         WITH READ ONLY
+            --     ;
             
             
-            CREATE VIEW SUB_CTGY
-                AS
-                    SELECT  SUB_ID
-                            , SUB_NM
-                            , MAIN_ID
-                    FROM CTGY
-                    WITH READ ONLY
-                ;
+            -- CREATE VIEW SUB_CTGY
+            --     AS
+            --         SELECT  SUB_ID
+            --                 , SUB_NM
+            --                 , MAIN_ID
+            --         FROM CTGY
+            --         WITH READ ONLY
+            --     ;
             
             
-            CREATE VIEW ITEM
-                AS
-                    SELECT  ITEM_ID
-                            , ITEM_NM
-                            , SUB_ID
-                    FROM CTGY
-                    WITH READ ONLY
-                ;
+            -- CREATE VIEW ITEM
+            --     AS
+            --         SELECT  ITEM_ID
+            --                 , ITEM_NM
+            --                 , SUB_ID
+            --         FROM CTGY
+            --         WITH READ ONLY
+            --     ;
 
 
 -- URL 테이블 생성 (부모) ( 단순 저장용, 조회는 이거로 안함 )
@@ -87,48 +87,48 @@ drop table CLIENT;
 select * from CLIENT;
 
 
--- 회사 정보 VIEW 생성
-            CREATE VIEW CMP
-                AS
-                    SELECT  DUNS_NO
-                            , CMP_NM
-                            , SIC_CD
-                            , SALES
-                            , ASSET
-                            , EMP
-                            , CONTACT_GRD_CD
-                            , CREDIT_GRD_CD
-                            , URL
-                            , EML
-                            , ENG
-                            , NAT_ID
-                    FROM CLIENT
-                    WITH READ ONLY
-                ;
+-- -- 회사 정보 VIEW 생성
+-- CREATE VIEW CMP
+--     AS
+--         SELECT  DUNS_NO
+--                 , CMP_NM
+--                 , SIC_CD
+--                 , SALES
+--                 , ASSET
+--                 , EMP
+--                 , CONTACT_GRD_CD
+--                 , CREDIT_GRD_CD
+--                 , URL
+--                 , EML
+--                 , ENG
+--                 , NAT_ID
+--         FROM CLIENT
+--         WITH READ ONLY
+--     ;
 
 
--- 국가 VIEW 생성
-            CREATE VIEW NTN
-                AS
-                    SELECT  NAT_ID
-                            , NAT_CD
-                            , NAT_KOR
-                            , NAT_ENG
-                    FROM CLIENT
-                    ORDER BY NAT_ID
-                    WITH READ ONLY
-                ;
+-- -- 국가 VIEW 생성
+--             CREATE VIEW NTN
+--                 AS
+--                     SELECT  NAT_ID
+--                             , NAT_CD
+--                             , NAT_KOR
+--                             , NAT_ENG
+--                     FROM CLIENT
+--                     ORDER BY NAT_ID
+--                     WITH READ ONLY
+--                 ;
 
 
--- 주소 테이블 생성
-            CREATE VIEW LOC
-                AS
-                    SELECT  NTN_ID
-                            , CITY
-                            , ADR
-                    FROM CLIENT
-                    WITH READ ONLY
-                ;
+-- -- 주소 테이블 생성
+--             CREATE VIEW LOC
+--                 AS
+--                     SELECT  NTN_ID
+--                             , CITY
+--                             , ADR
+--                     FROM CLIENT
+--                     WITH READ ONLY
+--                 ;
                 
 -- 국가 기본정보 테이블 생성
 -- 기본정보와 5년치의 수출액 수입액 무역수지 경제성장률 GDP를 포함하는 하나의 테이블을 만들고 연도를 컬럼으로 만들어야 할 거 같다

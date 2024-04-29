@@ -17,10 +17,13 @@ from nltk import WordNetLemmatizer
 from konlpy.tag import Mecab
 from sklearn.metrics.pairwise import cosine_similarity
 
-wlem = nltk.WordNetLemmatizer()
-tokenizer = Mecab().morphs
-app = FastAPI()
 
+
+wlem = nltk.WordNetLemmatizer()
+
+mecab_path = 'C:/mecab/mecab-ko-dic'  # MeCab 사전의 설치 경로 -- 사용자마다 다름 
+tokenizer = Mecab(dicpath=mecab_path).morphs
+app = FastAPI()
 class InputKeyword(BaseModel):
     inputKeyword: str
     nation: str
@@ -32,7 +35,7 @@ def to_string(text): # 리스트에서 문자열로 다 바꿔주기
     text=text.replace("]","") 
     return text
 
-def calculate_similarity(input_vector, df_vectors): # 코사인 유사도 구하기 
+def calculate_similarity(input_vector, df_vectors): # 코사인 유사도 구하기
     similarity = cosine_similarity(input_vector, df_vectors)
     return similarity[0]
 

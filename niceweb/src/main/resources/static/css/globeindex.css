@@ -35,6 +35,7 @@
 지구본 
 ******/
 #chartdiv {
+    position: relative; /* 가상 요소 위치 기준 설정 */
     order: 0;
     /* 첫 번째 위치 */
     flex: 0 0 55%;
@@ -44,8 +45,17 @@
     margin-top: 100px;
     margin-bottom: 180px;
     margin-left: 30px;
-    border-right: 5px dotted var(--blue);
     /* 점선 경계선 추가, 색상은 --blue 사용 */
+}
+
+#chartdiv::after {
+    content: ""; /* 가상 요소에 내용 없음 */
+    position: absolute; /* 절대 위치 */
+    right: 0; /* 오른쪽에 위치 */
+    top: 250px; /* 위에서부터 시작 */
+    height: 8%; /* 경계선의 길이 조절 */
+    width: 10px; /* 경계선의 두께 */
+    border-right: 10px dotted var(--blue); /* 경계선 스타일 지정 */
 }
 
 

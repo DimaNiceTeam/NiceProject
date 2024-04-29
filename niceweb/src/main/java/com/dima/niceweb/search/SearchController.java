@@ -44,9 +44,9 @@ public class SearchController {
 
 	}
 	
-	   @GetMapping("/categorySearch")
-	   public String categorySearch() {
+	@GetMapping("/categorySearch")
+	public String categorySearch() {
 
-	      return "/Recommendation/recommendationByCar";
-	   }
+		return "/Recommendation/recommendationByCar";
+	}
 }
