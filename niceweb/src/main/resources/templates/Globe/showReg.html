@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>미래마이페이지</title>
+    <title>규제</title>
     <link rel="icon" th:href="@{/images/common/favi.png}">
     <meta property="og:title" content="나이스투매치유">
     <meta property="og:image:type" content="image/png">
@@ -25,8 +25,6 @@
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
 
-    <script>
-    </script>
     <style>
         /**페이지 헤더**/
         .page-header {
@@ -34,11 +32,93 @@
             font-size: 36px;
             margin-top: 150px;
             margin-bottom: 50px;
+            display: flex;
+            /* Flexbox를 사용하여 요소를 가운데로 정렬합니다. */
+            justify-content: center;
+            /* 수평 가운데 정렬 */
+            align-items: center;
+            /* 수직 가운데 정렬 */
         }
+
+        .page-header img {
+            margin-right: 10px;
+            /* 이미지 오른쪽에 약간의 여백을 추가합니다. */
+            width: 60px;
+            /* 이미지의 너비를 조정합니다. */
+            height: 60px;
+            /* 이미지의 높이를 조정합니다. */
+        }
+
+        .content {
+            width: 68%;
+            margin: 0 auto;
+        }
+
+        #regulationTable {
+            border-collapse: collapse;
+            width: 100%;
+
+        }
+
+        /* 테이블 간격 조정 */
+        #regulationTabletd:first-child(2),
+        #regulationTable th:first-child(2) {
+            width: 10%;
+            /* 첫 번째 열의 너비를 200px로 조정합니다. */
+        }
+
+        #regulationTabletd:first-child(3),
+        #regulationTable th:first-child(3) {
+            width: 50%;
+            /* 첫 번째 열의 너비를 200spx로 조정합니다. */
+        }
+
+        #regulationTabletd:first-child,
+        #regulationTable th:first-child {
+
+            width: 10%;
+
+        }
+
+
+
+        #regulationTabletd:first-child(4),
+        #regulationTable th:first-child(4) {
+            width: 20%;
+            /* 첫 번째 열의 너비를 200px로 조정합니다. */
+        }
+
+        #regulationTabletd:first-child(5),
+        #regulationTable th:first-child(5) {
+            width: 5%
+                /* 첫 번째 열의 너비를 200px로 조정합니다. */
+        }
+
+
+
+
+
 
         #insertReg {
             margin-top: 30px;
         }
+
+        #regulationTable th {
+            padding: 8px;
+            text-align: left;
+            text-align: center;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            color: #000;
+            font-weight: bold;
+        }
+
+        #regulationTable tbody tr {
+            border-bottom: 1px solid #d3d3d3;
+            /* 회색 선 추가 */
+        }
+
+        /* #regulationTable {} */
     </style>
 
 </head>
@@ -58,24 +138,24 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="" class="has-depth"><!--추후 수정 필요-->
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="#"><!--추후 수정 필요-->
+                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/showovsNews}">
+                                        <a th:href="@{/showOvsNews}">
                                             <span>NEWS</span>
                                         </a>
                                     </li>
@@ -92,20 +172,34 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href=""><!--수정 필요-->
                                     <span>INFO</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>LOGIN</span>
+                                    <span>Login</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/myPage}" class="has-depth">
+                                    <span>MyPage</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>
@@ -128,9 +222,9 @@
             <!--데이터 꽂히는 부분 내용 들어갈 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
             <div class="content">
                 <div class="page-header on">
+                    <img id="countryFlag" src="" alt="Flag">
                     <h2>규제</h2>
                 </div>
-                <!--규제 부분-->
                 <div id="insertReg">
 
                 </div>
@@ -172,8 +266,14 @@
         <!--나라별 규제 끌어오는 부분-->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+
+                console.log(flagUrl)
                 const params = new URLSearchParams(window.location.search);
                 const country = params.get('country');
+
+                //국기 api
+                var flagUrl = `https://flagsapi.com/${country}/flat/64.png`; // 국기 이미지 URL 생성
+                document.getElementById('countryFlag').src = flagUrl; // 이미지 소스 업데이트
 
                 if (!country) {
                     document.getElementById('insertReg').innerHTML = 'No country specified.';
@@ -221,7 +321,18 @@
                 if (data.length === 0) {
                     return 'No data found for selected country.';
                 }
-                let table = '<table border="1">';
+                let table = '<table border="1" id="regulationTable">';
+                table += `
+            <thead>
+                    <tr>
+                        <th>국가코드</th>
+                        <th>물품</th>
+                        <th>적용국가</th>
+                        <th>규제내용</th>
+                        <th>HS코드</th>
+                        
+                    </tr>
+            </thead>`;
                 data.forEach((row, index) => {
                     table += '<tr>';
                     row.forEach(cell => {
@@ -233,6 +344,7 @@
                 return table;
             }
         </script>
+
 
         <!--상단과 하단바에 적용되는 부분-->
         <script th:src="@{/js/lib/gsap.min.js}"></script>

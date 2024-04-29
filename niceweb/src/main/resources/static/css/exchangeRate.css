@@ -1,4 +1,4 @@
-<style>.content {
+.content {
     /* content가 화면의 68%를 차지하도록 설정 */
     margin: 0 auto;
     /* 가운데 정렬 */
@@ -29,6 +29,24 @@
     text-align: center;
     /* 텍스트를 가운데 정렬 */
 }
+
+/****************
+국기 위치
+****************/
+
+
+.flag-container {
+    display: inline-block;
+    vertical-align: middle;
+    /* 이미지를 텍스트와 수직으로 정렬합니다. */
+    margin-right: 10px;
+    /* 이미지와 텍스트 사이의 간격을 조절합니다. */
+
+
+}
+
+
+
 
 
 .selectBox {
@@ -84,5 +102,3 @@ table {
     background-color: aliceblue;
 
 }
-
-</style>

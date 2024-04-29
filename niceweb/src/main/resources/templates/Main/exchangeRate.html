@@ -37,6 +37,16 @@
             //bankingAPI(); -- 안됨 
             //showrate(); // 맨처음 환율 미국:1달러시 한국돈 환율 보여줌 
 
+            // 국기 바뀜
+            flagNation();
+            $("#exchangeFrom").change(function () {
+                flagNation("from");
+            });
+            $("#exchangeTo").change(function () {
+                flagNation("down");
+            });
+
+
             // 1) 윗칸이 변할때 
             // showrateUp();
             // $("#exchangeFrom").change(showrateUp);
@@ -50,6 +60,41 @@
 
 
         });
+        function flagNation(place) {
+
+            if (place == "from") {
+                let country = $("#exchangeFrom").val().substring(0, 2);
+                let flagUrl = `https://flagsapi.com/${country}/flat/64.png`; // 국기 이미지 URL 생성
+                //document.getElementById('countryFlag').src = flagUrl; // 이미지 소스 업데이트
+                //$("#countryFlag").src(flagUrl);
+                $("#countryFlag").attr('src', flagUrl); // 이미지 소스 업데이트
+            }
+            else if (place == "down") {
+
+                let country = $("#exchangeTo").val().substring(0, 2);
+                let flagUrl = `https://flagsapi.com/${country}/flat/64.png`; // 국기 이미지 URL 생성
+
+                $("#countryFlagFrom").attr('src', flagUrl); // 이미지 소스 업데이트
+
+            }
+            else {
+                let country = $("#exchangeTo").val().substring(0, 2);
+                let flagUrl = `https://flagsapi.com/${country}/flat/64.png`; // 국기 이미지 URL 생성
+                $("#countryFlagFrom").attr('src', flagUrl); // 이미지 소스 업데이트
+
+                country = $("#exchangeFrom").val().substring(0, 2);
+                flagUrl = `https://flagsapi.com/${country}/flat/64.png`;
+                $("#countryFlag").attr('src', flagUrl);
+
+
+            }
+            //국기 api
+
+
+
+
+
+        }
 
         function bankingAPI() {
             var authkey = 'Uz4el4zIIu0ZrTuEnM8A0ZDuSOb8ubhV';
@@ -195,6 +240,7 @@
 
                 return
             }
+            //http://apilayer.net/api/convert?access_key=58dfaebb4ddb4d8dea6360b93171efff&from=US&to=KR&amount=10
 
             $.ajax({
                 url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
@@ -373,6 +419,9 @@
                 <div class="crateCal" id="crateCal"><!--계산 부분-->
 
                     <div class="selectFirst" id="selectFirst"><!--첫번째-->
+                        <div class="flag-container">
+                            <img id="countryFlag" src="" alt="Flag" class="flag">
+                        </div>
                         <select name="exchageRate" id="exchangeFrom" class="selectBox">
                             <option value="USD">미국</option>
                             <option value="KRW">대한민국</option>
@@ -544,6 +593,9 @@
 
 
                     <div class="selectSecond" id="selectSecond"><!--두번째 -->
+                        <span class="flag-container">
+                            <img id="countryFlagFrom" src="" alt="Flag" class="flag">
+                        </span>
                         <select name="exchageRate" id="exchangeTo" class="selectBox">
                             <option value="KRW">대한민국</option>
                             <option value="USD">미국</option>
