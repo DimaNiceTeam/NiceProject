@@ -31,7 +31,7 @@ public class UserController {
 	
 	@GetMapping("/myPage")
 	public String myPage() {
-		return"myPage/pagemy";
+		return"myPage/mypage_h";
 	}
 	/**
 	 * 회원 가입 정보 DB에 저장 
