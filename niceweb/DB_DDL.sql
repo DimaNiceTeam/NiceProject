@@ -61,6 +61,9 @@ CREATE TABLE CTGY
 
 -- URL 테이블 생성 (부모) ( 단순 저장용, 조회는 이거로 안함 )
 -- JOIN으로 받은 USER_ACC 객체를 저장해야하기 때문에 정규화되지 않은 원데이터 틀로 저장후 조회할 때는 정규화된 테이블을 이용
+
+drop table CLIENT;
+
 CREATE TABLE CLIENT 
 (
       DUNS_NO           VARCHAR2(100)   PRIMARY KEY    -- DUNS넘버
@@ -83,7 +86,6 @@ CREATE TABLE CLIENT
    
 );
 
-drop table CLIENT;
 select * from CLIENT;
 
 
