@@ -1,109 +1,5 @@
 @keyframes spin {
     0% {
-<<<<<<< HEAD
-      transform: translate(2px, 1px) rotate(0deg);
-    }
-    10% {
-      transform: translate(-1px, -3px) rotate(36deg);
-    }
-    20% {
-      transform: translate(-2px, 0px) rotate(72deg);
-    }
-    30% {
-      transform: translate(1px, 2px) rotate(108deg);
-    }
-    40% {
-      transform: translate(1px, -1px) rotate(144deg);
-    }
-    50% {
-      transform: translate(-1px, 3px) rotate(180deg);
-    }
-    60% {
-      transform: translate(-1px, 1px) rotate(216deg);
-    }
-    70% {
-      transform: translate(3px, 1px) rotate(252deg);
-    }
-    80% {
-      transform: translate(-2px, -1px) rotate(288deg);
-    }
-    90% {
-      transform: translate(2px, 1px) rotate(324deg);
-    }
-    100% {
-      transform: translate(1px, -2px) rotate(360deg);
-    }
-  }
-  @keyframes speed {
-    0% {
-      transform: translate(2px, 1px) rotate(0deg);
-    }
-    10% {
-      transform: translate(-1px, -3px) rotate(-1deg);
-    }
-    20% {
-      transform: translate(-2px, 0px) rotate(1deg);
-    }
-    30% {
-      transform: translate(1px, 2px) rotate(0deg);
-    }
-    40% {
-      transform: translate(1px, -1px) rotate(1deg);
-    }
-    50% {
-      transform: translate(-1px, 3px) rotate(-1deg);
-    }
-    60% {
-      transform: translate(-1px, 1px) rotate(0deg);
-    }
-    70% {
-      transform: translate(3px, 1px) rotate(-1deg);
-    }
-    80% {
-      transform: translate(-2px, -1px) rotate(1deg);
-    }
-    90% {
-      transform: translate(2px, 1px) rotate(0deg);
-    }
-    100% {
-      transform: translate(1px, -2px) rotate(-1deg);
-    }
-  }
-  @keyframes strikes {
-    from {
-      left: 25px;
-    }
-    to {
-      left: -80px;
-      opacity: 0;
-    }
-  }
-  @keyframes dots {
-    from {
-      width: 0px;
-    }
-    to {
-      width: 15px;
-    }
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  body {
-    background: #333;
-  }
-  
-  .fadeIn, .error-window {
-    animation: fadeIn 0.4s both;
-  }
-  
-  .error-window {
-=======
         transform: translate(2px, 1px) rotate(0deg);
     }
 
@@ -235,7 +131,6 @@ body {
 }
 
 .error-window {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     background: #333;
     border-radius: 6px;
     color: #aaccff;
@@ -247,26 +142,13 @@ body {
     top: 50%;
     width: 300px;
     z-index: 99;
-<<<<<<< HEAD
-  }
-  .error-window .text {
-=======
 }
 
 .error-window .text {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     font-size: 20px;
     position: absolute;
     width: auto;
     top: 75%;
-<<<<<<< HEAD
-left:0;
-right:0;
-    margin: auto;
-    text-align: center;
-  }
-  .error-window .dots {
-=======
     left: 0;
     right: 0;
     margin: auto;
@@ -274,60 +156,28 @@ right:0;
 }
 
 .error-window .dots {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     display: inline-block;
     width: 5px;
     overflow: hidden;
     vertical-align: bottom;
     animation: dots 1.5s linear infinite;
     transition: 1;
-<<<<<<< HEAD
-  }
-  
-  .car {
-=======
 }
 
 .car {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     position: absolute;
     width: 117px;
     height: 42px;
     left: 92px;
     top: 70px;
-<<<<<<< HEAD
-  }
-  .car .strike {
-=======
 }
 
 .car .strike {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     position: absolute;
     width: 11px;
     height: 1px;
     background: #aaccff;
     animation: strikes 0.2s linear infinite;
-<<<<<<< HEAD
-  }
-  .car .strike2 {
-    top: 11px;
-    animation-delay: 0.05s;
-  }
-  .car .strike3 {
-    top: 22px;
-    animation-delay: 0.1s;
-  }
-  .car .strike4 {
-    top: 33px;
-    animation-delay: 0.15s;
-  }
-  .car .strike5 {
-    top: 44px;
-    animation-delay: 0.2s;
-  }
-  .car-detail {
-=======
 }
 
 .car .strike2 {
@@ -351,19 +201,13 @@ right:0;
 }
 
 .car-detail {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     position: absolute;
     display: block;
     background: #aaccff;
     animation: speed 0.5s linear infinite;
-<<<<<<< HEAD
-  }
-  .car-detail.spoiler {
-=======
 }
 
 .car-detail.spoiler {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     width: 0;
     height: 0;
     top: 7px;
@@ -371,26 +215,16 @@ right:0;
     border: 20px solid transparent;
     border-bottom: 8px solid #aaccff;
     border-left: 20px solid #aaccff;
-<<<<<<< HEAD
-  }
-  .car-detail.back {
-=======
 }
 
 .car-detail.back {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     height: 20px;
     width: 92px;
     top: 15px;
     left: 0px;
-<<<<<<< HEAD
-  }
-  .car-detail.center {
-=======
 }
 
 .car-detail.center {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     height: 35px;
     width: 75px;
     left: 12px;
@@ -399,40 +233,25 @@ right:0;
     border: 4px solid #aaccff;
     background: none;
     box-sizing: border-box;
-<<<<<<< HEAD
-  }
-  .car-detail.center1 {
-=======
 }
 
 .car-detail.center1 {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     height: 35px;
     width: 35px;
     left: 12px;
     border-top-left-radius: 30px;
-<<<<<<< HEAD
-  }
-  .car-detail.front {
-=======
 }
 
 .car-detail.front {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     height: 20px;
     width: 50px;
     top: 15px;
     left: 67px;
     border-top-right-radius: 50px 40px;
     border-bottom-right-radius: 10px;
-<<<<<<< HEAD
-  }
-  .car-detail.wheel {
-=======
 }
 
 .car-detail.wheel {
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -441,15 +260,8 @@ right:0;
     border: 3px solid #333;
     background: linear-gradient(45deg, transparent 45%, #aaccff 46%, #aaccff 54%, transparent 55%), linear-gradient(-45deg, transparent 45%, #aaccff 46%, #aaccff 54%, transparent 55%), linear-gradient(90deg, transparent 45%, #aaccff 46%, #aaccff 54%, transparent 55%), linear-gradient(0deg, transparent 45%, #aaccff 46%, #aaccff 54%, transparent 55%), radial-gradient(#aaccff 29%, transparent 30%, transparent 50%, #aaccff 51%), #333;
     animation-name: spin;
-<<<<<<< HEAD
-  }
-  .car-detail.wheel2 {
-    left: 82px;
-  }
-=======
 }
 
 .car-detail.wheel2 {
     left: 82px;
 }
->>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
