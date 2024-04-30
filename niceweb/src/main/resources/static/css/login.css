@@ -57,10 +57,10 @@ LOGIN
   flex-direction: column;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 20px;
-  max-width: 330px;
+  padding: 50px; /* 패딩 증가 */
+  max-width: 600px; /* 폼의 최대 너비를 더 증가 */
   width: 100%;
 }
 
@@ -73,32 +73,33 @@ LOGIN
 .form-login input[type="id"],
 .form-login input[type="password"] {
   width: 100%;
-  padding: 12px 20px;
+  padding: 25px 40px; /* 패딩 증가 */
+  font-size: 1.5rem; /* 폰트 사이즈 증가 */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   transition: border 0.3s ease;
 }
 
 .form-login input[type="id"]:focus,
 .form-login input[type="password"]:focus {
-  border-color: #0056b3;
+  border-color: #98bce2;
   outline: none;
 }
 
 .form-login button[type="submit"] {
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #007bff;
+  width: 100%; /* 너비를 100%로 조정 */
+  padding: 20px 40px; /* 패딩 증가 */
+  background-color: var(--blue);
   color: white;
-  font-size: 1.0rem;
+  font-size: 1.8rem; /* 폰트 사이즈 증가 */
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .form-login button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #7b92b4;
 }
 
 @media all and (max-width: 768px) {
@@ -115,7 +116,7 @@ LOGIN
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  background-color: #007bff; /* Bootstrap의 primary 색상 */
+  background-color: var(--blue); /* Bootstrap의 primary 색상 */
   border: 1px solid transparent;
   text-decoration: none;
 }
@@ -131,12 +132,12 @@ LOGIN
   text-decoration: none; /* 밑줄 제거 */
   font-size: 0.8rem; /* 폰트 크기 조정 */
   color: white; /* 텍스트 색상 */
-  background-color: #6c757d; /* 배경 색상 */
+  background-color: #c9deff; /* 배경 색상 */
   padding: 10px 15px; /* 패딩 조정 */
   border-radius: 4px; /* 모서리 둥글게 */
   display: block;
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268; /* 호버 시 배경색 변경 */
+  background-color: #c9deff; /* 호버 시 배경색 변경 */
 }

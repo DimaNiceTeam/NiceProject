@@ -31,7 +31,7 @@ public class UserController {
 	
 	@GetMapping("/myPage")
 	public String myPage() {
-		return"myPage/mypage_h";
+		return"myPage/mypage";
 	}
 	/**
 	 * 회원 가입 정보 DB에 저장 
@@ -50,7 +50,7 @@ public class UserController {
 	}
 	@GetMapping("/login")
 	public String login() {
-		return"login/logincopy";
+		return"login/login";
 	}
 
 	@GetMapping("/find")

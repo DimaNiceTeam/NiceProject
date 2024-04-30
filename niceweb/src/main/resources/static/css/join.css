@@ -71,7 +71,7 @@ input[type='name'] {
     /* 입력창 하단의 여백 설정 */
     display: inline-block;
     /* 인라인 블록 요소로 설정 */
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
     /* 테두리 더 뚜렷하게 설정 */
     border-radius: 20px;
     /* 모서리를 약간 둥글게 설정 */
@@ -110,7 +110,7 @@ input[type='email']:focus,
 input[type='name']:focus {
     background-color: #e8e8e8;
     /* 포커스 시 배경색 변경 */
-    border-color: #a0a0a0;
+    border-color: #c7c7c7;
     /* 포커스 시 테두리 색상 변경 */
     outline: none;
     /* 기본 아웃라인 제거 */
@@ -119,7 +119,7 @@ input[type='name']:focus {
 #countrySelect:focus {
     background-color: #e8e8e8;
     /* 포커스 시 배경색 변경 */
-    border-color: #a0a0a0;
+    border-color: #c7c7c7;
     /* 포커스 시 테두리 색상 변경 */
     outline: none;
     /* 기본 아웃라인 제거 */
@@ -195,7 +195,7 @@ input[type='name']:focus {
     width: 25px;
     /* 체크박스의 크기 */
     height: 25px;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
     /* 체크박스의 테두리 */
     border-radius: 20px;
     /* 체크박스 모서리를 둥글게 */
@@ -211,7 +211,7 @@ input[type='name']:focus {
     top: 5px;
     width: 5px;
     height: 10px;
-    border: solid #000;
+    border: solid var(--blue);
     /* 체크 표시 색상 */
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -227,7 +227,7 @@ input[type='name']:focus {
 /* 기존 스타일 유지 */
 .join .btn-primary {
     padding: 10px 20px;
-    background-color: var(--light-blue-2);
+    background-color: var(--blue);
     color: white;
     border: none;
     border-radius: 20px;
@@ -242,7 +242,7 @@ input[type='name']:focus {
 
 /* 버튼에 마우스를 올렸을 때의 스타일 */
 .join .btn-primary:hover {
-    background-color: var(--blue);
+    background-color: #7b92b4;
 }
 
 /* 경고 메세지 */

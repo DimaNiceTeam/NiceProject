@@ -58,14 +58,14 @@ body.opened-nav	 {overflow: hidden; height:100%;}
 }
 body.scroll-down:not(.opened-nav) #header {top: var(--header-);}
 #header .header-inner {position: relative;}
-#header .logo {width: 300px; height: var(--header);}
+#header .logo {width: 150px; height: var(--header);}
 #header .logo > a {display: -ms-flexbox; display: -webkit-flex; display: flex; 
 	-webkit-box-align: center; -ms-flex-align: center; align-items: center;
-	width: 100%; height: 100%; background-image: url('../images/common/LOGO.svg'); background-repeat: no-repeat; background-position: center center; background-size: 300px auto; -webkit-transition: background-image 0.3s ease-in-out; -o-transition: background-image 0.3s ease-in-out; transition: background-image 0.3s ease-in-out;
+	width: 250%; height: 100%; background-image: url('../images/common/logo-w.svg'); background-repeat: no-repeat; background-position: center center; background-size: 250px auto; -webkit-transition: background-image 0.3s ease-in-out; -o-transition: background-image 0.3s ease-in-out; transition: background-image 0.3s ease-in-out;
 }
 #header.nav-hover .logo > a,
 #wrap.gap #header .logo > a ,
-body:not(.opened-nav).scroll-has #header:not(.nav-hover) .logo > a {background-image: url('../images/common/logo_color.svg');}
+body:not(.opened-nav).scroll-has #header:not(.nav-hover) .logo > a {background-image: url('../images/common/logo.svg');}
 #header .nav-wrap {width: 100%;}
 #header .gnb-list {position: relative;}
 #header .gnb-list > li a,
@@ -219,7 +219,7 @@ body.opened-nav #header .language > .btn::before {background-image: url('../imag
 	
 	#header .utility {position: fixed; top: 16px; left: 30px; z-index: 11;}
 	#header .language > .btn {display: none;}
-	#header .language > ul {background-image: url('../images/common/btn_menu-w.svg'); background-repeat: no-repeat; background-position: 0 5px; background-size: 20px 20px; padding-left: 30px;}
+	#header .language > ul {background-image: url('../images/common/ico_globe.svg'); background-repeat: no-repeat; background-position: 0 5px; background-size: 20px 20px; padding-left: 30px;}
 	#header .language > ul > li {position: relative;}
 	#header .language > ul > li + li::before {content: ''; display: block; position: absolute; top: 9px; left: -13px; width: 2px; height: 12px; background-color: var(--light-gray-1);}
 	#header .language > ul > li > a {font-weight: 500; font-size: 14px;}
