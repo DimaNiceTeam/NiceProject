@@ -16,7 +16,7 @@
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
     <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/exchangeRate.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/serviceCss/exchangeRate.css}">
 
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
@@ -30,7 +30,6 @@
 
 
     <script>
-
 
         $(function () {
             init(); // 4월 환율 데이터 
@@ -313,15 +312,11 @@
 
         }
 
-
-
-
-
     </script>
 </head>
 
 <body>
-    <div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+    <div class="skip-nav"> <a href="#content">본문 바로가기</a></div>
     <div id="wrap" class="wrap">
         <header id="header" class="header">
             <div class="header-inner">
@@ -339,7 +334,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -352,12 +347,17 @@
                                 <ul>
                                     <li>
                                         <a th:href="@{/showOvsNews}">
-                                            <span>NEWS</span>
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -374,22 +374,22 @@
                             </li>
                             <li>
                                 <a href=""><!--수정 필요-->
-                                    <span>INFO</span>
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>Login</span>
+                                    <span>LOGIN</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{/user/myPage}" class="has-depth">
-                                    <span>MyPage</span>
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
                                 </a>
                                 <ul>
                                     <li>
                                         <a th:href="@{/user/logout}">
-                                            <span>Logout</span>
+                                            <span>LOGOUT</span>
                                         </a>
                                     </li>
 
@@ -412,9 +412,16 @@
         </header>
         <div id="scroller" class="scroller" data-scrollbar>
             <div class="content">
-                <div class="page-header on">
-                    <h2>환율 계산기</h2>
+                <div class="sub-visual sub-visual--sub2">
+                    <div class="sub-visual__inner">
+                        <h2 class="sub-visual__h2">환율 계산기</h2>
+                        <p class="sub-visual__desc">바이어에게 실시간 환율 정보를 제공하는 페이지입니다. </p>
+                    </div>
+
                 </div>
+                <!-- <div class="page-header on">
+                    <h2>환율 계산기</h2>
+                </div> -->
 
                 <div class="crateCal" id="crateCal"><!--계산 부분-->
 

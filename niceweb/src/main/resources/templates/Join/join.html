@@ -305,12 +305,17 @@
                                 <ul>
                                     <li>
                                         <a th:href="@{/showOvsNews}">
-                                            <span>NEWS</span>
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -327,13 +332,26 @@
                             </li>
                             <li>
                                 <a href=""><!--수정 필요-->
-                                    <span>INFO</span>
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>Login</span>
+                                    <span>LOGIN</span>
                                 </a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>LOGOUT</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
                             </li>
 
                         </ul>

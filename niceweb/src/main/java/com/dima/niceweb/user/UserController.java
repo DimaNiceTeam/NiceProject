@@ -29,7 +29,7 @@ public class UserController {
 		return"Join/join";
 	}
 	
-	@GetMapping("/myPage")
+	@GetMapping("/mypage")
 	public String myPage() {
 		return"myPage/mypage";
 	}

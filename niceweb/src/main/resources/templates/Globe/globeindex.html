@@ -48,30 +48,35 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="" class="has-depth"><!--추후 수정 필요-->
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="#"><!--추후 수정 필요-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/showovsNews}">
-                                            <span>NEWS</span>
+                                        <a th:href="@{/showOvsNews}">
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -82,20 +87,34 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span>INFO</span>
+                                <a href=""><!--수정 필요-->
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
                                     <span>LOGIN</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>LOGOUT</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>
@@ -113,7 +132,13 @@
         </header>
 
         <div id="scroller" class="scroller" data-scrollbar>
-            <!--데이터 꽂히는 부분 내용 들어갈 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <div class="sub-visual sub-visual--sub2">
+                <div class="sub-visual__inner">
+                    <h2 class="sub-visual__h2">무역통계</h2>
+                    <p class="sub-visual__desc">세계 각국의 무역 관련 통계를 확인할 수 있는 페이지입니다.</p>
+                </div>
+            </div>
+            <!--데이터 꽂히는 부분 내용 들어갈 부분-->
             <div class="content">
                 <div class="dropdown-container">
                     <select id="continentSelect" onchange="updateCountryList()">

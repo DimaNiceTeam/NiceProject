@@ -1,0 +1,167 @@
+header {
+    margin-bottom: 20px;
+    /* header 아래에 20px의 여백을 줍니다. */
+}
+
+.content {
+    margin-top: 200px;
+
+}
+
+.searchBox {
+    margin-top: 50px;
+    /* 페이지 헤더와의 윗 간격 조정  */
+}
+
+/**페이지 헤더**/
+.page-header {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 150px;
+}
+
+/* 검색창 영역*/
+div.search {
+    width: 560px;
+    margin: 0 auto;
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border-radius: 25px;
+    padding-left: 10px;
+    border: 1px solid gray;
+}
+
+div.search {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+input {
+    display: inline-block;
+    margin-left: 20px;
+    border: 0px;
+    outline: none;
+    font-size: 16px;
+}
+
+.searchBox {
+    margin-bottom: 120px;
+}
+
+
+/* 테이블 출력 부분 */
+/* 테이블 제목과 테이블 왼쪽 너비 맞춤 */
+
+.table-content {
+    display: none;
+}
+
+.count {
+    font-weight: bolder;
+
+}
+
+.content {
+    width: 68%;
+    margin: 0 auto;
+}
+
+
+
+table th {
+    padding: 8px;
+    text-align: left;
+    text-align: center;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    color: #000;
+    font-weight: bold;
+}
+
+#results tr {
+    border-bottom: 1px solid #d3d3d3;
+    /* 회색 선 추가 */
+}
+
+.showDetails:hover {
+    color: #ff4dd6;
+}
+
+#results td:nth-child(2),
+#results td:nth-child(3),
+#results td:nth-child(4) {
+    text-align: center;
+    /* 가운데 정렬로 수정 */
+}
+
+/* 결과 없음 메시지 스타일 */
+#noResult {
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
+    width: 100%;
+    /* 전체 너비를 차지하도록 설정 */
+    color: var(--dark-gray);
+    /* 글자 색상 조정 */
+    font-size: 18px;
+    /* 글자 크기 확대 */
+    font-weight: bold;
+    /* 글자 두께를 굵게 */
+    margin-bottom: 100px;
+    /* fotter와의 간격조정 */
+    display: block;
+    /* 블록 레벨 요소로 설정 */
+}
+
+/******************************
+        배너 만들기 
+*******************************/
+.sub-visual--sub2 .sub-visual__inner {
+    background: #64DB99
+}
+
+.sub-visual__inner {
+    position: relative;
+    max-width: 1366px;
+    margin: 122px auto 0;
+    padding: 64px 0 65px 111px;
+    border-radius: 32px 0;
+}
+
+.sub-visual__h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Pretendard, Nanum Gothic, 나눔고딕, sans-serif;
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.sub-visual__desc {
+    position: relative;
+    width: 475px;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
+
+}
+
+.sub-visual__inner:before {
+    content: "";
+    position: absolute;
+    top: 50px;
+    right: 70px;
+    display: block;
+    width: 498px;
+    height: 269px;
+    /* height: 280px; */
+
+    background: url(/images/banner/newsbanner.png) no-repeat 0 0 / 100% auto;
+}

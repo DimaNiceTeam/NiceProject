@@ -25,6 +25,7 @@
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
 
+
     <style>
         /**페이지 헤더**/
         .page-header {
@@ -57,45 +58,15 @@
         #regulationTable {
             border-collapse: collapse;
             width: 100%;
+            table-layout:
+                fixed;
+            word-break:
+                break-all;
+            height:
+                auto;
+
 
         }
-
-        /* 테이블 간격 조정 */
-        #regulationTabletd:first-child(2),
-        #regulationTable th:first-child(2) {
-            width: 10%;
-            /* 첫 번째 열의 너비를 200px로 조정합니다. */
-        }
-
-        #regulationTabletd:first-child(3),
-        #regulationTable th:first-child(3) {
-            width: 50%;
-            /* 첫 번째 열의 너비를 200spx로 조정합니다. */
-        }
-
-        #regulationTabletd:first-child,
-        #regulationTable th:first-child {
-
-            width: 10%;
-
-        }
-
-
-
-        #regulationTabletd:first-child(4),
-        #regulationTable th:first-child(4) {
-            width: 20%;
-            /* 첫 번째 열의 너비를 200px로 조정합니다. */
-        }
-
-        #regulationTabletd:first-child(5),
-        #regulationTable th:first-child(5) {
-            width: 5%
-                /* 첫 번째 열의 너비를 200px로 조정합니다. */
-        }
-
-
-
 
 
 
@@ -118,7 +89,117 @@
             /* 회색 선 추가 */
         }
 
-        /* #regulationTable {} */
+        .page {
+            color: #fff;
+            background-color: #198754;
+            border-color: #198754;
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+        }
+
+        .bbb {
+            float: right;
+            /* margin-left: 100px; */
+
+
+            /* You can adjust the margin as needed */
+            color: #fff;
+            background-color: #385E82;
+            border-color: #385E82;
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+        }
+
+        .bbb {
+            /* margin: 1rem; */
+            margin-bottom: 30px;
+            margin-left: 30px;
+            background-color: #385E82;
+            border-color: #385E82;
+        }
+
+        .jittery {
+            animation: jittery 4s infinite;
+        }
+
+        @keyframes jittery {
+
+            5%,
+            50% {
+                transform: scale(1);
+            }
+
+            10% {
+                transform: scale(0.9);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            20% {
+                transform: scale(1.15) rotate(-5deg);
+            }
+
+            25% {
+                transform: scale(1.15) rotate(5deg);
+            }
+
+            30% {
+                transform: scale(1.15) rotate(-3deg);
+            }
+
+            35% {
+                transform: scale(1.15) rotate(2deg);
+            }
+
+            40% {
+                transform: scale(1.15) rotate(0);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        /*****************************************
+        ******************************************/
     </style>
 
 </head>
@@ -143,7 +224,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -156,12 +237,17 @@
                                 <ul>
                                     <li>
                                         <a th:href="@{/showOvsNews}">
-                                            <span>NEWS</span>
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -178,22 +264,22 @@
                             </li>
                             <li>
                                 <a href=""><!--수정 필요-->
-                                    <span>INFO</span>
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>Login</span>
+                                    <span>LOGIN</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{/user/myPage}" class="has-depth">
-                                    <span>MyPage</span>
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
                                 </a>
                                 <ul>
                                     <li>
                                         <a th:href="@{/user/logout}">
-                                            <span>Logout</span>
+                                            <span>LOGOUT</span>
                                         </a>
                                     </li>
 
@@ -219,12 +305,17 @@
         <div id="scroller" class="scroller" data-scrollbar>
 
 
-            <!--데이터 꽂히는 부분 내용 들어갈 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+            <!--데이터 꽂히는 부분 내용-->
             <div class="content">
                 <div class="page-header on">
                     <img id="countryFlag" src="" alt="Flag">
                     <h2>규제</h2>
                 </div>
+                <button class="bbb btn-primary jittery"><a
+                        href="https://www.hs-tariff.com/main/hs_mti_ai_main/?device=pc" target="_blank">HS코드를
+                        모른다면</a></button>
+
+
                 <div id="insertReg">
 
                 </div>

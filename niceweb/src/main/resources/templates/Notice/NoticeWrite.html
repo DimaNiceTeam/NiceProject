@@ -15,7 +15,7 @@
     <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/notice.css}">
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
 </head>
@@ -73,8 +73,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="info.html">
-                                    <span>INFO</span>
+                                <a href="notice.html">
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
                             <li>
@@ -83,7 +83,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div> <!-- // .nav-wrap -->
+                    </div> <!--// .nav-wrap-->
                 </nav>
                 <div class="btns">
                     <button type="button" class="btn open-nav" id="openMe">
@@ -99,37 +99,40 @@
         <div id="scroller" class="scroller" data-scrollbar>
 
             <!-- 공지사항 수정 form 변경 -->
-            <div class="container">
-                <div class="logo">
-                    <h2>글 쓰기</h2>
+            <div class="content2">
+                <div class="page-header2 on">
+                    <h2>게시글 쓰기</h2>
                 </div>
-            </div> <!-- .container 끝 -->
+            </div>
 
-            <!-- 글쓰기 --> <!-- 전체적으로 손봐야함 -->
-            <div class="content">
-                <form th:action="@{/board/boardWrite}" method="POST" enctype="multipart/form-data">
-                    <table border="1">
+            <!-- 글쓰기 -->
+            <div class="table-content">
+                <form th:action="@{/noticeWrite}" method="POST" enctype="multipart/form-data">
+                    <table border="1" class="nWrite">
+
 
                         <tr>
-                            <th>글제목</th>
-                            <td><input id="boardTitle" type="text" name="boardTitle" required></td>
+                            <th class="writeTitle">글 제목</th>
+                            <td><input id="noticeTitle" type="text" name="noticeTitle">
+                                <input type="hidden" id="noticeWriter" value="NICE2MATCHYOU" name="noticeWriter">
+                            </td>
+
                         </tr>
+
+
+
                         <tr>
-                            <th>글내용</th>
+                            <th class="writeContent">글 내용</th>
                             <td>
-                                <textarea name="boardContent" id="boardContent" cols="30" rows="10" required></textarea>
+                                <textarea name="noticeContent" id="noticeContent" cols="30" rows="10"
+                                    required></textarea>
                             </td>
                         </tr>
 
                         <tr>
-                            <th>첨부파일</th> <!-- 혹시몰라서 냅둠-->
-                            <td><input id="uploadFile" type="file" name="uploadFile"></td>
-                        </tr>
-
-                        <tr>
                             <th colspan="2">
-                                <input type="submit" value="글등록" class="btn btn-primary"> &nbsp;
-                                <input type="reset" value="초기화" class="btn btn-danger">
+                                <input type="submit" value="글등록"> &nbsp;
+                                <input type="reset" value="초기화">
                             </th>
 
                         </tr>

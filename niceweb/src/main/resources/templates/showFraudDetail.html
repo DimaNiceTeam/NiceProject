@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>무역사기사례details</title>
+    <title>사기사례 확인</title>
     <link rel="icon" th:href="@{/images/common/favi.png}">
     <meta property="og:title" content="나이스투매치유">
     <meta property="og:image:type" content="image/png">
@@ -24,49 +24,6 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}"><!--이거 때문에 안됨-->
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
-    <script>
-        async function fetchFraudDetail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const title = urlParams.get('title');
-            const apiUrl = `https://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?serviceKey=1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D&type=json&numOfRows=1&pageNo=1&search1=&search2=${title}&search3=&_type=json`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                document.getElementById('fraudContent').innerHTML = `
-                                        <div>
-                                            <div id="fraudsTitle"><p>${data.response.body.itemList.item[0].titl}</p></div>
-                                            <div id="fraudsInfo">
-                                                <p>무역사기사례</p>
-                                                <p>|</p>
-                                                <p>Nation:&nbsp;&nbsp; ${data.response.body.itemList.item[0].natn}</p>
-                                                <p>|</p>
-                                                <p>Region:&nbsp;&nbsp; ${data.response.body.itemList.item[0].regn}</p>
-                                                <p>|</p>
-                                                <p>FraudType:&nbsp;&nbsp; ${data.response.body.itemList.item[0].fraudType}</p>
-                                                <p>|</p>
-                                                <p>Date:&nbsp;&nbsp; ${data.response.body.itemList.item[0].othbcDt}</p>
-                                            </div>
-                                            <div id="fraudsContent">
-                                                <p>${data.response.body.itemList.item[0].bdtCntnt}</p>
-                                            </div>
-                                        </div>
-                                    `;
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('fraudContent').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
-            }
-        }
-
-        fetchFraudDetail();
-    </script>
-
     <style>
         .content {
             margin-top: 100px;
@@ -86,20 +43,24 @@
             margin-bottom: 50px;
         }
 
-        /*************************
-        로딩중 페이지 
-        **************************/
+        .droplet_spinner {
+            margin-bottom: 100px;
+        }
 
-        .main {
+        /*************************
+            로딩중 페이지 
+            **************************/
+
+        /* .main {
             width: 90vw;
             margin: 0 auto;
             text-align: center;
-        }
+        } */
 
         .droplet_spinner {
             display: flex;
             justify-content: center;
-            margin: 30px;
+
         }
 
         .droplet_spinner .droplet {
@@ -152,8 +113,8 @@
 
 
         /***********************************
-        세부 조정
-        ***********************************/
+            세부 조정
+            ***********************************/
         #fraudsTitle {
             font-size: 30px;
             line-height: 38px;
@@ -185,12 +146,54 @@
             /* 글자 안보이게 하기 */
         }
     </style>
+    <script>
+        async function fetchFraudDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('title');
+            const apiUrl = `https://apis.data.go.kr/B410001/cmmrcFraudCase/cmmrcFraudCase?serviceKey=1Oo0omv4bVoztr5VGKOWz2QJYFpy2gmu8Kq8DbYg%2F%2B7gX2EfMQBU2jTu6MpQfsbJoqxzTTyyyDdSfpVZ0FIPlA%3D%3D&type=json&numOfRows=1&pageNo=1&search1=&search2=${title}&search3=&_type=json`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                document.getElementById('fraudContent').innerHTML = `
+                                            <div>
+                                                <div id="fraudsTitle"><p>${data.response.body.itemList.item[0].titl}</p></div>
+                                                <div id="fraudsInfo">
+                                                    <p>무역사기사례</p>
+                                                    <p>|</p>
+                                                    <p>Nation:&nbsp;&nbsp; ${data.response.body.itemList.item[0].natn}</p>
+                                                    <p>|</p>
+                                                    <p>Region:&nbsp;&nbsp; ${data.response.body.itemList.item[0].regn}</p>
+                                                    <p>|</p>
+                                                    <p>FraudType:&nbsp;&nbsp; ${data.response.body.itemList.item[0].fraudType}</p>
+                                                    <p>|</p>
+                                                    <p>Date:&nbsp;&nbsp; ${data.response.body.itemList.item[0].othbcDt}</p>
+                                                </div>
+                                                <div id="fraudsContent">
+                                                    <p>${data.response.body.itemList.item[0].bdtCntnt}</p>
+                                                </div>
+                                            </div>
+                                        `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('fraudContent').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
+            }
+        }
+
+        fetchFraudDetail();
+    </script>
 
 </head>
 
+
 <body>
-    <!--상단 메뉴바-->
-    <div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+    <div class="skip-nav"> <a href="#content">본문 바로가기</a></div>
     <div id="wrap" class="wrap">
         <header id="header" class="header">
             <div class="header-inner">
@@ -203,30 +206,35 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="" class="has-depth"><!--추후 수정 필요-->
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/about}"><!--추후 수정 필요-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/showovsNews}">
-                                            <span>NEWS</span>
+                                        <a th:href="@{/showOvsNews}">
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -237,24 +245,37 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span>INFO</span>
+                                <a href=""><!--수정 필요-->
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
                                     <span>LOGIN</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>LOGOUT</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>
-                <!--상단 메뉴바-->
                 <div class="btns">
                     <button type="button" class="btn open-nav" id="openMe">
                         <span class="blind">메뉴 열기</span>
@@ -263,18 +284,16 @@
                         <span class="blind">메뉴 열기</span>
                     </button>
                 </div>
-                <divqq class="nav-bg"></divqq>
+                <div class="nav-bg"></div>
             </div>
         </header>
-        <br><br><br><br><br>
         <div id="scroller" class="scroller" data-scrollbar>
 
 
-            <!--데이터 꽂히는 부분 내용 들어갈 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
             <div class="content">
                 <h1 class="page-header">사기 사례 상세 정보</h1>
                 <!--로딩 부분-->
-                <div id="fraudContent">
+                <div id="fraudContent"><!--데이터가 꽂히는 부분-->
                     <div class="main">
                         <div class="droplet_spinner">
                             <div class="droplet"></div>
@@ -284,241 +303,241 @@
                     </div>
                 </div><!--로딩 end-->
 
+            </div><!--content-->
 
-                <!--풋터-->
-                <footer id="footer" class="footer">
-                    <div class="footer-inner">
-                        <div class="cont site">
-                            <div class="menu">
-                                <a href="#">개인정보처리방침</a>
-                                <a href="#">이용약관</a>
-                            </div>
-                            <div class="select-box">
-                                <select class="select family" title="나이스투매치유">
-                                    <option value disabled selected>Family Site</option>
-                                    <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B
-                                    </option>
-                                    <option value="http://www.ec21.co.kr/">EC21</option>
-                                    <option value="https://www.valuelinku.com/">ValueLinkeU</option>
-                                    <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
-                                    <option value="https://www.itronics.co.kr">5조</option>
-                                </select>
-                            </div>
+
+
+            <footer id="footer" class="footer">
+                <div class="footer-inner">
+                    <div class="cont site">
+                        <div class="menu">
+                            <a href="/privacy.html">개인정보처리방침</a>
+                            <a href="/terms.html">이용약관</a>
                         </div>
-                        <!--풋터-->
-                        <div class="cont contact">
-                            <address>
-                                <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
-                                <span>대표자&nbsp;<em>주진명</em></span>
-                                <span>TEL.<em>010-2432-2450</em></span>
-                            </address>
-                            <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                        <div class="select-box">
+                            <select class="select family" title="나이스투매치유">
+                                <option value disabled selected>Family Site</option>
+                                <option value="https://g2b-rating.nicednb.com/index.html#MENUCM0100">NICE D&B</option>
+                                <option value="http://www.ec21.co.kr/">EC21</option>
+                                <option value="https://www.valuelinku.com/">ValueLinkeU</option>
+                                <option value="https://www.hanwhacorp.co.kr/">HANWHA</option>
+                                <option value="https://www.itronics.co.kr">5조</option>
+                            </select>
                         </div>
                     </div>
-                </footer>
-            </div><!-- id:scroller-->
-        </div><!-- // #wrap -->
+                    <div class="cont contact">
+                        <address>
+                            <span>서울특별시 강남구 영동대로 513 COEX 4층 무역아카데미</span>
+                            <span>대표자&nbsp;<em>주진명</em></span>
+                            <span>TEL.<em>010-2432-2450</em></span>
+                        </address>
+                        <p class="copyright">Copyright 2024 NICETOMATCHYOU Inc. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div><!--스크롤-->
+    </div><!-- // #wrap -->
 
-        <!--상단과 하단바에 적용되는 부분-->
-        <script th:src="@{/js/lib/gsap.min.js}"></script>
-        <script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
-        <script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
-        <script th:src="@{/js/lib/aos.js}"></script>
-        <script th:src="@{/js/lib/swiper-bundle.js}"></script>
-        <script>
-            nav.current(5, 0);
-            familySite();
+    <script th:src="@{/js/lib/gsap.min.js}"></script>
+    <script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
+    <script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
+    <script th:src="@{/js/lib/aos.js}"></script>
+    <script th:src="@{/js/lib/swiper-bundle.js}"></script>
+    <script>
+        nav.current(5, 0);
+        familySite();
 
-            jQuery(function () {
+        jQuery(function () {
 
-                setTimeout(function () {
-                    $('.page-header').addClass('on');
-                    $('.counter').animate({ 'opacity': '1.0' }, 300);
-                }, 150);
-
+            setTimeout(function () {
+                $('.page-header').addClass('on');
+                $('.counter').animate({ 'opacity': '1.0' }, 300);
+            }, 150);
 
 
+
+            yearCount();
+
+            $(window).on("resize", function () {
                 yearCount();
+            });
 
-                $(window).on("resize", function () {
-                    yearCount();
-                });
+            function yearCount() {
+                $counter = $('.counter');
+                var windowWidth = window.innerWidth;
+                if (windowWidth > 961) {
 
-                function yearCount() {
-                    $counter = $('.counter');
-                    var windowWidth = window.innerWidth;
-                    if (windowWidth > 961) {
-
-                        $('.counter').css('font-size', '140px');
-                    } else {
-
-                        $('.counter').css('font-size', '80px');
-                    }
-
+                    $('.counter').css('font-size', '140px');
+                } else {
+                    $('.counter').css('font-size', '80px');
                 }
 
-
-                gsap.registerPlugin(ScrollTrigger);
-
-                gsap.to('.section.with .cont1', {
-                    scrollTrigger: {
-                        trigger: '.section.with',
-                        start: 'top 70%-=20%',
-                        end: 'top top-=120%',
-                        scrub: 1,
-                        onEnter: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
-                        onLeave: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
-                        onEnterBack: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
-                        onLeaveBack: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
-                    },
-                });
-
-                gsap.to('.section.with .cont2', {
-                    scrollTrigger: {
-                        trigger: '.section.with',
-                        start: 'top top-=140%',
-                        end: 'top top-=240%',
-                        scrub: 1,
-                        onEnter: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
-                        onEnterBack: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
-                        onLeaveBack: () => $('.section.with .cont2 .masking-wrap').removeClass('show').addClass('hide'),
-                    },
-                });
-
-                gsap.timeline({
-                    scrollTrigger: {
-                        start: "top top",
-                        pin: '.section.with',
-                        end: "+=250%",
-                        pinSpacing: true,
-                        scrub: 0.5
-                    },
-                }).to('.section.with .bg-wrap ', {
-                    backgroundPosition: '0% 100%',
-                });
+            }
 
 
-                gsap.to('.section.growth', {
-                    scrollTrigger: {
-                        trigger: '.section.growth',
-                        start: 'top 0%',
-                        end: "+=50%",
-                        pin: true,
-                        pinSpacing: true,
-                        scroller: scroller,
-                        pinType: "transform",
-                        scrub: true,
-                    },
-                });
-                gsap.to('.section.growth', {
-                    scrollTrigger: {
-                        trigger: '.section.growth .title-wrap',
-                        start: 'top 50%',
-                        end: "bottom+=80% 80%",
-                        scrub: true,
-                        onEnter: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
-                        onEnterBack: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
-                        onLeaveBack: () => $('.section.growth .masking-wrap').removeClass('show').addClass('hide'),
-                    },
-                });
+            gsap.registerPlugin(ScrollTrigger);
 
-                gsap.set(".section.innovation .content-list > li", {
-                    yPercent: 50,
-                });
-
-                const yPercent_vh = (coef) => window.innerHeight * (coef / 100);
-                const invTl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ".section.innovation",
-                        scrub: 3,
-                        start: "-30% 100%",
-                        ease: "none",
-                    },
-                })
-                invTl.to(".section.innovation .content-list > li:nth-child(1)", {
-                    yPercent: yPercent_vh(-8),
-                    duration: 5,
-                }, "innovItem");
-                invTl.to(".section.innovation .content-list > li:nth-child(2)", {
-                    yPercent: yPercent_vh(-8),
-                    duration: 5,
-                }, "innovItem+=1.2",);
-
-                gsap.to('.section.inquiry', {
-                    scrollTrigger: {
-                        trigger: '.section.inquiry .content-wrap',
-                        start: 'top 90%',
-                        end: "bottom+=80% 80%",
-                        scrub: true,
-                        onEnter: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
-                        onLeave: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
-                        onEnterBack: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
-                        onLeaveBack: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
-                    },
-                });
-
-                const fade = document.querySelectorAll("[data-gsap='fade']");
-                fade.forEach((item, index) => {
-                    gsap.set(item, {
-                        opacity: 0,
-                    }),
-                        gsap.to(item, {
-                            opacity: 1,
-                            duration: 1,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 90%",
-                                toggleActions: 'play none none reverse',
-                            },
-                        });
-                });
-
-                const fadeUp = document.querySelectorAll("[data-gsap='fade-up']");
-                fadeUp.forEach((item, index) => {
-                    gsap.set(item, {
-                        opacity: 0,
-                        yPercent: 10,
-                    }),
-                        gsap.to(item, {
-                            opacity: 1,
-                            yPercent: 0,
-                            duration: 1,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: item,
-                                start: "top 75%",
-                                toggleActions: 'play none none reverse',
-                            },
-                        });
-                });
-
-                //swiper - product
-                var productSwiper = new Swiper("#productSwiper .swiper", {
-                    autoHeight: false,
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                    navigation: {
-                        nextEl: '#productSwiper .swiper-button-next',
-                        prevEl: '#productSwiper .swiper-button-prev',
-                    },
-
-                    breakpoints: {
-                        "100": {
-                            slidesPerView: 'auto',
-                            centeredSlides: true,
-                            autoHeight: false,
-                        },
-                        "768": {
-                            slidesPerView: 'auto',
-                            spaceBetween: 20,
-                            centeredSlides: false,
-                            autoHeight: false,
-                        },
-                    }
-                });
+            gsap.to('.section.with .cont1', {
+                scrollTrigger: {
+                    trigger: '.section.with',
+                    start: 'top 70%-=20%',
+                    end: 'top top-=120%',
+                    scrub: 1,
+                    onEnter: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeave: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
+                    onEnterBack: () => $('.section.with .cont1 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.with .cont1 .masking-wrap').removeClass('show').addClass('hide'),
+                },
             });
-        </script>
+
+            gsap.to('.section.with .cont2', {
+                scrollTrigger: {
+                    trigger: '.section.with',
+                    start: 'top top-=140%',
+                    end: 'top top-=240%',
+                    scrub: 1,
+                    onEnter: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
+                    onEnterBack: () => $('.section.with .cont2 .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.with .cont2 .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            gsap.timeline({
+                scrollTrigger: {
+                    start: "top top",
+                    pin: '.section.with',
+                    end: "+=250%",
+                    pinSpacing: true,
+                    scrub: 0.5
+                },
+            }).to('.section.with .bg-wrap ', {
+                backgroundPosition: '0% 100%',
+            });
+
+
+            gsap.to('.section.growth', {
+                scrollTrigger: {
+                    trigger: '.section.growth',
+                    start: 'top 0%',
+                    end: "+=50%",
+                    pin: true,
+                    pinSpacing: true,
+                    scroller: scroller,
+                    pinType: "transform",
+                    scrub: true,
+                },
+            });
+            gsap.to('.section.growth', {
+                scrollTrigger: {
+                    trigger: '.section.growth .title-wrap',
+                    start: 'top 50%',
+                    end: "bottom+=80% 80%",
+                    scrub: true,
+                    onEnter: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
+                    onEnterBack: () => $('.section.growth .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.growth .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            gsap.set(".section.innovation .content-list > li", {
+                yPercent: 50,
+            });
+
+            const yPercent_vh = (coef) => window.innerHeight * (coef / 100);
+            const invTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".section.innovation",
+                    scrub: 3,
+                    start: "-30% 100%",
+                    ease: "none",
+                },
+            })
+            invTl.to(".section.innovation .content-list > li:nth-child(1)", {
+                yPercent: yPercent_vh(-8),
+                duration: 5,
+            }, "innovItem");
+            invTl.to(".section.innovation .content-list > li:nth-child(2)", {
+                yPercent: yPercent_vh(-8),
+                duration: 5,
+            }, "innovItem+=1.2",);
+
+            gsap.to('.section.inquiry', {
+                scrollTrigger: {
+                    trigger: '.section.inquiry .content-wrap',
+                    start: 'top 90%',
+                    end: "bottom+=80% 80%",
+                    scrub: true,
+                    onEnter: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeave: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
+                    onEnterBack: () => $('.section.inquiry .masking-wrap').removeClass('hide').addClass('show'),
+                    onLeaveBack: () => $('.section.inquiry .masking-wrap').removeClass('show').addClass('hide'),
+                },
+            });
+
+            const fade = document.querySelectorAll("[data-gsap='fade']");
+            fade.forEach((item, index) => {
+                gsap.set(item, {
+                    opacity: 0,
+                }),
+                    gsap.to(item, {
+                        opacity: 1,
+                        duration: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 90%",
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+            });
+
+            const fadeUp = document.querySelectorAll("[data-gsap='fade-up']");
+            fadeUp.forEach((item, index) => {
+                gsap.set(item, {
+                    opacity: 0,
+                    yPercent: 10,
+                }),
+                    gsap.to(item, {
+                        opacity: 1,
+                        yPercent: 0,
+                        duration: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 75%",
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+            });
+
+            //swiper - product
+            var productSwiper = new Swiper("#productSwiper .swiper", {
+                autoHeight: false,
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '#productSwiper .swiper-button-next',
+                    prevEl: '#productSwiper .swiper-button-prev',
+                },
+
+                breakpoints: {
+                    "100": {
+                        slidesPerView: 'auto',
+                        centeredSlides: true,
+                        autoHeight: false,
+                    },
+                    "768": {
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
+                        centeredSlides: false,
+                        autoHeight: false,
+                    },
+                }
+            });
+        });
+    </script>
 </body>
+
+
 
 </html>

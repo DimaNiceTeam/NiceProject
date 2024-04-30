@@ -76,7 +76,11 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+=======
+    <div class="skip-nav"> <a href="#content">본문 바로가기</a></div>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     <div id="wrap" class="wrap">
         <header id="header" class="header">
             <div class="header-inner">
@@ -94,7 +98,11 @@
                                 </a>
                                 <ul>
                                     <li>
+<<<<<<< HEAD
                                         <a th:href="@{about}"><!--페이지 나중에 삽입-->
+=======
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -107,12 +115,21 @@
                                 <ul>
                                     <li>
                                         <a th:href="@{/showOvsNews}">
+<<<<<<< HEAD
                                             <span>NEWS</span>
+=======
+                                            <span>News</span>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -129,7 +146,11 @@
                             </li>
                             <li>
                                 <a href=""><!--수정 필요-->
+<<<<<<< HEAD
                                     <span>INFO</span>
+=======
+                                    <span>NOTICE</span>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                 </a>
                             </li>
                             <li sec:authorize="isAnonymous()">
@@ -138,13 +159,22 @@
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
+<<<<<<< HEAD
                                 <a th:href="@{/user/myPage}" class="has-depth">
                                     <span>MyPage</span>
+=======
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                 </a>
                                 <ul>
                                     <li>
                                         <a th:href="@{/user/logout}">
+<<<<<<< HEAD
                                             <span>Logout</span>
+=======
+                                            <span>LOGOUT</span>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                         </a>
                                     </li>
 
@@ -177,6 +207,7 @@
                         <div class="droplet"></div>
                     </div>
                 </div>
+<<<<<<< HEAD
 
                 <div id="newsContent"></div>
 
@@ -186,6 +217,10 @@
 
 
 
+=======
+                <div id="newsContent"></div>
+            </div>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
             <footer id="footer" class="footer">
                 <div class="footer-inner">
                     <div class="cont site">
@@ -214,7 +249,11 @@
                     </div>
                 </div>
             </footer>
+<<<<<<< HEAD
         </div>
+=======
+        </div><!--스크롤-->
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
     </div><!-- // #wrap -->
 
     <script th:src="@{/js/lib/gsap.min.js}"></script>
@@ -245,6 +284,7 @@
                 $counter = $('.counter');
                 var windowWidth = window.innerWidth;
                 if (windowWidth > 961) {
+<<<<<<< HEAD
                     /*
                     $counter.rollNumber({
                     number: $counter[0].dataset.number, 
@@ -265,6 +305,11 @@
                     }
                     })
                     */
+=======
+
+                    $('.counter').css('font-size', '140px');
+                } else {
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                     $('.counter').css('font-size', '80px');
                 }
 
@@ -433,5 +478,7 @@
         });
     </script>
 </body>
+
+
 
 </html>

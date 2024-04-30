@@ -16,8 +16,13 @@
 @import url(_form.css);
 @import url(_layout.css);
 @import url(_global.css);
+<<<<<<< HEAD
   
 
+=======
+
+
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
 #container {
     padding-top: 100px;
     /* 헤더 높이에 맞춰 상단 패딩 조정 */
@@ -66,7 +71,11 @@ h2 {
     font-size: 14px;
     text-align: center;
     color: #fff;
+<<<<<<< HEAD
     background-color: rgba(0,0,0,.2)
+=======
+    background-color: rgba(0, 0, 0, .2)
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
 }
 
 .mypageBox--style1 {
@@ -83,7 +92,11 @@ h2 {
 
 @media screen and (max-width: 800px) {
     .mypage-main__head {
+<<<<<<< HEAD
         padding:20px 20px;
+=======
+        padding: 20px 20px;
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
         font-size: 19px
     }
 

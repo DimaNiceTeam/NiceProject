@@ -47,7 +47,7 @@
         .page-header {
             text-align: center;
             font-size: 36px;
-            margin-top: 150px;
+            margin-top: 50px;
             margin-bottom: 50px;
         }
 
@@ -142,6 +142,58 @@
             /* 부드러운 전환 효과를 추가합니다. */
             cursor: pointer;
             /* 마우스 커서를 포인터로 변경합니다. */
+        }
+
+        /******************************
+        배너 만들기 
+        *******************************/
+        .sub-visual--sub2 .sub-visual__inner {
+            background: var(--light-blue-1);
+        }
+
+        .sub-visual__inner {
+            position: relative;
+            max-width: 1366px;
+            margin: 122px auto 0;
+            padding: 64px 0 65px 111px;
+            border-radius: 32px 0;
+        }
+
+        .sub-visual__h2 {
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            border: 0;
+            box-sizing: border-box;
+            font-family: Pretendard, Nanum Gothic, 나눔고딕, sans-serif;
+            position: relative;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .sub-visual__desc {
+            position: relative;
+            width: 475px;
+            margin-top: 15px;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+            color: #fff;
+
+        }
+
+        .sub-visual__inner:before {
+            content: "";
+            position: absolute;
+            top: 50px;
+            right: 111px;
+            display: block;
+            width: 498px;
+            /* height: 269px; */
+            height: 300px;
+
+            background: url(/images/banner/emailbanner.png) no-repeat 0 0 / 100% auto;
         }
     </style>
     <script>
@@ -270,7 +322,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -283,12 +335,17 @@
                                 <ul>
                                     <li>
                                         <a th:href="@{/showOvsNews}">
-                                            <span>NEWS</span>
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -305,22 +362,22 @@
                             </li>
                             <li>
                                 <a href=""><!--수정 필요-->
-                                    <span>INFO</span>
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>Login</span>
+                                    <span>LOGIN</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{/user/myPage}" class="has-depth">
-                                    <span>MyPage</span>
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
                                 </a>
                                 <ul>
                                     <li>
                                         <a th:href="@{/user/logout}">
-                                            <span>Logout</span>
+                                            <span>LOGOUT</span>
                                         </a>
                                     </li>
 
@@ -355,14 +412,22 @@
             </section>
             <!--데이터 꽂히는 부분-->
             <div class="content">
+                <div class="sub-visual sub-visual--sub2">
+                    <div class="sub-visual__inner">
+
+                        <h2 class="sub-visual__h2">보낸 메일함</h2>
+                        <p class="sub-visual__desc">바이어에게 보낸 메일을 관리하는 페이지입니다.</p>
+                    </div>
+
+                </div>
+
                 <div class="page-header on">
-                    <h2>보낸 메일함</h2>
+                    <h2></h2>
                     <input type="hidden" id="userNum" th:value="${#authentication.principal.userNum}">
                 </div>
                 <span id="noResult"></span><!--보낸 메일함이 적을때 출력합니다.
                     -->
                 <div class="table-heading">
-
                     <div class="count">
                         <span>총 </span><span id="board-count" style="color: #ff4dd6;"></span><span> 건</span>
                     </div>
@@ -412,7 +477,6 @@
     <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">이메일 발송</h4>

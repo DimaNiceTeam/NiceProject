@@ -37,30 +37,35 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="" class="has-depth"><!--추후 수정 필요-->
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="#"><!--추후 수정 필요-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/showovsNews}">
-                                            <span>NEWS</span>
+                                        <a th:href="@{/showOvsNews}">
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -71,21 +76,40 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}"><!--서희가 수정한 css로 파일한-->
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
+<<<<<<< HEAD
                             <li>
                                 <a href="#">
                                     <span>INFO</span>
+=======
+                                <a href=""><!--수정 필요-->
+                                    <span>NOTICE</span>
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
                                     <span>LOGIN</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>LOGOUT</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div> <!-- // .nav-wrap -->
                 </nav>
@@ -259,7 +283,7 @@
                                     </div>
                                     <div class="button-area center">
                                         <div class="masking-wrap">
-                                            <a href="contact.html" class="btn medium bdr-lightgray">문의하기</a>
+                                            <a href="#" class="btn medium bdr-lightgray">문의하기</a>
                                         </div>
                                     </div>
                                 </div>
@@ -305,6 +329,7 @@
     </div><!-- // #wrap -->
 
     <!--상단과 하단바에 적용되는 부분-->
+<<<<<<< HEAD
 	<script src="/@resource//js/lib/gsap.min.js"></script>
 	<script src="/@resource//js/lib/ScrollTrigger.min.js"></script>
 	<script src="/@resource//js/lib/smooth-scrollbar.js"></script>
@@ -314,6 +339,16 @@
 	<script>
 		nav.current(1,1);
 		familySite();
+=======
+    <script th:src="@{/js/lib/gsap.min.js}"></script>
+    <script th:src="@{/js/lib/ScrollTrigger.min.js}"></script>
+    <script th:src="@{/js/lib/smooth-scrollbar.js}"></script>
+    <script th:src="@{/js/lib/aos.js}"></script>
+    <script th:src="@{/js/lib/swiper-bundle.js}"></script>
+    <script>
+        nav.current(1, 1);
+        familySite();
+>>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
 
 		jQuery(function () {
 

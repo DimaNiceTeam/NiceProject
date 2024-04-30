@@ -153,6 +153,7 @@
         function plusMyCmp() {
             let dunsNo = $(this).attr("attr-dunsno"); // 고유 던스넘버
             let userNum = $("#userNum").val(); // 사용자의 고유 넘버 넣어주기 ~~
+            alert(userNum);
 
 
             $.ajax({
@@ -230,7 +231,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -243,12 +244,17 @@
                                 <ul>
                                     <li>
                                         <a th:href="@{/showOvsNews}">
-                                            <span>NEWS</span>
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a th:href="@{/showFraud}">
-                                            <span>무역 사기사례</span>
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
                                         </a>
                                     </li>
                                     <li>
@@ -265,22 +271,22 @@
                             </li>
                             <li>
                                 <a href=""><!--수정 필요-->
-                                    <span>INFO</span>
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
-                                    <span>Login</span>
+                                    <span>LOGIN</span>
                                 </a>
                             </li>
                             <li sec:authorize="isAuthenticated()">
-                                <a th:href="@{/user/myPage}" class="has-depth">
-                                    <span>MyPage</span>
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
                                 </a>
                                 <ul>
                                     <li>
                                         <a th:href="@{/user/logout}">
-                                            <span>Logout</span>
+                                            <span>LOGOUT</span>
                                         </a>
                                     </li>
 
@@ -309,9 +315,7 @@
                     <!-- cosine 시작 -->
                     <h2>MATCH</h2>
                     <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
-                    <!-- <input type="hidden" id="loginId" th:value="${#authentication.name}"> 로그인한 유저의 -->
-                    <input type="hidden" id="userNum" value="1"><!--우선은 임의로 만들어봄 -->
-
+                    <input type="hidden" id="userNum" name="userNum" th:value="${#authentication.principal.userNum}">
                     <form th:action="@{/predict}" method="POST">
                         <div class="search">
                             <input type="text" placeholder="키워드 입력" id="search" name="inputKeyword"
@@ -381,7 +385,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">이메일 발송</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="closeBtn" data-bs-dismiss="modal"></button>
                 </div>
 
                 <!-- Modal body -->
@@ -404,7 +408,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn " style="background-color: blue; color: white;"
                             data-bs-dismiss="modal">발송</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="closeBtn" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
 
@@ -468,7 +472,7 @@
 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="closeBtn" data-bs-dismiss="modal">Close</button>
                 </div>
 
 

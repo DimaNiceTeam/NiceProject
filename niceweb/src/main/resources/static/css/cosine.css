@@ -112,8 +112,10 @@ img {
 }
 
 #countrySelect option {
-    text-align: left; /* 옵션 텍스트 왼쪽 정렬 */
-    padding-left: 10px; /* 왼쪽 패딩 설정 */
+    text-align: left;
+    /* 옵션 텍스트 왼쪽 정렬 */
+    padding-left: 10px;
+    /* 왼쪽 패딩 설정 */
 }
 
 #continentSelect {
@@ -128,8 +130,10 @@ img {
 }
 
 #countrySelect option {
-    text-align: left; /* 옵션 텍스트 왼쪽 정렬 */
-    padding-left: 10px; /* 왼쪽 패딩 설정 */
+    text-align: left;
+    /* 옵션 텍스트 왼쪽 정렬 */
+    padding-left: 10px;
+    /* 왼쪽 패딩 설정 */
 }
 
 
@@ -167,24 +171,30 @@ h2 {
     width: 100%;
     border-radius: 20px;
     border-collapse: collapse;
-    background-color: var(--white); /* 배경색 설정 */
-    
+    background-color: var(--white);
+    /* 배경색 설정 */
+
 }
 
 /* 테이블 헤더 스타일 */
 #cosine-list th {
-    text-align: center; /* 텍스트 가운데 정렬 */
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
     background-color: var(--blue);
     color: var(--white);
-    padding: 15px 10px; /* 적절한 패딩으로 간격 조정 */
+    padding: 15px 10px;
+    /* 적절한 패딩으로 간격 조정 */
 }
 
 /* 테이블 셀 스타일 */
 #cosine-list td {
     text-align: center;
-    padding: 12px 10px; /* 적절한 패딩으로 간격 조정 */
-    word-break: break-word; /* 단어가 길어질 경우 줄바꿈 */
-    max-width: 150px; /* 최대 너비 설정 */
+    padding: 12px 10px;
+    /* 적절한 패딩으로 간격 조정 */
+    word-break: break-word;
+    /* 단어가 길어질 경우 줄바꿈 */
+    max-width: 150px;
+    /* 최대 너비 설정 */
 }
 
 /* 행 호버 효과 */
@@ -194,12 +204,43 @@ h2 {
 
 /* 아이콘 스타일 */
 .fa {
-    font-size: 16px; /* 아이콘 크기 */
-    color: var(light-gray-2); /* 아이콘 기본 색상 */
-    cursor: pointer; /* 마우스 오버 시 커서 변경 */
-    padding: 0 5px; /* 아이콘 사이의 간격 조정 */
+    font-size: 16px;
+    /* 아이콘 크기 */
+    color: var(light-gray-2);
+    /* 아이콘 기본 색상 */
+    cursor: pointer;
+    /* 마우스 오버 시 커서 변경 */
+    padding: 0 5px;
+    /* 아이콘 사이의 간격 조정 */
 }
 
-.fa-star.active, .fa-envelope.active, .fa-magnifying-glass.active {
+.fa-star.active,
+.fa-envelope.active,
+.fa-magnifying-glass.active {
     color: var(--blue);
+}
+
+/* 모달창 닫기 버튼 css */
+.closeBtn {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
 }

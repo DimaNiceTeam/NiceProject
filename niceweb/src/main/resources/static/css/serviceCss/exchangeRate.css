@@ -6,7 +6,6 @@
     margin-bottom: 200px;
 }
 
-/*페이지 헤더*/
 .page-header {
     text-align: center;
     font-size: 36px;
@@ -15,9 +14,10 @@
 }
 
 .crateCal {
-    /* crateCal 스타일 설정 */
     margin: 0 auto;
     /* 가운데 정렬 */
+    margin-top: 150px;
+    /* 배너와의 거리 */
     margin-bottom: 60px;
 }
 
@@ -101,4 +101,56 @@ table {
     text-align: left;
     background-color: aliceblue;
 
+}
+
+/******************************
+        배너 
+*******************************/
+.sub-visual--sub2 .sub-visual__inner {
+    background: #8CBDED
+}
+
+.sub-visual__inner {
+    position: relative;
+    max-width: 1366px;
+    margin: 122px auto 0;
+    padding: 64px 0 65px 111px;
+    border-radius: 32px 0;
+}
+
+.sub-visual__h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Pretendard, Nanum Gothic, 나눔고딕, sans-serif;
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.sub-visual__desc {
+    position: relative;
+    width: 475px;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
+
+}
+
+.sub-visual__inner:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: 50px;
+    display: block;
+    width: 498px;
+    /* height: 269px; */
+    height: 350px;
+
+    background: url(/images/banner/moneybanner.png) no-repeat 0 0 / 100% auto;
 }
