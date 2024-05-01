@@ -1,43 +1,42 @@
 
 /*
 
-ÀÌ ÆÄÀÏ¿¡ »ý¼ºµÇ¾îÀÖ´Â Å×ÀÌºí
+ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 
-- °øÁö»çÇ×(NOTICE)
-- ¹®ÀÇ»çÇ×(INQUIRY)
-    - ´ñ±Û(REPLY)
+- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(NOTICE)
+- ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½(INQUIRY)
+    - ï¿½ï¿½ï¿½(REPLY)
 
 */
 
 
--- °øÁö»çÇ× Å×ÀÌºí »ý¼º
--- ¹ÌÀÎÁõ »ç¿ëÀÚµµ È®ÀÎ °¡´É -- ÀÌÁ¦ ¸øº½
--- °ü¸®ÀÚ¸¸ ÀÛ¼º ¼öÁ¤ »èÁ¦ °¡´É
-CREATE TABLE NOTICE
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Úµï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Û¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+CREATE TABLE Notice
 (
-      NOTICE_NO                   NUMBER          PRIMARY KEY
-    , NOTICE_WRITER               VARCHAR2(20)    REFERENCES 
-                                                  USER_ACC(USER_ID) 
-                                                  ON DELETE CASCADE
-    , NOTICE_TITLE                VARCHAR2(300)   NOT NULL
-    , NOTICE_CONTENT              VARCHAR2(3000)  NOT NULL
-    , NOTICE_CREATE_DATE          DATE            DEFAULT SYSDATE
-                                                  NOT NULL
-    , NOTICE_UPDATE_DATE          DATE
-    , NOTICE_ORIGINALFILENAME     VARCHAR2(300)
-    , NOTICE_SAVEDFILENAME        VARCHAR2(300)
-    , NOTICE_APPROVAL            CHAR(1)         DEFAULT 1
-                                                  CHECK(board_APPROVAL IN
-                                                  ('USER', 'ADMIN'))
-                                                  NOT NULL
+    Notice_Num          NUMBER constraint notice_seq PRIMARY KEY
+    , Notice_Writer     VARCHAR2(20) default 'NICE2MATCHYOU'
+    , Notice_Title      VARCHAR2(200) default 'ì œëª©ì—†ìŒ'
+    , Notice_Content    VARCHAR2(4000)
+    , hit_count         NUMBER default 0
+    , create_date       DATE default sysdate
+    , update_date       DATE
 );
 
+CREATE SEQUENCE Notice_seq;
+
+DROP TABLE Notice;
+DROP SEQUENCE Notice_seq;
+
+select * from Notice;
 
 
 
--- ¹®ÀÇ»çÇ× Å×ÀÌºí »ý¼º
--- ÀÛ¼ºÀÚ¿Í ·Î±×ÀÎ»ç¿ëÀÚ°¡ °°Àº Çà¸¸ Ãâ·Â
--- °ü¸®ÀÚ = ¸ðµç ¹®ÀÇ»çÇ×À» È®ÀÎ °¡´É
+
+-- ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+-- ï¿½Û¼ï¿½ï¿½Ú¿ï¿½ ï¿½Î±ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½à¸¸ ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ = ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE INQUIRY
 (
       INQUIRY_NO                  NUMBER          PRIMARY KEY
@@ -55,10 +54,10 @@ CREATE TABLE INQUIRY
                                                   CHECK(board_APPROVAL IN
                                                   ('USER', 'ADMIN'))
                                                   NOT NULL
-); -- ¹Ýµå½Ã USER_ACC¸¦ »ý¼ºÇÑ µÚ ½ÇÇà½ÃÅ³ °Í
+); -- ï¿½Ýµï¿½ï¿½ USER_ACCï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ ï¿½ï¿½
 
 
--- ¹®ÀÇ ´äº¯(´ñ±Û)Å×ÀÌºí »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½äº¯(ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE REPLY
 (
     REPLY_NO            NUMBER          PRIMARY KEY
@@ -72,21 +71,21 @@ CREATE TABLE REPLY
     , REPLY_CREATE_DATE DATE            DEFAULT SYSDATE
                                         NOT NULL
     , REPLY_UPDATE_DATE DATE
-); -- ¹Ýµå½Ã BOARD¸¦ »ý¼ºÇÑ µÚ ½ÇÇà½ÃÅ³ °Í
+); -- ï¿½Ýµï¿½ï¿½ BOARDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ ï¿½ï¿½
 
 
 
 
 
 
--- ½ÃÄö½º »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 CREATE SEQUENCE INQUIRY_SEQ;
 
 CREATE SEQUENCE REPLY_SEQ;
 
--- Å×ÀÌºí »èÁ¦
--- »èÁ¦´Â »ý¼ºÀÇ ¿ª¼ø
+-- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
 DROP TABLE NOTICE;
