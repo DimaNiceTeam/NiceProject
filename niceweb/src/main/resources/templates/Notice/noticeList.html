@@ -165,14 +165,16 @@
 
         <div id="scroller" class="scroller" data-scrollbar>
 
+            <div class="sub-visual sub-visual--sub2">
+                <div class="sub-visual__inner">
+                    <h2 class="sub-visual__h2">공지사항</h2>
+                </div>
+
+            </div>
 
             <!-- 공지사항 form 변경 -->
             <!-- 게시글 전체 목록 출력  -->
             <div class="content">
-                <div class="page-header on">
-                    <h2>공지 사항</h2>
-                </div>
-            </div>
 
             <div class="searchBox">
                 <form id="search" th:action="@{/notice/noticeList}" method="GET">

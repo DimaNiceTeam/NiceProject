@@ -21,6 +21,10 @@
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
     <style>
+        html { 
+            font-family: 'SUIT', 'NanumSquareNeo', sans-serif !important;
+        }
+
         .vertical-list li {
 
             margin: 40px;
@@ -152,7 +156,7 @@
             top: 0;
             height: 70px;
             bottom: 0;
-            background-color: #020de0;
+            background-color: #8d9eb7;
             /* 배경색 변경 */
             color: #fff;
             min-height: var(--side-bar-height);
@@ -187,14 +191,14 @@
 
         /* 모든 메뉴가 마우스 인식 시 반응 */
         .side-bar ul>li:hover>a {
-            background-color: #2300a2;
+            background-color: #8d9eb7;
 
         }
 
         /* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
         .side-bar>ul>li>ul:hover {
             position: absolute;
-            background-color: #0a37ff;
+            background-color: #8d9eb7;
             top: 0;
             /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
             left: 100%;
@@ -209,7 +213,7 @@
         .side-bar>ul ul ul {
             position: absolute;
             display: none;
-            background-color: #0a37ff;
+            background-color: #8d9eb7;
             top: 0;
             left: var(--side-bar-width);
             width: var(--side-bar-width);
@@ -224,7 +228,7 @@
             /* 이 부분은 필요에 따라 조정 */
             position: absolute;
             /* 이미 정의된 위치 설정을 유지 */
-            background-color: #006aff;
+            background-color: #8d9eb7;
             /* 배경 색상 유지 */
             top: 0;
             left: 100%;
@@ -317,7 +321,7 @@
 
         /* 버튼 기본 스타일 */
         button {
-            background-color: #3388ff;
+            background-color: #8d9eb7;
             /* 녹색 배경 */
             color: white;
             /* 텍스트 색상 */
