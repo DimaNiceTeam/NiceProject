@@ -64,24 +64,24 @@ CREATE TABLE CTGY
 CREATE TABLE CLIENT
 (
 <<<<<<< HEAD
-      DUNS_NO           VARCHAR2(100)   PRIMARY KEY     -- DUNS³Ñ¹ö
-    , CMP_NM            VARCHAR2(100)   NOT NULL        -- È¸»ç¸í
-    , NAT_ID            VARCHAR2(1000)  NOT NULL        -- ±¹°¡ ¾ÆÀÌµð
-    , NAT_CD            CHAR(2)         NOT NULL        -- ±¹°¡ ÄÚµå
-    , NAT_KOR           VARCHAR2(20)    NOT NULL        -- ±¹°¡¸í (ÇÑ±Û)
-    , NAT_ENG           VARCHAR2(20)    NOT NULL        -- ±¹°¡¸í (¿µ¹®)
-    , CITY              VARCHAR2(100)   NOT NULL        -- µµ½Ã¸í
-    , ADR               VARCHAR2(100)   NOT NULL        -- ÀüÃ¼ ÁÖ¼Ò
-    , SIC_CD            VARCHAR2(100)   NOT NULL        -- ÁÖ¿ä Ãë±Þ Ç°¸ñ
-    , SALES             NUMBER(20)                      -- ¸ÅÃâ
-    , ASSET             NUMBER(20)                      -- ÀÚ»ê
-    , EMP               NUMBER(10)                      -- Á¾¾÷¿ø¼ö
-    , CONTACT_GRD_CD    VARCHAR2(4)                     -- ¸¶ÄÉÆÃ µî±Þ
-    -- NOT NULLÀÌ ¾Æ´Ñ ´ë½Å NICEÀÇ ½Å¿ëÁ¶»ç ¹ÌÀÀ½ÃÇÑ ¸ðµç »ç¿ëÀÚ¿¡°Ô ´Ù¸¥ »ç¿ëÀÚ¿¡°Ô ³ëÃâÀÌ ¾î·Æ´Ù´Â Á¡À» °æ°íÃ¢ »ý¼º
-    -- , CREDIT_GRD_CD     VARCHAR2(4)                     -- ½Å¿ë µî±Þ
-    , URL               VARCHAR2(200)   NOT NULL        -- È¨ÆäÀÌÁö ÁÖ¼Ò
-    , EML               VARCHAR2(100)   NOT NULL        -- ÀÌ¸ÞÀÏ ÁÖ¼Ò
-    , ENG               VARCHAR2(2000)  NOT NULL        -- °ü·Ã Å°¿öµå ¸ñ·Ï
+      DUNS_NO           VARCHAR2(100)   PRIMARY KEY     -- DUNSï¿½Ñ¹ï¿½
+    , CMP_NM            VARCHAR2(100)   NOT NULL        -- È¸ï¿½ï¿½ï¿½
+    , NAT_ID            VARCHAR2(1000)  NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+    , NAT_CD            CHAR(2)         NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
+    , NAT_KOR           VARCHAR2(20)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½Ñ±ï¿½)
+    , NAT_ENG           VARCHAR2(20)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
+    , CITY              VARCHAR2(100)   NOT NULL        -- ï¿½ï¿½ï¿½Ã¸ï¿½
+    , ADR               VARCHAR2(100)   NOT NULL        -- ï¿½ï¿½Ã¼ ï¿½Ö¼ï¿½
+    , SIC_CD            VARCHAR2(100)   NOT NULL        -- ï¿½Ö¿ï¿½ ï¿½ï¿½ï¿½ Ç°ï¿½ï¿½
+    , SALES             NUMBER(20)                      -- ï¿½ï¿½ï¿½ï¿½
+    , ASSET             NUMBER(20)                      -- ï¿½Ú»ï¿½
+    , EMP               NUMBER(10)                      -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    , CONTACT_GRD_CD    VARCHAR2(4)                     -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    -- NOT NULLï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ NICEï¿½ï¿½ ï¿½Å¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ´Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¢ ï¿½ï¿½ï¿½ï¿½
+    -- , CREDIT_GRD_CD     VARCHAR2(4)                     -- ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½
+    , URL               VARCHAR2(200)   NOT NULL        -- È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+    , EML               VARCHAR2(100)   NOT NULL        -- ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+    , ENG               VARCHAR2(2000)  NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 =======
       DUNS_NO           VARCHAR2(100)   PRIMARY KEY     -- DUNSë„˜ë²„
     , CMP_NM            VARCHAR2(100)   NOT NULL        -- íšŒì‚¬ëª…
@@ -148,99 +148,99 @@ CREATE TABLE CLIENT
                 ;
                 
 <<<<<<< HEAD
--- ±¹°¡ ±âº»Á¤º¸ Å×ÀÌºí »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE TABLE STAT_INFO
 ( 
-      STAT_NO       NUMBER          PRIMARY KEY     -- ±¹°¡ ³Ñ¹ö
-    , STAT_NTN      VARCHAR2(50)    UNIQUE NOT NULL -- ±¹°¡ ¸í
-    , STAT_POP      NUMBER          NOT NULL        -- ±¹°¡ ÀÎ±¸
-    , STAT_CPT      VARCHAR2(50)    UNIQUE NOT NULL -- ±¹°¡ ¼öµµ
-    , STAT_LAN      VARCHAR2(50)    NOT NULL        -- ±¹°¡ ¾ð¾î
+      STAT_NO       NUMBER          PRIMARY KEY     -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
+    , STAT_NTN      VARCHAR2(50)    UNIQUE NOT NULL -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    , STAT_POP      NUMBER          NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½
+    , STAT_CPT      VARCHAR2(50)    UNIQUE NOT NULL -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    , STAT_LAN      VARCHAR2(50)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 );
 
 
--- ±¹°¡ Åë°è Å×ÀÌºí »ý¼º
--- 5³âÄ¡¸¦ ´ãÀ» ¿¹Á¤
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+-- 5ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
--- ÀÌ°Å »ý°¢º¸´Ù Á¹¶ó º¹ÀâÇÏ°Ô ´ã¾Æ¾ßÇÒµí
--- ¼öÃâ¾× ¼öÀÔ¾× ¹«¿ª¼öÁö °æÁ¦¼ºÀå·ü GDP °¢°¢ µû·Î Å×ÀÌºí ¸¸µé°í ¿¬µµ¸¦ ÄÃ·³À¸·Î ¸¸µé¾î¾ß ÇÒ °Å °°´Ù
--- ¼öÃâ¾× Å×ÀÌºí
+-- ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½Æ¾ï¿½ï¿½Òµï¿½
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GDP ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
     CREATE TABLE STAT_EXP
     ( 
-          STAT_NO       NUMBER      REFERENCES          -- ±¹°¡ ³Ñ¹ö
+          STAT_NO       NUMBER      REFERENCES          -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
                                     STAT_INFO(STAT_NO) 
                                     ON DELETE CASCADE
-        , EXP_2019      NUMBER      NOT NULL            -- ¼öÃâ¾×
-        , EXP_2020      NUMBER      NOT NULL            -- ¼öÀÔ¾×
-        , EXP_2021      NUMBER      NOT NULL            -- ¹«¿ª¼öÁö
-        , EXP_2022      NUMBER      NOT NULL            -- °æÁ¦¼ºÀå·ü
-        , EXP_2023      NUMBER      NOT NULL            -- 1ÀÎ´ç GDP
+        , EXP_2019      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½
+        , EXP_2020      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½Ô¾ï¿½
+        , EXP_2021      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , EXP_2022      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , EXP_2023      NUMBER      NOT NULL            -- 1ï¿½Î´ï¿½ GDP
     );
     
--- ¼öÀÔ¾× Å×ÀÌºí
+-- ï¿½ï¿½ï¿½Ô¾ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
     CREATE TABLE STAT_IMP
     ( 
-          STAT_NO       NUMBER      REFERENCES          -- ±¹°¡ ³Ñ¹ö
+          STAT_NO       NUMBER      REFERENCES          -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
                                     STAT_INFO(STAT_NO) 
                                     ON DELETE CASCADE
-        , IMP_2019      NUMBER      NOT NULL            -- ¼öÃâ¾×
-        , IMP_2020      NUMBER      NOT NULL            -- ¼öÀÔ¾×
-        , IMP_2021      NUMBER      NOT NULL            -- ¹«¿ª¼öÁö
-        , IMP_2022      NUMBER      NOT NULL            -- °æÁ¦¼ºÀå·ü
-        , IMP_2023      NUMBER      NOT NULL            -- 1ÀÎ´ç GDP
+        , IMP_2019      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½
+        , IMP_2020      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½Ô¾ï¿½
+        , IMP_2021      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , IMP_2022      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , IMP_2023      NUMBER      NOT NULL            -- 1ï¿½Î´ï¿½ GDP
     );
     
--- ¹«¿ª¼öÁö Å×ÀÌºí
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
     CREATE TABLE STAT_BAL
     ( 
-          STAT_NO       NUMBER      REFERENCES          -- ±¹°¡ ³Ñ¹ö
+          STAT_NO       NUMBER      REFERENCES          -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
                                     STAT_INFO(STAT_NO) 
                                     ON DELETE CASCADE
-        , BAL_2019      NUMBER      NOT NULL            -- ¼öÃâ¾×
-        , BAL_2020      NUMBER      NOT NULL            -- ¼öÀÔ¾×
-        , BAL_2021      NUMBER      NOT NULL            -- ¹«¿ª¼öÁö
-        , BAL_2022      NUMBER      NOT NULL            -- °æÁ¦¼ºÀå·ü
-        , BAL_2023      NUMBER      NOT NULL            -- 1ÀÎ´ç GDP
+        , BAL_2019      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½
+        , BAL_2020      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½Ô¾ï¿½
+        , BAL_2021      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , BAL_2022      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , BAL_2023      NUMBER      NOT NULL            -- 1ï¿½Î´ï¿½ GDP
     );
     
--- °æÁ¦¼ºÀå·ü Å×ÀÌºí
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
     CREATE TABLE STAT_GWT
     ( 
-          STAT_NO       NUMBER      REFERENCES          -- ±¹°¡ ³Ñ¹ö
+          STAT_NO       NUMBER      REFERENCES          -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
                                     STAT_INFO(STAT_NO) 
                                     ON DELETE CASCADE
-        , GWT_2019      NUMBER      NOT NULL            -- ¼öÃâ¾×
-        , GWT_2020      NUMBER      NOT NULL            -- ¼öÀÔ¾×
-        , GWT_2021      NUMBER      NOT NULL            -- ¹«¿ª¼öÁö
-        , GWT_2022      NUMBER      NOT NULL            -- °æÁ¦¼ºÀå·ü
-        , GWT_2023      NUMBER      NOT NULL            -- 1ÀÎ´ç GDP
+        , GWT_2019      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½
+        , GWT_2020      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½Ô¾ï¿½
+        , GWT_2021      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , GWT_2022      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , GWT_2023      NUMBER      NOT NULL            -- 1ï¿½Î´ï¿½ GDP
     );
     
--- GDP Å×ÀÌºí
+-- GDP ï¿½ï¿½ï¿½Ìºï¿½
     CREATE TABLE STAT_GDP
     ( 
-          STAT_NO       NUMBER      REFERENCES          -- ±¹°¡ ³Ñ¹ö
+          STAT_NO       NUMBER      REFERENCES          -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
                                     STAT_INFO(STAT_NO) 
                                     ON DELETE CASCADE
-        , GDP_2019      NUMBER      NOT NULL            -- ¼öÃâ¾×
-        , GDP_2020      NUMBER      NOT NULL            -- ¼öÀÔ¾×
-        , GDP_2021      NUMBER      NOT NULL            -- ¹«¿ª¼öÁö
-        , GDP_2022      NUMBER      NOT NULL            -- °æÁ¦¼ºÀå·ü
-        , GDP_2023      NUMBER      NOT NULL            -- 1ÀÎ´ç GDP
+        , GDP_2019      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½
+        , GDP_2020      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½Ô¾ï¿½
+        , GDP_2021      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , GDP_2022      NUMBER      NOT NULL            -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        , GDP_2023      NUMBER      NOT NULL            -- 1ï¿½Î´ï¿½ GDP
     );  
 
 
--- ±¹°¡ ±ÔÁ¦»çÇ× Å×ÀÌºí »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 
 CREATE TABLE STAT_REG
 ( 
-      STAT_NO       NUMBER          REFERENCES      -- ±¹°¡ ³Ñ¹ö
+      STAT_NO       NUMBER          REFERENCES      -- ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½
                                     STAT_INFO(STAT_NO) 
                                     ON DELETE CASCADE
-    , STAT_REG1     VARCHAR2(500)    NOT NULL        -- ±ÔÁ¦Ç°¸ñ
-    , STAT_REG2     VARCHAR2(500)    NOT NULL        -- ±ÔÁ¦ºÐ·ù
-    , STAT_REG3     VARCHAR2(500)    NOT NULL        -- ±ÔÁ¦´ë»ó±¹
-    , STAT_HS       VARCHAR2(500)    NOT NULL        -- ±ÔÁ¦´ë»ó HS CODE
+    , STAT_REG1     VARCHAR2(500)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
+    , STAT_REG2     VARCHAR2(500)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½
+    , STAT_REG3     VARCHAR2(500)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    , STAT_HS       VARCHAR2(500)    NOT NULL        -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HS CODE
 );
 
 
@@ -333,3 +333,20 @@ DROP TABLE STAT_ALL_INFO;
 
 DROP TABLE STAT_REG;
 
+
+
+CREATE TABLE Notice
+(
+    Notice_Num          NUMBER constraint notice_seq PRIMARY KEY
+    , Notice_Writer     VARCHAR2(20) default 'NICE2MATCHYOU'
+    , Notice_Title      VARCHAR2(200) default 'ì œëª©ì—†ìŒ'
+    , Notice_Content    VARCHAR2(4000)
+    , hit_count         NUMBER default 0
+    , create_date       DATE default sysdate
+    , update_date       DATE
+);
+
+CREATE SEQUENCE Notice_seq;
+
+DROP TABLE Notice;
+DROP SEQUENCE Notice_seq;

@@ -15,121 +15,220 @@
     <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/notice.css}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
+    <style>
+        header {
+            margin-bottom: 20px;
+            /* header 아래에 20px의 여백을 줍니다. */
+        }
+
+        .content {
+            margin-top: 200px;
+        }
+
+        .searchBox {
+            margin-top: 120px;
+            /* 화면 상단에서 떨어진 정도 */
+        }
+
+        /**페이지 헤더**/
+        .page-header {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 150px;
+            margin-bottom: 50px;
+        }
+
+        /* 검색창 영역*/
+        div.search {
+            width: 560px;
+            margin: 0 auto;
+            background-color: white;
+            width: 500px;
+            height: 50px;
+            border-radius: 25px;
+            /* box-shadow: 5px 5px 5px gray; */
+            padding-left: 10px;
+            border: 1px solid gray;
+
+        }
+
+        div.search {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
 </head>
 
-<div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
-<div id="wrap" class="wrap">
-    <header id="header" class="header">
-        <div class="header-inner">
-            <h1 class="logo">
-                <a href="/">
-                    <span class="blind">NICE TO MATCH YOU</span>
-                </a>
-            </h1>
-            <nav id="nav" class="nav">
-                <div class="nav-wrap">
-                    <ul class="gnb-list">
-                        <li>
-                            <a href="about.html" class="has-depth">
-                                <span>ABOUT</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="about.html">
-                                        <span>NICE TO MATCH YOU</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="service.html" class="has-depth">
-                                <span>SERVICE</span>
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="service.html">
-                                        <span>NEWS</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="service.html">
-                                        <span>무역 사기사례</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="service.html">
-                                        <span>Exchange Rate</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="match.html">
-                                <span>MATCH</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="info.html">
-                                <span>INFO</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/user/login}">
-                                <span>LOGIN</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div> <!-- // .nav-wrap -->
-            </nav>
-            <div class="btns">
-                <button type="button" class="btn open-nav" id="openMe">
-                    <span class="blind">메뉴 열기</span>
-                </button>
-                <button type="button" class="btn close-nav">
-                    <span class="blind">메뉴 열기</span>
-                </button>
+
+<body>
+
+
+    <div class="skip-nav"> <a href="#content">본문 바로가기</a> </div>
+    <div id="wrap" class="wrap">
+        <header id="header" class="header">
+            <div class="header-inner">
+                <h1 class="logo">
+                    <a href="/">
+                        <span class="blind">NICE TO MATCH YOU</span>
+                    </a>
+                </h1>
+                <nav id="nav" class="nav">
+                    <div class="nav-wrap">
+                        <ul class="gnb-list">
+                            <li>
+                                <a href="" class="has-depth">
+                                    <span>ABOUT</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
+                                            <span>NICE TO MATCH YOU</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="has-depth">
+                                    <span>SERVICE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/showOvsNews}">
+                                            <span>News</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/showFraud}">
+                                            <span>Trade fraud</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/rate}">
+                                            <span>Exchange Rate</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a th:href="@{/search}">
+                                    <span>MATCH</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/noticeList}"><!--수정 필요-->
+                                    <span>NOTICE</span>
+                                </a>
+                            </li>
+                            <li sec:authorize="isAnonymous()">
+                                <a th:href="@{/user/login}">
+                                    <span>LOGIN</span>
+                                </a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>LOGOUT</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!— // .nav-wrap —>
+                </nav>
+                <div class="btns">
+                    <button type="button" class="btn open-nav" id="openMe">
+                        <span class="blind">메뉴 열기</span>
+                    </button>
+                    <button type="button" class="btn close-nav">
+                        <span class="blind">메뉴 열기</span>
+                    </button>
+                </div>
+                <divqq class="nav-bg"></divqq>
             </div>
-            <divqq class="nav-bg"></divqq>
-        </div>
-    </header>
-    <div id="scroller" class="scroller" data-scrollbar>
+        </header>
 
-        <!-- 공지사항 form 변경 -->
-        <!-- 게시글 전체 목록 출력  -->
-        <div class="content">
 
-            <!-- 게시글 목록 --> <!-- 전체적으로 손봐야함 -->
-            <div>
-                <table boarder="1">
+        <div id="scroller" class="scroller" data-scrollbar>
+
+
+            <!-- 공지사항 form 변경 -->
+            <!-- 게시글 전체 목록 출력  -->
+            <div class="content">
+                <div class="page-header on">
+                    <h2>공지사항</h2>
+                </div>
+            </div>
+
+            <div class="searchBox">
+                <form id="search" th:action="@{/notice/noticeList}" method="GET">
+                    <input type="hidden" name="page" id="requestPage" th:value="${page}">
+                    <select id="typeSelect">
+                        <option value="noticeTitle" th:selected="${searchItem == 'noticeTitle'}">글제목</option>
+                        <option value="noticeContent" th:selected="${searchItem == 'noticeContent'}">글내용</option>
+                    </select>
+                    <input type="text" class="searchWord" th:value="${searchWord}">
+                    <button type="button" name="searchBtn" value="검색" class="w-btn w-btn-gray">검색
+                </form>
+            </div>
+
+            <!-- 게시글 목록 -->
+            <div class="table-content">
+                <table border="1" class="nList">
                     <tr>
-                        <th class="no">글번호</th>
-                        <th>제목</th>
+                        <th class="no">번호</th>
+                        <th class="title">제목</th>
+                        <th class="writer">작성자</th>
                         <th class="hitcount">조회수</th>
                         <th class="create_date">작성일</th>
                     </tr>
-                    <!--  반복 구간  -->
-                    <tr th:each="board, status : ${list}">
-                        <td th:text="${(list.number+1) * list.size - (list.size - status.count)}"></td>
-                        <td>
-                            <a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, searchItem=${searchItem}, searchWord=${searchWord})}"
-                                th:text="${board.boardTitle}">오늘은 화요일.</a>
-                            <span th:if="${board.originalFileName != null}">
-                                <img th:src="@{/images/clip.png}" alt="첨부파일" width="20px">
-                            </span>
-                        </td>
-                        <td th:text="${board.hitCount}"> 22</td>
-                        <td th:text="*{#temporals.format(board.createDate, 'yyyy-MM-dd hh:mm:ss')}">2024-03-12</td>
-                    </tr>
-                </table>
-            </div> <!-- .content 끝 -->
+                    <!-- 반복 구간 -->
+                    <tbody id="results" class="tableList">
+                        <tr th:each="notice, status : ${list}">
+                            <td class="indexNum" th:text="${status.count}"></td>
+                            <td>
+                                <a class="inputTitle"
+                                    th:href="@{/noticeDetail(noticeNum=${notice.noticeNum}, searchItem=${searchItem}, searchWord=${searchWord})}"
+                                    th:text="${notice.noticeTitle}">오늘은 화요일/</a>
+                            </td>
+                            <td class="fixedWriter" th:text="${notice.noticeWriter}">홍길동</td>
+                            <td class="ReadNum" th:text="${notice.hitCount}">22</td>
+                            <td class="PostedDate" th:text="*{#temporals.format(notice.createDate, 'yyyy-MM-dd')}">
+                                2024-03-12</td>
+                            <!--*{#temporals : #은 Thymeleaf에서 특정 유틸리티 객체를 사용하기 위한 접두사-->
+                            <!--vscode에서 제공하는게 아니라 sts에서 제공하는 특정 행동(?)들을 여기서 쓸 때는 앞에 #을 쓰고 s를 붙임. -->
+                            <!--마치 #lists.isEmpty(list) 처럼-->
+                        </tr>
+                    </tbody>
 
-            <!-- 글쓰기 버튼 -->
-            <div class="write">
-                <a th:href="@{/board/boardWrite}" class="btn btn-primary">글쓰기</a>
-            </div>
+                    </tr>
+
+                </table>
+                <div class="write">
+                    <a th:href="@{/noticeWrite}" class="w-btn-outline w-btn-gray-outline">글쓰기</a>
+                </div>
+                <!--글쓰기 버튼-->
+
+
+            </div> <!-- .content 끝-->
+
+
             <!-- 공지사항 form -->
 
             <footer id="footer" class="footer">
@@ -382,6 +481,6 @@
             });
         });
     </script>
-    </body>
+</body>
 
 </html>

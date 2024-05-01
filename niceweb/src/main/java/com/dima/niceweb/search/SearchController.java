@@ -25,21 +25,12 @@ public class SearchController {
 			@RequestParam(name = "inputKeyword", defaultValue = "") String inputKeyword,
 			@RequestParam(name = "nation", defaultValue = "") String nation,
 			Model model) {
-<<<<<<< HEAD
-
-		model.addAttribute("inputKeyword", inputKeyword);
-		model.addAttribute("nation", nation);
-
-		// return "Company/cosine";
-		return "Stat/mirae";
-=======
 		
 		model.addAttribute("inputKeyword",inputKeyword);
 		model.addAttribute("nation",nation);
 		
 		
 		return "Company/cosine";
->>>>>>> fee291c0e4ebdcb4b1a9b94fe86a4079438dd403
 	}
 
 	@GetMapping("/categorySearch")

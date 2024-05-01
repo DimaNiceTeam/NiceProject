@@ -15,7 +15,7 @@
     <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/nice_dev.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/notice.css}">
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
 </head>
@@ -34,56 +34,76 @@
                     <div class="nav-wrap">
                         <ul class="gnb-list">
                             <li>
-                                <a href="about.html" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>ABOUT</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="about.html">
+                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="service.html" class="has-depth">
+                                <a href="" class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="service.html">
-                                            <span>NEWS</span>
+                                        <a th:href="@{/showOvsNews}">
+                                            <span>News</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="service.html">
-                                            <span>무역 사기사례</span>
+                                        <a th:href="@{/showFraud}">
+                                            <span>Trade fraud</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="service.html">
+                                        <a th:href="@{/globeindex}">
+                                            <span>Trade statistics</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/rate}">
                                             <span>Exchange Rate</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="match.html">
+                                <a th:href="@{/search}">
                                     <span>MATCH</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="info.html">
-                                    <span>INFO</span>
+                                <a th:href="@{/noticeList}"><!--수정 필요-->
+                                    <span>NOTICE</span>
                                 </a>
                             </li>
-                            <li>
+                            <li sec:authorize="isAnonymous()">
                                 <a th:href="@{/user/login}">
                                     <span>LOGIN</span>
                                 </a>
                             </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/mypage}" class="has-depth">
+                                    <span>MY PAGE</span>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/user/logout}">
+                                            <span>LOGOUT</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
                         </ul>
-                    </div> <!-- // .nav-wrap -->
+                    </div>
+                    <!— // .nav-wrap —>
                 </nav>
                 <div class="btns">
                     <button type="button" class="btn open-nav" id="openMe">
@@ -99,37 +119,40 @@
         <div id="scroller" class="scroller" data-scrollbar>
 
             <!-- 공지사항 수정 form 변경 -->
-            <div class="container">
-                <div class="logo">
-                    <h2>글 쓰기</h2>
+            <div class="content2">
+                <div class="page-header2 on">
+                    <h2>게시글 쓰기</h2>
                 </div>
-            </div> <!-- .container 끝 -->
+            </div>
 
-            <!-- 글쓰기 --> <!-- 전체적으로 손봐야함 -->
-            <div class="content">
-                <form th:action="@{/board/boardWrite}" method="POST" enctype="multipart/form-data">
-                    <table border="1">
+            <!-- 글쓰기 -->
+            <div class="table-content">
+                <form th:action="@{/noticeWrite}" method="POST" enctype="multipart/form-data">
+                    <table border="1" class="nWrite">
+
 
                         <tr>
-                            <th>글제목</th>
-                            <td><input id="boardTitle" type="text" name="boardTitle" required></td>
+                            <th class="writeTitle">글 제목</th>
+                            <td><input id="noticeTitle" type="text" name="noticeTitle">
+                                <input type="hidden" id="noticeWriter" value="NICE2MATCHYOU" name="noticeWriter">
+                            </td>
+
                         </tr>
+
+
+
                         <tr>
-                            <th>글내용</th>
+                            <th class="writeContent">글 내용</th>
                             <td>
-                                <textarea name="boardContent" id="boardContent" cols="30" rows="10" required></textarea>
+                                <textarea name="noticeContent" id="noticeContent" cols="30" rows="10"
+                                    required></textarea>
                             </td>
                         </tr>
 
                         <tr>
-                            <th>첨부파일</th> <!-- 혹시몰라서 냅둠-->
-                            <td><input id="uploadFile" type="file" name="uploadFile"></td>
-                        </tr>
-
-                        <tr>
                             <th colspan="2">
-                                <input type="submit" value="글등록" class="btn btn-primary"> &nbsp;
-                                <input type="reset" value="초기화" class="btn btn-danger">
+                                <input type="submit" value="글등록"> &nbsp;
+                                <input type="reset" value="초기화">
                             </th>
 
                         </tr>
