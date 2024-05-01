@@ -140,15 +140,31 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}">
+                                <a href="" class="has-depth">
                                     <span>MATCH</span>
                                 </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/search}">
+                                            <span>Keyword</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/categorySearch}">
+                                            <span>Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
+<<<<<<< HEAD
                                 <a href=""><!--수정 필요-->
 <<<<<<< HEAD
                                     <span>INFO</span>
 =======
+=======
+                                <a th:href="@{/noticeList}"><!--수정 필요-->
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
                                     <span>NOTICE</span>
 >>>>>>> fa71c0546ad7b2ec7b2c3c8a4336b1d9e1891165
                                 </a>
@@ -225,8 +241,8 @@
                 <div class="footer-inner">
                     <div class="cont site">
                         <div class="menu">
-                            <a href="/privacy.html">개인정보처리방침</a>
-                            <a href="/terms.html">이용약관</a>
+                            <a>개인정보처리방침</a>
+                            <a>이용약관</a>
                         </div>
                         <div class="select-box">
                             <select class="select family" title="나이스투매치유">
@@ -262,7 +278,7 @@
     <script th:src="@{/js/lib/aos.js}"></script>
     <script th:src="@{/js/lib/swiper-bundle.js}"></script>
     <script>
-        nav.current(5, 0);
+        nav.current(2, 1);
         familySite();
 
         jQuery(function () {

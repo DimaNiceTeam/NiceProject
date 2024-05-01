@@ -311,11 +311,11 @@ dropdown
 .sub-visual__inner:before {
     content: "";
     position: absolute;
-    top: 30px;
+    top: 10px;
     right: -50px;
     display: block;
     width: 498px;
-    height: 269px;
+    height: 290px;
     /* height: 280px; */
 
     background: url(/images/banner/staticbanner.png) no-repeat 0 0 / 100% auto;

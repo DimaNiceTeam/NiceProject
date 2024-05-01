@@ -35,18 +35,26 @@ body {
     /* 내부 요소를 세로로 정렬 */
     justify-content: flex-start;
     /* 시작 지점에서 정렬 */
+    margin-top: 0px;
 }
 
 
 .searchBox {
-    position: relative;
+
+
+    /* position: relative; */
     /* 상대적 위치 지정 */
     width: 500px;
+
     /* 너비 지정, 필요에 따라 조정 */
     margin-left: auto;
     /* 왼쪽 여백 자동으로 설정하여 오른쪽 정렬 */
     margin-right: auto;
     /* 오른쪽 여백 설정 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
 }
 
 .searchBox input,
@@ -150,6 +158,14 @@ div.table-content {
     margin: 0 auto;
     margin-bottom: 100px;
     position: relative;
+}
+
+
+.searchBox {
+    margin-top: ;
+    margin-right: 0px;
+    /* 오른쪽으로 이동시킵니다. */
+
 }
 
 .nList {
@@ -256,12 +272,13 @@ th.create_date {
 
 
 .nWrite {
-    width: 100%;
+    width: 80%;
     /* 테이블 전체 너비 사용 */
     border-collapse: collapse;
     /* 테이블 셀 사이의 공간 제거 */
     table-layout: fixed;
     /* 테이블 레이아웃 고정 */
+    margin-top: 100px;
 }
 
 .nWrite th,
@@ -375,11 +392,14 @@ th.create_date {
 /* noticeDetail */
 
 .nWrite {
-    width: 90%;
+
     margin: 0 auto;
     /* Center the table on the page */
     border-collapse: collapse;
+    border-top: 0px;
 }
+
+.nWrite {}
 
 .nWrite .titleName,
 .nWrite .WriterName,
@@ -398,6 +418,12 @@ th.create_date {
     /* Align text to the left */
     padding: 8px;
     /* Add some padding around the text */
+    background-color: #F4F3EA;
+}
+
+.threebutton {
+    background-color: #F4F3EA;
+
 }
 
 
@@ -442,16 +468,26 @@ th.create_date {
     /* Center the buttons */
 }
 
+<<<<<<< HEAD
 .nWrite .threebutton .editBtn {
+=======
+/* .nWrite .threebutton .editBtn {
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
     border: 3px solid var(--blue);
     color: #6e6e6e;
-}
+} */
 
+<<<<<<< HEAD
 .nWrite .threebutton .editBtn:hover {
+=======
+
+/* .nWrite .threebutton .deleteBtn:hover {
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
     background-color: var(--blue);
     color: #e1eef6;
-}
+} */
 
+<<<<<<< HEAD
 .nWrite .threebutton .deleteBtn {
     border: 3px solid var(--blue);
     color: #6e6e6e;
@@ -473,6 +509,20 @@ th.create_date {
     background-color: var(--blue);
     color: #d4dfe6;
 }
+=======
+
+#editBtn,
+#deleteBtn,
+#goListBtn {
+    background-color: #CDD2DA;
+    color: white;
+
+    border-radius: 4px;
+    width: 70px;
+}
+
+
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
 
 .nWrite .ListBtn {
     margin-right: 10px;
@@ -503,7 +553,11 @@ th.create_date {
         배너 만들기 
 *******************************/
 .sub-visual--sub2 .sub-visual__inner {
+<<<<<<< HEAD
     background: var(--light-blue-1);
+=======
+    background: #a0db70;
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
 }
 
 .sub-visual__inner {
@@ -530,6 +584,7 @@ th.create_date {
 .sub-visual__inner:before {
     content: "";
     position: absolute;
+<<<<<<< HEAD
     top: 50px;
     right: 30px;
     display: block;
@@ -537,5 +592,12 @@ th.create_date {
     /* height: 269px; */
     height: 300px;
 
+=======
+    top: 5px;
+    right: 30px;
+    display: block;
+    width: 300px;
+    height: 300px;
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
     background: url(/images/banner/noticebanner.png) no-repeat 0 0 / 100% auto;
 }

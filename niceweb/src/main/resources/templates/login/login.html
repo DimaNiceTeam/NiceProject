@@ -34,54 +34,85 @@
 					<div class="nav-wrap">
 						<ul class="gnb-list">
 							<li>
-								<a href="about.html" class="has-depth">
+								<a href="" class="has-depth">
 									<span>ABOUT</span>
 								</a>
 								<ul>
 									<li>
-										<a href="about.html">
+										<a th:href="@{/about}"><!--페이지 나중에 삽입-->
 											<span>NICE TO MATCH YOU</span>
 										</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a href="service.html" class="has-depth">
+								<a href="" class="has-depth">
 									<span>SERVICE</span>
 								</a>
 								<ul>
 									<li>
-										<a href="service.html">
-											<span>NEWS</span>
+										<a th:href="@{/showOvsNews}">
+											<span>News</span>
 										</a>
 									</li>
 									<li>
-										<a href="service.html">
-											<span>무역 사기사례</span>
+										<a th:href="@{/showFraud}">
+											<span>Trade fraud</span>
 										</a>
 									</li>
 									<li>
-										<a href="service.html">
+										<a th:href="@{/globeindex}">
+											<span>Trade statistics</span>
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/rate}">
 											<span>Exchange Rate</span>
 										</a>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<a href="match.html">
+								<a href="" class="has-depth">
 									<span>MATCH</span>
 								</a>
+								<ul>
+									<li>
+										<a th:href="@{/search}">
+											<span>Keyword</span>
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/categorySearch}" target="_blank">
+											<span>Category</span>
+										</a>
+									</li>
+								</ul>
 							</li>
 							<li>
-								<a href="info.html">
-									<span>INFO</span>
+								<a th:href="@{/noticeList}"><!--수정 필요-->
+									<span>NOTICE</span>
 								</a>
 							</li>
-							<li>
+							<li sec:authorize="isAnonymous()">
 								<a th:href="@{/user/login}">
 									<span>LOGIN</span>
 								</a>
 							</li>
+							<li sec:authorize="isAuthenticated()">
+								<a th:href="@{/user/mypage}" class="has-depth">
+									<span>MY PAGE</span>
+								</a>
+								<ul>
+									<li>
+										<a th:href="@{/user/logout}">
+											<span>LOGOUT</span>
+										</a>
+									</li>
+
+								</ul>
+							</li>
+
 						</ul>
 					</div> <!-- // .nav-wrap -->
 				</nav>
@@ -140,8 +171,8 @@
 				<div class="footer-inner">
 					<div class="cont site">
 						<div class="menu">
-							<a href="/privacy.html">개인정보처리방침</a>
-							<a href="/terms.html">이용약관</a>
+							<a>개인정보처리방침</a>
+							<a>이용약관</a>
 						</div>
 						<div class="select-box">
 							<select class="select family" title="나이스투매치유">

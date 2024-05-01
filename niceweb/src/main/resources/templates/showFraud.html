@@ -122,7 +122,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="" class="has-depth">
+                                <a class="has-depth">
                                     <span>SERVICE</span>
                                 </a>
                                 <ul>
@@ -149,12 +149,24 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}">
+                                <a class="has-depth">
                                     <span>MATCH</span>
                                 </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/search}">
+                                            <span>Keyword</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/categorySearch}">
+                                            <span>Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href=""><!--수정 필요-->
+                                <a th:href="@{/noticeList}"><!--수정 필요-->
                                     <span>NOTICE</span>
                                 </a>
                             </li>
@@ -276,12 +288,12 @@
     <script th:src="@{/js/lib/aos.js}"></script>
     <script th:src="@{/js/lib/swiper-bundle.js}"></script>
     <script>
-        nav.current(5, 0);
+        nav.current(2, 2);
         familySite();
 
         jQuery(function () {
 
-            setTimeout(function () {
+            ㅍ(function () {
                 $('.page-header').addClass('on');
                 $('.counter').animate({ 'opacity': '1.0' }, 300);
             }, 150);

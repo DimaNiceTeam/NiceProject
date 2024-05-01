@@ -265,12 +265,24 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/search}">
+                                <a href="" class="has-depth">
                                     <span>MATCH</span>
                                 </a>
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/search}">
+                                            <span>Keyword</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/categorySearch}" target="_blank">
+                                            <span>Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href=""><!--수정 필요-->
+                                <a th:href="@{/noticeList}"><!--수정 필요-->
                                     <span>NOTICE</span>
                                 </a>
                             </li>
@@ -308,6 +320,7 @@
             </div>
         </header>
 
+
         <div id="scroller" class="scroller" data-scrollbar>
             <div class="sub-visual sub-visual--sub2">
                 <div class="sub-visual__inner">
@@ -317,10 +330,20 @@
 
             </div>
             <div id="container" class="container">
-                <div id="content" class="main">
+                <div class="sub-visual sub-visual--sub2">
+                    <div class="sub-visual__inner">
+                        <h2 class="sub-visual__h2">AI 바이어 매칭</h2>
+                        <p class="sub-visual__desc">글로벌 기업정보와 해외기업 DB POOL을 기반으로 잠재바이어를 빠르게 발굴합니다.</p>
 
+
+
+                    </div>
+
+                </div>
+
+                <div id="content" class="main">
                     <!-- cosine 시작 -->
-                    <h2>MATCH</h2>
+                    <!-- <h2>MATCH</h2> -->
                     <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
                     <input type="hidden" id="userNum" name="userNum" th:value="${#authentication.principal.userNum}">
                     <form th:action="@{/predict}" method="POST">
@@ -357,8 +380,8 @@
                 <div class="footer-inner">
                     <div class="cont site">
                         <div class="menu">
-                            <a href="/privacy.html">개인정보처리방침</a>
-                            <a href="/terms.html">이용약관</a>
+                            <a href="">개인정보처리방침</a>
+                            <a href="">이용약관</a>
                         </div>
                         <div class="select-box">
                             <select class="select family" title="나이스투매치유">
@@ -495,6 +518,7 @@
     <script th:src="@{/js/lib/aos.js}"></script>
     <script th:src="@{/js/lib/swiper-bundle.js}"></script>
     <script>
+        nav.current(3, 1);
 
         jQuery(function () {
 

@@ -160,7 +160,7 @@ img {
 /* 섹션 제목 스타일 */
 h2 {
     color: var(--blue);
-    text-align: center;
+    /* text-align: center; */
     padding-top: 50px;
     padding-bottom: 50px;
 }
@@ -247,9 +247,15 @@ h2 {
 
 /******************************
         배너 만들기 
+<<<<<<< HEAD
 *******************************/
 .sub-visual--sub2 .sub-visual__inner {
     background: var(--light-blue-1);
+=======
+        *******************************/
+.sub-visual--sub2 .sub-visual__inner {
+    background: #FF9614;
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
 }
 
 .sub-visual__inner {
@@ -275,7 +281,11 @@ h2 {
 
 .sub-visual__desc {
     position: relative;
+<<<<<<< HEAD
     width: 475px;
+=======
+    width: 400x;
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
     margin-top: 15px;
     font-size: 16px;
     line-height: 24px;
@@ -288,11 +298,19 @@ h2 {
     content: "";
     position: absolute;
     top: 50px;
+<<<<<<< HEAD
     right: 30px;
+=======
+    right: 10px;
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
     display: block;
     width: 498px;
     /* height: 269px; */
     height: 300px;
 
+<<<<<<< HEAD
     background: url(/images/banner/fraudbanner.png) no-repeat 0 0 / 100% auto;
+=======
+    background: url(/images/banner/matchbanner.png) no-repeat 0 0 / 100% auto;
+>>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
 }
