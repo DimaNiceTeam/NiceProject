@@ -1,4 +1,4 @@
-package com.dima.niceweb.myfavcompany;
+package com.dima.niceweb.notice;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,10 +7,6 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import com.dima.niceweb.notice.NoticeDTO;
-import com.dima.niceweb.notice.NoticeEntity;
-import com.dima.niceweb.notice.NoticeRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +35,7 @@ public class NoticeService {
         // entity를 dto로 변환하여 List에 담는 작업
         entityList.forEach((entity) -> dtoList.add(NoticeDTO.toDTO(entity)));
         log.info("dassdadsadsdsdaasdsad");
-       
+
         return dtoList;
     }
 
@@ -74,6 +70,7 @@ public class NoticeService {
 
     /**
      * DB에서 noticeNum에 해당하는 글을 삭제
+     * 
      * @param noticeNum
      */
     @Transactional // 하나의 메소드에서 두 개 이상의 쿼리가 날라갈때는 해줄 것.
@@ -112,6 +109,7 @@ public class NoticeService {
 
     /**
      * 조회수 증가
+     * 
      * @param noticeNum
      */
     @Transactional // 하나의 메소드에서 두 개 이상의 쿼리(조회+업뎃)가 날라갈때는 해줄 것.
