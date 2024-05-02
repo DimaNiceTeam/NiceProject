@@ -31,6 +31,8 @@
     /* 전체 너비 설정 */
     margin-top: 50px;
     /* 상단바와의 간격설정 */
+
+    position: relative;
 }
 
 /*****
@@ -184,7 +186,7 @@ dropdown
 #countryInfo {
     display: none;
     position: absolute;
-    right: 100px;
+    right: 0px;
     padding: 15px;
     background-color: rgb(255, 255, 255);
     width: 450px;
@@ -278,7 +280,8 @@ dropdown
 
 .sub-visual__inner {
     position: relative;
-    max-width: 1366px;
+    /* max-width: 1366px; */
+    max-width: 1560px;
     margin: 122px auto 0;
     padding: 64px 0 65px 111px;
     border-radius: 32px 0;

@@ -17,6 +17,9 @@
     <!--부트스트랩5버전(미래)-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!--css-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/serviceCss/showReg.css}">
+
     <!-- 페이지가 소셜 미디어 플랫폼에 공유될 때 표시될 이미지의 URL을 지정 -->
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
@@ -25,182 +28,6 @@
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
 
-
-    <style>
-        /**페이지 헤더**/
-        .page-header {
-            text-align: center;
-            font-size: 36px;
-            margin-top: 150px;
-            margin-bottom: 50px;
-            display: flex;
-            /* Flexbox를 사용하여 요소를 가운데로 정렬합니다. */
-            justify-content: center;
-            /* 수평 가운데 정렬 */
-            align-items: center;
-            /* 수직 가운데 정렬 */
-        }
-
-        .page-header img {
-            margin-right: 10px;
-            /* 이미지 오른쪽에 약간의 여백을 추가합니다. */
-            width: 60px;
-            /* 이미지의 너비를 조정합니다. */
-            height: 60px;
-            /* 이미지의 높이를 조정합니다. */
-        }
-
-        .content {
-            width: 68%;
-            margin: 0 auto;
-        }
-
-        #regulationTable {
-            border-collapse: collapse;
-            width: 100%;
-            table-layout:
-                fixed;
-            word-break:
-                break-all;
-            height:
-                auto;
-
-
-        }
-
-
-
-        #insertReg {
-            margin-top: 30px;
-        }
-
-        #regulationTable th {
-            padding: 8px;
-            text-align: left;
-            text-align: center;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-            color: #000;
-            font-weight: bold;
-        }
-
-        #regulationTable tbody tr {
-            border-bottom: 1px solid #d3d3d3;
-            /* 회색 선 추가 */
-        }
-
-        .page {
-            color: #fff;
-            background-color: #198754;
-            border-color: #198754;
-            display: inline-block;
-            font-weight: 400;
-            line-height: 1.5;
-
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-
-            border: 1px solid transparent;
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            border-radius: .25rem;
-            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
-        }
-
-        .bbb {
-            float: right;
-            /* margin-left: 100px; */
-
-
-            /* You can adjust the margin as needed */
-            color: #fff;
-            background-color: #385E82;
-            border-color: #385E82;
-            display: inline-block;
-            font-weight: 400;
-            line-height: 1.5;
-
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-
-            border: 1px solid transparent;
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            border-radius: .25rem;
-            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
-        }
-
-        .bbb {
-            /* margin: 1rem; */
-            margin-bottom: 30px;
-            margin-left: 30px;
-            background-color: #385E82;
-            border-color: #385E82;
-        }
-
-        .jittery {
-            animation: jittery 4s infinite;
-        }
-
-        @keyframes jittery {
-
-            5%,
-            50% {
-                transform: scale(1);
-            }
-
-            10% {
-                transform: scale(0.9);
-            }
-
-            15% {
-                transform: scale(1.15);
-            }
-
-            20% {
-                transform: scale(1.15) rotate(-5deg);
-            }
-
-            25% {
-                transform: scale(1.15) rotate(5deg);
-            }
-
-            30% {
-                transform: scale(1.15) rotate(-3deg);
-            }
-
-            35% {
-                transform: scale(1.15) rotate(2deg);
-            }
-
-            40% {
-                transform: scale(1.15) rotate(0);
-            }
-        }
-
-
-
-
-
-
-
-
-
-        /*****************************************
-        ******************************************/
-    </style>
 
 </head>
 
@@ -319,17 +146,29 @@
 
             <!--데이터 꽂히는 부분 내용-->
             <div class="content">
-                <div class="page-header on">
-                    <img id="countryFlag" src="" alt="Flag">
-                    <h2>규제</h2>
+                <div class="sub-visual sub-visual--sub2">
+                    <div class="sub-visual__inner">
+
+                        <h2 class="sub-visual__h2" id="conuntryName">무역규제</h2>
+                        <p class="sub-visual__desc">세계 각국의 무역 규제에대한 정보를 제공합니다.</p>
+                    </div>
                 </div>
-                <button class="bbb btn-primary jittery"><a
-                        href="https://www.hs-tariff.com/main/hs_mti_ai_main/?device=pc" target="_blank">HS코드를
-                        모른다면</a></button>
+                <div class="page-header on">
+                </div>
+                <div id="flagBtn">
+                    <img id="countryFlag" src="" alt="Flag">
+                    <button class="bbb btn-primary jittery" id="bbb"><a
+                            href="https://www.hs-tariff.com/main/hs_mti_ai_main/?device=pc" target="_blank">HS코드를
+                            모른다면</a></button>
+
+                </div>
+
+                <!-- <div class="conuntryName">
+                    <span id="conuntryName">나라이름</span>
+                </div> -->
 
 
                 <div id="insertReg">
-
                 </div>
 
                 <!--풋터-->
@@ -370,12 +209,32 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
 
+                // 나라 이름 반환 
+                const countryNames = {
+                    "CN": "China", "KR": "South Korea", "IN": "India", "MY": "Malaysia", "JP": "Japan", "TH": "Thailand", "HK": "Hong Kong", "SG": "Singapore", "TW": "Taiwan", "AE": "United Arab Emirates",
+                    "IL": "Israel", "BH": "Bahrain", "QA": "Qatar", "VN": "Vietnam", "SA": "Saudi Arabia", "ID": "Indonesia", "PH": "Philippines", "PK": "Pakistan", "LK": "Sri Lanka", "UZ": "Uzbekistan",
+                    "DE": "Germany", "GB": "United Kingdom", "FR": "France", "SE": "Sweden", "AT": "Austria", "DK": "Denmark", "IT": "Italy", "BE": "Belgium", "NL": "Netherlands", "SI": "Slovenia",
+                    "HU": "Hungary", "CH": "Switzerland", "CZ": "Czech Republic", "RO": "Romania", "TR": "Turkey", "RS": "Serbia", "PL": "Poland", "UA": "Ukraine", "SK": "Slovakia", "FI": "Finland",
+                    "BG": "Bulgaria", "EE": "Estonia", "GR": "Greece", "NO": "Norway", "PT": "Portugal", "LV": "Latvia", "HR": "Croatia", "GE": "Georgia", "BY": "Belarus", "LT": "Lithuania",
+                    "MT": "Malta", "BA": "Bosnia and Herzegovina", "ES": "Spain", "US": "United States", "CA": "Canada", "MX": "Mexico", "GT": "Guatemala", "CR": "Costa Rica", "SV": "El Salvador", "JM": "Jamaica",
+                    "NI": "Nicaragua", "DO": "Dominican Republic", "VG": "British Virgin Islands", "PA": "Panama", "BR": "Brazil", "CO": "Colombia", "AR": "Argentina", "CL": "Chile", "VE": "Venezuela", "EC": "Ecuador",
+                    "TT": "Trinidad and Tobago", "ZA": "South Africa", "NG": "Nigeria", "EG": "Egypt", "MA": "Morocco", "KE": "Kenya", "NZ": "New Zealand", "AU": "Australia", "RU": "Russia"
+                };
+                function getCountryName(code) {
+                    return countryNames[code] || code;  // 국가 코드에 해당하는 이름이 없다면 코드를 그대로 반환
+                }
+
                 console.log(flagUrl)
                 const params = new URLSearchParams(window.location.search);
                 const country = params.get('country');
 
                 //국기 api
                 var flagUrl = `https://flagsapi.com/${country}/flat/64.png`; // 국기 이미지 URL 생성
+                let countryName = getCountryName(country);
+                // 나라이름 반환 
+                // document.getElementById("conuntryName").innerHTML = countryName;
+                document.getElementById("conuntryName").innerHTML = countryName + " 무역 규제";
+                //alert(countryName); // 나라 이름 반환
                 document.getElementById('countryFlag').src = flagUrl; // 이미지 소스 업데이트
 
                 if (!country) {
@@ -422,7 +281,9 @@
 
             function convertToTableHTML(data) {
                 if (data.length === 0) {
-                    return 'No data found for selected country.';
+                    document.getElementById("countryFlag").style.display = "none";
+                    return '해당국가의 규제관련 데이터가 존재하지 않습니다.';
+                    return '';
                 }
                 let table = '<table border="1" id="regulationTable">';
                 table += `

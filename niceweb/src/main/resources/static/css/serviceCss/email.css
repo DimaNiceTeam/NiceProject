@@ -1,8 +1,15 @@
-.content {
-    margin-top: 40s0px;
-    width: 68%;
-    margin: 0 auto;
+header {
+    margin-bottom: 20px;
+    /* header 아래에 20px의 여백을 줍니다. */
 }
+
+.content {
+    margin-top: 20px;
+    /* container 위에 20px의 여백을 줍니다. */
+    margin-bottom: 100px;
+
+}
+
 
 .count {
     text-align: left;
@@ -17,7 +24,25 @@
     margin-bottom: 50px;
 }
 
-#favoriteList th {
+/* 테이블 제목과 테이블 왼쪽 너비 맞춤 */
+div.table-heading {
+    width: 68%;
+    margin: 0 auto;
+}
+
+div.table-heading h2 {
+    text-align: left;
+}
+
+
+
+#sendedEmail-list tbody tr {
+    border-bottom: 1px solid #d3d3d3;
+    /* 회색 선 추가 */
+}
+
+
+#sendedEmail-list th {
     padding: 8px;
     text-align: left;
     text-align: center;
@@ -27,87 +52,35 @@
     font-weight: bold;
 }
 
-#favoriteList tbody tr {
+#sendedEmail-list tbody tr {
     border-bottom: 1px solid #d3d3d3;
     /* 회색 선 추가 */
 }
 
-/* 테이블 올렸을 때 -호버*/
-tbody i:hover {
-    background-color: #d3d3d3;
-    opacity: 0.9;
-    cursor: pointer;
-}
-
-th:nth-child(2) {
-    width: 150px;
-    /* 두 번째 열의 너비를 150px로 설정 */
-}
-
-#favoriteList td:nth-child(4),
-#favoriteList td:nth-child(5),
-#favoriteList td:nth-child(6) {
-    width: 80px;
-    /* 예시로 너비를 100px로 지정합니다. */
-}
-
-#favoriteList td:nth-child(2),
-#favoriteList td:nth-child(4),
-#favoriteList td:nth-child(5),
-#favoriteList td:nth-child(6) {
-    text-align: center;
-    /*글씨 가운데로 조정*/
-}
-
-
-#favoriteList td {
-    font-size: 14px;
-    /* 폰트크기*/
-}
-
-
-td i:hover {
-    transform: scale(1.5);
+#sendedEmail-list td:nth-child(3):hover {
+    /* font-weight: bolder;
+        font-size: 18px; */
+    transform: scale(1.1);
     /* 마우스를 올렸을 때 크기를 1.2배로 확대합니다. */
     transition: transform 0.3s ease;
     /* 부드러운 전환 효과를 추가합니다. */
     cursor: pointer;
     /* 마우스 커서를 포인터로 변경합니다. */
-}
-
-#favoriteList td:nth-child(3) a:hover,
-.linkhover:hover {
-
-
     color: #ff4dd6;
+    /* 원하는 크기로 조정하세요 */
 }
 
-.table-wrapper {
-    display: flex;
-    align-items: center;
-}
 
-.primaryBtn {
-    color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
+#sendedEmail-list td:nth-child(3),
+#sendedEmail-list td:nth-child(4) {
     text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+    /*글씨 가운데로 조정*/
+}
 
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
+#sendedEmail-list td {
+    font-size: 16px;
+    /* 폰트크기*/
 }
 
 /* 모달창 닫기 버튼 css */
@@ -135,19 +108,25 @@ td i:hover {
 
 }
 
-/* 총건수 스타일 */
-
+td i:hover {
+    transform: scale(1.5);
+    /* 마우스를 올렸을 때 크기를 1.2배로 확대합니다. */
+    transition: transform 0.3s ease;
+    /* 부드러운 전환 효과를 추가합니다. */
+    cursor: pointer;
+    /* 마우스 커서를 포인터로 변경합니다. */
+}
 
 /******************************
-        배너 만들기 
-        *******************************/
+    배너 만들기 
+    *******************************/
 .sub-visual--sub2 .sub-visual__inner {
-    background: #B0D6FF;
+    background: var(--light-blue-1);
 }
 
 .sub-visual__inner {
     position: relative;
-    /* max-width: 1366px; */
+    max-width: 1366px;
     margin: 122px auto 0;
     padding: 64px 0 65px 111px;
     border-radius: 32px 0;
@@ -181,11 +160,11 @@ td i:hover {
     content: "";
     position: absolute;
     top: 50px;
-    right: 60px;
+    right: 111px;
     display: block;
     width: 498px;
     /* height: 269px; */
-    height: 350px;
+    height: 300px;
 
     background: url(/images/banner/emailbanner.png) no-repeat 0 0 / 100% auto;
 }

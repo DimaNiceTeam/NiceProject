@@ -1,0 +1,244 @@
+/**페이지 헤더**/
+.page-header {
+    /* text-align: center; */
+    font-size: 36px;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    /* display: flex; */
+    /* Flexbox를 사용하여 요소를 가운데로 정렬합니다. */
+    justify-content: center;
+    /* 수평 가운데 정렬 */
+    align-items: center;
+    /* 수직 가운데 정렬 */
+}
+
+
+
+#flagBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+#countryFlag {
+    border-radius: 0.5px solid black;
+    width: 90px;
+    /* 이미지의 너비를 조정합니다. */
+    height: 90px;
+
+}
+
+.content {
+    width: 68%;
+    margin: 0 auto;
+}
+
+#regulationTable {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout:
+        fixed;
+    word-break:
+        break-all;
+    height:
+        auto;
+
+
+}
+
+
+
+#insertReg {
+    margin-top: 30px;
+}
+
+#regulationTable th {
+    padding: 8px;
+    text-align: left;
+    text-align: center;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    color: #000;
+    font-weight: bold;
+}
+
+#regulationTable tbody tr {
+    border-bottom: 1px solid #d3d3d3;
+    /* 회색 선 추가 */
+}
+
+.page {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+}
+
+#bbb {
+    float: right;
+    /* margin-left: 100px; */
+    height: 50px;
+
+
+    /* You can adjust the margin as needed */
+    color: #fff;
+    background-color: #385E82;
+    border-color: #385E82;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+}
+
+#bbb {
+    /* margin: 1rem; */
+    /* margin-bottom: 30px; */
+    margin-left: 30px;
+    background-color: #385E82;
+    border-color: #385E82;
+}
+
+.jittery {
+    animation: jittery 4s infinite;
+}
+
+@keyframes jittery {
+
+    5%,
+    50% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(0.9);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    20% {
+        transform: scale(1.15) rotate(-5deg);
+    }
+
+    25% {
+        transform: scale(1.15) rotate(5deg);
+    }
+
+    30% {
+        transform: scale(1.15) rotate(-3deg);
+    }
+
+    35% {
+        transform: scale(1.15) rotate(2deg);
+    }
+
+    40% {
+        transform: scale(1.15) rotate(0);
+    }
+}
+
+#insertReg {
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
+    width: 100%;
+    /* 전체 너비를 차지하도록 설정 */
+    color: var(--dark-gray);
+    /* 글자 색상 조정 */
+    font-size: 18px;
+    /* 글자 크기 확대 */
+    font-weight: bold;
+    /* 글자 두께를 굵게 */
+    margin-bottom: 100px;
+    /* fotter와의 간격조정 */
+    display: block;
+    /* 블록 레벨 요소로 설정 */
+}
+
+/******************************
+        배너 만들기 
+*******************************/
+.sub-visual--sub2 .sub-visual__inner {
+    background: #14213D;
+}
+
+.sub-visual__inner {
+    position: relative;
+    /* max-width: 1366px; */
+    margin: 122px auto 0;
+    padding: 64px 0 65px 111px;
+    border-radius: 32px 0;
+
+
+}
+
+
+
+.sub-visual__h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Pretendard, Nanum Gothic, 나눔고딕, sans-serif;
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.sub-visual__desc {
+    position: relative;
+    width: 475px;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
+
+}
+
+.sub-visual__inner:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: -50px;
+    display: block;
+    width: 498px;
+    height: 290px;
+    /* height: 280px; */
+    background: url(/images/banner/showregbanner.png) no-repeat 0 0 / 100% auto;
+}

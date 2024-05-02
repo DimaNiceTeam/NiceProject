@@ -153,7 +153,7 @@
         function plusMyCmp() {
             let dunsNo = $(this).attr("attr-dunsno"); // 고유 던스넘버
             let userNum = $("#userNum").val(); // 사용자의 고유 넘버 넣어주기 ~~
-            alert(userNum);
+
 
 
             $.ajax({
@@ -346,9 +346,9 @@
                     <!-- <h2>MATCH</h2> -->
                     <!-- 로그인 유저의 고유 넘버값 넣어주는거 있지말기-->
                     <input type="hidden" id="userNum" name="userNum" th:value="${#authentication.principal.userNum}">
-                    <form th:action="@{/predict}" method="POST">
+                    <form action="#" onsubmit="return false">
                         <div class="search">
-                            <input type="text" placeholder="키워드 입력" id="search" name="inputKeyword"
+                            <input type="text" placeholder="Enter Keyword" id="search" name="inputKeyword"
                                 th:value="${inputKeyword}">
                             <img type=button
                                 src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
@@ -357,7 +357,7 @@
                     </form>
                     <div class="dropdown-container">
                         <select id="continentSelect" onchange="updateCountryList()">
-                            <option value="all">모든 국가</option>
+                            <option value="all">Continent</option>
                             <option value="Asia">Asia</option>
                             <option value="Europe">Europe</option>
                             <option value="NorthAmerica">North America</option>
@@ -367,7 +367,7 @@
                         </select>
 
                         <select id="countrySelect">
-                            <option th:value="${nation}">Select Country</option>
+                            <option th:value="${nation}">Country</option>
                         </select>
                         <!-- <input type="button" value="검색" id="searchBtn"> -->
                     </div>
@@ -380,8 +380,8 @@
                 <div class="footer-inner">
                     <div class="cont site">
                         <div class="menu">
-                            <a href="">개인정보처리방침</a>
-                            <a href="">이용약관</a>
+                            <a>개인정보처리방침</a>
+                            <a>이용약관</a>
                         </div>
                         <div class="select-box">
                             <select class="select family" title="나이스투매치유">
@@ -415,7 +415,8 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">이메일 발송</h4>
-                    <button type="button" class="closeBtn" data-bs-dismiss="modal"></button>
+                    <!-- <button type="button" class="closeBtn" data-bs-dismiss="modal"></button> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <!-- Modal body -->
@@ -459,10 +460,11 @@
                 <!-- Modal body -->
 
                 <div class="modal-body">
-                    <table>
+                    <table class="cmpInfo">
                         <tr>
                             <td>D-U-N-S® Number</td>
-                            <td id="cmpDunsNo"></td>
+                            <td id="cmpDunsNo">
+                            </td>
                         </tr>
                         <tr>
                             <td>Primary SIC Code</td>
@@ -494,7 +496,7 @@
                         </tr>
                         <tr>
                             <td>홈페이지</td>
-                            <td><a href="" id="cmpUrl"></a></td>
+                            <td><a href="" id="cmpUrl" target="_blank" class="linkhover"></a></td>
                         </tr>
                     </table>
 

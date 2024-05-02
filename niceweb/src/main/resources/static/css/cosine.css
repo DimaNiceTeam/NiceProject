@@ -245,6 +245,10 @@ h2 {
 
 }
 
+.linkhover:hover {
+    color: #ff4dd6;
+}
+
 /******************************
         배너 만들기 
 <<<<<<< HEAD
@@ -312,5 +316,12 @@ h2 {
     background: url(/images/banner/fraudbanner.png) no-repeat 0 0 / 100% auto;
 =======
     background: url(/images/banner/matchbanner.png) no-repeat 0 0 / 100% auto;
+<<<<<<< HEAD
 >>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
 }
+=======
+}
+
+/**************************
+***************************/
+>>>>>>> 978854a5e6597cfbf81aadd474450faaebc7c1c1

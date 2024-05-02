@@ -53,4 +53,11 @@ public class UserService {
 	return true;
 	}
 
+
+	public UserDTO findbyUserNum(Long userNum) {
+		UserEntity entity = userRepository.findById(userNum).get();
+		
+		return UserDTO.toDTO(entity);
+	}
+
 }

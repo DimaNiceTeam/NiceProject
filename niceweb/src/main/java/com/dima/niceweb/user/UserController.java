@@ -33,6 +33,27 @@ public class UserController {
 	public String myPage() {
 		return"myPage/mypage";
 	}
+	
+	/*
+	 * 개인 정보 확인 
+	 */
+	@GetMapping("/myInfo")
+	public String myInfo() {
+		return"myPage/mypageInfo";
+
+	}
+	
+	@GetMapping("/searchInfo")
+	@ResponseBody
+	public UserDTO searchInfo(@RequestParam(name="userNum") Long userNum) {
+		
+		UserDTO userDTO = userService.findbyUserNum(userNum);
+		
+		return userDTO;
+	}
+	
+	
+	
 	/**
 	 * 회원 가입 정보 DB에 저장 
 	 * @param userDTO

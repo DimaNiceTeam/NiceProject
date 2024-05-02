@@ -27,6 +27,13 @@ body {
     flex-direction: column;
 }
 
+.content {
+    width: 68%;
+    margin: 0 auto;
+}
+
+
+
 #container {
     flex: 1;
     /* 나머지 공간을 모두 차지하도록 설정 */
@@ -162,7 +169,7 @@ div.table-content {
 
 
 .searchBox {
-    margin-top: ;
+    /* margin-top: ; */
     margin-right: 0px;
     /* 오른쪽으로 이동시킵니다. */
 
@@ -557,7 +564,12 @@ th.create_date {
     background: var(--light-blue-1);
 =======
     background: #a0db70;
+<<<<<<< HEAD
 >>>>>>> 82a4bbf19d962977b7ca9e99b1ecf5986c81e5e2
+=======
+    /* height: 220px; */
+
+>>>>>>> 978854a5e6597cfbf81aadd474450faaebc7c1c1
 }
 
 .sub-visual__inner {
@@ -579,6 +591,17 @@ th.create_date {
     font-size: 48px;
     font-weight: 700;
     color: #fff;
+}
+
+.sub-visual__desc {
+    position: relative;
+    width: 475px;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
+
 }
 
 .sub-visual__inner:before {

@@ -28,6 +28,9 @@
     <script th:src="@{/js/nice_dev.js}"></script>
     <script>
         async function fetchOvsData() {
+            // 로딩 중 스피너 삽입
+            document.querySelector('.loading').style.display = 'block';
+
             const search1 = encodeURIComponent(document.getElementById('search1').value);
             const search2 = encodeURIComponent(document.getElementById('search2').value);
             ///const search4 = (document.getElementById('search4').value);
@@ -51,8 +54,9 @@
                 const data = await response.json();
                 //sosad.innerHTML = url;
                 displayResults(data);
-            } catch (error) {
+            } catch (error) { // 에러 발생시
                 console.error('Error:', error);
+                document.querySelector('.loading').style.display = 'none';// 에러 발생시 로딩 종료
                 document.getElementById('results').innerHTML = '데이터를 불러오는 중 오류가 발생했습니다.';
             }
         }
@@ -75,11 +79,12 @@
                     tbody.appendChild(tr);
                 });
                 if (count != 0) { // 검색된 정보가 있는 경우 
+                    document.querySelector('.loading').style.display = 'none';// 
                     $("#board-count").html(count);
-                    $(".table-content").show(); // table-content를 보이게 함3
+                    $(".table-content").show(); // table-content를 보이게 함
                     $("#noResult").html(""); // 재검색의 경우 안보이도록 숨김
                 } else {
-
+                    document.querySelector('.loading').style.display = 'none';
                     $("#noResult").html("검색된 결과가 없습니다");
                     $(".table-content").hide();
                 }
@@ -208,9 +213,11 @@
                         <p class="sub-visual__desc">자동차 관련 해외뉴스를 제공하는 페이지입니다.</p>
                     </div>
                 </div>
+
                 <div class="content">
                     <div class="page-header on">
                     </div>
+
 
                     <div class="searchBox">
                         <div class="search">
@@ -222,6 +229,22 @@
 
                         </div>
                     </div>
+                    <div class="loading">
+                        <div class="droplet_spinner">
+                            <div class="droplet"></div>
+                            <div class="droplet"></div>
+                            <div class="droplet"></div>
+                            <div class="droplet"></div>
+
+
+                        </div>
+                        <div>
+                            <h2 style="color: rgb(20, 17, 17); font-weight: bolder; font-size: 20px;">요청하신 해외뉴스를 검색중입니다.
+                            </h2>
+                        </div>
+
+                    </div>
+                    <!-- 로딩페이지 end -->
                     <div>
                         <span id="noResult"></span>
                     </div>
@@ -229,7 +252,7 @@
                         <div class="count">
                             <span>총 </span><span id="board-count" style="color: #ff4dd6;"></span><span> 건</span>
                         </div>
-                        <table border="1">
+                        <table border="1" class="tableList">
                             <tr>
                                 <th>국가</th>
                                 <th>제목</th>
