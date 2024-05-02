@@ -419,8 +419,9 @@
                     <input type="hidden" name="nation" value="" id="emailnation">
 
                     <div class="modal-body">
-                        <!--수정해야할 부분입니다~~~~~~~~-->
-                        <input type="hidden" name="userNum" value="1"><!--우선은 임의로 만들어봄 -->
+
+                        <input type="hidden" id="userNum" name="userNum"
+                            th:value="${#authentication.principal.userNum}">
                         <input id="cmpaddress" name="receiver" placeholder="이메일 주소" class="form-control" value=""> <br>
                         <input name="emailSubject" placeholder="제목" class="form-control"> <br>
                         <textarea name="emailContent" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"
