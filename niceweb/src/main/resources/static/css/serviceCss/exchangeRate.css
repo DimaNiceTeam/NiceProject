@@ -13,12 +13,17 @@
     margin-bottom: 50px;
 }
 
+
+
 .crateCal {
+
+    display: flex;
     margin: 0 auto;
-    /* 가운데 정렬 */
     margin-top: 150px;
-    /* 배너와의 거리 */
     margin-bottom: 60px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
 }
 
 
@@ -68,16 +73,12 @@
 
 }
 
-.eqalSign {
+/* .eqalSign {
     text-align: center;
+    margin-left: 80px;
     margin-bottom: 20px;
 
-}
-
-
-
-
-
+} */
 
 table {
     width: 68%;
@@ -103,11 +104,39 @@ table {
 
 }
 
+.rateBtn {
+    /* margin: 0 auto; */
+    margin-left: 10px;
+    margin-right: 20px;
+    color: #fff;
+    width: 80px;
+    background-color: #2483e3;
+    border-color: #2483e3;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    /* color: #212529; */
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    /* background-color: transparent; */
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+}
+
 /******************************
         배너 
 *******************************/
 .sub-visual--sub2 .sub-visual__inner {
-    background: #8CBDED
+    background: #8CBDED;
 }
 
 .sub-visual__inner {
