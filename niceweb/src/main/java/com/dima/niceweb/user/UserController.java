@@ -29,12 +29,15 @@ public class UserController {
 		return"Join/join";
 	}
 	
+	/*
+	 * 마이페이지 화면 요청 
+	 */
 	@GetMapping("/mypage")
 	public String myPage() {
 		return"myPage/mypage";
 	}
 	
-	/*
+	/* 마이페이지 
 	 * 개인 정보 확인 
 	 */
 	@GetMapping("/myInfo")
@@ -43,6 +46,11 @@ public class UserController {
 
 	}
 	
+	/**
+	 * 회원 정보 가져오기 
+	 * @param userNum
+	 * @return
+	 */
 	@GetMapping("/searchInfo")
 	@ResponseBody
 	public UserDTO searchInfo(@RequestParam(name="userNum") Long userNum) {
@@ -62,22 +70,24 @@ public class UserController {
 	@PostMapping("/joinProc")
 	public String joinProc(@ModelAttribute UserDTO userDTO) {
 		
-		log.info("로그를 던져라 하이루~~~ {}", userDTO.toString());
+		
 		
 		// 사용자 계정으로 설정함 
 		userDTO.setUserRoles("ROLE_USER");
 		userService.joinProc(userDTO);
 		return "redirect:/";
 	}
+	
+	/**
+	 * 로그인 페이지 
+	 * @return
+	 */
 	@GetMapping("/login")
 	public String login() {
 		return"login/login";
 	}
 
-	@GetMapping("/find")
-	public String find() {
-		return"find/find";
-	}
+	
 	
 	/**
 	 * 아이디 중복 검사 

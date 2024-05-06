@@ -58,7 +58,7 @@ public class EmailController {
 		
 		
 		log.info("~~~~~~ 찜리스트의 메일보내기임 ");
-//		log.info(mailDTO.getUserNum().toString());
+//		log.info(mailDTO.getUserapNum().toString());
 		mailService.mailSend(mailDTO);
 		mailService.insertMail(mailDTO);// 보낸 메일함에 메시지 저장 
 		
@@ -81,15 +81,9 @@ public class EmailController {
 	 */
 	@PostMapping("/myPageSendEmail")
 	public String myPagemailsend(EmailDTO mailDTO) {
-		log.info("******여기까지 오시나"+mailDTO.toString());
-		
-		
 		
 		mailService.mailSend(mailDTO);
 		mailService.insertMail(mailDTO);// 보낸 메일함에 메시지 저장 
-		log.info("여기까지는 ㅇ~~~~~~~~~~~~~~~~~~~~~~");
-		
-		
 		
 		
 		return "redirect:/user/myFavCompany";
@@ -118,7 +112,7 @@ public class EmailController {
 	@GetMapping("mailDelete")
 	@ResponseBody
 	public String mailDelete(@RequestParam(name="emailNum") Long emailNum) {
-		log.info("~~~~~~~~~여기는까지 오  니??"+emailNum);
+		
 		mailService.deleteOne(emailNum);
 		
 		return "success";

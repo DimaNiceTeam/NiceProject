@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dima.niceweb.myfavcompany.NoticeService;
 
@@ -17,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-//@RequestMapping(name = "/notice")
+
 @RequiredArgsConstructor
 @Slf4j
 public class NoticeController {
@@ -38,7 +37,7 @@ public class NoticeController {
 
         List<NoticeDTO> dtoList = noticeService.selectAll();
 
-        // 페이지 번호 자동계산 해주는 PageNavigator 객체 생성
+      
 
         model.addAttribute("list", dtoList);
         return "Notice/noticeList";
@@ -51,7 +50,7 @@ public class NoticeController {
      */
     @GetMapping("/noticeWrite")
     public String noticeWrite() {
-        log.info("글쓰기 화면 요청");
+        
 
         return "Notice/noticeWrite";
     }
@@ -112,48 +111,5 @@ public class NoticeController {
         return "redirect:/noticeList";
     }
 
-    /**
-     * noticeNum의 글을 수정하기 위한 요청
-     * 
-     * @param noticeNum
-     * @return
-     */
-    @GetMapping("/noticeUpdate")
-    public String noticeUpdate(
-            @RequestParam(name = "noticeNum") Long noticeNum, Model model,
-            @RequestParam(name = "searchItem", defaultValue = "noticeTitle") String searchItem,
-            @RequestParam(name = "searchWord", defaultValue = "") String searchWord) {
-        NoticeDTO noticeDTO = noticeService.selectOne(noticeNum);
-
-        model.addAttribute("notice", noticeDTO);
-        model.addAttribute("searchItem", searchItem);
-        model.addAttribute("searchWord", searchWord);
-        return "Notice/noticeUpdate";
-    }
-
-    /**
-     * 파라미터로 전달받은 NoticeDTO 받아 서비스단으로 전달
-     * 
-     * @param noticeDTO
-     * @param rttr
-     * @return
-     */
-    @PostMapping("/noticeUpdate")
-    public String noticeUpdate(@ModelAttribute NoticeDTO noticeDTO,
-            @RequestParam(name = "searchItem", defaultValue = "noticeTitle") String searchItem,
-            @RequestParam(name = "searchWord", defaultValue = "") String searchWord, Model model,
-            RedirectAttributes rttr) {
-
-        log.info("===========searchItem{}", searchItem);
-        log.info("===========searchWord{}", searchWord);
-        log.info("==========={}", noticeDTO.toString());
-        noticeService.updateOne(noticeDTO);
-
-        rttr.addAttribute("noticeNum", noticeDTO.getNoticeNum());
-        rttr.addAttribute("searchItem", searchItem);
-        rttr.addAttribute("searchWord", searchWord);
-        // model.addAttribute("searchItem",searchItem);
-        // model.addAttribute("searchWord",searchWord);
-        return "redirect:/noticeDetail";
-    }
+  
 }

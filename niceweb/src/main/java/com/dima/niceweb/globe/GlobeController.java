@@ -5,13 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class GlobeController {
-
+	
+	/**
+	 * 무역 통계 페이지 
+	 * @return
+	 */
     @GetMapping("/globeindex")
     public String globeindex() {
 
         return "Globe/globeindex";
     }
     
+    /**
+     * 무역 규제 
+     * @return
+     */
     @GetMapping("/showReg")
     public String showReg() {
 

@@ -24,7 +24,6 @@ public class FraudController {
         }
         return null;
     }
-
     @GetMapping("/showFraud")
     public String showFraud() {
 

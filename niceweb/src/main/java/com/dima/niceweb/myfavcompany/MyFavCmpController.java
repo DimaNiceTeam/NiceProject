@@ -29,7 +29,7 @@ public class MyFavCmpController {// 마이페이지 - 찜기능 관련 컨트롤
 	 */
 	@GetMapping("/myFavCompany")
 	public String favCmp() {
-		return "myPage/favCompany";// 미래한
+		return "myPage/favCompany";
 	}
 
 	
