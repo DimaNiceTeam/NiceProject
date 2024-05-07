@@ -1,0 +1,522 @@
+.vertical-list li {
+
+    margin: 40px;
+    /* 각 항목의 마진 설정 */
+    text-align: left;
+    /* 텍스트 중앙 정렬 */
+    overflow-y: auto;
+    /* 내용이 많을 경우 스크롤바 표시 */
+}
+
+.toggle {
+    border-color: 1px solid #fff;
+}
+
+.box {
+    float: left;
+    width: 355px;
+    height: 115;
+    margin: 0 75px;
+    position: relative;
+    margin-left: 400px;
+
+}
+
+.dropdown-container {
+    display: none;
+    /* 초기에 숨겨진 상태 */
+    position: absolute;
+    top: 20px;
+    /* 위치 조정 필요에 따라 수정 */
+    right: 20px;
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.front {
+    position: absolute;
+    width: 30%;
+    opacity: 0.5;
+    top: 267.8px;
+    left: 99.8px;
+}
+
+.secondfront {
+    position: absolute;
+    width: 120%;
+    height: auto;
+    opacity: 0.5;
+    top: 197.5px;
+    left: 31.7px;
+}
+
+/*인테리어 */
+.thirdfront {
+    position: absolute;
+    width: 59.4%;
+    height: auto;
+    opacity: 0.5;
+    top: 123.8px;
+    left: 216px;
+}
+
+/* 차체 */
+.fourthfront {
+    position: absolute;
+    width: 97.5%;
+    height: auto;
+    opacity: 0.5;
+    top: 69.7px;
+    left: 10.2px;
+}
+
+.EngineImage:hover,
+.smallpartsImage:hover,
+.interiorImage:hover,
+.bodyImage:hover {
+    filter: brightness(200%);
+    transition: filter 0.3s ease-in-out;
+}
+
+/* 노멀라이즈 시작 */
+body,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* 해당 태그의 list-style을 none으로 하는 것으로 ●을 제거한다 */
+}
+
+a {
+    color: inherit;
+    /* 부모 엘리먼트의 값을 물려받는다 */
+    text-decoration: none;
+    /* 해당 태그의 text-decoration 속성을 none 값으로 하는 것으로 밑줄을 제거한다 */
+}
+
+/* 노멀라이즈 끝 */
+
+/* 2차 이상의 메뉴를 숨기기 */
+.side-bar>ul ul {
+    display: block;
+}
+
+/* 사이트의 높이를 5000px로 만들어 스크롤 생성 */
+body {
+    height: 700px;
+    background-color: #080808;
+
+}
+
+
+
+/* 사이드바의 너비와 높이를 변수를 통해 통제 */
+:root {
+    --side-bar-width: 330px;
+    --side-bar-height: 5vh;
+}
+
+.side-bar {
+    width: var(--side-bar-width);
+    position: fixed;
+    left: -330px;
+    /* 초기에 사이드바를 숨깁니다 */
+    top: 0;
+    height: 70px;
+    bottom: 0;
+    background-color: #8595a9;
+    /* 배경색 변경 */
+    color: #fff;
+    min-height: var(--side-bar-height);
+    transition: left 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1001;
+    margin-top: calc((100vh - var(--side-bar-height)) / 10);
+    border-color: 1px solid #fff;
+}
+
+
+/* 사이드바가 활성화되면 왼쪽으로 이동 */
+.active {
+    left: 0;
+}
+
+/* 모든 메뉴의 a에 속성값 부여 */
+.side-bar ul>li>a {
+    display: block;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+}
+
+
+/* 자식의 position이 absolute일 때 자식을 영역 안에 가두어 준다 */
+.side-bar>ul>li {
+    position: relative;
+}
+
+/* 모든 메뉴가 마우스 인식 시 반응 */
+.side-bar ul>li:hover>a {
+    background-color: #6b6e72;
+
+}
+
+/* 1차 메뉴의 항목이 마우스 인식 시에 2차 메뉴 등장 */
+.side-bar>ul>li>ul:hover {
+    position: absolute;
+    background-color: #8595a9;
+    top: 0;
+    /* 2차 메뉴의 상단을 1차 메뉴의 상단에 고정 */
+    left: 100%;
+    /* 2차 메뉴를 1차 메뉴의 너비만큼 이동 */
+    width: 100%;
+    /* 1차 메뉴의 너비를 상속 */
+
+}
+
+/* 2차, 3차 메뉴의 절대 위치를 설정합니다 */
+.side-bar>ul ul,
+.side-bar>ul ul ul {
+    position: absolute;
+    display: none;
+    background-color: #8595a9;
+    top: 0;
+    left: var(--side-bar-width);
+    width: var(--side-bar-width);
+    margin-left: -1px;
+    /* 부모 메뉴와의 경계선 겹침을 피하기 위해 */
+}
+
+/* 3차 메뉴는 2차 메뉴와 동일한 레벨에서 표시되어야 합니다. */
+/* 3단 서브메뉴 스크롤바 설정 */
+.side-bar ul ul ul {
+    display: block;
+    /* 이 부분은 필요에 따라 조정 */
+    position: absolute;
+    /* 이미 정의된 위치 설정을 유지 */
+    background-color: #8595a9;
+    /* 배경 색상 유지 */
+    top: 0;
+    left: 100%;
+    /* 왼쪽에서 100% 떨어진 곳에 위치 */
+    /* 너비는 --side-bar-width 변수 사용 */
+    max-height: 300px;
+    /* 최대 높이 설정, 필요에 따라 조절 가능 */
+    overflow-y: auto;
+    /* 세로 방향으로 내용이 넘칠 경우 스크롤바 표시 */
+    z-index: 100;
+    /* 다른 요소들 위에 보이도록 z-index 설정 */
+    margin-left: -1px;
+    /* 서브메뉴간 경계선 겹침 방지 */
+    border: 1px solid #ffffff;
+    /* 서브메뉴의 경계를 더 명확하게 표시 */
+    scrollbar-width: none;
+    /* Firefox에서 스크롤바를 숨깁니다 */
+    width: 550px;
+    font-size: 12px;
+}
+
+.side-bar ul ul ul::-webkit-scrollbar {
+    display: none;
+    /* 스크롤바를 숨김 */
+}
+
+/* 하위 메뉴에 호버 스타일 적용 */
+.side-bar ul li ul li:hover {
+    background-color: #ffffff;
+    /* 호버 시 배경 색상 변경 예시 */
+    color: white;
+    /* 텍스트 색상 변경 예시 */
+}
+
+.side-bar ul li a {
+    margin-left: 7px;
+    font-size: 1.4em;
+    /* 하위 메뉴 항목의 기본 글씨 크기로 설정 */
+}
+
+.col3 {
+    display: relative;
+}
+
+
+
+.productListContainer {
+    font-size: 16px;
+    position: absolute;
+    /* 위치를 절대적으로 지정 */
+    right: 0;
+    /* 컨테이너의 오른쪽 끝에 배치 */
+    top: 7%;
+    /* 상단으로부터 10%의 여백을 둠 */
+    width: 20%;
+    /* 너비를 20%로 설정 */
+    z-index: 1000;
+    /* 다른 요소들 위에 표시되도록 높은 z-index 값 설정 */
+    color: white;
+    /* 텍스트 색상은 흰색으로 설정 */
+    background-color: #080808;
+    /* 배경색 설정 */
+    padding: 5px;
+    /* 내부 여백 설정 */
+    box-sizing: border-box;
+    /* padding을 포함한 너비와 높이 계산 */
+    height: 670px;
+    border-left: 4px solid #7A2F60;
+    border-right: 4px;
+    /* 왼쪽에 경계선 추가 */
+    display: block;
+    overflow-y: auto;
+    /* 내용이 넘칠 경우 세로 스크롤바 활성화 */
+    scrollbar-width: none;
+    /* Firefox에서 스크롤바 숨기기 */
+    -ms-overflow-style: none;
+    /* IE, Edge에서 스크롤바 숨기기 */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    /* 그림자 추가 */
+    border-radius: 10px;
+    /* 경계 모서리 둥글게 */
+}
+
+
+.itemNameList::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
+}
+
+
+/* 버튼 기본 스타일 */
+button {
+    background-color: #8595a9;
+    /* 녹색 배경 */
+    color: white;
+    /* 텍스트 색상 */
+    padding: 8px 24px;
+    /* 상하, 좌우 패딩 */
+    border: none;
+    /* 테두리 없음 */
+    border-radius: 10px;
+    /* 둥근 테두리 */
+    cursor: pointer;
+    /* 커서를 포인터로 설정 */
+    transition: background-color 0.3s;
+    /* 배경색 변경 애니메이션 */
+    font-size: 14px;
+    /* 폰트 크기 */
+    box-shadow: 0px 0px 2px 2px rgba(206, 229, 255, 0.803);
+}
+
+/* 버튼 호버 상태 스타일 */
+button:hover {
+    background-color: #e6f0ff;
+    /* 호버 시 배경색 변경 */
+    color: #080808;
+}
+
+.container .row .col .button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+/* 화살표 기본 스타일 */
+.container .row .col .arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+
+
+/* 상위 메뉴 화살표 위치 조정 */
+.side-bar>ul>li>a {
+    position: relative;
+    /* 부모 요소를 relative로 설정 */
+    padding-right: 20px;
+    /* 텍스트와 화살표 사이 공간 확보 */
+}
+
+/* 상위 메뉴 화살표 스타일 */
+.side-bar>ul>li>a>.arrow {
+    position: absolute;
+    right: 10px;
+    /* 오른쪽 정렬에 대한 위치 */
+    top: 50%;
+    /* 세로 중앙 정렬을 위해 top을 50%로 설정 */
+    transform: translateY(-50%);
+    /* 세로 중앙 정렬을 위한 변환 */
+}
+
+/* 하위 메뉴 화살표 위치 조정 */
+.side-bar>ul>li>ul>li>a {
+    position: relative;
+    /* 부모 요소를 relative로 설정 */
+    padding-right: 20px;
+    /* 텍스트와 화살표 사이 공간 확보 */
+}
+
+/* 하위 메뉴 화살표 스타일 */
+.side-bar>ul>li>ul>li>a>.arrow {
+    position: absolute;
+    right: 10px;
+    /* 오른쪽 정렬에 대한 위치 */
+    top: 50%;
+    /* 세로 중앙 정렬을 위해 top을 50%로 설정 */
+    transform: translateY(-50%);
+    /* 세로 중앙 정렬을 위한 변환 */
+}
+
+.submenu li {
+    position: relative;
+    /* 부모 요소를 relative로 설정하여 자식 요소인 button이 위치를 절대적으로 찾을 수 있게 함 */
+}
+
+.submenu button {
+    position: absolute;
+    /* 절대 위치를 사용하여 버튼을 부모 요소 기준으로 오른쪽 끝에 위치시킴 */
+    right: 10px;
+    /* 오른쪽에서 10px 떨어진 곳에 위치 */
+    top: 50%;
+    /* 버튼을 상위 요소의 중앙 높이에 위치시킴 */
+    transform: translateY(-50%);
+    /* 버튼을 수직 중앙에 위치시키기 위해 Y축 기준 50%만큼 이동 */
+}
+
+.side-bar ul li {
+    border-bottom: 1px solid #ffffff;
+    /* 각 항목 사이에 테두리 추가 */
+}
+
+/* 마지막 항목의 하단 테두리 제거 */
+.side-bar ul li:last-child {
+    border-bottom: none;
+}
+
+.item-style {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.item-style:hover {
+    background-color: #eaeaea;
+    color: black;
+}
+
+.vertical-list li {
+    display: flex;
+    align-items: baseline;
+    /* 항목들을 베이스라인에 맞춤 */
+    margin: 40px;
+    overflow-y: auto;
+}
+
+.index {
+    margin-right: 10px;
+    /* 번호와 텍스트 사이의 공간 */
+    white-space: nowrap;
+    /* 번호가 줄바꿈 되지 않도록 설정 */
+}
+
+.item-text {
+    flex-grow: 1;
+    /* 남은 공간을 모두 차지하도록 설정 */
+}
+
+/* Product List Container Style */
+.productListContainer {
+    width: 300px;
+    /* 사이드바 너비 */
+    background-color: #e6f0ff;
+    /* 배경색 */
+    border-left: 1px solid #ccc;
+    /* 왼쪽 경계선 */
+    position: fixed;
+    /* 사이드바를 고정 위치에 표시 */
+    top: 0;
+    /* 상단에 맞춤 */
+    right: -330px;
+    /* 초기에는 숨김 */
+    transition: right 0.3s;
+    /* 부드러운 오른쪽으로 이동 효과 */
+    z-index: 1000;
+    /* 다른 요소들 위에 표시 */
+    height: 100vh;
+    /* 전체 높이 */
+    box-shadow: -2px 0 5px rgba(226, 236, 255, 0.2);
+    /* 그림자 효과 */
+    overflow-y: auto;
+    /* 내용이 많으면 스크롤 표시 */
+}
+
+/* 제목 스타일 */
+.itemNameListTitle {
+    margin: 5px;
+    margin-bottom: 20px;
+    /* 타이틀과 리스트 아이템 사이의 간격 추가 */
+    font-size: 20px;
+    /* 글자 크기 */
+    font-weight: bold;
+    /* 글자 굵기 */
+    color: #333;
+    /* 글자 색상 */
+    text-align: center;
+    /* 중앙 정렬 */
+    padding: 20px;
+    /* 패딩 */
+    background-color: #fff;
+    /* 배경색 */
+    /* 마진 제거 */
+    border: 1px solid #b3d2ff;
+    /* 하단 테두리 */
+    border-radius: 10px;
+}
+
+/* 아이템 리스트 스타일 */
+.itemNameList {
+    margin: 5px;
+    /* 마진 제거 */
+    padding: 0;
+    /* 패딩 제거 */
+    list-style: none;
+    /* 기본 목록 스타일 제거 */
+}
+
+.itemNameList li {
+    padding: 10px 15px;
+    /* 상하, 좌우 패딩 */
+    border-bottom: 1px solid #ccc;
+    /* 각 아이템 하단에 테두리 추가 */
+    font-size: 16px;
+    /* 글자 크기 */
+    color: #333;
+    /* 글자 색상 */
+    background-color: #ffffff;
+    /* 배경색 */
+    display: flex;
+    /* Flexbox 사용 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    transition: background-color 0.3s;
+    /* 배경색 변화 효과 */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    /* 리스트 아이템 상하 패딩 조정 */
+}
+
+.itemNameList li:hover {
+    background-color: #cfcfcf;
+    /* 호버 시 배경색 변경 */
+}

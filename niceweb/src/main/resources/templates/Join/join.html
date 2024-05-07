@@ -18,23 +18,6 @@
     <script th:src="@{/js/nice_dev.js}"></script>
     <script>
 
-        //aa();
-
-        function aa() {
-            let a = "aaa";
-            let englishRegex = /^[a-z|A-Z]+$/;
-            let koreanRegex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-
-            if (!englishRegex.test(a)) { // 영문이 아닐경우 
-                alert(englishRegex.test(a));
-
-            }
-            if (koreanRegex.test(a)) {
-                alert("~~~aaaaaaaaa~!!!관심 품목을 한글이다.");
-
-            }
-        }
-
         function checkjoinform() { // 자바스크립트가 모두 실행된 후에 마지막에 실행
 
             let userName = $("#userName").val() // 담당자 이름 
@@ -98,14 +81,7 @@
                 $("#userSicCd").focus();
                 return false;
             }
-            // 수정필요
-            // if ($("#userKeyWord").val().length != 0) { // 관심 품목 키워드가 입력되었는데 
-            //     if ($(!englishRegex.test($("#userKeyWord").val()))) { // 영문이 아닐경우 
-            //         alert("관심 품목을 영문으로 입력해주세요.");
-            //         $("#userKeyWord").focus();
-            //         return false;
-            //     }
-            // }
+
 
             if (!$("#agreementCheckbox").is(":checked")) {
                 alert("필수 이용약관에 동의해주세요");
@@ -292,7 +268,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}">
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -343,7 +319,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/noticeList}"><!--수정 필요-->
+                                <a th:href="@{/noticeList}">
                                     <span>NOTICE</span>
                                 </a>
                             </li>
@@ -521,9 +497,7 @@
                                 마케팅 정보 수신에 모두
                                 동의합니다.</label>
                         </div>
-                        <!-- <div class="join">
-            <a type="button" class="join Btn btn-primary"> 가입하기</a>
-        </div> -->
+
                         <div class="join">
                             <input type="submit" id="submitBtn" value="회원가입" class="join Btn btn-primary">
                             <!--유효성 검사 끝나면 버튼 클릭 할 수 있도록 하기 -->

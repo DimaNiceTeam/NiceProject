@@ -14,67 +14,11 @@
     <meta property="og:image:width" content="800">
     <meta property="og:image:height" content="400">
     <link type="text/css" rel="stylesheet" th:href="@{/css/join.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/mypageCss/mypageInfo.css}">
+
     <script th:src="@{/js/lib/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/js/nice_dev.js}"></script>
 </head>
-<style>
-    /******************************
-        배너 만들기 
-*******************************/
-    .sub-visual--sub2 .sub-visual__inner {
-        background: #FF88B6;
-    }
-
-    .sub-visual__inner {
-        position: relative;
-        max-width: 1366px;
-        margin: 122px auto 0;
-        padding: 64px 0 65px 111px;
-        border-radius: 32px 0;
-
-
-    }
-
-
-
-    .sub-visual__h2 {
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-        border: 0;
-        box-sizing: border-box;
-        font-family: Pretendard, Nanum Gothic, 나눔고딕, sans-serif;
-        position: relative;
-        font-size: 48px;
-        font-weight: 700;
-        color: #fff;
-        text-align: left;
-    }
-
-    .sub-visual__desc {
-        position: relative;
-        width: 475px;
-        margin-top: 15px;
-        font-size: 16px;
-        line-height: 24px;
-        font-weight: 500;
-        color: #fff;
-
-    }
-
-    .sub-visual__inner:before {
-        content: "";
-        position: absolute;
-        top: -20px;
-        right: -50px;
-        display: block;
-        width: 498px;
-        height: 290px;
-        /* height: 280px; */
-
-        background: url(/images/banner/mypagebanner.png) no-repeat 0 0 / 100% auto;
-    }
-</style>
 <script>
     $(function () {
         searchInfo();
@@ -144,7 +88,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}">
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -195,7 +139,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/noticeList}"><!--수정 필요-->
+                                <a th:href="@{/noticeList}">
                                     <span>NOTICE</span>
                                 </a>
                             </li>

@@ -93,57 +93,6 @@
 
         }
 
-        function bankingAPI() {
-            var authkey = 'Uz4el4zIIu0ZrTuEnM8A0ZDuSOb8ubhV';
-            var searchdate = '20240426';
-            var data = 'AP01';
-            var url = `https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=${authkey}&searchdate=${searchdate}&data=${data}`
-            const aaa = '' // 이 부분을 이용하는 서버 URL로 변경
-
-            fetch(`https://cors-anywhere.herokuapp.com/${url}`)
-                .then((response) => response.json()) // 문자열이 아닌 리스트 형식으로 받아온다 
-                .then((data) => {
-                    let count = 0;
-                    let receivedData = `
-                                    <thead>
-                                            <tr>
-                                                <th>통화코드</th>
-                                                <th>국가/통화명</th>
-                                                <th>(송금)받으실때</th>
-                                                <th>(송금)보내실때</th>
-                                                <th>매매 기준율</th>
-                                                <th>장부가격</th>
-                                                
-                                                <th>서울외국환중개매매기준율</th>
-                                                <th>서울외국환중개장부가격</th>      
-                                            </tr>
-                                    </thead>`;
-                    data.forEach(item => {
-                        receivedData += `
-                        <tr>
-                            <td>${item.cur_unit}</td>
-                            <td>${item.cur_nm}</td>
-                            <td>${item.ttb}</td>
-                            <td>${item.tts}</td>
-                            <td>${item.deal_bas_r}</td>
-                            <td>${item.bkpr}</td>
-                            <td>${item.kftc_deal_bas_r}</td>
-                            <td>${item.kftc_bkpr}</td>          
-                            `
-
-                            ;
-                        receivedData += `</tr>`;
-
-
-                    })
-                    $(".dailyRate").html(receivedData);
-
-                }// data - end
-                );
-
-
-
-        }
 
         function init() {
 
@@ -156,7 +105,7 @@
         function successFunction(data) {
 
             let allRows = data.split(/\r?\n|\r/);//     개행을 기준으로 문자열을 가지고옴 -  모든 행
-            //let allRows = data.split(/\r?\n|\r/);
+
             let table = "<table>";
 
             for (let singleRow = 0; singleRow < allRows.length; singleRow++) {
@@ -213,74 +162,19 @@
 
                 return
             }
-            //http://apilayer.net/api/convert?access_key=58dfaebb4ddb4d8dea6360b93171efff&from=US&to=KR&amount=10
+
 
             $.ajax({
                 url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
                 dataType: 'jsonp',
                 // async: false,
                 success: function (json) {
-                    //alert(json.result);
-                    //$("#rate-result").html(json.result)
+
 
                     console.log(json.result)
                     $("#amountDown").val(json.result)
                     return
 
-
-                }
-            });
-
-        }//
-        function showrateDown() {
-            let endpoint = 'convert';
-
-            let access_key = '58dfaebb4ddb4d8dea6360b93171efff';
-            let from = $("#exchangeTo").val(); // 하위 국가기준으로 
-            let to = $("#exchangeFrom").val(); // 상위국가의 값이 바뀜
-            let amount = $('#amount').val();
-
-            if (amount.length == 0) { // 값이 아무것도 입력되지 않았다면
-
-                return
-            }
-
-            $.ajax({
-                url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&from=' + from + '&to=' + to + '&amount=' + amount,
-                dataType: 'jsonp',
-                success: function (json) {
-
-                    console.log(json.result)
-                    $("#amount").val(json.result)
-                    return
-
-
-                }
-            });
-
-        }
-        function showAll() {
-            let endpoint = 'historical';
-            let access_key = '58dfaebb4ddb4d8dea6360b93171efff';
-
-            $.ajax({
-                url: 'http://apilayer.net/api/' + endpoint + '?access_key=' + access_key + '&date=' + '2024-03-02' + '&source' + 'KRW',
-                dataType: 'jsonp',
-                success: function (json) {
-                    let result = '';
-
-                    for (let currency in json.quotes) {
-
-                        if (json.quotes.hasOwnProperty(currency)) {
-                            var exchangeRate = json.quotes[currency];
-                            let nation = currency.substring(3);
-
-                            result += nation + `<br>`;
-                        }
-
-                    }
-
-                    $("#all-result").html(result);
 
                 }
             });
@@ -309,7 +203,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}">
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -360,7 +254,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/noticeList}"><!--수정 필요-->
+                                <a th:href="@{/noticeList}">
                                     <span>NOTICE</span>
                                 </a>
                             </li>

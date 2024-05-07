@@ -1,0 +1,53 @@
+.sub-visual--sub2 .sub-visual__inner {
+    background: #FF88B6;
+}
+
+.sub-visual__inner {
+    position: relative;
+    max-width: 1366px;
+    margin: 122px auto 0;
+    padding: 64px 0 65px 111px;
+    border-radius: 32px 0;
+
+
+}
+
+
+
+.sub-visual__h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Pretendard, Nanum Gothic, 나눔고딕, sans-serif;
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    text-align: left;
+}
+
+.sub-visual__desc {
+    position: relative;
+    width: 475px;
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
+
+}
+
+.sub-visual__inner:before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: -50px;
+    display: block;
+    width: 498px;
+    height: 290px;
+    /* height: 280px; */
+
+    background: url(/images/banner/mypagebanner.png) no-repeat 0 0 / 100% auto;
+}

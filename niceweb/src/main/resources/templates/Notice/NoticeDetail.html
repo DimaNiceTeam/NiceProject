@@ -46,7 +46,6 @@
             width: 500px;
             height: 50px;
             border-radius: 25px;
-            /* box-shadow: 5px 5px 5px gray; */
             padding-left: 10px;
             border: 1px solid gray;
 
@@ -81,7 +80,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/about}"><!--페이지 나중에 삽입-->
+                                        <a th:href="@{/about}">
                                             <span>NICE TO MATCH YOU</span>
                                         </a>
                                     </li>
@@ -132,7 +131,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/noticeList}"><!--수정 필요-->
+                                <a th:href="@{/noticeList}">
                                     <span>NOTICE</span>
                                 </a>
                             </li>
@@ -217,16 +216,11 @@
                             <th colspan="2" class="threebutton">
                                 <!--수정, 삭제의 버튼 경우 관리자에게만 보임-->
                                 <th:block>
-                                    <a th:href="@{/noticeUpdate(noticeNum=${notice.noticeNum})}" id="editBtn">수
-                                        정</a>
-                                    <a th:href="@{/noticeDelete(noticeNum=${notice.noticeNum})}" id="deleteBtn"
-                                        data-notice-num="${notice.noticeNum}">삭
-                                        제</a>
-                                    <!-- <a th:href="@{/noticeUpdate(noticeNum=${notice.noticeNum})}" class="editBtn"
+                                    <a th:href="@{/noticeUpdate(noticeNum=${notice.noticeNum})}" class="editBtn"
                                         th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">수정</a>
                                     <a th:href="@{/noticeDelete(noticeNum=${notice.noticeNum})}" class="deleteBtn"
                                         data-notice-num="${notice.noticeNum}"
-                                        th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">삭제</a> -->
+                                        th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">삭제</a>
                                 </th:block>
                                 <a th:href="@{/noticeList(searchWord=${searchWord}, searchItem=${searchItem})}"
                                     id="goListBtn">목
