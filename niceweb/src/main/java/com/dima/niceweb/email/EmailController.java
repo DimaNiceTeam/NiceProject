@@ -49,7 +49,7 @@ public class EmailController {
 	
 	
 	/**
-	 * 메일 보내기  - 검색 페이지 다시요총 
+	 * 메일 보내기 (추천 알고리즘/ 검색 페이지 다시 요청) 
 	 * @param mailDTO
 	 * @return
 	 */
@@ -57,8 +57,6 @@ public class EmailController {
 	public String sendMail(EmailDTO mailDTO, InputKeywordDTO inputkeyword, RedirectAttributes rttr) {
 		
 		
-		log.info("~~~~~~ 찜리스트의 메일보내기임 ");
-//		log.info(mailDTO.getUserapNum().toString());
 		mailService.mailSend(mailDTO);
 		mailService.insertMail(mailDTO);// 보낸 메일함에 메시지 저장 
 		
@@ -73,7 +71,7 @@ public class EmailController {
 	}
 	
 	/**
-	 * 
+	 * 메일 보내기 - (마이페이지)
 	 * @param mailDTO
 	 * @param inputkeyword
 	 * @param rttr
@@ -98,9 +96,7 @@ public class EmailController {
 	@ResponseBody
 	public EmailDTO mailSelectOne(@RequestParam(name="emailNum") Long emailNum){
 		
-		
 		EmailDTO mailDTO = mailService.selectOne(emailNum);
-		
 		
 		return mailDTO;
 	}

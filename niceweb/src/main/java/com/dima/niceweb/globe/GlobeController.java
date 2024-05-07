@@ -17,7 +17,7 @@ public class GlobeController {
     }
     
     /**
-     * 무역 규제 
+     * 무역 규제 페이지 요청
      * @return
      */
     @GetMapping("/showReg")

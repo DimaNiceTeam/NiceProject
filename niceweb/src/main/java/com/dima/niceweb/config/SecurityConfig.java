@@ -38,7 +38,7 @@ public class SecurityConfig {
 					,"/mail/myPageSendEmail"
 					,"/mail/mailSelectOne" // ** 메일 dto한개 반환 get
 					,"/mail/mailDelete" // ** 메일 삭제 post
-					,"/rate" // 환율 getaaaaa!1
+					,"/rate" // 환율
 					,"/fraud" // * 사기 get
 					,"/showFraud" //* 사기 get
 					,"/globeindex" // * get

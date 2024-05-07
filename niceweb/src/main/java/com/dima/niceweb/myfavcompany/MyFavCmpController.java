@@ -34,7 +34,6 @@ public class MyFavCmpController {// 마이페이지 - 찜기능 관련 컨트롤
 
 	
 	
-	
 	/**
 	 * 찜한 회사목록 모두 출력 
 	 * @return

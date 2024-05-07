@@ -22,7 +22,7 @@ public class EmailDTO {
     private String receiver;     // 받는 사람
     private String emailSubject; // 메시지 제목
     private String emailContent; // 내용
-    private LocalDateTime sendedDate;     // 보낸 날짜
+    private LocalDateTime sendedDate; // 보낸 날짜
 	
 	
     // entity -> dto 변환 

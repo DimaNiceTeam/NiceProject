@@ -14,16 +14,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component // 이 클래스도 빈이다. 
+@Component 
 public class CustomFailuerHandler extends SimpleUrlAuthenticationFailureHandler {
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		
-		log.info("로그인 실패 "+exception.getClass());
+		//log.info("로그인 실패 "+exception.getClass());
 		
-		// 사용자게 에러가 났다는 에러를 
-		// 에러 자체도 겟요청이다 ~ 주소표시줄에 나타남 
+		// 에러 표시 
+		// 에러 자체도 겟요청
 		String errMessage = "";
 		if (exception instanceof BadCredentialsException) {
 			errMessage = exception.getMessage(); // 자격증명이 실패했다는 메세지 
