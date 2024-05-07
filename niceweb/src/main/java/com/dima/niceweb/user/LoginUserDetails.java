@@ -26,11 +26,6 @@ public class LoginUserDetails implements UserDetails {
 	private String userKeyWord; // 사용자 관심 키워드
 	private String userRoles;// 권한
 	
-	
-	
-	
-	
-	
 
 	public LoginUserDetails(UserDTO userDTO) {
 		super();

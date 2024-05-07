@@ -37,16 +37,14 @@ public class SearchController {
 	@ResponseBody
 	public List<Map<String, Object>> searchProduct(@ModelAttribute InputKeywordDTO inputkeyword) {
 
-		log.info(inputkeyword.toString());// 사용자가 입력한 값
 		List<Map<String, Object>> result = service.predictRest(inputkeyword);
-		log.info("ajax로 넘길거");// 사용자가 입력한 값
 		return result;
 
 	}
 	
-	   @GetMapping("/categorySearch")
-	   public String categorySearch() {
+   @GetMapping("/categorySearch")
+   public String categorySearch() {
 
-	      return "/Recommendation/recommendationByCar";
-	   }
+      return "/Recommendation/recommendationByCar";
+   }
 }

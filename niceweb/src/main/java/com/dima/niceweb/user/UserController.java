@@ -71,7 +71,6 @@ public class UserController {
 	public String joinProc(@ModelAttribute UserDTO userDTO) {
 		
 		
-		
 		// 사용자 계정으로 설정함 
 		userDTO.setUserRoles("ROLE_USER");
 		userService.joinProc(userDTO);
